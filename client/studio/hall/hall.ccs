@@ -1,0 +1,17 @@
+<Solution>
+  <PropertyGroup Name="hall" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="res">
+          <Folder Name="hall">
+            <Folder Name="main">
+              <Project Name="HallBackGround.csd" Type="Layer" />
+              <Image Name="hall_bg.jpg" />
+            </Folder>
+          </Folder>
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

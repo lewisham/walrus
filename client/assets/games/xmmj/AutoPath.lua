@@ -1,0 +1,21 @@
+local tb = {
+	["UIWallTile"] = "games.xmmj.ui.UIWallTile", 
+	["Ting"] = "games.xmmj.player.ai.Ting", 
+	["DropCard"] = "games.xmmj.player.view.DropCard", 
+	["AutoPath"] = "games.xmmj.AutoPath", 
+	["UIDecision"] = "games.xmmj.ui.UIDecision", 
+	["PlayerCard"] = "games.xmmj.player.view.PlayerCard", 
+	["BattleConst"] = "games.xmmj.BattleConst", 
+	["UIDesk"] = "games.xmmj.ui.UIDesk", 
+	["DAPlayers"] = "games.xmmj.data.DAPlayers", 
+	["UIPong"] = "games.xmmj.ui.UIPong", 
+	["SCPlayer"] = "games.xmmj.player.SCPlayer", 
+	["UIMenu"] = "games.xmmj.ui.UIMenu", 
+	["SXiaMen"] = "games.xmmj.SXiaMen", 
+	["UISetting"] = "games.xmmj.ui.UISetting", 
+	["DAMahjong"] = "games.xmmj.data.DAMahjong", 
+	["PongCard"] = "games.xmmj.player.view.PongCard", 
+	["UIDice"] = "games.xmmj.ui.UIDice", 
+	["AI"] = "games.xmmj.player.ai.AI", 
+} 
+ return tb
