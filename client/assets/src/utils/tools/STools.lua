@@ -15,7 +15,7 @@ function STools:createAutoPath()
     self:autoRequire("src\\utils\\tools")
 end
 
-function STools:init()
+function STools:onCreate()
     self:getRoot():setTouchEnabled(false)
     --self:createGameObject("UIToolsPanel")
 end

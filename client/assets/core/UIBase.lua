@@ -4,14 +4,22 @@
 -- 描述：ui基类
 ----------------------------------------------------------------------
 
-UIBase = class("UIBase", function() return ccui.Widget:create() end)
+local function newFunc(obj)
+	if type(obj) == "userdata" then
+		return obj
+	else
+		return ccui.Widget:create()
+	end
+end
 
-function UIBase:init(...)
+UIBase = class("UIBase", newFunc)
+
+
+function UIBase:start()
     local parent = self:getParentNode()
     if parent then
         self:addTo(parent, self:getZorder())
     end
-	self:onCreate(...)
 end
 
 function UIBase:getParentNode()
@@ -30,28 +38,44 @@ function UIBase:isObjectAlive()
 end
 
 -- 加载csb
-function UIBase:loadCsb(filename, bShield, aniType)
+function UIBase:loadCsb(filename, bShield)
     local node = cc.CSLoader:createNode(filename)
 	local size = cc.Director:getInstance():getVisibleSize()
-    if node:getName() == "Layer" then
+	local bLayer = node:getName() == "Layer"
+    if bLayer then
         self:setContentSize(size)
     end
+ 	self:setTouchEnabled(bShield)
+    self:setPosition(0, 0)
+    self:setAnchorPoint(0, 0)
+	-- csb 绑定到的节点
+	local bindWidget = self
+	for k, v in ipairs(node:getChildren()) do
+		v:changeParentNode(bindWidget)
+	end
+	if bLayer then
+		ccui.Helper:doLayout(self)
+	end
+	BindToUI(bindWidget, self)
+end
+
+-- 加载csb
+function UIBase:loadCenterNode(filename, bShield, aniType)
+    local node = cc.CSLoader:createNode(filename)
+	local size = cc.Director:getInstance():getVisibleSize()
+    self:setContentSize(size)
  	self:setTouchEnabled(bShield)
     self:setPosition(0, 0)
     self:setAnchorPoint(0, 0)
 
 	-- csb 绑定到的节点
 	local bindWidget = self
-
+	node:setPosition(size.width / 2, size.height / 2)
 	-- 开场特效
 	if aniType == "scaleTo" then
 		bindWidget = self:scaleToEnter()
 	end
-
-	for k, v in ipairs(node:getChildren()) do
-		v:changeParentNode(bindWidget)
-	end
-	ccui.Helper:doLayout(self)
+	node:addTo(bindWidget)
 	BindToUI(bindWidget, self)
 end
 
@@ -61,7 +85,7 @@ function UIBase:scaleToEnter()
 	self:addChild(mask)
 	mask:setContentSize(size)
 	mask:setBackGroundColor(cc.c3b(0, 0, 0))
-	mask:setBackGroundColorOpacity(128)
+	mask:setBackGroundColorOpacity(168)
 	mask:setBackGroundColorType(1)
 
 	-- 动作结点
@@ -76,9 +100,14 @@ function UIBase:scaleToEnter()
 	root:setContentSize(size)
 
 	-- action
-	action:setScale(0.0)
-	action:runAction(cc.EaseBackOut:create(cc.ScaleTo:create(0.25, 1.0)))
+	action:setScale(0.82)
+	action:runAction(cc.ScaleTo:create(0.1, 1.0))
 
+	action:setScale(0.82)
+    action:setCascadeOpacityEnabled(true)
+    action:setOpacity(0)
+    local spawnaction = cc.Spawn:create(cc.FadeIn:create(0.09), cc.ScaleTo:create(0.1, 1.0))
+    action:runAction(spawnaction)
 	return root
 end
 
@@ -86,11 +115,7 @@ end
 -- 继承GameObject接口
 ------------------------------------
 
-function UIBase:coroutine(target, name, ...)
-    local co = NewCoroutine(target, name, ...)
-	co.mNode = self
-	co:resume("start run")
-end
+
 
 -- 从场景中移除
 function UIBase:removeFromScene()
@@ -102,30 +127,14 @@ function UIBase:getScene()
     return self.mGameScene
 end
 
-------------------------------------
--- 列表
-------------------------------------
-
-function UIBase:createListView(name, list, root, cls, cellSize, cpr, dir)
-    if type(cls) == "string" then
-        cls = require(cls)
-    end
-    dir = dir or ccui.ScrollViewDir.vertical
-    local ret = ListViewHelper.new()
-    self.mComponents[name] = ret
-    ret.mGameOject = self
-    ret.item_cls = cls
-    ret.cell_size = cellSize
-    ret.mDataList = list
-    ret.contetent_size = root:getContentSize()
-    ret.cpr = cpr or 1  -- 每行多少列
-    ret:setDirection(dir)
-    ret:setBounceEnabled(true)
-    ret:setContentSize(root:getContentSize())
-    ret:init(list)
-    ret.items_margin = 6   -- 默认间隔
-    ret:setItemsMargin(ret.items_margin)
-    root:addChild(ret)
-    return ret
+function UIBase:createUnnameChild(root, filename, ...)
+	local child = self:getScene():createUnnameObject(filename, ...)
+	child:changeParentNode(root)
+	return child
 end
+
+function UIBase:fullPath(filename)
+	return self.mGameScene:fullPath(filename)
+end
+
 

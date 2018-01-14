@@ -19,7 +19,7 @@ function AppBase:createScene(name, ...)
     scene:set("GameApp", self)
     scene:createRoot()
     scene:createAutoPath()
-    scene:init(...)
+    scene:onCreate(...)
     self.mSceneList[scene.__cname] = scene
     return scene
 end

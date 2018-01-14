@@ -17,8 +17,6 @@ function LuaObject:ctor()
     instance_id = instance_id + 1
 end
 
-function LuaObject:init()
-end
 
 -- 获得实例id
 function LuaObject:getInstanceID()
@@ -66,27 +64,4 @@ function LuaObject:coroutine(target, name, ...)
     end
 	local co = NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")
-end
-
--- 自动自成require文件列表
-function LuaObject:autoRequire(dir)
-    if CreateLuaPath then
-        CreateLuaPath(dir)
-    end
-    local pre = string.gsub(dir, "\\", ".")
-    local tb = require(pre .. ".AutoPath")
-    local list = self:get("lua_path") or {}
-    for name, path in pairs(tb) do
-        list[name] = path
-    end
-    self:set("lua_path", list)
-end
-
-function LuaObject:getLuaPath(name)
-    return self:get("lua_path")[name]
-end
-
-function LuaObject:require(name)
-    local path = self:getLuaPath(name) or name
-    return ReloadLuaModule(path)
 end

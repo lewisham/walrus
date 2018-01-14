@@ -269,6 +269,11 @@ function LoadCsb(filename, obj, bShield)
     return widget
 end
 
+local mustExtendFunc = {}
+mustExtendFunc["require"] = true
+mustExtendFunc["getComponent"] = true
+mustExtendFunc["getScene"] = true
+
 -- 继承类
 function ExtendClass(obj, cls)
     local parent = cls.new()
@@ -285,13 +290,14 @@ function ExtendClass(obj, cls)
     end
 
     -- 继承方法
-    for name, val in pairs(cls) do
+	for name, val in pairs(cls) do
         if obj[name] == nil then
             --print("function", name, obj[name], val)
             obj[name] = val
         end
 
-        if name == "getComponent" then
+		if mustExtendFunc[name] then
+			--print(parent.__cname, name, obj.__cname)
             obj[name] = val
         end
     end
@@ -320,11 +326,11 @@ function DebugGameObject(obj)
 end
 
 function PlaySound(filename)
-    --if DISABLE_SOUND then return end
+    if DISABLE_SOUND then return end
     cc.SimpleAudioEngine:getInstance():playEffect(filename)
 end
 
 function PlayMusic(filename)
     if DISABLE_MUSIC then return end
-    cc.SimpleAudioEngine:getInstance():playMusic(filename)
+    cc.SimpleAudioEngine:getInstance():playMusic(filename, true)
 end

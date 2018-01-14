@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/bag/bar_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{336,172},{20,20}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{20,20}</string>
+			</dict>
+			<key>hall/bag/bar_blue.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,206},{384,18}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{384,18}</string>
+			</dict>
+			<key>hall/bag/bar_btn.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{470,56},{27,71}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{50,72}</string>
+			</dict>
+			<key>hall/bag/bar_green.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,228},{384,18}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{384,18}</string>
+			</dict>
+			<key>hall/bag/bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{108,277}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{108,278}</string>
+			</dict>
+			<key>hall/bag/bg_left.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{390,56},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>hall/bag/btn_a.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{336,132},{36,36}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{36,36}</string>
+			</dict>
+			<key>hall/bag/btn_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{450,193},{52,52}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{52,52}</string>
+			</dict>
+			<key>hall/bag/btn_r.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{491,2},{36,4}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{36,36}</string>
+			</dict>
+			<key>hall/bag/insert_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,114},{32,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{32,32}</string>
+			</dict>
+			<key>hall/bag/item_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{390,193},{56,56}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{56,56}</string>
+			</dict>
+			<key>hall/bag/item_info_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{283,2},{50,204}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{50,204}</string>
+			</dict>
+			<key>hall/bag/title_wdbb.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{376,136},{53,106}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{54,108}</string>
+			</dict>
+			<key>hall/bag/top_arrow.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{336,56},{72,38}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{72,38}</string>
+			</dict>
+			<key>hall/bag/btn_kf.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{283,56},{146,49}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{146,49}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>bag.png</string>
+			<key>realTextureFileName</key>
+			<string>bag.png</string>
+			<key>size</key>
+			<string>{512,256}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>512</integer>
+			<key>height</key>
+			<integer>256</integer>
+		</dict>
+	</dict>
+</plist>

@@ -1,0 +1,12 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="loading" Type="Plist" ID="2794c25f-cc26-4979-a2cd-06636d481044" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/loading/btn_kf.png" />
+      <FilePathData Path="hall/loading/btn_xf.png" />
+      <FilePathData Path="hall/loading/img_logo.png" />
+      <FilePathData Path="hall/loading/loadibg_bg.png" />
+    </ImageFiles>
+    <MaxSize Width="256" Height="512" />
+  </Content>
+</PlistInfoProjectFile>

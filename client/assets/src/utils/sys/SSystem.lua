@@ -16,10 +16,11 @@ function M:createAutoPath()
     self:autoRequire("src\\utils\\sys")
 end
 
-function M:init()
+function M:onCreate()
     self:getRoot():setTouchEnabled(false)
     self:require("SYSGobalFunc")
     self:createGameObject("UIToast")
+    self:createGameObject("UIBroadcast")
 end
 
 return M

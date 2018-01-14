@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/match/bg_anniu.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{330,277},{19,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{19,60}</string>
+			</dict>
+			<key>hall/match/bg_dik.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{462,450},{45,45}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{45,45}</string>
+			</dict>
+			<key>hall/match/bg_kuang.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{435,413},{33,33}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{33,33}</string>
+			</dict>
+			<key>hall/match/bg_line.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{494,29},{23,1}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{23,1}</string>
+			</dict>
+			<key>hall/match/btn_hb.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{362,2},{128,128}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{128,128}</string>
+			</dict>
+			<key>hall/match/btn_hf2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{353,326},{37,128}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{37,128}</string>
+			</dict>
+			<key>hall/match/btn_hf3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{394,326},{37,128}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{37,128}</string>
+			</dict>
+			<key>hall/match/btn_hf1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{330,458},{37,128}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{37,128}</string>
+			</dict>
+			<key>hall/match/jiantou-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{494,2},{12,23}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{12,23}</string>
+			</dict>
+			<key>hall/match/jp-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{436,134},{69,89}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{69,89}</string>
+			</dict>
+			<key>hall/match/jp-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{436,227},{69,89}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{69,89}</string>
+			</dict>
+			<key>hall/match/jp-3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{436,320},{69,89}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{69,89}</string>
+			</dict>
+			<key>hall/match/zrph-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,413},{76,160}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{76,160}</string>
+			</dict>
+			<key>hall/match/zrph-2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{166,413},{76,160}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{76,160}</string>
+			</dict>
+			<key>hall/match/yingxiongbang-1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{362,134},{188,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{188,70}</string>
+			</dict>
+			<key>hall/match/mfyj_action.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{293,2},{271,65}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{271,65}</string>
+			</dict>
+			<key>hall/match/yingxiongbang-bg.jpg</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{287,202}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{287,202}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>match.png</string>
+			<key>realTextureFileName</key>
+			<string>match.png</string>
+			<key>size</key>
+			<string>{512,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>512</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>

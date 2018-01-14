@@ -1,0 +1,25 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="match" Type="Plist" ID="8b8ddeea-c082-4d77-95cd-e264e1f6dd75" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/match/bg_anniu.png" />
+      <FilePathData Path="hall/match/bg_dik.png" />
+      <FilePathData Path="hall/match/bg_kuang.png" />
+      <FilePathData Path="hall/match/bg_line.png" />
+      <FilePathData Path="hall/match/btn_hb.png" />
+      <FilePathData Path="hall/match/btn_hf2.png" />
+      <FilePathData Path="hall/match/btn_hf3.png" />
+      <FilePathData Path="hall/match/btn_hf1.png" />
+      <FilePathData Path="hall/match/jiantou-1.png" />
+      <FilePathData Path="hall/match/jp-1.png" />
+      <FilePathData Path="hall/match/jp-2.png" />
+      <FilePathData Path="hall/match/jp-3.png" />
+      <FilePathData Path="hall/match/zrph-1.png" />
+      <FilePathData Path="hall/match/zrph-2.png" />
+      <FilePathData Path="hall/match/yingxiongbang-1.png" />
+      <FilePathData Path="hall/match/mfyj_action.png" />
+      <FilePathData Path="hall/match/yingxiongbang-bg.jpg" />
+    </ImageFiles>
+    <MaxSize Width="512" Height="512" />
+  </Content>
+</PlistInfoProjectFile>

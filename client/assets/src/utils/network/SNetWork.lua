@@ -14,7 +14,7 @@ function M:ctor()
     self.mRootZorder = 1
 end
 
-function M:init()
+function M:onCreate()
     self:getRoot():setTouchEnabled(false)
     self:require("NetGobalFunc")
     self:require("ByteArray")

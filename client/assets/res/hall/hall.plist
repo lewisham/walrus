@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/hall/center_icon/room_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,636},{132,132}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,132}</string>
+			</dict>
+			<key>hall/hall/btn_addgame.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{74,138},{131,131}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,132}</string>
+			</dict>
+			<key>hall/hall/img_addgame_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{68,630}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{68,630}</string>
+			</dict>
+			<key>hall/hall/center_icon/room_13.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,772},{132,132}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,132}</string>
+			</dict>
+			<key>hall/hall/center_icon/room_jdhj.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{74,2},{132,132}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,132}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>hall.png</string>
+			<key>realTextureFileName</key>
+			<string>hall.png</string>
+			<key>size</key>
+			<string>{256,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>256</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

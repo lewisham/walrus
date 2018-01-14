@@ -1,14 +1,17 @@
 -- 0 - disable debug info, 1 - less debug info, 2 - verbose debug info
 DEBUG = 1
 CC_USE_FRAMEWORK = true
-CC_SHOW_FPS = false
+CC_SHOW_FPS = true
 CC_DISABLE_GLOBAL = false
 CC_DESIGN_RESOLUTION = {
     width = 1280,
     height = 720,
     autoscale = "SHOW_ALL",
     callback = function(framesize)
-            return {autoscale = "SHOW_ALL"}
+        local ratio = framesize.width / framesize.height
+        if ratio <= 1.34 then --4:3 屏幕 单独适配
+            return { autoscale = "FIXED_HEIGHT" }
+        end
     end
 }
 
@@ -45,7 +48,7 @@ end
 
 -- 主函数
 local function main()
-    cc.Director:getInstance():setAnimationInterval(1.0 / 42)
+    cc.Director:getInstance():setAnimationInterval(1.0 / 60)
     require("src.platform.init")
 	-- 下载目录
 	DOWD_LOAD_DIR = cc.FileUtils:getInstance():getWritablePath() .. "download/"
@@ -83,12 +86,10 @@ end
 
 function __G__TRACKBACK__(msg)
     local msg = debug.traceback(msg, 3)
+    print(msg)
     require("core.common.TrackbackLayer"):show("error", msg)
     return msg
 end
 
 
-local status, msg = xpcall(main, __G__TRACKBACK__)
-if not status then
-    print(msg)
-end
+xpcall(main, __G__TRACKBACK__)

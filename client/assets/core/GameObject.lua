@@ -61,7 +61,7 @@ function GameObject:createComponent(filename, ...)
     local name = ret.__cname
 	ret.mGameOject = self
     self.mComponents[name] = ret
-	ret:init(...)
+	ret:onCreate(...)
     return ret
 end
 
@@ -88,11 +88,23 @@ function GameObject:find(name)
     return self:getScene():find(name)
 end
 
+function GameObject:post(eventName, ...)
+    self:getScene():post(eventName, ...)
+end
+
+function GameObject:fullPath(filename)
+	return self.mGameScene:fullPath(filename)
+end
+
 ------------------------------------
 -- 子结点管理与操作
 ------------------------------------
 function GameObject:createGameObject(path, ...)
     return self:getScene():createGameObject(path, ...)
+end
+
+function GameObject:createUnnameObject(path, ...)
+    return self:getScene():createUnnameObject(path, ...)
 end
 
 function GameObject:removeGameObject(name)
@@ -102,4 +114,8 @@ end
 function GameObject:reloadGameObject(name, ...)
     self:removeGameObject(name)
     return self:createGameObject(path, ...)
+end
+
+function GameObject:wrapGameObject(obj, path, name, ...)
+    return self:getScene():wrapGameObject(obj, path, name, ...)
 end

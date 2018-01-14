@@ -12,3 +12,5 @@ require("core.GameBase")
 require("core.GameObject")
 require("core.Component")
 require("core.UIBase")
+
+PI = 3.1415926

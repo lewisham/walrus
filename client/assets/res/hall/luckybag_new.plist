@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/luckybag/bg_an.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{79,117},{28,23}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{28,23}</string>
+			</dict>
+			<key>hall/luckybag/bg_jl1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{41,157},{28,16}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{28,16}</string>
+			</dict>
+			<key>hall/luckybag/bg_jl2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{41,117},{30,28}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{30,28}</string>
+			</dict>
+			<key>hall/luckybag/bg_lv.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{79,155},{10,24}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{10,24}</string>
+			</dict>
+			<key>hall/luckybag/bg_tan1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{501,91},{4,4}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{4,4}</string>
+			</dict>
+			<key>hall/luckybag/bg_tan2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{501,105},{4,4}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{4,4}</string>
+			</dict>
+			<key>hall/luckybag/bg_tan3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{112,117},{16,15}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{16,15}</string>
+			</dict>
+			<key>hall/luckybag/card_lv.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,117},{41,26}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{41,26}</string>
+			</dict>
+			<key>hall/luckybag/choujiang.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,5},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/hongbaoka.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{147,5},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/huafeika.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{289,5},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/jihuo.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,187},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/meiri.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,329},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/pic_icon_lock.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{431,91},{60,86}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{60,86}</string>
+			</dict>
+			<key>hall/luckybag/shouchong.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{117,143},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/yuanbao.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{259,117},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/jindou_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{401,187},{132,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{132,102}</string>
+			</dict>
+			<key>hall/luckybag/pic_light_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{259,229},{72,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{72,70}</string>
+			</dict>
+			<key>hall/luckybag/btn_mri.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{431,5},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>luckybag_new.png</string>
+			<key>realTextureFileName</key>
+			<string>luckybag_new.png</string>
+			<key>size</key>
+			<string>{512,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>512</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>

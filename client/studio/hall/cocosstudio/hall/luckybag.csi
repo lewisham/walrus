@@ -1,0 +1,13 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="luckybag" Type="Plist" ID="1f0964fc-83a7-4c78-a3fa-a521ce7ff017" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="False" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/luckybag/pic_bar.png" />
+      <FilePathData Path="hall/luckybag/pic_bar_bg.png" />
+      <FilePathData Path="hall/luckybag/pic_light_2.png" />
+      <FilePathData Path="hall/luckybag/pic_light_3.png" />
+      <FilePathData Path="hall/luckybag/pic_light_1.png" />
+    </ImageFiles>
+    <MaxSize Width="256" Height="128" />
+  </Content>
+</PlistInfoProjectFile>

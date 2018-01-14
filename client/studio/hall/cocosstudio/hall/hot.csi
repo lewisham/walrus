@@ -1,0 +1,14 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="hot" Type="Plist" ID="e2e0410c-5a3c-41ad-93c9-8d6525e920e9" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/room/hotanimate/hot_1.png" />
+      <FilePathData Path="hall/room/hotanimate/hot_2.png" />
+      <FilePathData Path="hall/room/hotanimate/hot_3.png" />
+      <FilePathData Path="hall/room/hotanimate/hot_4.png" />
+      <FilePathData Path="hall/room/hotanimate/hot_5.png" />
+      <FilePathData Path="hall/room/hotanimate/hot_6.png" />
+    </ImageFiles>
+    <MaxSize Width="512" Height="512" />
+  </Content>
+</PlistInfoProjectFile>

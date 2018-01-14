@@ -1,0 +1,13 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="add_gamg" Type="Plist" ID="8c2d2c45-1574-40ea-9b7e-66a5c77f79fb" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/addgame/pic_bg_0.png" />
+      <FilePathData Path="hall/addgame/pic_ring_0.png" />
+      <FilePathData Path="hall/addgame/pic_ring_1.png" />
+      <FilePathData Path="hall/addgame/pic_tick.png" />
+      <FilePathData Path="hall/addgame/pic_bg_1.png" />
+    </ImageFiles>
+    <MaxSize Width="256" Height="128" />
+  </Content>
+</PlistInfoProjectFile>

@@ -6,7 +6,7 @@
 
 local SCUpdateZip = class("SCUpdateZip", GameObject)
 
-function SCUpdateZip:init()
+function SCUpdateZip:onCreate()
 end
 
 function SCUpdateZip:play(co)

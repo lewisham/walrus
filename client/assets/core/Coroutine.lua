@@ -90,9 +90,8 @@ _CE_TRACKBACK_ = function(msg)
         NEED_TRACK_COROUTINE_ERROR = true
         return
     end
-    print("协程出错")
-    local msg = debug.traceback(msg, 3)
-	__G__TRACKBACK__(msg)
+    print(msg)
+    printError("协程出错")
 end
 
 -- 创建新的协程

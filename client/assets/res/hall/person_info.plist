@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/person_info/bk_head_bottom.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{224,116},{28,16}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{28,16}</string>
+			</dict>
+			<key>hall/person_info/btn_camera.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{114,116},{106,90}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{106,90}</string>
+			</dict>
+			<key>hall/person_info/btn_photo.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{114,210},{106,90}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{106,90}</string>
+			</dict>
+			<key>hall/person_info/btn_wexin.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,228},{106,90}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{106,90}</string>
+			</dict>
+			<key>hall/person_info/title_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{186,304},{48,56}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{48,56}</string>
+			</dict>
+			<key>hall/person_info/pic_icon_phone.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{122,110}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{122,110}</string>
+			</dict>
+			<key>hall/person_info/pic_icon_wx.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{128,2},{122,110}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{122,110}</string>
+			</dict>
+			<key>hall/person_info/pic_select.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{112,304},{70,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{70,70}</string>
+			</dict>
+			<key>hall/person_info/pic_select_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,322},{70,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{70,70}</string>
+			</dict>
+			<key>hall/person_info/pic_itembg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,116},{108,108}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{108,108}</string>
+			</dict>
+			<key>hall/person_info/icon_phone_change.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{186,356},{40,52}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{40,52}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>person_info.png</string>
+			<key>realTextureFileName</key>
+			<string>person_info.png</string>
+			<key>size</key>
+			<string>{256,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>256</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>

@@ -6,7 +6,7 @@
 
 local M = class("DAClientTCP", GameObject)
 
-function M:init(args)
+function M:onCreate(args)
     self.t1 = 0
     self.mSendBuf = ""
     self.mRecvBuf = ""

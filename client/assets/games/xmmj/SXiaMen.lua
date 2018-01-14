@@ -4,9 +4,11 @@
 -- 描述：厦门麻将
 ----------------------------------------------------------------------
 
-local SXiaMen = class("SXiaMen", GameBase)
+local M = class("SXiaMen", GameBase)
 
-function SXiaMen:run()
+M.__version = 1 -- 版本号
+
+function M:run()
     self:autoRequire("games\\xmmj")
     self:require("BattleConst")
     self:createGameObject("DAMahjong")
@@ -14,7 +16,7 @@ function SXiaMen:run()
     self:coroutine(self, "play")
 end
 
-function SXiaMen:play()
+function M:play()
     self:createGameObject("UIDesk")
     self:balckOut(0.1)
     PlayMusic("sound/bgm_battle1.mp3")
@@ -29,7 +31,7 @@ function SXiaMen:play()
 end
 
 -- 发牌
-function SXiaMen:deal()
+function M:deal()
     self:find("UIDesk"):onTurn(self:find("DAPlayers"):getDealer())
     self:createGameObject("UIDice"):play(1)
     self:find("UIWallTile"):deal()
@@ -44,7 +46,7 @@ function SXiaMen:deal()
     WaitForSeconds(0.3)
 end
 
-function SXiaMen:loop()
+function M:loop()
     local idx = self:find("DAPlayers"):get("dealer")
     local card = nil
     while true do
@@ -80,7 +82,7 @@ function SXiaMen:loop()
     end
 end
 
-function SXiaMen:gameEnd()
+function M:gameEnd()
     local list = self:find("DAPlayers"):get("player_list")
     for _, val in ipairs(list) do
         val:getComponent("PlayerCard"):showCards()
@@ -91,4 +93,4 @@ function SXiaMen:gameEnd()
     app:playGame(1001)
 end
 
-return SXiaMen
+return M

@@ -14,7 +14,38 @@ function GameScene:ctor()
     self.mUniqueObjects = {}
     self.mLayers = {}
     self:set("lua_path", {})
+    self:set("assets_path", "")
     self:set("tmp_name_id", 0)
+end
+
+function GameScene:onCreate()
+end
+
+-- 自动自成require文件列表
+function GameScene:autoRequire(dir)
+    if CreateLuaPath then
+        CreateLuaPath(dir)
+    end
+    local pre = string.gsub(dir, "\\", ".")
+    local tb = require(pre .. ".AutoPath")
+    local list = self:get("lua_path") or {}
+    for name, path in pairs(tb) do
+        list[name] = path
+    end
+    self:set("lua_path", list)
+end
+
+function GameScene:getLuaPath(name)
+    return self:get("lua_path")[name]
+end
+
+function GameScene:require(name)
+    local path = self:getLuaPath(name) or name
+    return ReloadLuaModule(path)
+end
+
+function GameScene:fullPath(filename)
+    return string.format("%s%s", self:get("assets_path"), filename)
 end
 
 function GameScene:run()
@@ -61,7 +92,8 @@ function GameScene:createRoot()
         if not device:isWindows() then
             self:onUpdate(dt)
         else
-            xpcall(function() self:onUpdate(dt) end, __G__TRACKBACK__)
+            --xpcall(function() self:onUpdate(dt) end, __G__TRACKBACK__)
+            self:onUpdate(dt)
         end
     end
     widget:scheduleUpdateWithPriorityLua(update, 0)
@@ -74,6 +106,16 @@ function GameScene:onUpdate(dt)
     for _, obj in pairs(tb) do
         Invoke(obj, "onUpdate", dt)
     end 
+end
+
+-- 事件派发
+function GameScene:post(eventName, ...)
+    -- 清除无用的对象
+    Invoke(self, eventName, ...)
+    local tb = self:getGameObjects()
+    for _, obj in pairs(tb) do
+        Invoke(obj, eventName, ...)
+    end
 end
 
 function GameScene:getGameObjects()
@@ -96,7 +138,7 @@ end
 function GameScene:createGameObject(filename, ...)
     local cls = self:require(filename)
 	local ret = cls.new(...)
-	if not IsKindOf(cls, "GameObject") then
+    if not IsKindOf(cls, "GameObject") then
         ExtendClass(ret, GameObject)
     end
     local name = ret.__cname
@@ -104,8 +146,43 @@ function GameScene:createGameObject(filename, ...)
     ret.mRoot = self:getRoot()
     ret.mGameScene = self
     self.mGameObjects[name] = ret
-	ret:init(...)
+    Invoke(ret, "start")
+    ret:onCreate(...)
     return ret
+end
+
+-- 创建没有名字的对象(不加入对象列表里管理)
+function GameScene:createUnnameObject(filename, ...)
+    local cls = self:require(filename)
+	local ret = cls.new(...)
+	if not IsKindOf(cls, "GameObject") then
+        ExtendClass(ret, GameObject)
+    end
+    local name = ret.__cname
+    ret.__path = self:getLuaPath(filename)
+    ret.mRoot = self:getRoot()
+    ret.mGameScene = self
+    Invoke(ret, "start")
+    ret:onCreate(...)
+    return ret
+end
+
+function GameScene:wrapGameObject(obj, path, ...)
+    local cls = self:require(path)
+    local ret = cls.new(obj)
+    if not IsKindOf(cls, "GameObject") then
+        ExtendClass(ret, GameObject)
+    end
+    local name = ret.__cname
+    ret.__path = self:getLuaPath(filename)
+    obj.mRoot = self:getRoot()
+    obj.mGameScene = self
+    obj.__cname = cls.__cname
+    self.mGameObjects[name] = obj
+    BindToUI(obj, ret)
+    Invoke(ret, "start")
+    obj:onCreate(...)
+    return obj
 end
 
 -- 查找游戏对象

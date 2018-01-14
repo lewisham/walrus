@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/loading/btn_kf.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,331},{174,64}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{174,64}</string>
+			</dict>
+			<key>hall/loading/btn_xf.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{70,331},{124,64}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{124,64}</string>
+			</dict>
+			<key>hall/loading/img_logo.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{325,91}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{325,91}</string>
+			</dict>
+			<key>hall/loading/loadibg_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{70,459},{26,8}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{26,8}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>loading.png</string>
+			<key>realTextureFileName</key>
+			<string>loading.png</string>
+			<key>size</key>
+			<string>{256,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>256</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>

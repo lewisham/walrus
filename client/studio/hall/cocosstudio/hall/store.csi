@@ -1,0 +1,30 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="store" Type="Plist" ID="a3e97129-94a1-4471-8588-442b7c447e48" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/store/btn_servise.png" />
+      <FilePathData Path="hall/store/expbar_bg.png" />
+      <FilePathData Path="hall/store/expbar_blood.png" />
+      <FilePathData Path="hall/store/ico_bean_lv1.png" />
+      <FilePathData Path="hall/store/ico_bean_lv2.png" />
+      <FilePathData Path="hall/store/ico_bean_lv3.png" />
+      <FilePathData Path="hall/store/ico_bean_lv4.png" />
+      <FilePathData Path="hall/store/ico_bean_lv5.png" />
+      <FilePathData Path="hall/store/icon_fangka.png" />
+      <FilePathData Path="hall/store/p_ico_1.png" />
+      <FilePathData Path="hall/store/p_ico_2.png" />
+      <FilePathData Path="hall/store/p_ico_3.png" />
+      <FilePathData Path="hall/store/p_ico_4.png" />
+      <FilePathData Path="hall/store/pic_arrow.png" />
+      <FilePathData Path="hall/store/score_bg.png" />
+      <FilePathData Path="hall/store/tips_rm.png" />
+      <FilePathData Path="hall/store/vip_v.png" />
+      <FilePathData Path="hall/store/pic_bk_info.png" />
+      <FilePathData Path="hall/store/pic_vip.png" />
+      <FilePathData Path="hall/store/ico_zuanshi_lv1.png" />
+      <FilePathData Path="hall/store/ico_zuanshi_lv2.png" />
+      <FilePathData Path="hall/store/ico_zuanshi_lv3.png" />
+    </ImageFiles>
+    <MaxSize Width="512" Height="512" />
+  </Content>
+</PlistInfoProjectFile>

@@ -18,11 +18,14 @@ end
 
 function M:start()
     require("src.global.GobalFunc")
+    self:runScene("games.fish.SFish")
+    do return end
     self:createScene("src.utils.tools.STools") 
     self:createScene("src.utils.sys.SSystem")
     self:createScene("src.utils.update.SAutoUpdate"):play(GetChannelInfo().url)
+    self:createScene("src.config.SConfig")
     self:createScene("src.utils.network.SNetWork")
-    self:runScene("src.scene.hall.SHall")
+    self:runScene("src.login.SLogin")
 end
 
 return M

@@ -38,3 +38,10 @@ function WaitForDialog(title, content)
     WaitForFrames(1)
     return bRet
 end
+
+
+function ShowBroadcast(str, priority)
+    local obj = FindObject("SSystem", "UIBroadcast")
+    if obj == nil then return end
+    obj:play(str, priority)
+end

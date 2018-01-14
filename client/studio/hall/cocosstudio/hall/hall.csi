@@ -1,0 +1,13 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="hall" Type="Plist" ID="14b0bb94-27b1-4ec2-8071-4659e330f392" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="2" AllowRotation="True" AllowAnySize="False" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="hall/hall/center_icon/room_1.png" />
+      <FilePathData Path="hall/hall/btn_addgame.png" />
+      <FilePathData Path="hall/hall/img_addgame_bg.png" />
+      <FilePathData Path="hall/hall/center_icon/room_13.png" />
+      <FilePathData Path="hall/hall/center_icon/room_jdhj.png" />
+    </ImageFiles>
+    <MaxSize Width="256" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

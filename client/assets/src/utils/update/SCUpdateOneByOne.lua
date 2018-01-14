@@ -6,7 +6,7 @@
 
 local SCUpdateOneByOne = class("SCUpdateOneByOne", GameObject)
 
-function SCUpdateOneByOne:init(url)
+function SCUpdateOneByOne:onCreate(url)
     self:set("url", url)
     self:set("wait_cnt", 0)
     self:set("total_update_cnt", 1)       -- 总共要更新的文件

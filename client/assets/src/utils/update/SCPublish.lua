@@ -6,7 +6,7 @@
 
 local SCPublish = class("SCPublish", GameObject)
 
-function SCPublish:init(idx)
+function SCPublish:onCreate(idx)
     self:coroutine(self, "play", idx)
 end
 

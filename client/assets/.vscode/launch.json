@@ -12,7 +12,7 @@
             "localRoot": "${workspaceRoot}",
             "commandLine": "-workdir ${workspaceRoot} -file main.lua",
             "port": 7003,
-            "exePath": "F:/FintSvn/flint/walrus/client/bin/dragon.exe",
+            "exePath": "F:/walrus/client/bin/dragon.exe",
             "printType": 1
         },
         {

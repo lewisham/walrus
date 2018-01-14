@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>hall/lotto/com_btn_close_0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{618,417},{70,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{70,70}</string>
+			</dict>
+			<key>hall/lotto/com_btn_close_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{698,417},{70,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{70,70}</string>
+			</dict>
+			<key>hall/lotto/dial_btn_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{319,504},{196,196}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{196,196}</string>
+			</dict>
+			<key>hall/lotto/dial_btn_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{504,5},{196,196}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{196,196}</string>
+			</dict>
+			<key>hall/lotto/dial_btn_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{504,211},{196,196}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{196,196}</string>
+			</dict>
+			<key>hall/lotto/dial_dh.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,818},{200,258}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{200,258}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_dwcj_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{609,669},{80,86}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{80,86}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_dwcj_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{657,497},{80,86}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{80,86}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_frame.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,504},{304,304}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{304,304}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_frame_lamp.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{273,954},{28,28}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{28,28}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_light.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{273,818},{344,126}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{344,126}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_title.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{525,497},{162,122}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{162,122}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_title_ptcj.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{319,710},{280,72}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{280,72}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_whel.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{5,5},{489,489}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{489,489}</string>
+			</dict>
+			<key>hall/lotto/dial_pic_zz.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{504,417},{104,70}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{104,70}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>lotto.png</string>
+			<key>realTextureFileName</key>
+			<string>lotto.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

@@ -3,8 +3,8 @@
        "isLandscape": true,
        "isWindowTop": false,
        "name": "dragon",
-       "width": 768,
-       "height": 432,
+       "width": 1280,
+       "height": 720,
        "entry": "main.lua",
        "consolePort": 6050,
        "uploadPort": 6060
