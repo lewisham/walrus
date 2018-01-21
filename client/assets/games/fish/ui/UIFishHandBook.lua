@@ -10,4 +10,8 @@ function M:onCreate()
     self:loadCenterNode(self:fullPath("ui/fishform/uifishform.csb"), true)
 end
 
+function M:click_btn_close()
+    SafeRemoveNode(self)
+end
+
 return M

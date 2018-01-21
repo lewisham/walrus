@@ -15,9 +15,9 @@ function M:initConfig()
     self:set("assets_path", "games/fish/assets/")
     -- 显示配置
     --rawset(_G, "TEST_COUNT", 0)
-    cc.Director:getInstance():setDisplayStats(false)
+    cc.Director:getInstance():setDisplayStats(true)
     self:set("enble_collider", false) -- 显示碰撞区
-    self:set("flip", true)
+    self:set("flip", false)
     -- 游戏数据
     self:set("room_idx", 1)
     self:set("view_id", 1)
@@ -29,6 +29,7 @@ function M:run()
     self:createGameObject("SCSound")
     self:createGameObject("SCPool")
     self:createGameObject("SCGameLoop")
+    self:createGameObject("SCNetwork")
     self:coroutine(self, "play")
 end
 
@@ -46,31 +47,7 @@ function M:play()
     end
     self:createGameObject("UIRightPanel")
     self:find("SCGameLoop"):startUpdate()
-    self:test()
-end
-
-function M:test()
-    --self:find("SCPool"):testFish("100000011")
-    --self:find("SCPool"):randomTimeLine()
-    --self:find("SCPool"):createNet(1, cc.p(512, 360))
-    --self:find("SCPool"):createFishArray("312124001", 1)
-    --self:find("SCPool"):createFishGroup(7, 1)
-    self:find("UICannon1"):join(1)
-    self:find("UICannon2"):join(2)
-    self:find("UICannon3"):join(3)
-    self:find("UICannon4"):join(4)
     self:createGameObject("ISever")
-    self:find("UITouch"):setTouchEnabled(true)
-    --self:createGameObject("UIBossComing"):play()
-end
-
--- 时间线
-function M:onMsgCreateTimeLine(resp)
-    self:find("SCPool"):createTimeLine(resp.id, resp.frame)
-end
-
-function M:onMsgShoot(resp)
-
 end
 
 return M

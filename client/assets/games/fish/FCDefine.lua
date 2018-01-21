@@ -9,6 +9,6 @@ setmetatable(_M, {__index = _G})
 setfenv(1, _M)
 
 MAX_BULLET_CNT = 25
-BULLET_LANCHER_INTERVAL = 0.25
+BULLET_LANCHER_INTERVAL = 0.2
 
 return _M

@@ -17,7 +17,7 @@ end
 
 -- 水波纹
 function M:initWave()
-    local wave1 = cc.Sprite:create(self:fullPath("images/battle/effect/wave_1_00.png"))
+    local wave1 = cc.Sprite:create(self:fullPath("bg/wave_1_00.png"))
     wave1:setPosition(cc.p(display.width / 2, display.height / 2))
     self:addChild(wave1,1)
     wave1:setScale(2)
@@ -26,7 +26,7 @@ function M:initWave()
     local seq = cc.Sequence:create(cc.FadeTo:create(time,255),cc.FadeTo:create(time,0))
     wave1:runAction(cc.RepeatForever:create(seq))
 
-    local wave2 = cc.Sprite:create(self:fullPath("images/battle/effect/wave_1_01.png"))
+    local wave2 = cc.Sprite:create(self:fullPath("bg/wave_1_01.png"))
     wave2:setPosition(cc.p(display.width / 2, display.height / 2))
     self:addChild(wave2, 1)
     wave2:setScale(2)

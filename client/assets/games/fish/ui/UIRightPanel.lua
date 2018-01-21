@@ -22,9 +22,12 @@ function M:click_btn_pokedex()
 end
 
 function M:click_btn_sound()
+    self:open()
+    self:createGameObject("UISetting")
 end
 
 function M:click_btn_exit()
+    self:open()
     self:getScene():doExitGame()
 end
 

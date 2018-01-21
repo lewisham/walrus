@@ -20,8 +20,9 @@ function M:onCreate()
             self:stopTimer()
         end
     end
-    self.bAutoFire = true
+    self.bAutoFire = false
     self.bTimer = false
+    self.bStopTimer = false
     self:onTouch(callback)
     self:setTouchEnabled(false)
     self:setPosition(0, 0)
@@ -29,14 +30,29 @@ function M:onCreate()
 end
 
 function M:launcher()
-    self:post("onEventFire", 1, self.touchPos)
+    local viewID = self:getScene():get("view_id")
+    if self:find("SCPool"):calcBulletCnt(viewID) >= FCDefine.MAX_BULLET_CNT then
+        Toast("屏幕上子弹太多")
+        return
+    end
+    local cannon = self:find("UICannon" .. viewID)
+    local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
+    local rotation = math.atan2(vec.y, vec.x) * 180 / PI
+    cannon:fire(rotation)
 end
 
 function M:startTimer()
+    self.bStopTimer = false
     if self.bTimer then return end
     self.bTimer = true
     self:launcher()
     local function callback()
+        if self.bStopTimer then
+            self.bStopTimer = false
+            self.bTimer = false
+            self:stopAllActions()
+            return
+        end
         self:launcher()
     end
     local tb = 
@@ -48,8 +64,7 @@ function M:startTimer()
 end
 
 function M:stopTimer()
-    self.bTimer = false
-    self:stopAllActions()
+    self.bStopTimer = true
 end
 
 return M
