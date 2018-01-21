@@ -33,7 +33,10 @@ function M:updateTimeLine()
     local room_idx = self:getScene():get("room_idx")
     local idx = math.random(1, 6)
     local id = 320000000 + room_idx * 100000 + idx * 1000 + 1
-    self:find("SCPool"):createTimeLine(id, 0)
+    local req = {}
+    req.id = id
+    req.frame = math.random(1, 50)
+    self:post("onMsgCreateTimeLine", req)
 end
 
 return M

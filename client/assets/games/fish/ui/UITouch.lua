@@ -12,17 +12,18 @@ function M:onCreate()
     local function callback(event)
         if event.name == "began" then
             self.touchPos = self:getTouchBeganPosition()
-            self:launcher()
             self:startTimer()
             return true
         elseif event.name == "moved" then
             self.touchPos = self:getTouchMovePosition()
-        else
+        elseif not self.bAutoFire then
             self:stopTimer()
         end
     end
+    self.bAutoFire = true
+    self.bTimer = false
     self:onTouch(callback)
-    self:setTouchEnabled(true)
+    self:setTouchEnabled(false)
     self:setPosition(0, 0)
     self:setAnchorPoint(0, 0)
 end
@@ -32,19 +33,22 @@ function M:launcher()
 end
 
 function M:startTimer()
+    if self.bTimer then return end
+    self.bTimer = true
+    self:launcher()
     local function callback()
         self:launcher()
     end
     local tb = 
     {
-        cc.DelayTime:create(0.25),
+        cc.DelayTime:create(FCDefine.BULLET_LANCHER_INTERVAL),
         cc.CallFunc:create(callback),
     }
-    self:stopAllActions()
     self:runAction(cc.RepeatForever:create(cc.Sequence:create(tb)))
 end
 
 function M:stopTimer()
+    self.bTimer = false
     self:stopAllActions()
 end
 

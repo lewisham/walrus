@@ -7,10 +7,13 @@
 local M = class("SCPool", GameObject)
 
 function M:onCreate()
+    self.mFishPool = {}
+    self.mNetPool = {}
+    self.mBulletPool = {}
+
     self.mFishList = {}
-    self.mTimeLineList = {}
     self.mBulletList = {}
-    self.mNetList = {}
+    self.mTimeLineList = {}
     self.mFishArrayList = {}
     self.mFishGroupList = {}
 end
@@ -53,7 +56,7 @@ function M:createFish(id, pathID, frame, offset)
         if val == id then return end
     end
     local go = nil
-    for _, fish in ipairs(self.mFishList) do
+    for _, fish in ipairs(self.mFishPool) do
         if not fish:isAlive() and fish.id == id then
             go = fish
             break
@@ -61,13 +64,14 @@ function M:createFish(id, pathID, frame, offset)
     end
     if go == nil then
         go = self:createUnnameObject("GOFish", id)
-        table.insert(self.mFishList, go)
+        table.insert(self.mFishPool, go)
     end
     go:reset()
     go:setOffsetPos(offset)
     local path = self:find("SCConfig"):get("path")[pathID]
     go:setPath(path)
     go:gotoFrame(frame)
+    table.insert(self.mFishList, go)
     return go
 end
 
@@ -79,10 +83,10 @@ function M:createTimeLine(id, frame)
     return go
 end
 
--- 创建子弹
-function M:createBullet(id, srcPos, angle)
+-- 创建普通子弹
+function M:createNormalBullet(viewID, id, srcPos, angle)
     local go = nil
-    for _, bullet in ipairs(self.mBulletList) do
+    for _, bullet in ipairs(self.mBulletPool) do
         if not bullet:isAlive() then
             go = bullet
             break
@@ -90,17 +94,37 @@ function M:createBullet(id, srcPos, angle)
     end
     if go == nil then
         go = self:createUnnameObject("GOBullet", id)
-        table.insert(self.mBulletList, go)
+        table.insert(self.mBulletPool, go)
     end
-    go:reset()
+    go:reset(viewID)
     go:launch(id, srcPos, angle)
+    table.insert(self.mBulletList, go)
+    return go
+end
+
+-- 创建跟踪子弹
+function M:createFollowBullet(viewID, id, srcPos, angle)
+    local go = nil
+    for _, bullet in ipairs(self.mBulletPool) do
+        if not bullet:isAlive() then
+            go = bullet
+            break
+        end
+    end
+    if go == nil then
+        go = self:createUnnameObject("GOBullet", id)
+        table.insert(self.mBulletPool, go)
+    end
+    go:reset(viewID)
+    go:follow(id, srcPos, angle)
+    table.insert(self.mBulletList, go)
     return go
 end
 
 -- 创建鱼网
 function M:createNet(id, pos)
     local go = nil
-    for _, net in ipairs(self.mNetList) do
+    for _, net in ipairs(self.mNetPool) do
         if not net:isAlive() then
             go = net
             break
@@ -108,10 +132,11 @@ function M:createNet(id, pos)
     end
     if go == nil then
         go = self:createUnnameObject("GONet")
-        table.insert(self.mNetList, go)
+        table.insert(self.mNetPool, go)
     end
     go:reset()
     go:play(id, pos)
+    return go
 end
 
 -- 创建鱼群
@@ -130,6 +155,28 @@ function M:createFishGroup(id, frame)
     return go
 end
 
+----------------------------------
+-- 测试
+----------------------------------
+
+function M:calcBulletCnt(viewID)
+    local cnt = 0
+    for _, bullet in ipairs(self.mBulletList) do
+        if bullet.mViewID == viewID then
+            cnt = cnt + 1
+        end
+    end
+    return cnt
+end
+
+function M:getFollowFish(viewID)
+    for _, fish in ipairs(self.mFishList) do
+        if fish:isAlive() then
+            return fish
+        end
+    end
+end
+
 
 
 ----------------------------------
@@ -146,13 +193,6 @@ end
 function M:testFish(id)
     local go = self:createFish(id, "300000663", 105)
     go:setState(1)
-end
-
-function M:testBullet(id, srcPos, dstPos)
-    local go = self:createUnnameObject("GOBullet", id)
-    table.insert(self.mBulletList, go)
-    go:laucherToPos(id, srcPos, dstPos)
-    return go
 end
 
 function M:testAllFish()

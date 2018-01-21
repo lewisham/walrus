@@ -8,7 +8,7 @@ local M = class("UIBackGround", UIBase)
 
 function M:onCreate()
     local idx = self:getScene():get("room_idx")
-    local sprite = cc.Sprite:create(self:fullPath(string.format("images/bl_roombg_%s.jpg", idx)))
+    local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", idx)))
     self:addChild(sprite)
     sprite:setPosition(display.width / 2, display.height / 2)
     self:initWave()
@@ -41,6 +41,14 @@ function M:initLayer()
     local layer = cc.Layer:create()
     self:addChild(layer, 2)
     self:getScene():set("fish_layer", layer)
+
+    layer = cc.Layer:create()
+    self:addChild(layer, 3)
+    self:getScene():set("bullet_layer", layer)
+
+    layer = cc.Layer:create()
+    self:addChild(layer, 3)
+    self:getScene():set("net_layer", layer)
 end
 
 return M

@@ -9,7 +9,6 @@ local MOVE_TAG = 101
 local M = class("GOFish", require("games.fish.objs.GOCollider"))
 
 function M:onCreate(id)
-    self:getScene():get("fish_layer"):addChild(self)
     self.id = id
     self.config = self:find("SCConfig"):get("fish")[id]
     self.vertices = self.config.vertices
@@ -18,6 +17,7 @@ function M:onCreate(id)
     self:initCollider()
     self:setVisible(false)
     self:reset()
+    self:getScene():get("fish_layer"):addChild(self, tonumber(self.config.show_layer))
 end
 
 function M:setOffsetPos(pos)
@@ -68,7 +68,7 @@ end
 
 function M:updateShadowPos()
     if self.shadow == nil then return end
-    local pos = cc.pAdd(cc.p(self:getPosition()), cc.p(20, -20))
+    local pos = cc.pAdd(cc.p(self:getPosition()), cc.p(30, -30))
     pos = self:convertToNodeSpaceAR(pos)
     self.shadow:setPosition(pos)
 end
@@ -128,10 +128,25 @@ function M:updateAngle(angle)
     elseif rt == 1 then
         self:setRotation(0)
     elseif rt == 2 then
-        self:setRotation(angle + 90)
+        angle = angle + 90
+        self:setRotation(angle)
+        if angle > 90 and angle < 270 then
+            self.fishSprite:setFlippedY(true)
+        else
+            self.fishSprite:setFlippedY(false)
+        end
+    elseif rt == 3 then
+        angle = angle + 90
+        self:setRotation(an0gle)
+        if angle > 90 and angle < 270 then
+            self.fishSprite:setFlippedX(true)
+        else
+            self.fishSprite:setFlippedX(false)
+        end
     end
 end
 
+-- 动作精灵
 function M:createActionSprite()
     local filename = self.config.fish_res
     local sp = cc.Sprite:createWithSpriteFrameName(filename .. "_00.png")
@@ -153,8 +168,8 @@ function M:createActionSprite()
     -- 阴影
     local shadow = cc.Sprite:create()
     shadow:setColor(cc.c3b(0, 0, 0))
-    shadow:setOpacity(60)
-    shadow:setScale(0.9)
+    shadow:setOpacity(128)
+    shadow:setScale(0.8)
     local act = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
     shadow:runAction(act)
     self:addChild(shadow, -2)

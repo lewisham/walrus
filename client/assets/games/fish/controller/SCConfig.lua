@@ -21,6 +21,7 @@ function M:parsePath()
             local unit = {}
             unit.pos = cc.p(tonumber(t2[1]), tonumber(t2[2]))
             unit.angle = tonumber(t2[3])
+            unit.vec = cc.p(math.sin(unit.angle), math.cos(unit.angle))
             table.insert(list, unit)
         end
         tb[val.id] = list

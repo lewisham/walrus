@@ -48,8 +48,11 @@ function M:initCollider()
     self.position = cc.p(self:getPosition())
     -- 法向量
     self.axis = {}
-    for i = 1, #self.vertices do
-        table.insert(self.axis, cc.p(0, 0))
+    local total = #self.vertices
+    for i = 1, total do
+        local next = i + 1 > total and 1 or i + 1
+        local axis = perp(cc.pNormalize(cc.pSub(self.vertices[i], self.vertices[next])))
+        table.insert(self.axis, axis)
     end
 end
 
@@ -72,12 +75,13 @@ function M:createCollider()
         kmGLLoadMatrix(transform)
         gl.lineWidth( 1.0 )
         gl.lineWidth(1)
-        cc.DrawPrimitives.drawSolidPoly(filledVertices, #filledVertices, cc.c4f(1, 1, 1, 0.5))
+        cc.DrawPrimitives.drawSolidPoly(filledVertices, #filledVertices, cc.c4f(1, 0.3, 0.5, 0.5))
         kmGLPopMatrix()
     end
     glNode:registerScriptDrawHandler(primitivesDraw)
 end
 
+-- 更新多边型点的位置
 function M:updatePoints()
     self.position = cc.p(self:getPosition())
     -- 更新顶点
@@ -86,6 +90,10 @@ function M:updatePoints()
         local pos = self:convertToWorldSpaceAR(vec)
         table.insert(self.points, pos)
     end
+end
+
+-- 更新法向量
+function M:updateAxis()
     local ratation = self:getRotation()
     if self.ratation == ratation then return end
     self.ratation = ratation
@@ -102,9 +110,11 @@ function M:updatePoints()
     --Log(self.points)
 end
 
--- 碰撞检测
-function M:doCheck(go)
-    local length = cc.pLengthSQ(cc.pSub(self.position, go.position))
+-- 分离轴算法
+function M:sat(go)
+    local offsetx = self.position.x - go.position.x
+    local offsety = self.position.y - go.position.y
+    local length =  offsetx * offsetx + offsety * offsety
     if length > self.raduis_2 + go.raduis_2 then
         return false
     end
@@ -118,8 +128,6 @@ function M:doCheck(go)
 		local a_, b_ = project(go.points, axis), project(self.points, axis)
 		if not overlap(a_, b_) then return false end
     end
-    self:onCollsion()
-    go:onCollsion()
 	return true
 end
 

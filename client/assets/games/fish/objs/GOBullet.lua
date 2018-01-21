@@ -1,14 +1,15 @@
 ----------------------------------------------------------------------
 -- 作者：lewis
 -- 日期：2016-2-15
--- 描述：鱼对象
+-- 描述：子弹
 ----------------------------------------------------------------------
 
 local M = class("GOBullet", require("games.fish.objs.GOCollider"))
 
 function M:onCreate(id)
+    self.mViewID = -1
     self.config = self:require("cannonoutlook")[id]
-    self:getScene():get("fish_layer"):addChild(self, 1)
+    self:getScene():get("bullet_layer"):addChild(self)
     local sprite = cc.Sprite:create(self:fullPath("plist/bullet/".. self.config.bullet_img))
     self:addChild(sprite)
     sprite:setAnchorPoint(cc.p(0.5, 0.75))
@@ -19,12 +20,24 @@ function M:onCreate(id)
     self.vec = cc.p(0, 0)
 end
 
-function M:reset()
+function M:reset(viewID)
+    self.mbSelf = self:getScene():get("view_id") == viewID  -- 是否是自己的子弹
+    self.mViewID = viewID
+    self.mbFollow = false
+    self.mFollowFish = nil
     self:setAlive(true)
     self:setVisible(true)
 end
 
--- 发射
+function M:isNeedCollionCheck()
+    return not self.mbFollow
+end
+
+function M:getViewID(viewID)
+    return self.mViewID
+end
+
+-- 向某个角度发射
 function M:launch(id, srcPos, angle)
     self.config = self:require("cannonoutlook")[id]
     self.bulletSpr:setTexture(self:fullPath("plist/bullet/".. self.config.bullet_img))
@@ -36,21 +49,18 @@ function M:launch(id, srcPos, angle)
     self:moveToNextPoint()
 end
 
--- 发射到某个点
-function M:laucherToPos(id, srcPos, dstPos)
-    self.config = self:require("cannonoutlook")[id]
-    self.bulletSpr:setTexture(self:fullPath("plist/bullet/".. self.config.bullet_img))
-    self:setPosition(srcPos)
-    self.vec = cc.pSub(dstPos, srcPos)
-    local act = cc.MoveTo:create(1.5, dstPos)
-    act:setTag(101)
-    self:stopActionByTag(101)
-    self:runAction(act)
-    local rotation = math.atan2(self.vec.y, self.vec.x) * 180 / PI
-    self:setRotation(-rotation + 90)
+-- 跟踪某个点
+function M:follow(id, srcPos, angle)
+    self.mbFollow = true
+    self:launch(id, srcPos, angle)
+    self.mFollowFish = self:find("SCPool"):getFollowFish(self.mViewID)
 end
 
 function M:updateFrame()
+    if self.mbFollow then
+        self:updateFollow()
+        return
+    end
     self:updateNormal()
     self:updatePoints()
 end
@@ -98,6 +108,17 @@ end
 function M:onCollsion()
     self:setVisible(false)
     self:setAlive(false)
+end
+
+-- 跟踪
+function M:updateFollow()
+    if self.mFollowFish == nil then return end
+    if not self.mFollowFish:isAlive() then
+        self.mFollowFish = self:find("SCPool"):getFollowFish(self.mViewID)
+    end
+    local p2 = cc.p(self:getPosition())
+    self.vec = cc.pNormalize(cc.pSub(self.mFollowFish.position, p2))
+    self:moveToNextPoint()
 end
 
 return M

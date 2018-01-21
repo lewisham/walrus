@@ -7,6 +7,7 @@
 local M = class("SCGameLoop", GameObject)
 
 function M:onCreate()
+    self:createGameObject("SCGrid")
 end
 
 function M:startUpdate()
@@ -14,44 +15,17 @@ function M:startUpdate()
     self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrame() end, 0.05, false)
 end
 
-function M:collsionCheck()
-    local go = self:find("SCPool")
-    if TEST_COUNT then 
-        t1 = os.clock()
-    end
-    local aliveFishes = go:getAliveList("mFishList")
-    local aliveBullets = go:getAliveList("mBulletList")
-    for _, bullet in ipairs(aliveBullets) do
-        for _, fish in ipairs(aliveFishes) do
-            if bullet:doCheck(fish) then
-                self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
-                break
-            end
-        end
-    end
-    -- 碰撞检测
-    if TEST_COUNT then
-        print(TEST_COUNT, "运算耗时:", os.clock() - t1, "鱼的数量:", #aliveFishes, "子弹数量", #aliveBullets)
-    end
-end
-
 function M:updateFrame()
     local go = self:find("SCPool")
     -- 更新鱼
-    local aliveFishes = {}
+    go:removeDeadObject("mFishList")
     for _, fish in ipairs(go.mFishList) do
-        if fish:isAlive() then
-            fish:updateFrame()
-            table.insert(aliveFishes, fish)
-        end
+        fish:updateFrame()
     end
     -- 更新子弹
-    local aliveBullets = {}
+    go:removeDeadObject("mBulletList")
     for _, bullet in ipairs(go.mBulletList) do
-        if bullet:isAlive() then
-            bullet:updateFrame()
-            table.insert(aliveBullets, bullet)
-        end
+        bullet:updateFrame()
     end
     -- 更新鱼时间线
     for _, timeline in ipairs(go.mTimeLineList) do
@@ -69,7 +43,58 @@ function M:updateFrame()
     end
     go:removeDeadObject("mFishGroupList")
 
+    -- local t1 = os.clock()
+    -- if TEST_COUNT then
+    --     TEST_COUNT = 0
+    -- end
     self:collsionCheck()
+    -- if TEST_COUNT then
+    --     print("运算耗时", os.clock() - t1, #go.mBulletList, #go.mFishList)
+    -- end
+end
+
+-- log2 4 * M算法
+function M:collsionCheck()
+    local grid = self:find("SCGrid")
+    local go = self:find("SCPool")
+    grid:reset()
+    for idx, fish in ipairs(go.mFishList) do
+        grid:addFish(idx, fish.points)
+    end
+    for _, bullet in ipairs(go.mBulletList) do
+        if bullet:isNeedCollionCheck() then
+            local list = grid:getFishes(bullet)
+            if list then
+                for idx, _ in pairs(list) do
+                    local fish = go.mFishList[idx]
+                    if bullet:sat(fish) then
+                        bullet:onCollsion()
+                        self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
+                        if bullet.mbSelf then
+
+                        end
+                        break
+                    end
+                end
+            end
+        end
+    end
+end
+
+-- n*m时间复杂度算法
+function M:collsionCheck1()
+    local go = self:find("SCPool")
+    for _, bullet in ipairs(go.mBulletList) do
+        if bullet:isNeedCollionCheck() then
+            for _, fish in ipairs(go.mFishList) do
+                if bullet:doCheck(fish) then
+                    bullet:onCollsion()
+                    self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
+                    break
+                end
+            end
+        end
+    end
 end
 
 return M

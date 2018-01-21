@@ -50,12 +50,17 @@ end
 
 function M:onEventFire(viewID, pos)
     if self.mViewID ~= viewID then return end
+    local cnt = self:find("SCPool"):calcBulletCnt(self.mViewID)
+    if cnt >= FCDefine.MAX_BULLET_CNT then
+        Toast("屏幕上子弹太多")
+        return
+    end
     local vec = cc.pSub(pos, self.cannonWorldPos)
     local rotation = math.atan2(vec.y, vec.x) * 180 / PI
     local extra = self.mViewID >= 3 and 270 or 90
     self.node_gun:setRotation(-rotation + extra)
     local pos = self.Node_launcher:convertToWorldSpaceAR(cc.p(0, 0))
-    self:find("SCPool"):createBullet(self.config.id, pos, rotation)
+    self:find("SCPool"):createNormalBullet(self.mViewID, self.config.id, pos, rotation)
     self:playFireAni()
 end
 
