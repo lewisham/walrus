@@ -20,13 +20,14 @@ function M:onCreate(id)
     self.vec = cc.p(0, 0)
 end
 
-function M:reset(viewID)
+function M:resetBullet(viewID)
     self.mbSelf = self:getScene():get("view_id") == viewID  -- 是否是自己的子弹
     self.mViewID = viewID
     self.mbFollow = false
     self.mFollowFish = nil
     self:setAlive(true)
     self:setVisible(true)
+    self:find("DAFish"):modifyBulletCnt(viewID, 1)
 end
 
 function M:isNeedCollionCheck()
@@ -106,8 +107,13 @@ function M:moveToNextPoint()
 end
 
 function M:onCollsion()
+    self:removeFromScreen()
+end
+
+function M:removeFromScreen()
     self:setVisible(false)
     self:setAlive(false)
+    self:find("DAFish"):modifyBulletCnt(self.mViewID, -1)
 end
 
 -- 跟踪

@@ -12,16 +12,10 @@ function M:onCreate()
     self.sp = cc.Sprite:createWithSpriteFrameName(self.filename .. "_00.png")
     self:addChild(self.sp)
     self:setVisible(false)
+    self:initAction()
 end
 
-function M:reset()
-end
-
-function M:play(id, pos)
-    self.filename = self:require("cannonoutlook")[tostring(id)].net_res
-    self:setPosition(pos)
-    self:setAlive(true)
-    self:setVisible(true)
+function M:initAction()
     local filename = self.filename
     local animation = cc.Animation:create()
     local idx = 0
@@ -37,8 +31,19 @@ function M:play(id, pos)
         self:setVisible(false)
         self:setAlive(false)
     end
-    local act = cc.Sequence:create(cc.Animate:create(animation), cc.CallFunc:create(callback))
-    self.sp:runAction(act)
+    self.action = cc.Sequence:create(cc.Animate:create(animation), cc.CallFunc:create(callback))
+    self.action:retain()
+end
+
+function M:reset()
+end
+
+function M:play(id, pos)
+    self.filename = self:require("cannonoutlook")[tostring(id)].net_res
+    self:setPosition(pos)
+    self:setAlive(true)
+    self:setVisible(true)
+    self.sp:runAction(self.action)
 end
 
 return M

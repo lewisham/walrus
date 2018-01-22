@@ -31,6 +31,17 @@ function M:onMsgCreateTimeLine(resp)
     self:find("SCPool"):createTimeLine(resp.id, resp.frame)
 end
 
+-- 鱼潮
+function M:onMsgCreateFishGroup(resp)
+    self:createGameObject("UIGroupComing"):play()
+    local go = self:find("SCPool")
+    go.mTimeLineList = {}
+    go:createFishGroup(resp.group_id, 1)
+    for _, fish in ipairs(go:getAliveList("mFishList")) do
+        fish:fadeOut()
+    end
+end
+
 function M:onMsgShoot(resp)
     local cannon = self:find("UICannon" .. resp.view_id)
     cannon:fire(resp.angle)

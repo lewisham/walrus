@@ -16,13 +16,15 @@ local M = class("UICannon", UIBase)
 
 function M:onCreate(viewID)
     self.mViewID = viewID
-    self:loadCsb("games/fish/assets/ui/uicannon.csb")
+    self:loadCsb(self:fullPath("ui/uicannon.csb"))
     self:initDir(viewID)
     self.cannonWorldPos = self.node_gun:convertToWorldSpaceAR(cc.p(0, 0))
     self:reset()
 end
 
 function M:reset()
+    self.mMenuNode = nil
+    self.panel_1:setTouchEnabled(false)
     self.spr_coin_bg:setVisible(false)
     self.fnt_curadd:setVisible(false)
     self.spr_gun_lock:setVisible(false)
@@ -81,6 +83,8 @@ function M:join(info)
     self.fnt_diamonds:setString(info.diamonds)
     self.spr_coin_bg:setVisible(true)
     if not info.is_self then return end
+    self.panel_1:setTouchEnabled(true)
+    self.panel_1:onClicked(function() self:click_panel() end)
     self.btn_minus:setVisible(true)
     self.btn_add:setVisible(true)
     self.spr_circle:setVisible(true)
@@ -104,6 +108,42 @@ function M:click_btn_add()
 end
 
 function M:click_btn_minus()
+end
+
+function M:click_panel()
+    self:createMenuNode()
+    self.mMenuNode:setVisible(true)
+    local bAutoFire = self:getScene():get("auto_fire")
+    self.mMenuNode.spr_autofire:setVisible(not bAutoFire)
+    self.mMenuNode.spr_cancelauto:setVisible(bAutoFire)
+end
+
+function M:createMenuNode()
+    if self.mMenuNode then return end
+    self.mMenuNode = LoadCsb(self:fullPath("ui/uigunchange.csb"))
+    self:addChild(self.mMenuNode, 10)
+    self.mMenuNode:setPosition(cc.p(0, 62))
+    BindToUI(self.mMenuNode, self.mMenuNode)
+    self.mMenuNode.btn_autofire:onClicked(function() self:click_auto_fire() end)
+    self.mMenuNode.btn_face:onClicked(function() self:click_btn_face() end)
+    self.mMenuNode.btn_changecannon:onClicked(function() self:click_btn_changecannon() end)
+end
+
+function M:click_auto_fire()
+    self.mMenuNode:setVisible(false)
+    local bAutoFire = not self:getScene():get("auto_fire")
+    self:getScene():set("auto_fire", bAutoFire)
+    if not bAutoFire then
+        self:find("UITouch"):stopTimer()
+    end
+end
+
+function M:click_btn_face()
+    self.mMenuNode:setVisible(false)
+end
+
+function M:click_btn_changecannon()
+    self.mMenuNode:setVisible(false)
 end
 
 return M

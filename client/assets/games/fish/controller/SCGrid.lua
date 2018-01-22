@@ -4,7 +4,7 @@
 -- 描述：格子类
 ----------------------------------------------------------------------
 
-local GRID_CNT = 4
+local GRID_CNT = 8
 local GRID_WIDTH = display.width / GRID_CNT
 local GRID_HEIGHT = display.height / GRID_CNT
 

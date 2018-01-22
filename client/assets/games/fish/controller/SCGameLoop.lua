@@ -12,19 +12,21 @@ end
 
 function M:startUpdate()
     local scheduler = cc.Director:getInstance():getScheduler()
-    self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrame() end, 0.05, false)
+    if TEST_COUNT then
+        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrameTest() end, 0.05, false)
+    else
+        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrame() end, 0.05, false)
+    end
 end
 
 function M:updateFrame()
     local go = self:find("SCPool")
     -- 更新鱼
-    go:removeDeadObject("mFishList")
-    for _, fish in ipairs(go.mFishList) do
+    for _, fish in ipairs(go:getAliveList("mFishList")) do
         fish:updateFrame()
     end
     -- 更新子弹
-    go:removeDeadObject("mBulletList")
-    for _, bullet in ipairs(go.mBulletList) do
+    for _, bullet in ipairs(go:getAliveList("mBulletList")) do
         bullet:updateFrame()
     end
     -- 更新鱼时间线
@@ -42,39 +44,42 @@ function M:updateFrame()
         array:updateFrame()
     end
     go:removeDeadObject("mFishGroupList")
-
-    -- local t1 = os.clock()
-    -- if TEST_COUNT then
-    --     TEST_COUNT = 0
-    -- end
     self:collsionCheck()
-    -- if TEST_COUNT then
-    --     print("运算耗时", os.clock() - t1, #go.mBulletList, #go.mFishList)
-    -- end
+end
+
+function M:updateFrameTest()
+    local t1 = os.clock()
+    if TEST_COUNT then
+        TEST_COUNT = 0
+    end
+    self:updateFrame()
+    if TEST_COUNT then
+        print("运算耗时", os.clock() - t1, #go.mBulletList, #go.mFishList)
+    end
 end
 
 -- log2 4 * M算法
 function M:collsionCheck()
     local grid = self:find("SCGrid")
-    local go = self:find("SCPool")
     grid:reset()
-    for idx, fish in ipairs(go.mFishList) do
+    local go = self:find("SCPool")
+    local bulletList = go:getCollsionBullet()
+    local fishes = go:getAliveList("mFishList")
+    for idx, fish in ipairs(fishes) do
         grid:addFish(idx, fish.points)
     end
-    for _, bullet in ipairs(go.mBulletList) do
-        if bullet:isNeedCollionCheck() then
-            local list = grid:getFishes(bullet)
-            if list then
-                for idx, _ in pairs(list) do
-                    local fish = go.mFishList[idx]
-                    if bullet:sat(fish) then
-                        bullet:onCollsion()
-                        self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
-                        if bullet.mbSelf then
+    for _, bullet in ipairs(bulletList) do
+        local list = grid:getFishes(bullet)
+        if list then
+            for idx, _ in pairs(list) do
+                local fish = fishes[idx]
+                if bullet:sat(fish) then
+                    bullet:onCollsion()
+                    self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
+                    if bullet.mbSelf then
 
-                        end
-                        break
                     end
+                    break
                 end
             end
         end

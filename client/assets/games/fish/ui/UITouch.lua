@@ -16,11 +16,10 @@ function M:onCreate()
             return true
         elseif event.name == "moved" then
             self.touchPos = self:getTouchMovePosition()
-        elseif not self.bAutoFire then
-            self:stopTimer()
+        elseif not self:getScene():get("auto_fire") then
+            self.bStopTimer = true
         end
     end
-    self.bAutoFire = false
     self.bTimer = false
     self.bStopTimer = false
     self:onTouch(callback)
@@ -31,7 +30,7 @@ end
 
 function M:launcher()
     local viewID = self:getScene():get("view_id")
-    if self:find("SCPool"):calcBulletCnt(viewID) >= FCDefine.MAX_BULLET_CNT then
+    if self:find("DAFish"):getBulletCnt(viewID) >= FCDefine.MAX_BULLET_CNT then
         Toast("屏幕上子弹太多")
         return
     end
@@ -48,9 +47,7 @@ function M:startTimer()
     self:launcher()
     local function callback()
         if self.bStopTimer then
-            self.bStopTimer = false
-            self.bTimer = false
-            self:stopAllActions()
+            self:stopTimer()
             return
         end
         self:launcher()
@@ -64,7 +61,9 @@ function M:startTimer()
 end
 
 function M:stopTimer()
-    self.bStopTimer = true
+    self.bStopTimer = false
+    self.bTimer = false
+    self:stopAllActions()
 end
 
 return M

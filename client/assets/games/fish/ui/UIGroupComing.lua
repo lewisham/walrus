@@ -13,11 +13,17 @@ function M:onCreate()
     action:gotoFrameAndPause(0)
     self:runAction(action)
     self.mTimelineAction = action
+    self:setVisible(false)
 end
 
 function M:play()
-    self.mTimelineAction:setLastFrameCallFunc(function() SafeRemoveNode(self) end)
+    self:setVisible(true)
+    local function callback()
+        SafeRemoveNode(self)
+    end
+    --self.mTimelineAction:setLastFrameCallFunc(function() self:setVisible(false) end)
     self.mTimelineAction:gotoFrameAndPlay(0)
+    self:callAfter(160 / 60.0, callback)
 end
 
 return M

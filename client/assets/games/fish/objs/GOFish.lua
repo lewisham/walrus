@@ -24,6 +24,7 @@ function M:setOffsetPos(pos)
     self.mPathOffset = pos
 end
 function M:reset()
+    self.fishSprite:setOpacity(255)
     self.hp = math.random(1, 100)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
@@ -119,6 +120,14 @@ end
 function M:outOfFrame()
     self:setVisible(false)
     self:setAlive(false)
+end
+
+function M:fadeOut()
+    local function callback()
+        self:setVisible(false)
+        self:setAlive(false)
+    end
+    self.fishSprite:runAction(cc.Sequence:create(cc.FadeOut:create(0.3), cc.CallFunc:create(callback)))
 end
 
 function M:updateAngle(angle)

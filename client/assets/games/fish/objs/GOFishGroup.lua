@@ -15,22 +15,7 @@ end
 function M:gotoFrame(frame)
     self:setAlive(true)
     self.mCurFrame = frame
-    local id = 330000000 + self.mStartID * 100000
-    local fishgroup = self:require("fishgroup")
-    local tb = {}
-    while true do
-        local config = fishgroup[tostring(id)]
-        if config == nil then break end
-        if config.arrId == "" then break end
-        id = id + 1
-        local unit = {}
-        unit.fisharrid = config.arrId
-        unit.frame = tonumber(config.frame)
-        unit.endframe = config.endframe
-        unit.use = false
-        table.insert(tb, unit)
-    end
-    self.mFishData = tb
+    self.mFishData = self:find("SCConfig"):getFishGroup(self.mStartID)
 end
 
 function M:updateFrame()

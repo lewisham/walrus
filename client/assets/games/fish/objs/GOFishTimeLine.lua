@@ -15,22 +15,7 @@ end
 function M:gotoFrame(frame)
     self:setAlive(true)
     self.mCurFrame = frame
-    local id = self.mStartID or 320101001
-    local timeline = self:require("timeline")
-    local tb = {}
-    while true do
-        local config = timeline[tostring(id)]
-        if config == nil then break end
-        if config.fishid == "" then break end
-        id = id + 1
-        local unit = {}
-        unit.fishid = config.fishid
-        unit.frame = tonumber(config.frame)
-        unit.pathid = config.pathid
-        unit.use = false
-        table.insert(tb, unit)
-    end
-    self.mFishData = tb
+    self.mFishData = self:find("SCConfig"):getFishTimeline(self.mStartID)
 end
 
 function M:updateFrame()
@@ -42,7 +27,8 @@ function M:updateFrame()
             if unit.fishid == "100" then
                 self:find("SCPool"):createFishArray(unit.pathid, 1)
             else
-                self:find("SCPool"):createFish(unit.fishid, tostring(unit.pathid +300000000), 1)
+                local fish = self:find("SCPool"):createFish(unit.fishid, tostring(unit.pathid +300000000), 1)
+                self:doBossWarnning(fish)
             end
         end
         if bAllUse and not unit.use then
@@ -50,6 +36,14 @@ function M:updateFrame()
         end
     end
     self.alive = not bAllUse
+end
+
+function M:doBossWarnning(fish)
+    if fish == nil then return end
+    local config = fish.config
+    local trace_type = tonumber(fish.config.trace_type)
+    if trace_type ~= 5 and trace_type ~= 10 then return end
+    self:createGameObject("UIBossComing"):play()
 end
 
 return M

@@ -21,10 +21,12 @@ function M:initConfig()
     -- 游戏数据
     self:set("room_idx", 1)
     self:set("view_id", 1)
+    self:set("auto_fire", false)
 end
 
 function M:run()
     self:initConfig()
+    self:createGameObject("DAFish")
     self:createGameObject("SCConfig")
     self:createGameObject("SCSound")
     self:createGameObject("SCPool")
