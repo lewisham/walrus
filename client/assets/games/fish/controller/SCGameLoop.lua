@@ -75,6 +75,7 @@ function M:collsionCheck()
                 local fish = fishes[idx]
                 if bullet:sat(fish) then
                     bullet:onCollsion()
+                    fish:onCollsion()
                     self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
                     if bullet.mbSelf then
 
