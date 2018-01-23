@@ -15,6 +15,17 @@ function M:onCreate()
     self.mFishGroupList = {}
 end
 
+function M:removeTimeline()
+    for _, timeline in ipairs(self.mTimeLineList) do
+        SafeRemoveNode(timeline)
+    end
+    self.mTimeLineList = {}
+    for _, array in ipairs(self.mFishArrayList) do
+        SafeRemoveNode(array)
+    end
+    self.mFishArrayList = {}
+end
+
 -- 移除已经失效的对象
 function M:removeDeadObject(name)
     local list = self[name]
@@ -119,17 +130,17 @@ end
 function M:createNet(id, pos)
     local go = nil
     for _, net in ipairs(self.mNetPool) do
-        if not net:isAlive() then
+        if not net:isAlive() and net.id == id then
             go = net
             break
         end
     end
     if go == nil then
-        go = self:createUnnameObject("GONet")
+        go = self:createUnnameObject("GONet", id)
         table.insert(self.mNetPool, go)
     end
     go:reset()
-    go:play(id, pos)
+    go:play(pos)
     return go
 end
 

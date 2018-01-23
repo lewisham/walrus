@@ -16,7 +16,7 @@ function M:initConfig()
     -- 显示配置
     --rawset(_G, "TEST_COUNT", 0)
     cc.Director:getInstance():setDisplayStats(true)
-    self:set("enble_collider", false) -- 显示碰撞区
+    --self:set("enble_collider", true) -- 显示碰撞区
     self:set("flip", false)
     -- 游戏数据
     self:set("room_idx", 1)

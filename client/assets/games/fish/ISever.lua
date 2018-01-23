@@ -22,7 +22,10 @@ function M:test()
     --self:find("SCPool"):createNet(1, cc.p(512, 360))
     --self:find("SCPool"):createFishArray("312124001", 1)
     --self:find("SCPool"):createFishGroup(1, 1)
-    local tb = {1, 4, 3, 2}
+    local tb = {}
+    for i = 1, 4 do
+        table.insert(tb, i)
+    end
     for _, i in ipairs(tb) do
         local info =
         {
@@ -58,7 +61,7 @@ function M:playerShoot(player)
         return
     end
     if player.shoot_cnt < 1 then
-        if math.random(1, 4) ~= 1 then return end
+        if math.random(1, 15) ~= 1 then return end
         player.shoot_cnt = math.random(1, 7)
     else
         player.shoot_cnt = player.shoot_cnt - 1
@@ -115,7 +118,8 @@ function M:createTimeline()
     self:post("onMsgCreateTimeLine", req)
     local config = self:find("SCConfig"):getFishTimeline(id)
     self.mTimeLineIdx = tonumber(config[#config].frame)
-    self.mGroupIdx = self.mTimeLineIdx - 2000
+    self.mGroupIdx = self.mTimeLineIdx
+    self.mTimeLineIdx = self.mTimeLineIdx + 200
 end
 
 

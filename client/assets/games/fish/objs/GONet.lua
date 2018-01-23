@@ -6,13 +6,19 @@
 
 local M = class("GONet", require("games.fish.objs.GOCollider"))
 
-function M:onCreate()
+function M:onCreate(id)
+    self.id = id
     self:getScene():get("net_layer"):addChild(self)
-    self.filename = "net_1"
+    self.filename = self:require("cannonoutlook")[tostring(id)].net_res
     self.sp = cc.Sprite:createWithSpriteFrameName(self.filename .. "_00.png")
     self:addChild(self.sp)
     self:setVisible(false)
     self:initAction()
+    local width = 65
+    self.vertices = {cc.p(-width, -width), cc.p(width, -width), cc.p(width, width), cc.p(-width, width)}
+    width = width * 1.4
+    self.raduis_2 = width * width
+    self:initCollider()
 end
 
 function M:initAction()
@@ -38,12 +44,12 @@ end
 function M:reset()
 end
 
-function M:play(id, pos)
-    self.filename = self:require("cannonoutlook")[tostring(id)].net_res
+function M:play(pos)
     self:setPosition(pos)
     self:setAlive(true)
     self:setVisible(true)
     self.sp:runAction(self.action)
+    self:updatePoints()
 end
 
 return M

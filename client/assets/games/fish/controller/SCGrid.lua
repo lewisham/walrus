@@ -4,7 +4,7 @@
 -- 描述：格子类
 ----------------------------------------------------------------------
 
-local GRID_CNT = 8
+local GRID_CNT = 4
 local GRID_WIDTH = display.width / GRID_CNT
 local GRID_HEIGHT = display.height / GRID_CNT
 
@@ -43,11 +43,24 @@ function M:addFish(fishIdx, points)
     end
 end
 
-function M:getFishes(bullet)
-    local idx = convertIdx(bullet.position)
+function M:getFishesByPos(pos)
+    local idx = convertIdx(pos)
     if self.mGridList[idx] then
         return self.mGridList[idx].fishes
     end
+end
+
+function M:getFishesByPoints(points)
+    local list = {}
+    for _, pos in ipairs(points) do
+        local tb = self:getFishesByPos(pos)
+        if tb then
+            for idx, _ in pairs(tb) do
+                list[idx] = 0
+            end
+        end
+    end
+    return list
 end
 
 return M

@@ -25,7 +25,7 @@ function M:setOffsetPos(pos)
 end
 function M:reset()
     self.fishSprite:setOpacity(255)
-    self.hp = math.random(1, 100)
+    self.hp = math.random(1, 30)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
     self.mCurIdx = 0
@@ -185,8 +185,8 @@ function M:createActionSprite()
     self.shadow = shadow
 end
 
-function M:onCollsion()
-    self.mRedIdx = 3
+function M:onHit()
+    self.mRedIdx = 5
     self.hp = self.hp - 1
     if self.hp < 1 then
         self:outOfFrame()

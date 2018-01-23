@@ -69,22 +69,32 @@ function M:collsionCheck()
         grid:addFish(idx, fish.points)
     end
     for _, bullet in ipairs(bulletList) do
-        local list = grid:getFishes(bullet)
+        local list = grid:getFishesByPos(bullet.position)
         if list then
             for idx, _ in pairs(list) do
                 local fish = fishes[idx]
                 if bullet:sat(fish) then
                     bullet:onCollsion()
-                    fish:onCollsion()
-                    self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
+                    local net = self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
                     if bullet.mbSelf then
-
+                        self:netCollsionCheck(fishes, net, grid)
                     end
                     break
                 end
             end
         end
     end
+end
+
+-- 鱼网与鱼碰撞
+function M:netCollsionCheck(fishes, net, grid)
+    local list = grid:getFishesByPoints(net.points)
+    for idx, _ in pairs(list) do
+        local fish = fishes[idx]
+        if fish and net:sat(fish) then
+            fish:onHit()
+        end
+    end 
 end
 
 -- n*m时间复杂度算法

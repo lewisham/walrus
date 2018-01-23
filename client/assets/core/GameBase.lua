@@ -10,3 +10,10 @@ GameBase = class("GameBase", GameScene)
 function GameBase:ctor()
     GameBase.super.ctor(self)
 end
+
+function GameBase:doExitGame()
+    self:coroutine(self, "doExitGameImpl")
+end
+
+function GameBase:doExitGameImpl()
+end

@@ -35,7 +35,7 @@ end
 function M:onMsgCreateFishGroup(resp)
     self:createGameObject("UIGroupComing"):play()
     local go = self:find("SCPool")
-    go.mTimeLineList = {}
+    go:removeTimeline()
     go:createFishGroup(resp.group_id, 1)
     for _, fish in ipairs(go:getAliveList("mFishList")) do
         fish:fadeOut()

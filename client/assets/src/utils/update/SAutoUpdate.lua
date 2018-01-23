@@ -13,12 +13,9 @@ end
 -- 执行自动更新逻辑
 function SAutoUpdate:play(url)
     url = "https://raw.githubusercontent.com/lewisham/mahjong/master/assets/"
-	self:createGameObject("UIAutoUpdate")
 	-- 不进进行自动更新
-    if NOT_AUTO_UPDATE then
-        self:find("UIAutoUpdate"):refreshTips("不进行自动更新")
-        WaitForSeconds(0.5)
-	else
+    if not NOT_AUTO_UPDATE then
+        self:createGameObject("UIAutoUpdate")
 		self:createGameObject("SCUpdateOneByOne", url):play()
 	end
     self:destroy()

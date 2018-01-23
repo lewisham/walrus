@@ -48,6 +48,7 @@ end
 
 -- 主函数
 local function main()
+    math.randomseed(os.clock())
     cc.Director:getInstance():setAnimationInterval(1.0 / 60)
     require("src.platform.init")
 	-- 下载目录
