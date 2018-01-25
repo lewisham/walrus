@@ -22,23 +22,14 @@ function M:onCreate(id)
 end
 
 function M:initAction()
-    local filename = self.filename
-    local animation = cc.Animation:create()
-    local idx = 0
-    while true do
-        local frameName = string.format("%s_%02d.png", filename, idx)
-        local spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName)
-        if spriteFrame == nil then break end
-        animation:addSpriteFrame(spriteFrame)
-        idx = idx + 1
-    end
-    animation:setDelayPerUnit(1 / 20.0)
+    local strFormat = string.format("%s_%s.png", self.filename, "%02d")
+    local animation = self:find("SCAction"):createAnimation(strFormat, 1 / 20.0)
     local function callback()
         self:setVisible(false)
         self:setAlive(false)
     end
     self.action = cc.Sequence:create(cc.Animate:create(animation), cc.CallFunc:create(callback))
-    self.action:retain()
+    self:find("SCAction"):retainAction(self.action)
 end
 
 function M:reset()

@@ -16,6 +16,7 @@ function M:onCreate()
             return true
         elseif event.name == "moved" then
             self.touchPos = self:getTouchMovePosition()
+            self:updateAngle()
         elseif not self:getScene():get("auto_fire") then
             self.bStopTimer = true
         end
@@ -28,6 +29,14 @@ function M:onCreate()
     self:setAnchorPoint(0, 0)
 end
 
+function M:updateAngle()
+    local viewID = self:getScene():get("view_id")
+    local cannon = self:find("UICannon" .. viewID)
+    local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
+    local angle = math.atan2(vec.y, vec.x) * 180 / PI
+    cannon:updateAngle(angle)
+end
+
 function M:launcher()
     local viewID = self:getScene():get("view_id")
     if self:find("DAFish"):getBulletCnt(viewID) >= FCDefine.MAX_BULLET_CNT then
@@ -37,7 +46,7 @@ function M:launcher()
     local cannon = self:find("UICannon" .. viewID)
     local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
     local rotation = math.atan2(vec.y, vec.x) * 180 / PI
-    cannon:fire(rotation)
+    cannon:firePre(rotation)
 end
 
 function M:startTimer()

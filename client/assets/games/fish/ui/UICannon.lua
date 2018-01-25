@@ -59,12 +59,31 @@ function M:initDir(viewID)
     end
 end
 
-function M:fire(rotation)
+-- 开火
+function M:fire(angle)
+    self:updateAngle(angle)
     local extra = self.mViewID >= 3 and 180 or 0
-    self.node_gun:setRotation(-rotation + 90)
     local pos = self.Node_launcher:convertToWorldSpaceAR(cc.p(0, 0))
-    self:find("SCPool"):createNormalBullet(self.mViewID, self.config.id, pos, rotation + extra)
+    self:find("SCPool"):createNormalBullet(self.mViewID, self.config.id, pos, angle + extra)
     self:playFireAni()
+end
+
+-- 预处理开火
+function M:firePre(angle)
+    self:updateAngle(angle)
+    local extra = self.mViewID >= 3 and 180 or 0
+    local pos = self.Node_launcher:convertToWorldSpaceAR(cc.p(0, 0))
+    self:find("SCPool"):createNormalBullet(self.mViewID, self.config.id, pos, angle + extra)
+    self:playFireAni()
+    local money = tonumber(self.fnt_coins:getString())
+    local rate = tonumber(self.fnt_multiple:getString())
+    money = money - rate
+    self.fnt_coins:setString(money)
+end
+
+function M:updateAngle(angle)
+    local extra = self.mViewID >= 3 and 180 or 0
+    self.node_gun:setRotation(-angle + 90)
 end
 
 function M:playFireAni()
@@ -119,14 +138,34 @@ function M:click_panel()
 end
 
 function M:createMenuNode()
-    if self.mMenuNode then return end
-    self.mMenuNode = LoadCsb(self:fullPath("ui/uigunchange.csb"))
+    if self.mMenuNode then 
+        self:openTouchBegan()
+        return 
+    end
+    local node = cc.Node:create()
+    self.mMenuNode = node
     self:addChild(self.mMenuNode, 10)
-    self.mMenuNode:setPosition(cc.p(0, 62))
-    BindToUI(self.mMenuNode, self.mMenuNode)
-    self.mMenuNode.btn_autofire:onClicked(function() self:click_auto_fire() end)
-    self.mMenuNode.btn_face:onClicked(function() self:click_btn_face() end)
-    self.mMenuNode.btn_changecannon:onClicked(function() self:click_btn_changecannon() end)
+    node:addChild(LoadCsb(self:fullPath("ui/uigunchange.csb")), 10)
+    node:setPosition(cc.p(0, 62))
+    BindToUI(node, node)
+    node.btn_autofire:onClicked(function() self:click_auto_fire() end)
+    node.btn_face:onClicked(function() self:click_btn_face() end)
+    node.btn_changecannon:onClicked(function() self:click_btn_changecannon() end) 
+    self:openTouchBegan()
+end
+
+function M:openTouchBegan()
+    local node = cc.Node:create()
+    self.mMenuNode:addChild(node, 1)
+    local function onTouchBegan(touch, event)
+        self.mMenuNode:setVisible(false)
+        SafeRemoveNode(node)
+        return true
+    end
+    local listener = cc.EventListenerTouchOneByOne:create()
+    listener:setSwallowTouches(true)
+	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
+	node:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)
 end
 
 function M:click_auto_fire()

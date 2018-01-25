@@ -24,6 +24,7 @@ function M:setOffsetPos(pos)
     self.mPathOffset = pos
 end
 function M:reset()
+    self:setRed(false)
     self.fishSprite:setOpacity(255)
     self.hp = math.random(1, 30)
     self.mPathOffset = cc.p(0, 0)
@@ -31,6 +32,7 @@ function M:reset()
     self.mCurIdx = 0
     self.mState = 0
     self.mRedIdx = 0
+    self.mStopRedCnt = 0
     self.mbRed = false
 end
 
@@ -58,11 +60,37 @@ function M:updateFrame()
 end
 
 function M:updateRed()
+    if self.mStopRedCnt > 0 then
+        self.mStopRedCnt = self.mStopRedCnt - 1
+    end
     if self.mRedIdx > 0 then
         self.mRedIdx = self.mRedIdx - 1
-        self.fishSprite:setColor(cc.c3b(255, 0, 0))
+        self.mStopRedCnt = 5
+        self:setRed(true)
     else
-        self.fishSprite:setColor(cc.c3b(255, 255, 255))
+        self:setRed(false)
+    end
+end
+
+function M:setRed(bo)
+    if bo then
+        if self.mbRed == bo then return end
+        self.mbRed = bo
+        local shader = self:getScene():get("shader_list")["red"]
+        if shader then
+            self.fishSprite:setGLProgramState(shader)
+        else
+            self.fishSprite:setColor(cc.c3b(255, 0, 0))
+        end
+    else
+        if self.mbRed == bo then return end
+        self.mbRed = bo
+        local shader = self:getScene():get("shader_list")["normal"]
+        if shader then
+            self.fishSprite:setGLProgramState(shader)
+        else
+            self.fishSprite:setColor(cc.c3b(255, 255, 255))
+        end
     end
 end
 
@@ -146,7 +174,7 @@ function M:updateAngle(angle)
         end
     elseif rt == 3 then
         angle = angle + 90
-        self:setRotation(an0gle)
+        self:setRotation(angle)
         if angle > 90 and angle < 270 then
             self.fishSprite:setFlippedX(true)
         else
@@ -157,21 +185,11 @@ end
 
 -- 动作精灵
 function M:createActionSprite()
-    local filename = self.config.fish_res
-    local sp = cc.Sprite:createWithSpriteFrameName(filename .. "_00.png")
+    local sp = cc.Sprite:createWithSpriteFrameName(self.config.fish_res .. "_00.png")
     self:addChild(sp)
-    local animation = cc.Animation:create()
-    local idx = 0
-    while true do
-        local frameName = string.format("%s_%02d.png", filename, idx)
-        local spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName)
-        if spriteFrame == nil then break end
-        animation:addSpriteFrame(spriteFrame)
-        idx = idx + 1
-    end
-    animation:setDelayPerUnit(3 / 20.0)
-    local act = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
-    sp:runAction(act)
+    local strFormat = string.format("%s_%s.png", self.config.fish_res, "%02d")
+    local animation = self:find("SCAction"):createAnimation(strFormat, 3 / 20.2)
+    sp:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
     self.fishSprite = sp
 
     -- 阴影
@@ -179,14 +197,16 @@ function M:createActionSprite()
     shadow:setColor(cc.c3b(0, 0, 0))
     shadow:setOpacity(128)
     shadow:setScale(0.8)
-    local act = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
-    shadow:runAction(act)
+    shadow:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
     self:addChild(shadow, -2)
     self.shadow = shadow
 end
 
 function M:onHit()
-    self.mRedIdx = 5
+    if self.mStopRedCnt == 0 then
+        self.mStopRedCnt = 5
+        self.mRedIdx = 8
+    end
     self.hp = self.hp - 1
     if self.hp < 1 then
         self:outOfFrame()
