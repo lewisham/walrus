@@ -9,41 +9,68 @@ local M = class("UIRightPanel", UIBase)
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uisetbutton.csb"))
     self:setPosition(display.width, display.height / 2)
+    self.originPos = cc.p(self:getPosition())
     self.isOpen = false
 end
 
 function M:click_btn_openlist()
-    self:open()
+    if not self.isOpen then 
+        self:open() 
+    else
+        self:close()
+    end
+    if not self:getScene():get("enable_fps") then return end
+    cc.Director:getInstance():setDisplayStats(self.isOpen)
 end
 
 function M:click_btn_pokedex()
-    self:open()
+    self:close()
     self:createGameObject("UIFishHandBook")
 end
 
 function M:click_btn_sound()
-    self:open()
+    self:close()
     self:createGameObject("UISetting")
 end
 
 function M:click_btn_exit()
-    self:open()
+    self:close()
     self:getScene():doExitGame()
 end
 
+-- 开启
 function M:open()
-    self.isOpen = not self.isOpen 
-    if self.originPos == nil then 
-        self.originPos = cc.p(self:getPosition())
-    end 
+    self.isOpen = true
     self:stopAllActions()
-    if self.isOpen == true then
-        self.spr_triangle:setRotation(0)
-        self:runAction(cc.MoveTo:create(0.1, cc.p(self.originPos.x-self.image_bg:getContentSize().width * 0.9, self.originPos.y)))
-    else
-        self.spr_triangle:setRotation(180)
-        self:runAction(cc.MoveTo:create(0.1, cc.p(self.originPos.x,self.originPos.y)))
+    self.spr_triangle:setRotation(0)
+    local tb =
+    {
+        cc.MoveTo:create(0.1, cc.p(self.originPos.x-self.image_bg:getContentSize().width * 0.9, self.originPos.y)),
+        cc.CallFunc:create(function() self:openTouchBegan() end),
+    }
+    self:runAction(cc.Sequence:create(tb))
+end
+
+-- 关闭
+function M:close()
+    self.isOpen = false
+    self:stopAllActions()
+    self.spr_triangle:setRotation(180)
+    self:runAction(cc.MoveTo:create(0.1, cc.p(self.originPos.x,self.originPos.y)))
+end
+
+function M:openTouchBegan()
+    local node = cc.Node:create()
+    self:addChild(node, -1)
+    local function onTouchBegan(touch, event)
+        SafeRemoveNode(node)
+        self:close()
+        return true
     end
+    local listener = cc.EventListenerTouchOneByOne:create()
+    listener:setSwallowTouches(true)
+	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
+	node:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)
 end
 
 return M

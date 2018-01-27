@@ -15,8 +15,9 @@ function M:initConfig()
     self:set("assets_path", "games/fish/assets/")
     -- 显示配置
     --rawset(_G, "TEST_COUNT", 0)
-    cc.Director:getInstance():setDisplayStats(true)
+    --cc.Director:getInstance():setDisplayStats(true)
     --self:set("enble_collider", true) -- 显示碰撞区
+    self:set("enable_fps", true) -- 显示帧速
     self:set("flip", false)
     self:set("shader_list", {})
     -- 游戏数据
@@ -46,12 +47,15 @@ end
 
 function M:play()
     self:createGameObject("UILoading"):play()
-    self:createGameObject("UITouch")
     self:createGameObject("UIBackGround")
+    self:createGameObject("UITouch")
     for i = 1, 4 do
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end
     self:createGameObject("UIRightPanel")
+    WaitForFrames(1)
+    self:find("UILoading"):removeFromScene()
+    WaitForFrames(2)
     self:find("SCGameLoop"):startUpdate()
     self:createGameObject("ISever")
 end

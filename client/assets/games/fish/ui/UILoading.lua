@@ -6,6 +6,10 @@
 
 local M = class("UILoading", UIBase)
 
+function M:getZorder()
+    return 100
+end
+
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uiLoadingLayer.csb"), true)
     self.sliderScale = self.slider_loading:getScale()
@@ -13,25 +17,41 @@ function M:onCreate()
     self.text_message:setString("海象号扬帆起航...")
 end
 
+function M:calcLoadRes()
+    local list = {}
+    -- 鱼的资源
+    for _, val in pairs(self:require("fish")) do
+        local unit = {}
+        unit.type = 1
+        unit.filename = string.format("games/fish/assets/plist/fish/%s.plist", val.fish_res)
+        table.insert(list, unit)
+    end
+    -- 鱼网
+    for i = 1, 10 do
+        local unit = {}
+        unit.type = 1
+        unit.filename = string.format("games/fish/assets/plist/nets/net_%d.plist", i)
+        table.insert(list, unit)
+    end
+    -- 子弹开火效果
+    table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/battle/effect/guns_fire.plist"})
+    return list
+
+end
+
 function M:play()
     cc.SimpleAudioEngine:getInstance():stopMusic()
-    local tb = self:require("fish")
-    local total = table.nums(tb)
-    local idx = 0
-    for _, val in pairs(tb) do
-        local name = string.format("games/fish/assets/plist/fish/%s.plist", val.fish_res)
-        cc.SpriteFrameCache:getInstance():addSpriteFrames(name)
-        idx = idx + 1
+    local list = self:calcLoadRes()
+    local total = #list
+    for idx, val in ipairs(list) do
+        if val.type == 1 then
+            cc.SpriteFrameCache:getInstance():addSpriteFrames(val.filename)
+        end
         self:updatePercent(idx / total * 100)
         WaitForFrames(1)
     end
-    for i = 1, 10 do
-        local name = string.format("games/fish/assets/plist/nets/net_%d.plist", i)
-        cc.SpriteFrameCache:getInstance():addSpriteFrames(name)
-    end
     WaitForSeconds(0.1)
     self:find("SCSound"):playMusic("music_00" .. self:getScene():get("room_idx"))
-    self:removeFromScene()
 end
 
 function M:updatePercent(per)

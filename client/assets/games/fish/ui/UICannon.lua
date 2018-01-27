@@ -19,6 +19,7 @@ function M:onCreate(viewID)
     self:loadCsb(self:fullPath("ui/uicannon.csb"))
     self:initDir(viewID)
     self.cannonWorldPos = self.node_gun:convertToWorldSpaceAR(cc.p(0, 0))
+    self:initGunFirAction()
     self:reset()
 end
 
@@ -59,6 +60,20 @@ function M:initDir(viewID)
     end
 end
 
+-- 枪火帧动画
+function M:initGunFirAction()
+    local strFormat = "games/fish/assets/ui/images/battle/effect/gunfire_1_%02d.png"
+    local animation = self:find("SCAction"):createAnimation(strFormat, 1 / 24.0)
+    local tb =
+    {
+        cc.Show:create(),
+        cc.Animate:create(animation),
+        cc.Hide:create(),
+    }
+    self.gunFireAction = cc.Sequence:create(tb)
+    self:find("SCAction"):retainAction(self.gunFireAction)
+end
+
 -- 开火
 function M:fire(angle)
     self:updateAngle(angle)
@@ -81,16 +96,20 @@ function M:firePre(angle)
     self.fnt_coins:setString(money)
 end
 
-function M:updateAngle(angle)
-    local extra = self.mViewID >= 3 and 180 or 0
-    self.node_gun:setRotation(-angle + 90)
-end
-
+-- 炮开火动画
 function M:playFireAni()
-    self:find("SCSound"):playSound("gunfire_01")
+    if self.is_self then
+        self:find("SCSound"):playSound("gunfire_01")
+    end
     self.spr_cannon:stopAllActions()
     local act = cc.Sequence:create(cc.ScaleTo:create(0.05, 1, 0.8), cc.ScaleTo:create(0.05, 1, 1))
     self.spr_cannon:runAction(act)
+    self.spr_gunfire:runAction(self.gunFireAction)
+end
+
+function M:updateAngle(angle)
+    local extra = self.mViewID >= 3 and 180 or 0
+    self.node_gun:setRotation(-angle + 90)
 end
 
 function M:join(info)
@@ -101,6 +120,7 @@ function M:join(info)
     self.fnt_coins:setString(info.coin)
     self.fnt_diamonds:setString(info.diamonds)
     self.spr_coin_bg:setVisible(true)
+    self.is_self = info.is_self
     if not info.is_self then return end
     self.panel_1:setTouchEnabled(true)
     self.panel_1:onClicked(function() self:click_panel() end)

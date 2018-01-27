@@ -17,14 +17,14 @@ function M:onCreate()
 end
 
 function M:test()
-    --self:find("SCPool"):testFish("100000011")
+    self:testFish("100000301")
     --self:find("SCPool"):randomTimeLine()
     --self:find("SCPool"):createNet(1, cc.p(512, 360))
     --self:find("SCPool"):createFishArray("312124001", 1)
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}
-    for i = 1, 1 do
+    for i = 1, 4 do
         table.insert(tb, i)
     end
     for _, i in ipairs(tb) do
@@ -136,14 +136,14 @@ function M:randomTimeLine()
 end
 
 function M:testFish(id)
-    local go = self:createFish(id, "300000663", 105)
-    go:setState(1)
+    local go = self:find("SCPool"):createFish(id, "300000663", 105)
+    --go:setState(1)
 end
 
 function M:testAllFish()
     for _, val in pairs(self:require("fish")) do
         print(val.id, val.name)
-        self:find("SCGameLoop"):createFish(val.id, "300000805", 1)
+        self:find("SCPool"):createFish(val.id, "300000805", 1)
         WaitForSeconds(4.0)
     end
 end
