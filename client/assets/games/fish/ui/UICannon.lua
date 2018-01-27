@@ -24,7 +24,6 @@ function M:onCreate(viewID)
 end
 
 function M:reset()
-    self.mMenuNode = nil
     self.panel_1:setTouchEnabled(false)
     self.spr_coin_bg:setVisible(false)
     self.fnt_curadd:setVisible(false)
@@ -122,12 +121,18 @@ function M:join(info)
     self.spr_coin_bg:setVisible(true)
     self.is_self = info.is_self
     if not info.is_self then return end
+    self:createMenuNode()
     self.panel_1:setTouchEnabled(true)
     self.panel_1:onClicked(function() self:click_panel() end)
     self.btn_minus:setVisible(true)
     self.btn_add:setVisible(true)
     self.spr_circle:setVisible(true)
     self.spr_circle:runAction(cc.RepeatForever:create(cc.RotateBy:create(5.0, 360)))
+end
+
+function M:createMenuNode()
+    if self:find("UIGunChange") then return end
+    self:createGameObject("UIGunChange", self.mViewID):setPosition(self:convertToWorldSpaceAR(cc.p(0, 62)))
 end
 
 -- 更新枪
@@ -150,59 +155,7 @@ function M:click_btn_minus()
 end
 
 function M:click_panel()
-    self:createMenuNode()
-    self.mMenuNode:setVisible(true)
-    local bAutoFire = self:getScene():get("auto_fire")
-    self.mMenuNode.spr_autofire:setVisible(not bAutoFire)
-    self.mMenuNode.spr_cancelauto:setVisible(bAutoFire)
-end
-
-function M:createMenuNode()
-    if self.mMenuNode then 
-        self:openTouchBegan()
-        return 
-    end
-    local node = cc.Node:create()
-    self.mMenuNode = node
-    self:addChild(self.mMenuNode, 10)
-    node:addChild(LoadCsb(self:fullPath("ui/uigunchange.csb")), 10)
-    node:setPosition(cc.p(0, 62))
-    BindToUI(node, node)
-    node.btn_autofire:onClicked(function() self:click_auto_fire() end)
-    node.btn_face:onClicked(function() self:click_btn_face() end)
-    node.btn_changecannon:onClicked(function() self:click_btn_changecannon() end) 
-    self:openTouchBegan()
-end
-
-function M:openTouchBegan()
-    local node = cc.Node:create()
-    self.mMenuNode:addChild(node, 1)
-    local function onTouchBegan(touch, event)
-        self.mMenuNode:setVisible(false)
-        SafeRemoveNode(node)
-        return true
-    end
-    local listener = cc.EventListenerTouchOneByOne:create()
-    listener:setSwallowTouches(true)
-	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
-	node:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)
-end
-
-function M:click_auto_fire()
-    self.mMenuNode:setVisible(false)
-    local bAutoFire = not self:getScene():get("auto_fire")
-    self:getScene():set("auto_fire", bAutoFire)
-    if not bAutoFire then
-        self:find("UITouch"):stopTimer()
-    end
-end
-
-function M:click_btn_face()
-    self.mMenuNode:setVisible(false)
-end
-
-function M:click_btn_changecannon()
-    self.mMenuNode:setVisible(false)
+    self:find("UIGunChange"):show()
 end
 
 return M

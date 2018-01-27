@@ -133,6 +133,10 @@ function UIBase:createUnnameChild(root, filename, ...)
 	return child
 end
 
+function UIBase:wrapGameObject(obj, path, ...)
+    return self.mGameScene:wrapGameObject(obj, path, ...)
+end
+
 function UIBase:fullPath(filename)
 	return self.mGameScene:fullPath(filename)
 end

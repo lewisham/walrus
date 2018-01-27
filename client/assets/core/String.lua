@@ -205,6 +205,12 @@ function string:split(sDiv)
     return retList
 end
 
+function string:splitNumber(sDiv)
+    local retList = {}
+    self:gsub('[^'..sDiv..']+', function(sRet) table.insert(retList, tonumber(sRet)) end)
+    return retList
+end
+
 -- 切割成unicode
 -- 返回列表
 -- 例子: local s = "a到b中文ok"

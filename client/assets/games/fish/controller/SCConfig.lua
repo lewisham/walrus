@@ -95,4 +95,20 @@ function M:getFishTimeline(id)
     return tb
 end
 
+function M:getFishchildren(id)
+    local config = clone(self:require("fishchildren")[id])
+    config.fishcount = tonumber(config.fishcount)
+    config.bgindex = string.splitNumber(config.bgindex, ";")
+    config.bgscale = string.splitNumber(config.bgscale, ";")
+    config.fishid = string.splitNumber(config.fishid, ";")
+    config.fishscale = string.splitNumber(config.fishscale, ";")
+    local tb = string.split(config.offset, ";")
+    config.offset = {}
+    for _, str in ipairs(tb) do
+        local points = string.split(str, ",")
+        table.insert(config.offset, cc.p(tonumber(points[1]), tonumber(points[2])))
+    end
+    return config
+end
+
 return M

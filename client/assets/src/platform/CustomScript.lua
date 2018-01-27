@@ -9,6 +9,6 @@ DEVELOPER_ENV = true
 NOT_AUTO_UPDATE = DEVELOPER_ENV
 
 DISABLE_SOUND = true
-DISABLE_MUSIC = true
+DISABLE_MUSIC = false
 
 local git_url = "https://github.com/lewisham/mahjong.git"

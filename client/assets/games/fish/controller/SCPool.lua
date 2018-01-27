@@ -51,17 +51,8 @@ function M:getAliveList(name)
 end
 
 -- 创建鱼
-local NotCreateFish = 
-{
-    "100000301", "100000302", "100000303", "100000304", "100000305",
-    "100000401", "100000402", "100000403", "100000404", "100000405",
-    "100000406", "100000407",  "100000205", "100000203", "100000202",
-}
 function M:createFish(id, pathID, frame, offset)
     offset = offset or cc.p(0, 0)
-    for _, val in ipairs(NotCreateFish) do
-        if val == id then return end
-    end
     local go = nil
     for _, fish in ipairs(self.mFishList) do
         if not fish:isAlive() and fish.id == id then
@@ -70,7 +61,12 @@ function M:createFish(id, pathID, frame, offset)
         end
     end
     if go == nil then
-        go = self:createUnnameObject("GOFish", id)
+        local config = self:find("SCConfig"):get("fish")[id]
+        if tonumber(config.trace_type) == 4 or tonumber(config.trace_type) == 8 then
+            go = self:createUnnameObject("GOFishChildren", id)
+        else
+            go = self:createUnnameObject("GOFish", id)
+        end
         table.insert(self.mFishList, go)
     end
     go:reset()

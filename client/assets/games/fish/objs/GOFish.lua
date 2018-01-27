@@ -9,10 +9,7 @@ local MOVE_TAG = 101
 local M = class("GOFish", require("games.fish.objs.GOCollider"))
 
 function M:onCreate(id)
-    self.id = id
-    self.config = self:find("SCConfig"):get("fish")[id]
-    self.vertices = self.config.vertices
-    self.raduis_2 = self.config.raduis * self.config.raduis
+    self:initData(id)
     self:createActionSprite()
     self:initCollider()
     self:setVisible(false)
@@ -20,12 +17,20 @@ function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, tonumber(self.config.show_layer))
 end
 
+function M:initData(id)
+    self.id = id
+    self.config = self:find("SCConfig"):get("fish")[id]
+    self.vertices = self.config.vertices
+    self.raduis_2 = self.config.raduis * self.config.raduis
+    self.mFishSpriteList = {}
+end
+
 function M:setOffsetPos(pos)
     self.mPathOffset = pos
 end
+
 function M:reset()
     self:setRed(false)
-    self.fishSprite:setOpacity(255)
     self.hp = math.random(1, 30)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
@@ -33,7 +38,6 @@ function M:reset()
     self.mState = 0
     self.mRedIdx = 0
     self.mStopRedCnt = 0
-    self.mbRed = false
 end
 
 function M:setPath(path)
@@ -73,27 +77,10 @@ function M:updateRed()
 end
 
 function M:setRed(bo)
-    if bo then
-        if self.mbRed == bo then return end
-        self.mbRed = bo
-        local shader = self:getScene():get("shader_list")["red"]
-        if shader then
-            self.fishSprite:setGLProgramState(shader)
-        else
-            self.fishSprite:setColor(cc.c3b(255, 0, 0))
-        end
-    else
-        if self.mbRed == bo then return end
-        self.mbRed = bo
-        local shader = self:getScene():get("shader_list")["normal"]
-        if shader then
-            self.fishSprite:setGLProgramState(shader)
-        else
-            self.fishSprite:setColor(cc.c3b(255, 255, 255))
-        end
+    for _, sprite in ipairs(self.mFishSpriteList) do
+        self:find("SCAction"):setRed(sprite, bo)
     end
 end
-
 
 function M:updateShadowPos()
     if self.shadow == nil then return end
@@ -155,7 +142,19 @@ function M:fadeOut()
         self:setVisible(false)
         self:setAlive(false)
     end
-    self.fishSprite:runAction(cc.Sequence:create(cc.FadeOut:create(0.3), cc.CallFunc:create(callback)))
+    for _, sprite in ipairs(self.mFishSpriteList) do
+        sprite:runAction(cc.Sequence:create(cc.FadeOut:create(0.3), cc.CallFunc:create(callback)))
+    end
+end
+
+function M:flipFishSprite(bY, bFilp)
+    for _, sprite in ipairs(self.mFishSpriteList) do
+        if bY then
+            sprite:setFlippedY(bFilp)
+        else
+            sprite:setFlippedX(bFilp)
+        end
+    end
 end
 
 function M:updateAngle(angle)
@@ -168,17 +167,17 @@ function M:updateAngle(angle)
         angle = angle + 90
         self:setRotation(angle)
         if angle > 90 and angle < 270 then
-            self.fishSprite:setFlippedY(true)
+            self:flipFishSprite(true, true)
         else
-            self.fishSprite:setFlippedY(false)
+            self:flipFishSprite(true, false)
         end
     elseif rt == 3 then
         angle = angle + 90
         self:setRotation(angle)
         if angle > 90 and angle < 270 then
-            self.fishSprite:setFlippedX(true)
+            self:flipFishSprite(false, true)
         else
-            self.fishSprite:setFlippedX(false)
+            self:flipFishSprite(false, false)
         end
     end
 end
@@ -190,7 +189,7 @@ function M:createActionSprite()
     local strFormat = string.format("%s_%s.png", self.config.fish_res, "%02d")
     local animation = self:find("SCAction"):createAnimation(strFormat, 3 / 20.2)
     sp:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
-    self.fishSprite = sp
+    table.insert(self.mFishSpriteList, sp)
 
     -- 阴影
     local shadow = cc.Sprite:create()

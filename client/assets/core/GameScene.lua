@@ -180,7 +180,6 @@ function GameScene:wrapGameObject(obj, path, ...)
     obj.__cname = cls.__cname
     self.mGameObjects[name] = obj
     BindToUI(obj, ret)
-    Invoke(ret, "start")
     obj:onCreate(...)
     return obj
 end

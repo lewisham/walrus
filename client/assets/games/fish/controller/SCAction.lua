@@ -37,4 +37,25 @@ function M:retainAction(action)
     table.insert(self.mRetainActions, action)
 end
 
+-- 变红
+function M:setRed(sprite, bo)
+    if sprite.mbRed == bo then return end
+    sprite.mbRed = bo
+    if bo then
+        local shader = self:getScene():get("shader_list")["red"]
+        if shader then
+            sprite:setGLProgramState(shader)
+        else
+            sprite:setColor(cc.c3b(255, 0, 0))
+        end
+    else
+        local shader = self:getScene():get("shader_list")["normal"]
+        if shader then
+            sprite:setGLProgramState(shader)
+        else
+            sprite:setColor(cc.c3b(255, 255, 255))
+        end
+    end
+end
+
 return M
