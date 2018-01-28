@@ -48,10 +48,12 @@ end
 function M:play()
     self:createGameObject("UILoading"):play()
     self:createGameObject("UIBackGround")
+    self:createGameObject("UIEffect")
     self:createGameObject("UITouch")
     for i = 1, 4 do
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end
+    self:createGameObject("UISkill")
     self:createGameObject("UIRightPanel")
     WaitForFrames(1)
     self:find("UILoading"):removeFromScene()

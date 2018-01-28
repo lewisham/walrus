@@ -133,6 +133,11 @@ function UIBase:createUnnameChild(root, filename, ...)
 	return child
 end
 
+function UIBase:createUnnameObject(filename, ...)
+	local child = self:getScene():createUnnameObject(filename, ...)
+	return child
+end
+
 function UIBase:wrapGameObject(obj, path, ...)
     return self.mGameScene:wrapGameObject(obj, path, ...)
 end

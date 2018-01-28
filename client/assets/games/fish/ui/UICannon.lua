@@ -61,7 +61,7 @@ end
 
 -- 枪火帧动画
 function M:initGunFirAction()
-    local strFormat = "games/fish/assets/ui/images/battle/effect/gunfire_1_%02d.png"
+    local strFormat = "games/fish/assets/ui/images/effect/gunfire_1_%02d.png"
     local animation = self:find("SCAction"):createAnimation(strFormat, 1 / 24.0)
     local tb =
     {

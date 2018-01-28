@@ -15,6 +15,9 @@ function M:onCreate()
     self.sliderScale = self.slider_loading:getScale()
     self:updatePercent(0)
     self.text_message:setString("海象号扬帆起航...")
+    local action = cc.CSLoader:createTimeline(self:fullPath("ui/uiLoadingLayer.csb"))
+    self:runAction(action)
+    action:gotoFrameAndPlay(0)
 end
 
 function M:calcLoadRes()
@@ -34,7 +37,12 @@ function M:calcLoadRes()
         table.insert(list, unit)
     end
     -- 子弹开火效果
-    table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/battle/effect/guns_fire.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/guns_fire.plist"})
+
+    -- 物效图
+    table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/blast.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/bomb.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/combo.plist"})
     return list
 
 end

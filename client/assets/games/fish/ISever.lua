@@ -24,7 +24,7 @@ function M:test()
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}
-    for i = 1, 1 do
+    for i = 1, 4 do
         table.insert(tb, i)
     end
     for _, i in ipairs(tb) do
