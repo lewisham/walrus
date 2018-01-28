@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_box.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{205,1},{34,94}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{34,94}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_box_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{112,167}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{112,168}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_box_bg1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{205,37},{20,36}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{20,36}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_hq.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{115,121},{90,43}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{90,44}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,672},{165,48}}</string>
+				<key>offset</key>
+				<string>{-1,-3}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,839},{165,48}}</string>
+				<key>offset</key>
+				<string>{0,-3}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,336},{166,48}}</string>
+				<key>offset</key>
+				<string>{0,-3}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{51,336},{165,48}}</string>
+				<key>offset</key>
+				<string>{-1,-3}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{52,170},{165,48}}</string>
+				<key>offset</key>
+				<string>{-1,-3}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,504},{166,48}}</string>
+				<key>offset</key>
+				<string>{-1,-3}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{52,220},{165,48}}</string>
+				<key>offset</key>
+				<string>{-1,-3}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{52,270},{165,48}}</string>
+				<key>offset</key>
+				<string>{-1,-3}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{168,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_title_8.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,170},{164,49}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{166,53}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_words_hp.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{207,117},{89,41}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{90,42}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_xstyz.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{160,93},{115,22}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{116,22}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_yzb.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{115,1},{118,43}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{118,44}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/selectcannon/selectcannon_pic_zb.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{160,1},{90,43}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{90,44}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>selectcannon.png</string>
+			<key>realTextureFileName</key>
+			<string>selectcannon.png</string>
+			<key>size</key>
+			<string>{300,1005}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>300</integer>
+			<key>height</key>
+			<integer>1005</integer>
+		</dict>
+	</dict>
+</plist>

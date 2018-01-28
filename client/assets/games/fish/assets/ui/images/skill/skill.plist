@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/fish/assets/ui/images/skill/bl_btn_hd.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{205,38},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_btn_jn.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{173,100},{30,54}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{30,54}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_btn_x2_0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{861,1},{73,74}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{80,80}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_btn_x2_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{937,1},{73,74}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{80,80}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_btn_x4_0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{861,76},{73,74}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{80,80}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_btn_x4_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{937,76},{73,74}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{80,80}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_deskskill_frame.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{291,1},{100,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{100,100}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_kb_yjjs.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{288,35}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{288,36}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_listskill_frame.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,38},{92,92}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{92,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{95,38},{60,108}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{60,108}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_bg1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{393,79},{45,82}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{46,82}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_bg2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{79,132},{24,14}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{24,14}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_003.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{95,100},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_004.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,132},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_005.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{393,1},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_006.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{471,1},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_014.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{549,1},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_015.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{627,1},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_016.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{705,1},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/skill/bl_pic_skill_prop_1001.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{783,1},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>skill.png</string>
+			<key>realTextureFileName</key>
+			<string>skill.png</string>
+			<key>size</key>
+			<string>{1012,209}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1012</integer>
+			<key>height</key>
+			<integer>209</integer>
+		</dict>
+	</dict>
+</plist>

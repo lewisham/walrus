@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{47,970},{10,86}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{10,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{166,622},{120,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{124,102}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,619},{184,163}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{184,163}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{212,212}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{216,216}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{133,805},{178,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{178,102}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,215},{191,187}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{194,188}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_bg_7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,408},{163,209}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{163,209}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_big.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,805},{130,163}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{130,166}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_buff.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,970},{44,44}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{44,44}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_pic_hsyb.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{166,408},{212,62}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{216,64}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_pic_ksjs.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{133,909},{210,56}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{214,60}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_skill_animation_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{190,215},{76,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_skill_animation_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{190,293},{64,76}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{76,76}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/hourglass/hourglass_text_s.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{215,1},{60,61}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{64,64}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>hourglass.png</string>
+			<key>realTextureFileName</key>
+			<string>hourglass.png</string>
+			<key>size</key>
+			<string>{344,1015}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>344</integer>
+			<key>height</key>
+			<integer>1015</integer>
+		</dict>
+	</dict>
+</plist>

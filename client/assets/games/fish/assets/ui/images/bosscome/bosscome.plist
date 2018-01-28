@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>games/fish/assets/ui/images/bosscome/bl_pic_word_award.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,335},{245,92}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{245,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/levelup_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{640,239}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{640,240}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/pic_alert.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{985,1},{80,31}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{80,32}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/title_pic_152.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{643,1},{340,92}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{340,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/title_pic_153.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,242},{331,91}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{340,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/title_pic_154.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{643,189},{335,91}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{340,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/title_pic_155.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{334,242},{301,92}}</string>
+				<key>offset</key>
+				<string>{1,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{340,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/title_pic_156.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{643,95},{336,92}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{340,92}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/bosscome/title_pic_lx.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{637,282},{139,86}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{140,86}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>bosscome.png</string>
+			<key>realTextureFileName</key>
+			<string>bosscome.png</string>
+			<key>size</key>
+			<string>{1017,428}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1017</integer>
+			<key>height</key>
+			<integer>428</integer>
+		</dict>
+	</dict>
+</plist>
