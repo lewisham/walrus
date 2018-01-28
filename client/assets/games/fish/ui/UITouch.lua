@@ -12,7 +12,6 @@ function M:onCreate()
     local function callback(event)
         if event.name == "began" then
             self.touchPos = self:getTouchBeganPosition()
-            self:createUnnameObject("UIBomb", self.touchPos)
             self:startTimer()
             return true
         elseif event.name == "moved" then

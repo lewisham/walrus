@@ -39,10 +39,16 @@ function M:calcLoadRes()
     -- 子弹开火效果
     table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/guns_fire.plist"})
 
-    -- 物效图
+    -- 特效图
     table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/blast.plist"})
     table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/bomb.plist"})
     table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/combo.plist"})
+
+    -- 金币
+    table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/friend_coin1.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/friend_coin2.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/game_coin1.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/game_coin2.plist"})
     return list
 
 end

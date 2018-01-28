@@ -31,7 +31,7 @@ end
 
 function M:reset()
     self:setRed(false)
-    self.hp = math.random(1, 30)
+    self.hp = math.random(3, 10)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
     self.mCurIdx = 0
@@ -209,6 +209,7 @@ function M:onHit()
     self.hp = self.hp - 1
     if self.hp < 1 then
         self:outOfFrame()
+        self:find("UICoinMgr"):play(cc.p(self:getPosition()), tonumber(self.config.coin_num), math.random(1, 4))
     end
 end
 
