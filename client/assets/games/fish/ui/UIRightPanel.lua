@@ -59,18 +59,14 @@ function M:close()
     self:runAction(cc.MoveTo:create(0.1, cc.p(self.originPos.x,self.originPos.y)))
 end
 
+function M:onEventTouchBegan()
+    if not self.bStartListen then return end
+    self.bStartListen = false
+    self:close()
+end
+
 function M:openTouchBegan()
-    local node = cc.Node:create()
-    self:addChild(node, -1)
-    local function onTouchBegan(touch, event)
-        SafeRemoveNode(node)
-        self:close()
-        return true
-    end
-    local listener = cc.EventListenerTouchOneByOne:create()
-    listener:setSwallowTouches(true)
-	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
-	node:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)
+    self.bStartListen = true
 end
 
 return M

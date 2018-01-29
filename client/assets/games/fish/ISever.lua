@@ -24,16 +24,20 @@ function M:test()
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}
-    for i = 1, 1 do
-        table.insert(tb, i)
+    local viewID = self:getScene():get("view_id")
+    table.insert(tb, viewID)
+    for i = 1, 4 do
+        if viewID ~= i then
+            table.insert(tb, i)
+        end
     end
     for _, i in ipairs(tb) do
         local info =
         {
             view_id = i,
-            gun_id = i == 1 and 1 or math.random(1, 7),
+            gun_id = i == viewID and 1 or math.random(1, 7),
             gun_rate = rates[math.random(1, #rates)],
-            is_self = i == 1,
+            is_self = i == viewID,
             coin = math.random(1000, 9999),
             diamonds = math.random(0, 9999),
             shoot_cnt = 0,

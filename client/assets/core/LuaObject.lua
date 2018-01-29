@@ -60,7 +60,7 @@ function LuaObject:coroutine(target, name, ...)
         return self:isObjectAlive()
     end
     local function callback(co)
-        Invoke(target, name, co, unpack(args))
+        Invoke(target, name, unpack(args))
     end
 	local co = NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")

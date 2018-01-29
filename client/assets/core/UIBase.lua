@@ -146,4 +146,16 @@ function UIBase:fullPath(filename)
 	return self.mGameScene:fullPath(filename)
 end
 
+function UIBase:coroutine(target, name, ...)
+    local args = {...}
+    local function aliveCheckFunc()
+        return not tolua.isnull(self)
+    end
+    local function callback(co)
+        Invoke(target, name, unpack(args))
+    end
+	local co = NewCoroutine(aliveCheckFunc, callback)
+	co:resume("start run")
+end
+
 

@@ -8,29 +8,33 @@ local M = class("UIGunChange", UIBase)
 
 function M:onCreate(viewID)
     self:loadCsb(self:fullPath("ui/uigunchange.csb"))
-    self.mViewID = viewID
+    local cannon = self:find("UICannon" .. self:getScene():get("view_id"))
+    self:setPosition(cannon:convertToWorldSpaceAR(cc.p(0, 62)))
     self:setVisible(false)
 end
 
-function M:show()
+function M:switch()
+    if self:isVisible() then
+        self:close()
+    else
+        self:open()
+    end
+end
+
+function M:onEventTouchBegan()
+    if not self:isVisible() then return end
+    self:setVisible(false)
+end
+
+function M:open()
     self:setVisible(true)
     local bAutoFire = self:getScene():get("auto_fire")
     self.spr_autofire:setVisible(not bAutoFire)
     self.spr_cancelauto:setVisible(bAutoFire)
-    self:openTouchBegan()
 end
 
-function M:openTouchBegan()
-    local node = cc.Node:create()
-    self:addChild(node, -1)
-    local function onTouchBegan(touch, event)
-        self:setVisible(false)
-        SafeRemoveNode(node)
-    end
-    local listener = cc.EventListenerTouchOneByOne:create()
-    listener:setSwallowTouches(true)
-	listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
-	node:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)
+function M:close()
+    self:setVisible(false)
 end
 
 function M:click_btn_autofire()

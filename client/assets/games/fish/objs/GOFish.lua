@@ -84,7 +84,7 @@ end
 
 function M:updateShadowPos()
     if self.shadow == nil then return end
-    local pos = cc.pAdd(cc.p(self:getPosition()), cc.p(30, -30))
+    local pos = cc.pAdd(cc.p(self:getPosition()), cc.p(20, -20))
     pos = self:convertToNodeSpaceAR(pos)
     self.shadow:setPosition(pos)
 end
@@ -209,7 +209,7 @@ function M:onHit()
     self.hp = self.hp - 1
     if self.hp < 1 then
         self:outOfFrame()
-        self:find("UICoinMgr"):play(cc.p(self:getPosition()), tonumber(self.config.coin_num), math.random(1, 4))
+        self:find("UICoinMgr"):play(cc.p(self:getPosition()), tonumber(self.config.coin_num), self:getScene():get("view_id"), math.random(10, 100))
     end
 end
 

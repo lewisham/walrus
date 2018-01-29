@@ -24,6 +24,7 @@ function M:onCreate(viewID)
 end
 
 function M:reset()
+    self.is_self = false
     self.panel_1:setTouchEnabled(false)
     self.spr_coin_bg:setVisible(false)
     self.fnt_curadd:setVisible(false)
@@ -121,18 +122,12 @@ function M:join(info)
     self.spr_coin_bg:setVisible(true)
     self.is_self = info.is_self
     if not info.is_self then return end
-    self:createMenuNode()
     self.panel_1:setTouchEnabled(true)
     self.panel_1:onClicked(function() self:click_panel() end)
     self.btn_minus:setVisible(true)
     self.btn_add:setVisible(true)
     self.spr_circle:setVisible(true)
     self.spr_circle:runAction(cc.RepeatForever:create(cc.RotateBy:create(5.0, 360)))
-end
-
-function M:createMenuNode()
-    if self:find("UIGunChange") then return end
-    self:createGameObject("UIGunChange", self.mViewID):setPosition(self:convertToWorldSpaceAR(cc.p(0, 62)))
 end
 
 -- 更新枪
@@ -148,14 +143,61 @@ function M:updateCoin(coin)
     self.fnt_coins:setString(coin)
 end
 
+function M:modify(add)
+    local cur = tonumber(self.fnt_coins:getString()) or 0
+    cur = cur + add
+    self.fnt_coins:setString(cur)
+end
+
 function M:click_btn_add()
+    local cur = tonumber(self.fnt_multiple:getString())
+    local rate = self:find("DAFish"):getNextRate(cur)
+    if rate == nil then return end
+    self.btn_minus:setTouchEnabled(false)
+    self.btn_add:setTouchEnabled(false)
+    self:updateGunRate(rate)
 end
 
 function M:click_btn_minus()
+    local cur = tonumber(self.fnt_multiple:getString())
+    local rate = self:find("DAFish"):getLastRate(cur)
+    if rate == nil then return end
+    self.btn_minus:setTouchEnabled(false)
+    self.btn_add:setTouchEnabled(false)
+    self:updateGunRate(rate)
+end
+
+function M:updateGunRate(rate)
+    self.fnt_multiple:setString(rate)
+    self:playChangeEff()
+    if not self.is_self then return end
+    self:find("SCSound"):playSound("gunswitch_01")
+    self.btn_minus:setTouchEnabled(true)
+    self.btn_add:setTouchEnabled(true)
+end
+
+--播放切换炮倍特效
+function M:playChangeEff( )
+    self.spr_light:stopAllActions()
+    self.spr_light:setOpacity(0)
+    self.spr_light:setScale(1)
+    local tb =
+    {
+        cc.Show:create(),
+        cc.FadeTo:create(0.04,255),
+        cc.ScaleTo:create(0.08,1.5),
+        cc.FadeTo:create(0.04,0),
+        cc.Hide:create(),
+    }
+    self.spr_light:runAction(cc.Sequence:create(tb))
+    self.node_gun:stopAllActions()
+    self.node_gun:setOpacity(255)
+    self.node_gun:setScale(1)
+    self.node_gun:runAction(cc.Sequence:create(cc.ScaleTo:create(0.04,0.5), cc.ScaleTo:create(0.08,1)))
 end
 
 function M:click_panel()
-    self:find("UIGunChange"):show()
+    self:find("UIGunChange"):switch()
 end
 
 return M

@@ -22,7 +22,7 @@ function M:initConfig()
     self:set("shader_list", {})
     -- 游戏数据
     self:set("room_idx", 1)
-    self:set("view_id", 1)
+    self:set("view_id", 2)
     self:set("auto_fire", false)
     self:set("retain_action", {})
 end
@@ -54,13 +54,16 @@ function M:play()
     for i = 1, 4 do
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end
+    self:createGameObject("UIGunChange")
+    self:createGameObject("ISever")
     self:createGameObject("UISkill")
     self:createGameObject("UIRightPanel")
     WaitForFrames(1)
+    self:createGameObject("UISelfChairTips")
     self:find("UILoading"):removeFromScene()
     WaitForFrames(2)
     self:find("SCGameLoop"):startUpdate()
-    self:createGameObject("ISever")
+    self:find("UISelfChairTips"):play()
 end
 
 function M:initShader()

@@ -21,6 +21,7 @@ local tb = {
 	["UITouch"] = "games.fish.ui.UITouch", 
 	["UISkill"] = "games.fish.ui.UISkill", 
 	["UISetting"] = "games.fish.ui.UISetting", 
+	["UISelfChairTips"] = "games.fish.ui.UISelfChairTips", 
 	["UIRightPanel"] = "games.fish.ui.UIRightPanel", 
 	["UIBossComing"] = "games.fish.ui.UIBossComing", 
 	["UILoading"] = "games.fish.ui.UILoading", 
