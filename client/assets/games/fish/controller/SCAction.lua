@@ -9,6 +9,7 @@ local M = class("SCAction", GameObject)
 function M:onCreate()
     self.mAnimationList = {}
     self.mRetainActions = {}
+    self:set("shader_list", {})
 end
 
 function M:createAnimation(strFormat, inteval)
@@ -42,20 +43,33 @@ function M:setRed(sprite, bo)
     if sprite.mbRed == bo then return end
     sprite.mbRed = bo
     if bo then
-        local shader = self:getScene():get("shader_list")["red"]
+        local shader = self:get("shader_list")["red"]
         if shader then
             sprite:setGLProgramState(shader)
         else
             sprite:setColor(cc.c3b(255, 0, 0))
         end
     else
-        local shader = self:getScene():get("shader_list")["normal"]
+        local shader = self:get("shader_list")["normal"]
         if shader then
             sprite:setGLProgramState(shader)
         else
             sprite:setColor(cc.c3b(255, 255, 255))
         end
     end
+end
+
+function M:initShader()
+    local list = {}
+    local function addShader(name, fsh)
+        local glprogram = cc.GLProgram:createWithFilenames("games/fish/shader/common.vsh", "games/fish/shader/" .. fsh)
+        local state = cc.GLProgramState:getOrCreateWithGLProgram(glprogram)
+        state:retain()
+        list[name] = state
+    end
+    list["normal"] = cc.GLProgramState:getOrCreateWithGLProgramName("ShaderPositionTextureColor_noMVP")
+    addShader("red", "red.fsh")
+    self:set("shader_list", list)
 end
 
 return M
