@@ -34,12 +34,17 @@ function M:reset()
     end
 end
 
-function M:addFish(fishIdx, points)
-    for _, pos in ipairs(points) do
-        local idx = convertIdx(pos)
-        if self.mGridList[idx] then
-            self.mGridList[idx].fishes[fishIdx] = 0
-        end
+function M:addFish(fishIdx, pos)
+    local idx = convertIdx(pos)
+    if self.mGridList[idx] then
+        self.mGridList[idx].fishes[fishIdx] = 1
+    end
+end
+
+function M:addFishRef(fishIdx, points, pos)
+    self:addFish(fishIdx, pos)
+    for _, point in ipairs(points) do
+        self:addFish(fishIdx, point)
     end
 end
 

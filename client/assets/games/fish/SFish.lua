@@ -19,7 +19,6 @@ function M:initConfig()
     --self:set("enble_collider", true) -- 显示碰撞区
     self:set("enable_fps", true) -- 显示帧速
     self:set("flip", false)
-    self:set("shader_list", {})
     -- 游戏数据
     self:set("room_idx", 1)
     self:set("view_id", 2)
@@ -29,7 +28,6 @@ end
 
 function M:run()
     self:initConfig()
-    --self:initShader()
     self:createGameObject("DAFish")
     self:createGameObject("SCConfig")
     self:createGameObject("SCSound")
@@ -61,22 +59,10 @@ function M:play()
     WaitForFrames(1)
     self:createGameObject("UISelfChairTips")
     self:find("UILoading"):removeFromScene()
+    self:find("SCPool"):createFishPool()
     WaitForFrames(2)
     self:find("SCGameLoop"):startUpdate()
     self:find("UISelfChairTips"):play()
-end
-
-function M:initShader()
-    local list = {}
-    local function addShader(name, fsh)
-        local glprogram = cc.GLProgram:createWithFilenames("games/fish/shader/common.vsh", "games/fish/shader/" .. fsh)
-        local state = cc.GLProgramState:getOrCreateWithGLProgram(glprogram)
-        state:retain()
-        list[name] = state
-    end
-    list["normal"] = cc.GLProgramState:getOrCreateWithGLProgramName("ShaderPositionTextureColor_noMVP")
-    addShader("red", "red.fsh")
-    self:set("shader_list", list)
 end
 
 return M

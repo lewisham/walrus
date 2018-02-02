@@ -15,6 +15,34 @@ function M:onCreate()
     self.mFishGroupList = {}
 end
 
+-- 预先创建鱼
+function M:createFishPool()
+    local tb = self:find("SCConfig"):get("fish")
+    local go = nil
+    for _, config in pairs(tb) do
+        if tonumber(config.id) < 100000201 then
+            for i = 1, 4 do
+                if tonumber(config.trace_type) == 4 or tonumber(config.trace_type) == 8 then
+                    go = self:createUnnameObject("GOFishChildren", config.id)
+                else
+                    go = self:createUnnameObject("GOFish", config.id)
+                end
+                table.insert(self.mFishList, go)
+            end
+        end
+    end
+end
+
+-- 预先创建子弹与鱼网
+function M:createBulletPool(id)
+    for i = 1, FCDefine.MAX_BULLET_CNT do
+        local bullet = self:createUnnameObject("GOBullet", id)
+        table.insert(self.mBulletList, bullet)
+        local net = self:createUnnameObject("GONet", id)
+        table.insert(self.mNetPool, net)
+    end
+end
+
 function M:removeTimeline()
     for _, timeline in ipairs(self.mTimeLineList) do
         SafeRemoveNode(timeline)
@@ -56,6 +84,7 @@ function M:createFish(id, pathID, frame, offset)
     local go = nil
     for _, fish in ipairs(self.mFishList) do
         if not fish:isAlive() and fish.id == id then
+            --print("从池中中创建鱼")
             go = fish
             break
         end
@@ -90,6 +119,7 @@ function M:createNormalBullet(viewID, id, srcPos, angle)
     local go = nil
     for _, bullet in ipairs(self.mBulletList) do
         if not bullet:isAlive() then
+            --print("从池中中创建子弹")
             go = bullet
             break
         end
@@ -108,6 +138,7 @@ function M:createFollowBullet(viewID, id, srcPos, angle)
     local go = nil
     for _, bullet in ipairs(self.mBulletList) do
         if not bullet:isAlive() then
+            --print("从池中中创建子弹")
             go = bullet
             break
         end

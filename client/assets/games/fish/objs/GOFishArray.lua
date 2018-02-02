@@ -15,39 +15,23 @@ end
 function M:gotoFrame(frame)
     self:setAlive(true)
     self.mCurFrame = frame
-    local id = 310000000 + self.mStartID * 1000
-    local fisharray = self:require("fisharray")
-    local tb = {}
-    while true do
-        local config = fisharray[tostring(id)]
-        if config == nil then break end
-        if config.fishid == "" then break end
-        id = id + 1
-        local unit = {}
-        unit.fishid = config.fishid
-        unit.frame = tonumber(config.frame)
-        unit.pathid = config.trace
-        unit.offset = cc.p(tonumber(config.offsetx), tonumber(config.offsety))
-        unit.use = false
-        table.insert(tb, unit)
-    end
-    self.mFishData = tb
+    self.mFishData, self.mMaxFrame = self:find("SCConfig"):getFishArray(self.mStartID)
+    self:doFrame()
 end
 
 
 function M:updateFrame()
     self.mCurFrame = self.mCurFrame + 1
-    local bAllUse = true
-    for _, unit in ipairs(self.mFishData) do
-        if unit.frame == self.mCurFrame then
-            unit.use = true
-            self:find("SCPool"):createFish(unit.fishid, tostring(unit.pathid +300000000), 1, unit.offset)
-        end
-        if bAllUse and not unit.use then
-            bAllUse = false
-        end
+    self:doFrame()
+    self.alive = self.mCurFrame < self.mMaxFrame
+end
+
+function M:doFrame()
+    local unit = self.mFishData[self.mCurFrame]
+    if unit == nil then return end
+    for _, val in ipairs(unit.fishes) do
+        self:find("SCPool"):createFish(val[1], tostring(val[2] +300000000), 1, val[3])
     end
-    self.alive = not bAllUse
 end
 
 return M
