@@ -10,16 +10,15 @@ function M:onCreate()
     self.mCoinPool = {}
     self.mLabelPool = {}
     self.mAmiPosList = {cc.p(332.43, 40), cc.p(945.05, 40), cc.p(945.05, 680), cc.p(332.43, 680)}
+    for i = 1, 20 do
+        self:createLabel(1)
+        self:createLabel(2)
+        self:createCoin(1)
+        self:createCoin(2)
+    end
 end
 
--- 创建数字
-function M:createLabel(viewID)
-    local idx = self:getScene():get("view_id") == viewID and 1 or 2
-    for _, label in ipairs(self.mLabelPool) do
-        if not label:isVisible() and label._idx == idx then
-            return label
-        end
-    end
+function M:createLabel(idx)
     local label = cc.LabelBMFont:create()
     label:setFntFile(self:fullPath(string.format("ui/fnt/bonus_num_%d.fnt", idx)))
     label:setVisible(false)
@@ -28,22 +27,36 @@ function M:createLabel(viewID)
     return label
 end
 
--- 创建金币
-function M:createCoin(viewID)
-    local idx = self:getScene():get("view_id") == viewID and 1 or 2
-    for _, coin in ipairs(self.mCoinPool) do
-        if not coin:isVisible() and coin._idx == idx then
-            return coin
-        end
-    end
+function M:createCoin(idx)
     local coin = cc.Sprite:create()
     self:addChild(coin)
+    coin:setVisible(false)
     coin._idx = idx
     local strFormat = string.format("game_coin%s_%s.png", idx, "%02d")
     local animation = self:find("SCAction"):createAnimation(strFormat, 1 / 12.0)
     coin:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
     table.insert(self.mCoinPool, coin)
     return coin
+end
+
+-- 创建数字
+function M:getLabel(idx)
+    for _, label in ipairs(self.mLabelPool) do
+        if not label:isVisible() and label._idx == idx then
+            return label
+        end
+    end
+    return self:createLabel(idx)
+end
+
+-- 创建金币
+function M:getCoin(idx)
+    for _, coin in ipairs(self.mCoinPool) do
+        if not coin:isVisible() and coin._idx == idx then
+            return coin
+        end
+    end
+    return self:createCoin(idx)
 end
 
 function M:play(pos, cnt, viewID, score)
@@ -75,7 +88,8 @@ end
 
 -- 显示金币
 function M:showCoin(viewID, pos, add)
-    local coin = self:createCoin(viewID)
+    local idx = self:getScene():get("view_id") == viewID and 1 or 2
+    local coin = self:getCoin(idx)
     coin:setPosition(pos)
     coin:setScale(0.5)
     coin:setVisible(true)
@@ -102,7 +116,8 @@ end
 
 -- 显示字体
 function M:showLabel(viewID, pos, score)
-    local label = self:createLabel(viewID)
+    local idx = self:getScene():get("view_id") == viewID and 1 or 2
+    local label = self:getLabel(idx)
     label:setPosition(pos)
     label:setVisible(false)
     label:setOpacity(255)

@@ -11,6 +11,12 @@ function M:onCreate()
 end
 
 function M:startUpdate()
+    self:startUpdateFrame()
+    WaitForFrames(1)
+    self:startCollsion()
+end
+
+function M:startUpdateFrame()
     local scheduler = cc.Director:getInstance():getScheduler()
     if TEST_COUNT then
         self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrameTest() end, 0.05, false)
@@ -19,15 +25,28 @@ function M:startUpdate()
     end
 end
 
+function M:startCollsion()
+    local scheduler = cc.Director:getInstance():getScheduler()
+    if TEST_COUNT then
+        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsionTest() end, 0.05, false)
+    else
+        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsion() end, 0.1, false)
+    end
+end
+
 function M:updateFrame()
     local go = self:find("SCPool")
     -- 更新鱼
-    for _, fish in ipairs(go:getAliveList("mFishList")) do
-        fish:updateFrame()
+    for _, fish in ipairs(go.mFishList) do
+        if fish.alive then
+            fish:updateFrame()
+        end
     end
     -- 更新子弹
-    for _, bullet in ipairs(go:getAliveList("mBulletList")) do
-        bullet:updateFrame()
+    for _, bullet in ipairs(go.mBulletList) do
+        if bullet.alive then
+            bullet:updateFrame()
+        end
     end
     -- 更新鱼时间线
     for _, timeline in ipairs(go.mTimeLineList) do
@@ -44,7 +63,6 @@ function M:updateFrame()
         array:updateFrame()
     end
     go:removeDeadObject("mFishGroupList")
-    self:collsionCheck()
 end
 
 function M:updateFrameTest()
@@ -58,24 +76,44 @@ function M:updateFrameTest()
     end
 end
 
+function M:updateCollsion()
+    self:collsionCheck()
+end
+
+function M:updateCollsionTest()
+    local t1 = os.clock()
+    if TEST_COUNT then
+        TEST_COUNT = 0
+    end
+    self:updateCollsion()
+    if TEST_COUNT then
+        print("运算耗时", os.clock() - t1, #go.mBulletList, #go.mFishList)
+    end
+end
+
 -- log2 4 * M算法
 function M:collsionCheck()
     local grid = self:find("SCGrid")
     grid:reset()
     local go = self:find("SCPool")
     local bulletList = go:getCollsionBullet()
-    local fishes = go:getAliveList("mFishList")
+    local fishes = go.mFishList
     for idx, fish in ipairs(fishes) do
-        grid:addFish(idx, fish.points)
+        if fish.alive then
+            fish:updatePoints()
+            grid:addFishRef(idx, fish.points, fish.position)
+        end
     end
     for _, bullet in ipairs(bulletList) do
-        local list = grid:getFishesByPos(bullet.position)
+        local pos = cc.p(bullet:getPosition())
+        local list = grid:getFishesByPos(pos)
         if list then
+            bullet:updatePoints()
             for idx, _ in pairs(list) do
                 local fish = fishes[idx]
                 if bullet:sat(fish) then
                     bullet:onCollsion()
-                    local net = self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
+                    local net = self:find("SCPool"):createNet(bullet.config.id, pos)
                     if bullet.mbSelf then
                         self:netCollsionCheck(fishes, net, grid)
                     end

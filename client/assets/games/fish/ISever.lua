@@ -45,6 +45,8 @@ function M:test()
         table.insert(self.mPlayerList, info)
         self:post("onMsgPlayerJoin", info)
     end
+    --self:createTimeline()
+    --self:createGroup()
 end
 
 function M:updatePlayer()
@@ -119,10 +121,10 @@ function M:createTimeline()
     local id = 320000000 + room_idx * 100000 + idx * 1000 + 1
     local req = {}
     req.id = id
-    req.frame = math.random(1, 50)
+    req.frame = 0
     self:post("onMsgCreateTimeLine", req)
-    local config = self:find("SCConfig"):getFishTimeline(id)
-    self.mTimeLineIdx = tonumber(config[#config].frame)
+    local _, maxFrame = self:find("SCConfig"):getFishTimeline(id)
+    self.mTimeLineIdx = maxFrame
     self.mGroupIdx = self.mTimeLineIdx
     self.mTimeLineIdx = self.mTimeLineIdx + 200
 end
@@ -150,6 +152,12 @@ function M:testAllFish()
         self:find("SCPool"):createFish(val.id, "300000805", 1)
         WaitForSeconds(4.0)
     end
+end
+
+function M:createGroup()
+    local req = {}
+    req.group_id = math.random(1, 7)
+    self:post("onMsgCreateFishGroup", req)
 end
 
 return M

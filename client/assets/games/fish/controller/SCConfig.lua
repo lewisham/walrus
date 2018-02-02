@@ -80,21 +80,52 @@ end
 function M:getFishTimeline(id)
     local timeline = self:require("timeline")
     local tb = {}
+    local maxFrame = 0
     while true do
         local config = timeline[tostring(id)]
         if config == nil then break end
         if config.fishid == "" then break end
         id = id + 1
-        local unit = {}
-        unit.fishid = config.fishid
-        unit.frame = tonumber(config.frame)
-        unit.pathid = config.pathid
-        unit.use = false
-        table.insert(tb, unit)
+        local frame = tonumber(config.frame)
+        maxFrame = frame > maxFrame and frame or maxFrame
+        local unit = tb[frame]
+        if unit == nil then
+            unit = {}
+            unit.frame = frame
+            unit.fishes = {}
+            tb[frame] = unit
+        end
+        table.insert(unit.fishes, {config.fishid, config.pathid})
     end
-    return tb
+    return tb, maxFrame
 end
 
+-- 鱼串
+function M:getFishArray(id)
+    id = 310000000 + id * 1000
+    local fisharray = self:require("fisharray")
+    local tb = {}
+    local maxFrame = 0
+    while true do
+        local config = fisharray[tostring(id)]
+        if config == nil then break end
+        if config.fishid == "" then break end
+        id = id + 1
+        local frame = tonumber(config.frame)
+        maxFrame = frame > maxFrame and frame or maxFrame
+        local unit = tb[frame]
+        if unit == nil then
+            unit = {}
+            unit.frame = frame
+            unit.fishes = {}
+            tb[frame] = unit
+        end
+        table.insert(unit.fishes, {config.fishid, config.trace, cc.p(tonumber(config.offsetx), tonumber(config.offsety))})
+    end
+    return tb, maxFrame
+end
+
+-- 鱼组
 function M:getFishchildren(id)
     local config = clone(self:require("fishchildren")[id])
     config.fishcount = tonumber(config.fishcount)

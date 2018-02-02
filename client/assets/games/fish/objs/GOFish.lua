@@ -31,7 +31,7 @@ end
 
 function M:reset()
     self:setRed(false)
-    self.hp = math.random(3, 10)
+    self.hp = math.random(1, 30)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
     self.mCurIdx = 0
@@ -59,7 +59,6 @@ function M:updateFrame()
         end
     end
     self:updateShadowPos()
-    self:updatePoints()
     self:updateRed()
 end
 
@@ -69,7 +68,7 @@ function M:updateRed()
     end
     if self.mRedIdx > 0 then
         self.mRedIdx = self.mRedIdx - 1
-        self.mStopRedCnt = 5
+        self.mStopRedCnt = 12
         self:setRed(true)
     else
         self:setRed(false)
@@ -203,7 +202,7 @@ end
 
 function M:onHit()
     if self.mStopRedCnt == 0 then
-        self.mStopRedCnt = 5
+        self.mStopRedCnt = 12
         self.mRedIdx = 8
     end
     self.hp = self.hp - 1

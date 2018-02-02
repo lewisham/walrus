@@ -86,9 +86,8 @@ function M:updatePoints()
     self.position = cc.p(self:getPosition())
     -- 更新顶点
     self.points = {}
-    for _, vec in ipairs(self.vertices) do
-        local pos = self:convertToWorldSpaceAR(vec)
-        table.insert(self.points, pos)
+    for key, vec in ipairs(self.vertices) do
+        self.points[key] = self:convertToWorldSpaceAR(vec)
     end
 end
 

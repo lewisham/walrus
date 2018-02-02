@@ -41,7 +41,11 @@ end
 
 function GameScene:require(name)
     local path = self:getLuaPath(name) or name
-    return ReloadLuaModule(path)
+    if self:get("reload_lua_module") then
+        return ReloadLuaModule(path)
+    else
+        return require(path)
+    end
 end
 
 function GameScene:fullPath(filename)

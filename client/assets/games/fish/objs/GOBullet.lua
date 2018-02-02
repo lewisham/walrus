@@ -18,6 +18,7 @@ function M:onCreate(id)
     self:initCollider()
     self.bulletSpr = sprite
     self.vec = cc.p(0, 0)
+    self:setVisible(false)
 end
 
 function M:resetBullet(viewID)
@@ -40,6 +41,7 @@ end
 
 -- 向某个角度发射
 function M:launch(id, srcPos, angle)
+    self:setVisible(true)
     self.config = self:require("cannonoutlook")[id]
     self.bulletSpr:setTexture(self:fullPath("plist/bullet/".. self.config.bullet_img))
     angle = angle - 90
@@ -60,10 +62,9 @@ end
 function M:updateFrame()
     if self.mbFollow then
         self:updateFollow()
-        return
+    else
+        self:updateNormal()
     end
-    self:updateNormal()
-    self:updatePoints()
 end
 
 function M:updateNormal()
