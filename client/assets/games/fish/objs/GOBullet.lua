@@ -9,7 +9,7 @@ local M = class("GOBullet", require("games.fish.objs.GOCollider"))
 function M:onCreate(id)
     self.mViewID = -1
     self.config = self:require("cannonoutlook")[id]
-    self:getScene():get("bullet_layer"):addChild(self)
+    self:getScene():get("bullet_layer"):addChild(self, tonumber(id))
     local sprite = cc.Sprite:create(self:fullPath("plist/bullet/".. self.config.bullet_img))
     self:addChild(sprite)
     sprite:setAnchorPoint(cc.p(0.5, 0.75))

@@ -8,7 +8,7 @@ local M = class("GONet", require("games.fish.objs.GOCollider"))
 
 function M:onCreate(id)
     self.id = id
-    self:getScene():get("net_layer"):addChild(self)
+    self:getScene():get("net_layer"):addChild(self, tonumber(id))
     self.filename = self:require("cannonoutlook")[tostring(id)].net_res
     self.sp = cc.Sprite:createWithSpriteFrameName(self.filename .. "_00.png")
     self:addChild(self.sp)
