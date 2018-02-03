@@ -37,9 +37,7 @@ function M:onMsgCreateFishGroup(resp)
     local go = self:find("SCPool")
     go:removeTimeline()
     go:createFishGroup(resp.group_id, 1)
-    for _, fish in ipairs(go:getAliveList("mFishList")) do
-        fish:fadeOut()
-    end
+    go:allFishFadeOut()
 end
 
 function M:onMsgShoot(resp)

@@ -57,25 +57,20 @@ end
 -- 移除已经失效的对象
 function M:removeDeadObject(name)
     local list = self[name]
-    local tb = {}
-    for _, timeline in ipairs(list) do
-        if timeline:isAlive() then
-            table.insert(tb, timeline)
+    for i = #list, 1, -1 do
+        if not list[i]:isAlive() then
+            table.remove(list, i)
         end
     end
-    self[name] = tb
 end
 
--- 存活的对象
-function M:getAliveList(name)
-    local list = self[name]
-    local tb = {}
-    for _, go in ipairs(list) do
-        if go:isAlive() then
-            table.insert(tb, go)
+-- 所有鱼淡出
+function M:allFishFadeOut()
+    for _, fish in ipairs(self.mFishList) do
+        if fish:isAlive() then
+            fish:fadeOut()
         end
     end
-    return tb
 end
 
 -- 创建鱼

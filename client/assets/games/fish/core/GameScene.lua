@@ -97,32 +97,25 @@ end
 
 function M:onUpdate(dt)
     -- 清除无用的对象
-    local tb = self:getGameObjects()
-    for _, obj in pairs(tb) do
-        u3a.Invoke(obj, "onUpdate", dt)
+    for key, obj in pairs(self.mGameObjects) do
+        if u3a.IsObjectAlive(obj) then
+            u3a.Invoke(obj, "onUpdate", dt)
+        else
+            self.mGameObjects[key] = nil
+        end
     end 
 end
+
 
 -- 事件派发
 function M:post(eventName, ...)
     -- 清除无用的对象
     u3a.Invoke(self, eventName, ...)
-    local tb = self:getGameObjects()
-    for _, obj in pairs(tb) do
-        u3a.Invoke(obj, eventName, ...)
-    end
-end
-
-function M:getGameObjects()
-	-- 清除无用的对象
-    local tb = {}
-    for key, val in pairs(self.mGameObjects) do
-        if u3a.IsObjectAlive(val) then
-            tb[key] = val
+    for _, obj in pairs(self.mGameObjects) do
+        if u3a.IsObjectAlive(obj) then
+            u3a.Invoke(obj, eventName, ...)
         end
-    end  
-    self.mGameObjects = tb
-	return tb
+    end 
 end
 
 function M:getRoot()

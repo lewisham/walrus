@@ -111,7 +111,7 @@ end
 function __G__TRACKBACK__(msg)
     local msg = debug.traceback(msg, 3)
     print(msg)
-    require("core.common.TrackbackLayer"):show("error", msg)
+    require("core.TrackbackLayer"):show("error", msg)
     return msg
 end
 
