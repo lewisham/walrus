@@ -4,7 +4,7 @@
 -- 描述：子弹
 ----------------------------------------------------------------------
 
-local M = class("GOBullet", FCDefine.FishObject)
+local M = class("GOBullet", u3a.FishObject)
 
 function M:onCreate(id)
     self.mViewID = -1

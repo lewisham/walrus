@@ -4,7 +4,7 @@
 -- 描述：模拟服务器
 ----------------------------------------------------------------------
 
-local M = class("ISever", FCDefine.GameObject)
+local M = class("ISever", u3a.GameObject)
 
 function M:onCreate()
     self.mFrameIdx = 0
@@ -56,7 +56,7 @@ function M:updatePlayer()
                 self:playerShoot(player)
             end
         end
-        WaitForSeconds(0.2)
+        u3a.WaitForSeconds(0.2)
     end
 end
 
@@ -73,7 +73,7 @@ function M:playerShoot(player)
     else
         player.shoot_cnt = player.shoot_cnt - 1
     end
-    if self:find("DAFish"):getBulletCnt(player.view_id) >= FCDefine.MAX_BULLET_CNT then
+    if self:find("DAFish"):getBulletCnt(player.view_id) >= u3a.MAX_BULLET_CNT then
         return
     end
     if player.shoot_angle == nil then
@@ -93,7 +93,7 @@ function M:play()
     while true do
         self.mFrameIdx = self.mFrameIdx + 1
         self:updateFrame()
-        WaitForSeconds(0.05)
+        u3a.WaitForSeconds(0.05)
     end
 end
 
@@ -150,7 +150,7 @@ function M:testAllFish()
     for _, val in pairs(self:require("fish")) do
         print(val.id, val.name)
         self:find("SCPool"):createFish(val.id, "300000805", 1)
-        WaitForSeconds(4.0)
+        u3a.WaitForSeconds(4.0)
     end
 end
 

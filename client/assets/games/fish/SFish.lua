@@ -4,14 +4,14 @@
 -- 描述：捕鱼
 ----------------------------------------------------------------------
 
-local M = class("SFish", FCDefine.GameScene)
+local M = class("SFish", u3a.GameScene)
 
 function M:createAutoPath()
     self:autoRequire("games\\fish")
 end
 
 function M:initConfig()
-    rawset(_G, "FCDefine", self:require("FCDefine"))
+    rawset(_G, "u3a", self:require("u3a"))
     self:set("assets_path", "games/fish/assets/")
     -- 显示配置
     --rawset(_G, "TEST_COUNT", 0)
@@ -56,11 +56,11 @@ function M:play()
     self:createGameObject("ISever")
     self:createGameObject("UISkill")
     self:createGameObject("UIRightPanel")
-    WaitForFrames(1)
+    u3a.WaitForFrames(1)
     self:createGameObject("UISelfChairTips")
     self:find("UILoading"):removeFromScene()
     self:find("SCPool"):createFishPool()
-    WaitForFrames(2)
+    u3a.WaitForFrames(2)
     self:find("SCGameLoop"):startUpdate()
     self:find("UISelfChairTips"):play()
 end

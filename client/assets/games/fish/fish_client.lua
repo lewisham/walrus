@@ -1,11 +1,11 @@
-rawset(_G, "FCDefine", require("games.fish.core.FCDefine"))
-FCDefine.LuaObject = require("games.fish.core.LuaObject")
-FCDefine.GameScene = require("games.fish.core.GameScene")
-FCDefine.GameObject = require("games.fish.core.GameObject")
-FCDefine.UIGameObject = require("games.fish.core.UIGameObject")
-FCDefine.FishObject = require("games.fish.core.FishObject")
+rawset(_G, "u3a", require("games.fish.core.u3a"))
+u3a.LuaObject = require("games.fish.core.LuaObject")
+u3a.GameScene = require("games.fish.core.GameScene")
+u3a.GameObject = require("games.fish.core.GameObject")
+u3a.UIGameObject = require("games.fish.core.UIGameObject")
+u3a.FishObject = require("games.fish.core.FishObject")
 
-require("core.Coroutine")
+--require("core.Coroutine")
 
 local scene = require("games.fish.SFish").new()
 scene:createRoot()

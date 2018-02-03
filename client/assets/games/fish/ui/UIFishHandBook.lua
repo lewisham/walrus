@@ -4,14 +4,14 @@
 -- 描述：图鉴
 ----------------------------------------------------------------------
 
-local M = class("UIFishHandBook", FCDefine.UIGameObject)
+local M = class("UIFishHandBook", u3a.UIGameObject)
 
 function M:onCreate()
     self:loadCenterNode(self:fullPath("ui/fishform/uifishform.csb"), true)
 end
 
 function M:click_btn_close()
-    SafeRemoveNode(self)
+    u3a.SafeRemoveNode(self)
 end
 
 return M

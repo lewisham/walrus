@@ -4,7 +4,7 @@
 -- 描述：Animation管理器
 ----------------------------------------------------------------------
 
-local M = class("SCAction", FCDefine.GameObject)
+local M = class("SCAction", u3a.GameObject)
 
 function M:onCreate()
     self.mAnimationList = {}

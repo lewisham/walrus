@@ -4,7 +4,7 @@
 -- 描述：加载界面
 ----------------------------------------------------------------------
 
-local M = class("UILoading", FCDefine.UIGameObject)
+local M = class("UILoading", u3a.UIGameObject)
 
 function M:getZorder()
     return 100
@@ -62,9 +62,9 @@ function M:play()
             cc.SpriteFrameCache:getInstance():addSpriteFrames(val.filename)
         end
         self:updatePercent(idx / total * 100)
-        WaitForFrames(1)
+        u3a.WaitForFrames(1)
     end
-    WaitForSeconds(0.1)
+    u3a.WaitForSeconds(0.1)
     self:find("SCSound"):playMusic("music_00" .. self:getScene():get("room_idx"))
 end
 

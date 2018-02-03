@@ -4,7 +4,7 @@
 -- 描述：金币效果
 ----------------------------------------------------------------------
 
-local M = class("UICoinMgr", FCDefine.UIGameObject)
+local M = class("UICoinMgr", u3a.UIGameObject)
 
 function M:onCreate()
     self.mCoinPool = {}
@@ -78,7 +78,7 @@ function M:playImpl(pos, cnt, viewID, score)
             cur = cur + 1
             local add = cur == cnt and score or 0
             self:showCoin(viewID, cc.p(x, y), add)
-            WaitForSeconds(0.12)
+            u3a.WaitForSeconds(0.12)
             x = x + gapWidth
         end
         y = y - gapHeight

@@ -4,7 +4,7 @@
 -- 描述：鱼网
 ----------------------------------------------------------------------
 
-local M = class("GONet", FCDefine.FishObject)
+local M = class("GONet", u3a.FishObject)
 
 function M:onCreate(id)
     self.id = id

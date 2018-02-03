@@ -6,7 +6,7 @@
 
 local MOVE_TAG = 101
 
-local M = class("GOFish", FCDefine.FishObject)
+local M = class("GOFish", u3a.FishObject)
 
 function M:onCreate(id)
     self:initData(id)

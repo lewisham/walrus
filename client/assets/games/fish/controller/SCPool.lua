@@ -4,7 +4,7 @@
 -- 描述：对象池管理器
 ----------------------------------------------------------------------
 
-local M = class("SCPool", FCDefine.GameObject)
+local M = class("SCPool", u3a.GameObject)
 
 function M:onCreate()
     self.mNetPool = {}
@@ -35,7 +35,7 @@ end
 
 -- 预先创建子弹与鱼网
 function M:createBulletPool(id)
-    for i = 1, FCDefine.MAX_BULLET_CNT do
+    for i = 1, u3a.MAX_BULLET_CNT do
         local bullet = self:createUnnameObject("GOBullet", id)
         table.insert(self.mBulletList, bullet)
         local net = self:createUnnameObject("GONet", id)
@@ -45,11 +45,11 @@ end
 
 function M:removeTimeline()
     for _, timeline in ipairs(self.mTimeLineList) do
-        FCDefine.SafeRemoveNode(timeline)
+        u3a.SafeRemoveNode(timeline)
     end
     self.mTimeLineList = {}
     for _, array in ipairs(self.mFishArrayList) do
-        FCDefine.SafeRemoveNode(array)
+        u3a.SafeRemoveNode(array)
     end
     self.mFishArrayList = {}
 end

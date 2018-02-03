@@ -4,7 +4,7 @@
 -- 描述：点击层
 ----------------------------------------------------------------------
 
-local M = class("UITouch", FCDefine.UIGameObject)
+local M = class("UITouch", u3a.UIGameObject)
 
 function M:onCreate()
     self:setContentSize(cc.size(display.width, display.height))
@@ -40,7 +40,7 @@ end
 
 function M:launcher()
     local viewID = self:getScene():get("view_id")
-    if self:find("DAFish"):getBulletCnt(viewID) >= FCDefine.MAX_BULLET_CNT then
+    if self:find("DAFish"):getBulletCnt(viewID) >= u3a.MAX_BULLET_CNT then
         Toast("屏幕上子弹太多")
         return
     end
@@ -64,7 +64,7 @@ function M:startTimer()
     end
     local tb = 
     {
-        cc.DelayTime:create(FCDefine.BULLET_LANCHER_INTERVAL),
+        cc.DelayTime:create(u3a.BULLET_LANCHER_INTERVAL),
         cc.CallFunc:create(callback),
     }
     self:runAction(cc.RepeatForever:create(cc.Sequence:create(tb)))

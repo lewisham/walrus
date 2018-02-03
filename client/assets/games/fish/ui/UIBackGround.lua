@@ -4,7 +4,7 @@
 -- 描述：背景界面
 ----------------------------------------------------------------------
 
-local M = class("UIBackGround", FCDefine.UIGameObject)
+local M = class("UIBackGround", u3a.UIGameObject)
 
 function M:onCreate()
     local idx = self:getScene():get("room_idx")

@@ -60,9 +60,9 @@ function M:coroutine(target, name, ...)
         return self:isObjectAlive()
     end
     local function callback(co)
-        FCDefine.Invoke(target, name, unpack(args))
+        u3a.Invoke(target, name, unpack(args))
     end
-	local co = NewCoroutine(aliveCheckFunc, callback)
+	local co = u3a.NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")
 end
 

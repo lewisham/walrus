@@ -4,7 +4,7 @@
 -- 描述：数据配置
 ----------------------------------------------------------------------
 
-local M = class("SCConfig", FCDefine.GameObject)
+local M = class("SCConfig", u3a.GameObject)
 
 function M:onCreate()
     self:parsePath()

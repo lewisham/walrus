@@ -4,7 +4,7 @@
 -- 描述：数据配置
 ----------------------------------------------------------------------
 
-local M = class("SCSound", FCDefine.GameObject)
+local M = class("SCSound", u3a.GameObject)
 
 function M:onCreate()
 

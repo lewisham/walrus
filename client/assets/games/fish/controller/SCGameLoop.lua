@@ -4,7 +4,7 @@
 -- 描述：游戏主循环
 ----------------------------------------------------------------------
 
-local M = class("SCGameLoop", FCDefine.GameObject)
+local M = class("SCGameLoop", u3a.GameObject)
 
 function M:onCreate()
     self:createGameObject("SCGrid")
@@ -12,7 +12,7 @@ end
 
 function M:startUpdate()
     self:startUpdateFrame()
-    WaitForFrames(1)
+    u3a.WaitForFrames(1)
     self:startCollsion()
 end
 

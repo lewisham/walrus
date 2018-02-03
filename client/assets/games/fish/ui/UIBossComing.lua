@@ -4,7 +4,7 @@
 -- 描述：boss 来临警告
 ----------------------------------------------------------------------
 
-local M = class("UIBossComing", FCDefine.UIGameObject)
+local M = class("UIBossComing", u3a.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uibosscome.csb"))
@@ -19,7 +19,7 @@ end
 function M:play(name, rate)
     self:setVisible(true)
     local function callback()
-        FCDefine.SafeRemoveNode(self)
+        u3a.SafeRemoveNode(self)
     end
     --self.mTimelineAction:setLastFrameCallFunc(function() self:setVisible(false) end)
     self.mTimelineAction:gotoFrameAndPlay(0)

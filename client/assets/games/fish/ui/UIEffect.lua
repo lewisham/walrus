@@ -4,7 +4,7 @@
 -- 描述：特效层
 ----------------------------------------------------------------------
 
-local M = class("UIEffect", FCDefine.UIGameObject)
+local M = class("UIEffect", u3a.UIGameObject)
 
 function M:onCreate()
 end
