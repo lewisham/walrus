@@ -162,5 +162,9 @@ function M:coroutine(target, name, ...)
 end
 
 
+function M:toast(str)
+	return self.mGameScene:toast(str)
+end
+
 return M
 

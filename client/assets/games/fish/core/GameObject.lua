@@ -89,6 +89,10 @@ function M:fullPath(filename)
 	return self.mGameScene:fullPath(filename)
 end
 
+function M:toast(str)
+	return self.mGameScene:toast(str)
+end
+
 ------------------------------------
 -- 子结点管理与操作
 ------------------------------------

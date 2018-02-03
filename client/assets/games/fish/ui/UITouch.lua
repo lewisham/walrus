@@ -41,7 +41,7 @@ end
 function M:launcher()
     local viewID = self:getScene():get("view_id")
     if self:find("DAFish"):getBulletCnt(viewID) >= u3a.MAX_BULLET_CNT then
-        Toast("屏幕上子弹太多")
+        self:toast("屏幕上子弹太多")
         return
     end
     local cannon = self:find("UICannon" .. viewID)

@@ -106,6 +106,8 @@ function M:onUpdate(dt)
     end 
 end
 
+function M:toast(str)
+end
 
 -- 事件派发
 function M:post(eventName, ...)
