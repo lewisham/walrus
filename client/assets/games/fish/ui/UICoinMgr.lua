@@ -10,12 +10,23 @@ function M:onCreate()
     self.mCoinPool = {}
     self.mLabelPool = {}
     self.mAmiPosList = {cc.p(332.43, 40), cc.p(945.05, 40), cc.p(945.05, 680), cc.p(332.43, 680)}
+    self:initCoinRowAndCol()
     for i = 1, 20 do
         self:createLabel(1)
         self:createLabel(2)
         self:createCoin(1)
         self:createCoin(2)
     end
+end
+
+function M:initCoinRowAndCol()
+    self.mCoinRowAndCol = {}
+    self.mCoinRowAndCol[1] = {row = 1, col = 1}
+    self.mCoinRowAndCol[2] = {row = 2, col = 1}
+    self.mCoinRowAndCol[5] = {row = 5, col = 1}
+    self.mCoinRowAndCol[8] = {row = 4, col = 2}
+    self.mCoinRowAndCol[12] = {row = 4, col = 3}
+    self.mCoinRowAndCol[18] = {row = 6, col = 3}
 end
 
 function M:createLabel(idx)
@@ -134,19 +145,9 @@ function M:showLabel(viewID, pos, score)
 end
 
 function M:getRowAndColByCount(cnt)
-    if cnt == 2 then
-        return {row = 2, col = 1}
-    elseif cnt == 5 then
-        return {row = 5, col = 1}
-    elseif cnt == 8 then
-        return {row = 4, col = 2}
-    elseif cnt == 12 then
-        return {row = 4, col = 3}
-    elseif cnt == 18 then
-        return {row = 6, col = 3}
-    else
-        return {row = 1, col = 1}
-    end
+    local ret = self.mCoinRowAndCol[cnt]
+    if ret == nil then ret = self.mCoinRowAndCol[1] end
+    return ret
 end
 
 function M:updateCoin(viewID, add)

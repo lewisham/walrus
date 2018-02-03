@@ -17,26 +17,30 @@ local function contains(n, range)
 	return n >= a and n <= b
 end
 
+local projectA = {0, 0}
+local projectB = {0, 0}
+
 -- 是否重叠
-local function overlap(a_, b_)
-	if contains(a_[1], b_) then return true
-	elseif contains(a_[2], b_) then return true
-	elseif contains(b_[1], a_) then return true
-	elseif contains(b_[2], a_) then return true
+local function overlap()
+	if contains(projectA[1], projectB) then return true
+	elseif contains(projectA[2], projectB) then return true
+	elseif contains(projectB[1], projectA) then return true
+	elseif contains(projectB[2], projectA) then return true
 	end
 	return false
 end
 
 -- 投影
-local function project(points, axis)
+local function project(tb, points, axis)
 	local min = dot(points[1],axis)
 	local max = min
 	for i,v in ipairs(points) do
 		local proj =  dot(v, axis) -- projection
 		if proj < min then min = proj end
 		if proj > max then max = proj end
-	end
-	return {min, max}
+    end
+    tb[1] = min
+    tb[2] = max
 end
 
 local M = class("FishObject", function() return cc.Node:create() end)
@@ -83,7 +87,7 @@ end
 
 -- 更新多边型点的位置
 function M:updatePoints()
-    self.position = cc.p(self:getPosition())
+    self.position.x, self.position.y = self:getPosition()
     -- 更新顶点
     self.points = {}
     for key, vec in ipairs(self.vertices) do
@@ -113,19 +117,20 @@ end
 function M:sat(go)
     local offsetx = self.position.x - go.position.x
     local offsety = self.position.y - go.position.y
-    local length =  offsetx * offsetx + offsety * offsety
-    if length > self.raduis_2 + go.raduis_2 then
+    if offsetx * offsetx + offsety * offsety > self.raduis_2 + go.raduis_2 then
         return false
     end
     for k, v in ipairs(self.points) do
-		local axis = self.axis[k]
-		local a_, b_ = project(self.points, axis), project(go.points, axis)
-		if not overlap(a_, b_) then return false end
+        local axis = self.axis[k]
+        project(projectA, self.points, axis)
+        project(projectB, go.points, axis)
+		if not overlap() then return false end
 	end
 	for k, v in ipairs(go.points) do
-		local axis = go.axis[k]
-		local a_, b_ = project(go.points, axis), project(self.points, axis)
-		if not overlap(a_, b_) then return false end
+        local axis = go.axis[k]
+        project(projectA, go.points, axis)
+        project(projectB, self.points, axis)
+		if not overlap() then return false end
     end
 	return true
 end

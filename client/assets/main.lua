@@ -96,7 +96,7 @@ local function testFish()
 	print("写入地址", cc.FileUtils:getInstance():getWritablePath())
 	print("下载地址", DOWD_LOAD_DIR)
     cc.Director:getInstance():setDisplayStats(CC_SHOW_FPS)
-    --StartCollectGarbage()
+    StartCollectGarbage()
 	-- 创建场景
     local scene = cc.Scene:create()
     if cc.Director:getInstance():getRunningScene() then

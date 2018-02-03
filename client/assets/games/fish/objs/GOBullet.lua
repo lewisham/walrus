@@ -32,6 +32,7 @@ function M:resetBullet(viewID)
 end
 
 function M:isNeedCollionCheck()
+    if not self.alive then return false end
     return not self.mbFollow
 end
 

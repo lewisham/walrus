@@ -96,7 +96,6 @@ function M:collsionCheck()
     local grid = self:find("SCGrid")
     grid:reset()
     local go = self:find("SCPool")
-    local bulletList = go:getCollsionBullet()
     local fishes = go.mFishList
     for idx, fish in ipairs(fishes) do
         if fish.alive then
@@ -104,20 +103,24 @@ function M:collsionCheck()
             grid:addFishRef(idx, fish.points, fish.position)
         end
     end
-    for _, bullet in ipairs(bulletList) do
-        local pos = cc.p(bullet:getPosition())
-        local list = grid:getFishesByPos(pos)
-        if list then
-            bullet:updatePoints()
-            for idx, _ in pairs(list) do
-                local fish = fishes[idx]
-                if bullet:sat(fish) then
-                    bullet:onCollsion()
-                    local net = self:find("SCPool"):createNet(bullet.config.id, pos)
-                    if bullet.mbSelf then
-                        self:netCollsionCheck(fishes, net, grid)
+    local pos = cc.p(0, 0)
+    local list = nil
+    for _, bullet in ipairs(go.mBulletList) do
+        if bullet:isNeedCollionCheck() then
+            pos.x, pos.y = bullet:getPosition()
+            list = grid:getFishesByPos(pos)
+            if list then
+                bullet:updatePoints()
+                for idx, _ in pairs(list) do
+                    local fish = fishes[idx]
+                    if bullet:sat(fish) then
+                        bullet:onCollsion()
+                        local net = self:find("SCPool"):createNet(bullet.config.id, pos)
+                        if bullet.mbSelf then
+                            self:netCollsionCheck(fishes, net, grid)
+                        end
+                        break
                     end
-                    break
                 end
             end
         end
@@ -133,22 +136,6 @@ function M:netCollsionCheck(fishes, net, grid)
             fish:onHit()
         end
     end 
-end
-
--- n*m时间复杂度算法
-function M:collsionCheck1()
-    local go = self:find("SCPool")
-    for _, bullet in ipairs(go.mBulletList) do
-        if bullet:isNeedCollionCheck() then
-            for _, fish in ipairs(go.mFishList) do
-                if bullet:doCheck(fish) then
-                    bullet:onCollsion()
-                    self:find("SCPool"):createNet(bullet.config.id, cc.p(bullet:getPosition()))
-                    break
-                end
-            end
-        end
-    end
 end
 
 return M
