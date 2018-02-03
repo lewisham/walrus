@@ -28,9 +28,9 @@ end
 function M:startCollsion()
     local scheduler = cc.Director:getInstance():getScheduler()
     if TEST_COUNT then
-        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsionTest() end, 0.05, false)
+        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsionTest() end, 0.09, false)
     else
-        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsion() end, 0.1, false)
+        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsion() end, 0.09, false)
     end
 end
 
