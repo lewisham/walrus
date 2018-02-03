@@ -8,7 +8,7 @@ local UISetting = class("UISetting", UIBase)
 
 function UISetting:onCreate()
     self:loadCsb("ui/battle/BattleSetting.csb", true)
-    self.Panel_1:onClicked(function() SafeRemoveNode(self) end)
+    self.Panel_1:onClicked(function() FCDefine.SafeRemoveNode(self) end)
     local auto = self:find("DAPlayers"):getPlayer():get("robot")
     self.btn_auto:setSelected(auto)
 

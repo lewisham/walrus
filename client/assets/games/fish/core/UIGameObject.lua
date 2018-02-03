@@ -51,7 +51,7 @@ function M:loadCsb(filename, bShield)
 	-- csb 绑定到的节点
 	local bindWidget = self
 	for k, v in ipairs(node:getChildren()) do
-		v:changeParentNode(bindWidget)
+		u3a.ChangeParentNode(v, bindWidget)
 	end
 	if bLayer then
 		ccui.Helper:doLayout(self)
@@ -109,6 +109,9 @@ function M:scaleToEnter()
     local spawnaction = cc.Spawn:create(cc.FadeIn:create(0.09), cc.ScaleTo:create(0.1, 1.0))
     action:runAction(spawnaction)
 	return root
+end
+
+function M:onUpdate()
 end
 
 ------------------------------------

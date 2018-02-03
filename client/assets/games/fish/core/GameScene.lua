@@ -71,14 +71,6 @@ function M:getGameApp()
     return self:get("GameApp")
 end
 
---
-function M:awaken()
-	local tb = self:getGameObjects()
-    for _, obj in pairs(tb) do
-		u3a.Invoke(obj, "awake")
-	end
-end
-
 function M:setVisible(bVisible)
     self:getRoot():setVisible(bVisible)
 end
@@ -86,19 +78,18 @@ end
 -- 创建根结点
 function M:createRoot()
     local widget = ccui.Widget:create()
-    g_RootNode:addChild(widget, self.mRootZorder)
+    local scene = g_RootNode
+    if scene == nil then
+        scene = cc.Director:getInstance():getRunningScene()
+    end
+    scene:addChild(widget, self.mRootZorder)
     local size = cc.Director:getInstance():getWinSize()
     widget:setContentSize(size)
     widget:setTouchEnabled(true) -- 防止穿透
     widget:setPosition(0, 0)
     widget:setAnchorPoint(0, 0)
     local function update(dt)
-        if not device:isWindows() then
-            self:onUpdate(dt)
-        else
-            --xpcall(function() self:onUpdate(dt) end, __G__TRACKBACK__)
-            self:onUpdate(dt)
-        end
+        self:onUpdate(dt)
     end
     widget:scheduleUpdateWithPriorityLua(update, 0)
     self.mRoot = widget
