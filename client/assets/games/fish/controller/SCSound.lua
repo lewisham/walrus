@@ -15,11 +15,13 @@ function M:fullPath(str)
 end
 
 function M:playSound(filename)
+    do return end
     filename = self:fullPath(filename)
     cc.SimpleAudioEngine:getInstance():playEffect(filename)
 end
 
 function M:playMusic(filename)
+    do return end
     filename = self:fullPath(filename)
     cc.SimpleAudioEngine:getInstance():playMusic(filename, true)
 end
