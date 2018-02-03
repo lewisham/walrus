@@ -4,7 +4,7 @@
 -- 描述：鱼组
 ----------------------------------------------------------------------
 
-local M = class("GOFishArray", require("games.fish.objs.GOCollider"))
+local M = class("GOFishArray", FCDefine.FishObject)
 
 function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)

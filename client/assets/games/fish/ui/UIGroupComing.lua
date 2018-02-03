@@ -4,7 +4,7 @@
 -- 描述：鱼潮来临
 ----------------------------------------------------------------------
 
-local M = class("UIGroupComing", UIBase)
+local M = class("UIGroupComing", FCDefine.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uifishgroupcome.csb"))

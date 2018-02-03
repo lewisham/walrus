@@ -4,7 +4,7 @@
 -- 描述：捕鱼
 ----------------------------------------------------------------------
 
-local M = class("SFish", GameBase)
+local M = class("SFish", FCDefine.GameScene)
 
 function M:createAutoPath()
     self:autoRequire("games\\fish")

@@ -4,7 +4,7 @@
 -- 描述：数据配置
 ----------------------------------------------------------------------
 
-local M = class("DAFish", GameObject)
+local M = class("DAFish", FCDefine.GameObject)
 
 function M:onCreate()
     self:set("bullet_cnts", {0, 0, 0, 0})

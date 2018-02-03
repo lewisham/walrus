@@ -61,7 +61,7 @@ end
 function M:destroy()
     SafeRemoveNode(self.mRoot)
 	for _, obj in pairs(self.mGameObjects) do
-		Invoke(obj, "releaseLuaObject")
+		FCDefine.Invoke(obj, "releaseLuaObject")
 	end
     self:releaseLuaObject()
     self:get("GameApp"):removeScene(self.__cname)
@@ -75,7 +75,7 @@ end
 function M:awaken()
 	local tb = self:getGameObjects()
     for _, obj in pairs(tb) do
-		Invoke(obj, "awake")
+		FCDefine.Invoke(obj, "awake")
 	end
 end
 
@@ -108,17 +108,17 @@ function M:onUpdate(dt)
     -- 清除无用的对象
     local tb = self:getGameObjects()
     for _, obj in pairs(tb) do
-        Invoke(obj, "onUpdate", dt)
+        FCDefine.Invoke(obj, "onUpdate", dt)
     end 
 end
 
 -- 事件派发
 function M:post(eventName, ...)
     -- 清除无用的对象
-    Invoke(self, eventName, ...)
+    FCDefine.Invoke(self, eventName, ...)
     local tb = self:getGameObjects()
     for _, obj in pairs(tb) do
-        Invoke(obj, eventName, ...)
+        FCDefine.Invoke(obj, eventName, ...)
     end
 end
 
@@ -126,7 +126,7 @@ function M:getGameObjects()
 	-- 清除无用的对象
     local tb = {}
     for key, val in pairs(self.mGameObjects) do
-        if IsObjectAlive(val) then
+        if FCDefine.IsObjectAlive(val) then
             tb[key] = val
         end
     end  
@@ -142,15 +142,15 @@ end
 function M:createGameObject(filename, ...)
     local cls = self:require(filename)
 	local ret = cls.new(...)
-    if not IsKindOf(cls, "GameObject") then
-        ExtendClass(ret, GameObject)
+    if not FCDefine.IsKindOf(cls, "GameObject") then
+        FCDefine.ExtendClass(ret, FCDefine.GameObject)
     end
     local name = ret.__cname
     ret.__path = self:getLuaPath(filename)
     ret.mRoot = self:getRoot()
     ret.mGameScene = self
     self.mGameObjects[name] = ret
-    Invoke(ret, "start")
+    FCDefine.Invoke(ret, "start")
     ret:onCreate(...)
     return ret
 end
@@ -159,14 +159,14 @@ end
 function M:createUnnameObject(filename, ...)
     local cls = self:require(filename)
 	local ret = cls.new(...)
-	if not IsKindOf(cls, "GameObject") then
-        ExtendClass(ret, GameObject)
+	if not FCDefine.IsKindOf(cls, "GameObject") then
+        FCDefine.ExtendClass(ret, FCDefine.GameObject)
     end
     local name = ret.__cname
     ret.__path = self:getLuaPath(filename)
     ret.mRoot = self:getRoot()
     ret.mGameScene = self
-    Invoke(ret, "start")
+    FCDefine.Invoke(ret, "start")
     ret:onCreate(...)
     return ret
 end
@@ -174,8 +174,8 @@ end
 function M:wrapGameObject(obj, path, ...)
     local cls = self:require(path)
     local ret = cls.new(obj)
-    if not IsKindOf(cls, "GameObject") then
-        ExtendClass(ret, GameObject)
+    if not FCDefine.IsKindOf(cls, "GameObject") then
+        FCDefine.ExtendClass(ret, FCDefine.GameObject)
     end
     local name = ret.__cname
     ret.__path = self:getLuaPath(filename)

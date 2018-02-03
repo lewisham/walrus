@@ -4,7 +4,7 @@
 -- 描述：技能操作层
 ----------------------------------------------------------------------
 
-local M = class("UISkill", UIBase)
+local M = class("UISkill", FCDefine.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/skill/uiskilldesk.csb"))

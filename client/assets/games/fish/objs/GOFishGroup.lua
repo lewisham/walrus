@@ -4,7 +4,7 @@
 -- 描述：鱼潮
 ----------------------------------------------------------------------
 
-local M = class("GOFishGroup", require("games.fish.objs.GOCollider"))
+local M = class("GOFishGroup", FCDefine.FishObject)
 
 function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)

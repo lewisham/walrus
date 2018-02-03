@@ -4,7 +4,7 @@
 -- 描述：自已座提示
 ----------------------------------------------------------------------
 
-local M = class("UISelfChairTips", UIBase)
+local M = class("UISelfChairTips", FCDefine.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uiselftips.csb"), true)
@@ -26,7 +26,7 @@ function M:play()
     self.Node_1:runAction(cc.Sequence:create(tb))
     WaitForSeconds(2.0)
     self:find("UIGunChange"):close()
-    SafeRemoveNode(self)
+    FCDefine.SafeRemoveNode(self)
 end
 
 return M

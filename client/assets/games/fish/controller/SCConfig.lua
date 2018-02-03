@@ -4,7 +4,7 @@
 -- 描述：数据配置
 ----------------------------------------------------------------------
 
-local M = class("SCConfig", GameObject)
+local M = class("SCConfig", FCDefine.GameObject)
 
 function M:onCreate()
     self:parsePath()
@@ -17,12 +17,14 @@ function M:parsePath()
     for _, val in pairs(self:require("fishpathEx")) do
         local list = {}
         for _, v2 in ipairs(string.split(val.pointdata, ";")) do
-            local t2 = string.split(v2, ",")
-            local unit = {}
-            unit.pos = cc.p(tonumber(t2[1]), tonumber(t2[2]))
-            unit.angle = tonumber(t2[3])
-            unit.vec = cc.p(math.sin(unit.angle), math.cos(unit.angle))
-            table.insert(list, unit)
+            if v2 ~= "" then
+                local t2 = string.split(v2, ",")
+                local unit = {}
+                unit.pos = cc.p(tonumber(t2[1]), tonumber(t2[2]))
+                unit.angle = tonumber(t2[3])
+                unit.vec = cc.p(math.sin(unit.angle), math.cos(unit.angle))
+                table.insert(list, unit)
+            end
         end
         tb[val.id] = list
     end
@@ -36,8 +38,10 @@ function M:parseFish()
         local tb = string.split(val.point_info, ";")
         val.vertices = {}
         for _, str in ipairs(tb) do
-            local points = string.split(str, ",")
-            table.insert(val.vertices, cc.p(tonumber(points[1]), tonumber(points[2])))
+            if str ~= "" then
+                local points = string.split(str, ",")
+                table.insert(val.vertices, cc.p(tonumber(points[1]), tonumber(points[2])))
+            end
         end
         val.raduis = self:calcRaduisByVertices(val.vertices)
         --print(val.name, val.raduis)
@@ -125,14 +129,20 @@ function M:getFishArray(id)
     return tb, maxFrame
 end
 
+local function splitNumber(str, sDiv)
+    local retList = {}
+    str:gsub('[^'..sDiv..']+', function(sRet) table.insert(retList, tonumber(sRet)) end)
+    return retList
+end
+
 -- 鱼组
 function M:getFishchildren(id)
     local config = clone(self:require("fishchildren")[id])
     config.fishcount = tonumber(config.fishcount)
-    config.bgindex = string.splitNumber(config.bgindex, ";")
-    config.bgscale = string.splitNumber(config.bgscale, ";")
-    config.fishid = string.splitNumber(config.fishid, ";")
-    config.fishscale = string.splitNumber(config.fishscale, ";")
+    config.bgindex = splitNumber(config.bgindex, ";")
+    config.bgscale = splitNumber(config.bgscale, ";")
+    config.fishid = splitNumber(config.fishid, ";")
+    config.fishscale = splitNumber(config.fishscale, ";")
     local tb = string.split(config.offset, ";")
     config.offset = {}
     for _, str in ipairs(tb) do

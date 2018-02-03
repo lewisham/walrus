@@ -4,7 +4,7 @@
 -- 描述：加载界面
 ----------------------------------------------------------------------
 
-local M = class("UILoading", UIBase)
+local M = class("UILoading", FCDefine.UIGameObject)
 
 function M:getZorder()
     return 100

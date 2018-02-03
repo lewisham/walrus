@@ -4,7 +4,7 @@
 -- 描述：鱼群时间线
 ----------------------------------------------------------------------
 
-local M = class("GOFishTimeLine", require("games.fish.objs.GOCollider"))
+local M = class("GOFishTimeLine", FCDefine.FishObject)
 
 function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)

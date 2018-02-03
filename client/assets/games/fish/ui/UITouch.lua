@@ -4,7 +4,7 @@
 -- 描述：点击层
 ----------------------------------------------------------------------
 
-local M = class("UITouch", UIBase)
+local M = class("UITouch", FCDefine.UIGameObject)
 
 function M:onCreate()
     self:setContentSize(cc.size(display.width, display.height))
@@ -34,7 +34,7 @@ function M:updateAngle()
     local viewID = self:getScene():get("view_id")
     local cannon = self:find("UICannon" .. viewID)
     local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
-    local angle = math.atan2(vec.y, vec.x) * 180 / PI
+    local angle = math.atan2(vec.y, vec.x) * 180 / math.pi
     cannon:updateAngle(angle)
 end
 
@@ -46,7 +46,7 @@ function M:launcher()
     end
     local cannon = self:find("UICannon" .. viewID)
     local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
-    local rotation = math.atan2(vec.y, vec.x) * 180 / PI
+    local rotation = math.atan2(vec.y, vec.x) * 180 / math.pi
     cannon:firePre(rotation)
 end
 

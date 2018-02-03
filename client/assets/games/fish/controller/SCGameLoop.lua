@@ -4,7 +4,7 @@
 -- 描述：游戏主循环
 ----------------------------------------------------------------------
 
-local M = class("SCGameLoop", GameObject)
+local M = class("SCGameLoop", FCDefine.GameObject)
 
 function M:onCreate()
     self:createGameObject("SCGrid")

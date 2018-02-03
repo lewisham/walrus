@@ -12,7 +12,7 @@ local pos_list =
     cc.p(330, display.height),
 }
 
-local M = class("UICannon", UIBase)
+local M = class("UICannon", FCDefine.UIGameObject)
 
 function M:onCreate(viewID)
     self.mViewID = viewID

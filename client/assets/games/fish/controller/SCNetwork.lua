@@ -4,7 +4,7 @@
 -- 描述：网络处理
 ----------------------------------------------------------------------
 
-local M = class("SCNetwork", GameObject)
+local M = class("SCNetwork", FCDefine.GameObject)
 
 function M:onCreate()
 

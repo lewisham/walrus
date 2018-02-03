@@ -4,7 +4,7 @@
 -- 描述：子弹
 ----------------------------------------------------------------------
 
-local M = class("GOBullet", require("games.fish.objs.GOCollider"))
+local M = class("GOBullet", FCDefine.FishObject)
 
 function M:onCreate(id)
     self.mViewID = -1
@@ -103,7 +103,7 @@ function M:moveToNextPoint()
     act:setTag(101)
     self:stopActionByTag(101)
     self:runAction(act)
-    local rotation = math.atan2(self.vec.y, self.vec.x) * 180 / PI
+    local rotation = math.atan2(self.vec.y, self.vec.x) * 180 / math.pi
     self:setRotation(-rotation + 90)
 end
 

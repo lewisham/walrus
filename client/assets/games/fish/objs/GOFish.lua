@@ -6,7 +6,7 @@
 
 local MOVE_TAG = 101
 
-local M = class("GOFish", require("games.fish.objs.GOCollider"))
+local M = class("GOFish", FCDefine.FishObject)
 
 function M:onCreate(id)
     self:initData(id)

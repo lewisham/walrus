@@ -4,7 +4,7 @@
 -- 描述：炮台Panel
 ----------------------------------------------------------------------
 
-local M = class("UIGunChange", UIBase)
+local M = class("UIGunChange", FCDefine.UIGameObject)
 
 function M:onCreate(viewID)
     self:loadCsb(self:fullPath("ui/uigunchange.csb"))

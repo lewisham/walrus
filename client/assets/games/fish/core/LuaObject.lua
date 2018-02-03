@@ -4,12 +4,12 @@
 -- 描述：lua 对象类
 ----------------------------------------------------------------------
 
-local LuaObject = class("LuaObject")
+local M = class("LuaObject")
 
 local instance_id = 0
 
 -- 构造函数
-function LuaObject:ctor()
+function M:ctor()
     self.mAutoAddToScene = true
     self.mProperty = {}
     self.mRefCnt   = 1
@@ -19,51 +19,51 @@ end
 
 
 -- 获得实例id
-function LuaObject:getInstanceID()
+function M:getInstanceID()
 	return self.mInstanceID
 end
 
 -- 获取缓存数据
-function LuaObject:get(name)
+function M:get(name)
     local ret = self.mProperty[name]
     return ret
 end
 
 -- 设置缓存数据
-function LuaObject:set(name, value)
+function M:set(name, value)
     self.mProperty[name] = value
 end
 
 -- 修改数据
-function LuaObject:modify(name, value)
+function M:modify(name, value)
     self.mProperty[name] = self.mProperty[name] + value
     return self.mProperty[name]
 end
 
-function LuaObject:releaseLuaObject()
+function M:releaseLuaObject()
     self.mRefCnt = self.mRefCnt - 1
 end
 
 -- 弱引用
-function LuaObject:getSelf()
+function M:getSelf()
     if self.mRefCnt < 1 then return nil end
     return self
 end
 
-function LuaObject:isObjectAlive()
+function M:isObjectAlive()
     return self:getSelf()
 end
 
-function LuaObject:coroutine(target, name, ...)
+function M:coroutine(target, name, ...)
     local args = {...}
     local function aliveCheckFunc()
         return self:isObjectAlive()
     end
     local function callback(co)
-        Invoke(target, name, unpack(args))
+        FCDefine.Invoke(target, name, unpack(args))
     end
 	local co = NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")
 end
 
-return LuaObject
+return M

@@ -4,7 +4,7 @@
 -- 描述：数据配置
 ----------------------------------------------------------------------
 
-local M = class("SCSound", GameObject)
+local M = class("SCSound", FCDefine.GameObject)
 
 function M:onCreate()
 
@@ -16,12 +16,12 @@ end
 
 function M:playSound(filename)
     filename = self:fullPath(filename)
-    PlaySound(filename)
+    cc.SimpleAudioEngine:getInstance():playEffect(filename)
 end
 
 function M:playMusic(filename)
     filename = self:fullPath(filename)
-    PlayMusic(filename)
+    cc.SimpleAudioEngine:getInstance():playMusic(filename, true)
 end
 
 return M

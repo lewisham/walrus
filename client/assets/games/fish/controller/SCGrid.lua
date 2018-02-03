@@ -12,7 +12,7 @@ local function convertIdx(pos)
     return math.floor(pos.y / GRID_HEIGHT) * GRID_CNT + math.ceil(pos.x / GRID_WIDTH)
 end
 
-local M = class("SCGrid", GameObject)
+local M = class("SCGrid", FCDefine.GameObject)
 
 function M:onCreate()
     self.mGridList = {}

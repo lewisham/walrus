@@ -4,7 +4,7 @@
 -- 描述：核弹特效
 ----------------------------------------------------------------------
 
-local M = class("UIBomb", UIBase)
+local M = class("UIBomb", FCDefine.UIGameObject)
 
 function M:onCreate(pos)
     self:setPosition(pos)
@@ -16,19 +16,19 @@ function M:loop()
     self:playCsbAni(self:fullPath("ui/bomb/uimbomb1.csb"), 120)
     self:playCsbAni(self:fullPath("ui/bomb/uimbombcom.csb"), 165)
     self:playCsbAni(self:fullPath("ui/bomb/uisbomb2.csb"), 49)
-    SafeRemoveNode(self)
+    FCDefine.SafeRemoveNode(self)
 end
 
 function M:playCsbAni(filename, frames)
     local node = LoadCsb(filename)
     self:addChild(node)
-    BindToUI(node, node)
+    FCDefine.BindToUI(node, node)
     node:setPosition(0, 0)
     local action = cc.CSLoader:createTimeline(filename)
     node:runAction(action)
     action:gotoFrameAndPlay(0)
     WaitForSeconds(frames / 60.0)
-    SafeRemoveNode(node)
+    FCDefine.SafeRemoveNode(node)
 end
 
 return M

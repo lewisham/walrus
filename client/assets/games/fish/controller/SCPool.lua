@@ -4,7 +4,7 @@
 -- 描述：对象池管理器
 ----------------------------------------------------------------------
 
-local M = class("SCPool", GameObject)
+local M = class("SCPool", FCDefine.GameObject)
 
 function M:onCreate()
     self.mNetPool = {}
@@ -45,11 +45,11 @@ end
 
 function M:removeTimeline()
     for _, timeline in ipairs(self.mTimeLineList) do
-        SafeRemoveNode(timeline)
+        FCDefine.SafeRemoveNode(timeline)
     end
     self.mTimeLineList = {}
     for _, array in ipairs(self.mFishArrayList) do
-        SafeRemoveNode(array)
+        FCDefine.SafeRemoveNode(array)
     end
     self.mFishArrayList = {}
 end

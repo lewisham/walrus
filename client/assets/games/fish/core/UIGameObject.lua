@@ -56,7 +56,7 @@ function M:loadCsb(filename, bShield)
 	if bLayer then
 		ccui.Helper:doLayout(self)
 	end
-	BindToUI(bindWidget, self)
+	FCDefine.BindToUI(bindWidget, self)
 end
 
 -- 加载csb
@@ -76,7 +76,7 @@ function M:loadCenterNode(filename, bShield, aniType)
 		bindWidget = self:scaleToEnter()
 	end
 	node:addTo(bindWidget)
-	BindToUI(bindWidget, self)
+	FCDefine.BindToUI(bindWidget, self)
 end
 
 function M:scaleToEnter()
@@ -119,7 +119,7 @@ end
 
 -- 从场景中移除
 function M:removeFromScene()
-	SafeRemoveNode(self)
+	FCDefine.SafeRemoveNode(self)
 end
 
 -- 获得添加到的场景
@@ -152,7 +152,7 @@ function M:coroutine(target, name, ...)
         return not tolua.isnull(self)
     end
     local function callback(co)
-        Invoke(target, name, unpack(args))
+        FCDefine.Invoke(target, name, unpack(args))
     end
 	local co = NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")

@@ -4,7 +4,7 @@
 -- 描述：金币效果
 ----------------------------------------------------------------------
 
-local M = class("UICoinMgr", UIBase)
+local M = class("UICoinMgr", FCDefine.UIGameObject)
 
 function M:onCreate()
     self.mCoinPool = {}

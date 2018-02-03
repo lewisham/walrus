@@ -4,7 +4,7 @@
 -- 描述：图鉴
 ----------------------------------------------------------------------
 
-local M = class("UIFishHandBook", UIBase)
+local M = class("UIFishHandBook", FCDefine.UIGameObject)
 
 function M:onCreate()
     self:loadCenterNode(self:fullPath("ui/fishform/uifishform.csb"), true)

@@ -4,7 +4,7 @@
 -- 描述：设置界面
 ----------------------------------------------------------------------
 
-local M = class("UISetting", UIBase)
+local M = class("UISetting", FCDefine.UIGameObject)
 
 function M:onCreate()
     self:loadCenterNode(self:fullPath("ui/fishform/uifishform.csb"), true)

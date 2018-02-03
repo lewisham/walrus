@@ -4,7 +4,7 @@
 -- 描述：鱼网
 ----------------------------------------------------------------------
 
-local M = class("GONet", require("games.fish.objs.GOCollider"))
+local M = class("GONet", FCDefine.FishObject)
 
 function M:onCreate(id)
     self.id = id

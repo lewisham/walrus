@@ -4,7 +4,7 @@
 -- 描述：模拟服务器
 ----------------------------------------------------------------------
 
-local M = class("ISever", GameObject)
+local M = class("ISever", FCDefine.GameObject)
 
 function M:onCreate()
     self.mFrameIdx = 0

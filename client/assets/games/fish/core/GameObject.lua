@@ -4,7 +4,7 @@
 -- 描述：游戏对象
 ----------------------------------------------------------------------
 
-local M = class("GameObject", LuaObject)
+local M = class("GameObject", require("games.fish.core.LuaObject"))
 
 -- 构造函数
 function M:ctor()
