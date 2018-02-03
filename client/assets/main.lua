@@ -29,7 +29,6 @@ cc.FileUtils:getInstance():addSearchPath("res/")
 
 CC_USE_FRAMEWORK = true
 require "cocos.init"
-require "core.init"
 print = release_print -- 打印函数
 old_require = require
 
@@ -48,6 +47,7 @@ end
 
 -- 主函数
 local function main()
+    require "core.init"
     math.randomseed(os.clock())
     cc.Director:getInstance():setAnimationInterval(1.0 / 60)
     require("src.platform.init")
@@ -85,6 +85,29 @@ local function main()
 	require("src.GameApp"):run()
 end
 
+local function testFish()
+    print("+++++++++++++++++++++testFish")
+    math.randomseed(os.clock())
+    cc.Director:getInstance():setAnimationInterval(1.0 / 60)
+    require("src.platform.init")
+	-- 下载目录
+	DOWD_LOAD_DIR = cc.FileUtils:getInstance():getWritablePath() .. "download/"
+	cc.FileUtils:getInstance():createDirectory(DOWD_LOAD_DIR)
+	print("写入地址", cc.FileUtils:getInstance():getWritablePath())
+	print("下载地址", DOWD_LOAD_DIR)
+    cc.Director:getInstance():setDisplayStats(CC_SHOW_FPS)
+    --StartCollectGarbage()
+	-- 创建场景
+    local scene = cc.Scene:create()
+    if cc.Director:getInstance():getRunningScene() then
+	    cc.Director:getInstance():replaceScene(scene)
+    else
+	    cc.Director:getInstance():runWithScene(scene)
+    end
+    g_RootNode = scene
+    require("games.fish.fish_client")
+end
+
 function __G__TRACKBACK__(msg)
     local msg = debug.traceback(msg, 3)
     print(msg)
@@ -93,4 +116,4 @@ function __G__TRACKBACK__(msg)
 end
 
 
-xpcall(main, __G__TRACKBACK__)
+xpcall(testFish, __G__TRACKBACK__)
