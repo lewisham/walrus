@@ -5,6 +5,7 @@
 ----------------------------------------------------------------------
 
 local MOVE_TAG = 101
+local ANIMATTION_TAG = 200
 
 local M = class("GOFish", u3a.FishObject)
 
@@ -23,6 +24,7 @@ function M:initData(id)
     self.vertices = self.config.vertices
     self.raduis_2 = self.config.raduis * self.config.raduis
     self.mFishSpriteList = {}
+    self.mFreezeActionList = {}
 end
 
 function M:setOffsetPos(pos)
@@ -34,8 +36,8 @@ function M:reset()
     self.hp = math.random(1, 30)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
-    self.mCurIdx = 0
-    self.mState = 0
+    self.mCurIdx = 3
+    self.mState = u3a.FISH_STATE.normal
     self.mRedIdx = 0
     self.mStopRedCnt = 0
 end
@@ -43,20 +45,14 @@ end
 function M:setPath(path)
     self.path = path
     self.frameIdx = 1
-    self.mCurIdx = 0
-end
-
-function M:setState(state)
-    self.mState = state
+    self.mCurIdx = 3
 end
 
 function M:updateFrame()
-    if self.mState == 0 then
-        self.mCurIdx = self.mCurIdx + 1
-        if self.mCurIdx == 3 then
-            self.mCurIdx = 0
-            self:nextFrame()
-        end
+    self.mCurIdx = self.mCurIdx - 1
+    if self.mCurIdx <= 0 then
+        self.mCurIdx = 3
+        self:nextFrame()
     end
     self:updateShadowPos()
     self:updateRed()
@@ -187,7 +183,9 @@ function M:createActionSprite()
     self:addChild(sp)
     local strFormat = string.format("%s_%s.png", self.config.fish_res, "%02d")
     local animation = self:find("SCAction"):createAnimation(strFormat, 3 / 20.2)
-    sp:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+    local act1 = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
+    table.insert(self.mFreezeActionList, act1)
+    sp:runAction(act1)
     table.insert(self.mFishSpriteList, sp)
 
     -- 阴影
@@ -195,7 +193,9 @@ function M:createActionSprite()
     shadow:setColor(cc.c3b(0, 0, 0))
     shadow:setOpacity(128)
     shadow:setScale(0.8)
-    shadow:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+    local act2 = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
+    table.insert(self.mFreezeActionList, act2)
+    shadow:runAction(act2)
     self:addChild(shadow, -2)
     self.shadow = shadow
 end
@@ -209,6 +209,32 @@ function M:onHit()
     if self.hp < 1 then
         self:outOfFrame()
         self:find("UICoinMgr"):play(cc.p(self:getPosition()), tonumber(self.config.coin_num), self:getScene():get("view_id"), math.random(10, 100))
+    end
+end
+
+function M:updateState(state)
+    if self.mState == state then return end
+    self.mState = state
+    if state == u3a.FISH_STATE.normal then
+        self:onNormal()
+    elseif state == u3a.FISH_STATE.start_freeze then
+        self:onStartFreeze()
+    elseif state == u3a.FISH_STATE.freeze then
+    elseif state == u3a.FISH_STATE.end_freeze then
+    end
+end
+
+function M:onNormal()
+    self.mCurIdx = 0
+    for _, action in ipairs(self.mFreezeActionList) do
+        action:setSpeed(1.0)
+    end
+end
+
+function M:onStartFreeze()
+    self:stopActionByTag(MOVE_TAG)
+    for _, action in ipairs(self.mFreezeActionList) do
+        action:setSpeed(0)
     end
 end
 

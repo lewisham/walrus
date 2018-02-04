@@ -11,15 +11,12 @@ function M:onCreate()
     self.touchPos = cc.p(0, 0)
     local function callback(event)
         if event.name == "began" then
-            self.touchPos = self:getTouchBeganPosition()
-            self:post("onEventTouchBegan", clone(self.touchPos))
-            self:startTimer()
+            self:onTouchBegan()
             return true
         elseif event.name == "moved" then
-            self.touchPos = self:getTouchMovePosition()
-            self:updateAngle()
-        elseif not self:getScene():get("auto_fire") then
-            self.bStopTimer = true
+            self:onTouchMoved()
+        else
+            self:onTouchEnded()
         end
     end
     self.bTimer = false
@@ -28,6 +25,23 @@ function M:onCreate()
     self:setTouchEnabled(false)
     self:setPosition(0, 0)
     self:setAnchorPoint(0, 0)
+end
+
+function M:onTouchBegan()
+    self.touchPos = self:getTouchBeganPosition()
+    self:post("onEventTouchBegan", clone(self.touchPos))
+    self:startTimer()
+end
+
+function M:onTouchMoved()
+    self.touchPos = self:getTouchMovePosition()
+    self:updateAngle()
+end
+
+function M:onTouchEnded()
+    if not self:getScene():get("auto_fire") then
+        self.bStopTimer = true
+    end
 end
 
 function M:updateAngle()

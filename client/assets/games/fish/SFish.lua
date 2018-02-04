@@ -23,7 +23,6 @@ function M:initConfig()
     self:set("room_idx", 1)
     self:set("view_id", 2)
     self:set("auto_fire", false)
-    self:set("retain_action", {})
 end
 
 function M:run()
@@ -32,6 +31,7 @@ function M:run()
     self:createGameObject("SCConfig")
     self:createGameObject("SCSound")
     self:createGameObject("SCPool")
+    self:createGameObject("SCGrid")
     self:createGameObject("SCGameLoop")
     self:createGameObject("SCNetwork")
     self:createGameObject("SCAction")
@@ -43,12 +43,19 @@ function M:doExitGameImpl()
 
 end
 
+function M:initSkill()
+    self:createGameObject("SKFreeze")
+    self:createGameObject("SKBomb")
+    self:createGameObject("SKSummon")
+end
+
 function M:play()
     self:createGameObject("UILoading"):play()
     self:createGameObject("UIBackGround")
     self:createGameObject("UIEffect")
     self:createGameObject("UICoinMgr")
     self:createGameObject("UITouch")
+    self:initSkill()
     for i = 1, 4 do
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end

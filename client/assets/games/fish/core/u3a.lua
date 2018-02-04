@@ -8,9 +8,6 @@ local _M = {}
 setmetatable(_M, {__index = _G})
 setfenv(1, _M)
 
-MAX_BULLET_CNT = 25
-BULLET_LANCHER_INTERVAL = 0.2
-
 function CreateSpriteFrameAnimation(strFormat, inteval)
     local animation = cc.Animation:create()
     local idx = 0

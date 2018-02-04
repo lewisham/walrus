@@ -14,4 +14,8 @@ function M:onCreate()
     self.node_left:setVisible(false)
 end
 
+function M:click_btn_skill()
+    self:find("SKFreeze"):activeSkill()
+end
+
 return M

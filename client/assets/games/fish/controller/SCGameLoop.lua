@@ -7,7 +7,7 @@
 local M = class("SCGameLoop", u3a.GameObject)
 
 function M:onCreate()
-    self:createGameObject("SCGrid")
+    self:set("freeze", false)
 end
 
 function M:startUpdate()
@@ -36,16 +36,17 @@ end
 
 function M:updateFrame()
     local go = self:find("SCPool")
-    -- 更新鱼
-    for _, fish in ipairs(go.mFishList) do
-        if fish.alive then
-            fish:updateFrame()
-        end
-    end
     -- 更新子弹
     for _, bullet in ipairs(go.mBulletList) do
         if bullet.alive then
             bullet:updateFrame()
+        end
+    end
+    if self:get("freeze") then return end
+    -- 更新鱼
+    for _, fish in ipairs(go.mFishList) do
+        if fish.alive then
+            fish:updateFrame()
         end
     end
     -- 更新鱼时间线
