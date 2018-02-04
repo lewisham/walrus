@@ -14,6 +14,7 @@ end
 -- 解析鱼游的路径
 function M:parsePath()
     local tb = {}
+    local scaleY = display.height / 720
     for _, val in pairs(self:require("fishpathEx")) do
         local list = {}
         for _, v2 in ipairs(string.split(val.pointdata, ";")) do
@@ -21,6 +22,7 @@ function M:parsePath()
                 local t2 = string.split(v2, ",")
                 local unit = {}
                 unit.pos = cc.p(tonumber(t2[1]), tonumber(t2[2]))
+                unit.pos.y = unit.pos.y * scaleY
                 unit.angle = tonumber(t2[3])
                 unit.vec = cc.p(math.sin(unit.angle), math.cos(unit.angle))
                 table.insert(list, unit)

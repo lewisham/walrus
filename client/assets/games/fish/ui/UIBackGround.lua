@@ -11,6 +11,7 @@ function M:onCreate()
     local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", idx)))
     self:addChild(sprite)
     sprite:setPosition(display.width / 2, display.height / 2)
+    sprite:setScaleY(display.height / 720)
     self:initWave()
     self:initLayer()
 end

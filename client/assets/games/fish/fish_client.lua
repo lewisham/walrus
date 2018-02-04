@@ -17,6 +17,21 @@ u3a.FISH_STATE =
     end_freeze = 4, 
 }
 
+local resolution = {
+    width = 1280,
+    height = 890,
+    autoscale = "FIXED_WIDTH",
+
+    callback = function(framesize)
+        local ratio = framesize.width / framesize.height
+        if ratio <= 1.5 then --4:3 屏幕 单独适配
+            return {autoscale = "FIXED_WIDTH"} -- FIXED_HEIGHT
+        end
+    end
+}
+display.setAutoScale(resolution)
+
+print(display.width, display.height)
 local scene = require("games.fish.SFish").new()
 scene:createRoot()
 scene:createAutoPath()

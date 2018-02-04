@@ -36,7 +36,7 @@ old_require = require
 function StartCollectGarbage()
 	collectgarbage("restart")
 	collectgarbage("collect")
-	collectgarbage("setpause", 150)
+    collectgarbage("setpause", 150)
     collectgarbage("setstepmul", 5000)
 end
 
@@ -59,7 +59,7 @@ local function main()
     cc.Director:getInstance():setDisplayStats(CC_SHOW_FPS)
 
 	-- 开始lua内存回收
-    --StartCollectGarbage()
+    StartCollectGarbage()
 	-- 创建场景
     local scene = cc.Scene:create()
     if cc.Director:getInstance():getRunningScene() then
