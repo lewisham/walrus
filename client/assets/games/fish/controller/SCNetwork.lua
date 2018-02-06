@@ -28,7 +28,8 @@ end
 
 -- 时间线
 function M:onMsgCreateTimeLine(resp)
-    self:find("SCPool"):createTimeLine(resp.id, resp.frame)
+    self:find("SCPool"):createTimeLine(resp.id, resp.frame, false)
+    self:find("SCPool"):createTimeLine(resp.id, resp.frame, true)
 end
 
 -- 鱼潮

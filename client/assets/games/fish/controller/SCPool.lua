@@ -64,6 +64,15 @@ function M:removeDeadObject(name)
     end
 end
 
+-- 移除鱼
+function M:removeFishFromList(fish)
+    for key, val in ipairs(self.mFishList) do
+        if fish == val then
+            table.remove(self.mFishList, key)
+        end
+    end
+end
+
 -- 所有鱼淡出
 function M:allFishFadeOut()
     for _, fish in ipairs(self.mFishList) do
@@ -73,9 +82,7 @@ function M:allFishFadeOut()
     end
 end
 
--- 创建鱼
-function M:createFish(id, pathID, frame, offset)
-    offset = offset or cc.p(0, 0)
+function M:getFish(id)
     local go = nil
     for _, fish in ipairs(self.mFishList) do
         if not fish:isAlive() and fish.id == id then
@@ -93,19 +100,18 @@ function M:createFish(id, pathID, frame, offset)
         end
         table.insert(self.mFishList, go)
     end
+    return go
+end
+
+-- 创建鱼
+function M:createFish(id, pathID, frame, offset)
+    offset = offset or cc.p(0, 0)
+    local go = self:getFish(id)
     go:reset()
     go:setOffsetPos(offset)
     local path = self:find("SCConfig"):get("path")[pathID]
     go:setPath(path)
     go:gotoFrame(frame)
-    return go
-end
-
--- 创建时间线
-function M:createTimeLine(id, frame)
-    local go = self:createUnnameObject("GOFishTimeLine", id)
-    go:gotoFrame(frame)
-    table.insert(self.mTimeLineList, go)
     return go
 end
 
@@ -162,6 +168,17 @@ function M:createNet(id, pos)
     end
     go:reset()
     go:play(pos)
+    return go
+end
+
+-- 创建时间线
+function M:createTimeLine(idx, frame, bServer)
+    local room_idx = self:getScene():get("room_idx")
+    local sever = bServer and 90000 or 0
+    local id = 320000000 + room_idx * 100000 + idx * 1000 + sever
+    local go = self:createUnnameObject("GOFishTimeLine", id)
+    go:gotoFrame(frame)
+    table.insert(self.mTimeLineList, go)
     return go
 end
 

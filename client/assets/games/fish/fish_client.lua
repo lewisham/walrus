@@ -31,6 +31,8 @@ local resolution = {
 }
 display.setAutoScale(resolution)
 
+u3a.SCALE = 720 / display.width
+
 print(display.width, display.height)
 local scene = require("games.fish.SFish").new()
 scene:createRoot()

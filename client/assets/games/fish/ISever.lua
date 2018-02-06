@@ -118,13 +118,12 @@ end
 function M:createTimeline()
     local room_idx = self:getScene():get("room_idx")
     local idx = math.random(1, 6)
-    local id = 320000000 + room_idx * 100000 + idx * 1000 + 1
+    local id = idx
     local req = {}
     req.id = id
     req.frame = 0
     self:post("onMsgCreateTimeLine", req)
-    local _, maxFrame = self:find("SCConfig"):getFishTimeline(id)
-    self.mTimeLineIdx = maxFrame
+    self.mTimeLineIdx = 6000
     self.mGroupIdx = self.mTimeLineIdx
     self.mTimeLineIdx = self.mTimeLineIdx + 200
 end

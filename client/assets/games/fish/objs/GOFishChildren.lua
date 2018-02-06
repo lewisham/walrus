@@ -32,6 +32,10 @@ function M:createFishes()
         node:addChild(unit.bg, -1)
         unit.bg:setScale(config.bgscale[i] / 100)
         unit.bg:setPosition(config.offset[i])
+
+        local act = cc.Speed:create(cc.RepeatForever:create(cc.RotateBy:create(3.0, 360)), 1.0)
+        table.insert(self.mFreezeActionList, act)
+        unit.bg:runAction(act)
     end
 end
 
@@ -40,7 +44,9 @@ function M:createFishSprite(id)
     local sp = cc.Sprite:createWithSpriteFrameName(config.fish_res .. "_00.png")
     local strFormat = string.format("%s_%s.png", config.fish_res, "%02d")
     local animation = self:find("SCAction"):createAnimation(strFormat, 3 / 20.2)
-    sp:runAction(cc.RepeatForever:create(cc.Animate:create(animation)))
+    local act = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
+    table.insert(self.mFreezeActionList, act)
+    sp:runAction(act)
     return sp
 end
 

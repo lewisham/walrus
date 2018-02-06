@@ -5,7 +5,6 @@
 ----------------------------------------------------------------------
 
 local MOVE_TAG = 101
-local ANIMATTION_TAG = 200
 
 local M = class("GOFish", u3a.FishObject)
 
@@ -16,6 +15,11 @@ function M:onCreate(id)
     self:setVisible(false)
     self:reset()
     self:getScene():get("fish_layer"):addChild(self, tonumber(self.config.show_layer))
+end
+
+function M:removeFromScreen()
+    self:setVisible(false)
+    self:setAlive(false)
 end
 
 function M:initData(id)
@@ -107,8 +111,6 @@ function M:nextFrame()
         return 
     end
     local pos, angle = self:getPathInfo()
-    self:setAlive(true)
-    self:stopActionByTag(MOVE_TAG)
     local mov = cc.MoveTo:create(0.15, pos)
     mov:setTag(MOVE_TAG)
     self:updateAngle(angle)
@@ -128,14 +130,15 @@ end
 
 -- 帧数都走完
 function M:outOfFrame()
-    self:setVisible(false)
-    self:setAlive(false)
+    self:removeFromScreen()
 end
 
 function M:fadeOut()
     local function callback()
-        self:setVisible(false)
-        self:setAlive(false)
+        for _, sprite in ipairs(self.mFishSpriteList) do
+            sprite:setOpacity(255)
+        end
+        self:removeFromScreen()
     end
     for _, sprite in ipairs(self.mFishSpriteList) do
         sprite:runAction(cc.Sequence:create(cc.FadeOut:create(0.3), cc.CallFunc:create(callback)))
