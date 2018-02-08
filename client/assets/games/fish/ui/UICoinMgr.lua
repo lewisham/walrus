@@ -75,6 +75,7 @@ function M:play(pos, cnt, viewID, score)
 end
 
 function M:playImpl(pos, cnt, viewID, score)
+    u3a.WaitForSeconds(1.0)
     local coord = self:getRowAndColByCount(cnt)
     local gapWidth = 50
     local gapHeight = 60

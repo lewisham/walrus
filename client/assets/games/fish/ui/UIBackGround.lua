@@ -65,4 +65,26 @@ function M:initLayer()
     self:getScene():set("net_layer", layer)
 end
 
+
+function M:shake(interval, times)
+    local pos = cc.p(display.width / 2, display.height / 2)
+    local function move()
+        local function getDirect()
+            return math.random(1, 2) == 2 and -1 or 1
+        end
+        times = times - 1
+        self:stopActionByTag(11200)
+        self:setPosition(pos)
+        local offset = 30/20*times
+        local tarPos = cc.p(math.random(-offset*getDirect(),offset*getDirect()), math.random(-offset*getDirect(),offset*getDirect()))
+        local moveBy = cc.MoveBy:create(interval/2, tarPos);
+        local act = cc.RepeatForever:create(cc.Sequence:create(moveBy, moveBy:reverse()))
+        act:setTag(11200)
+        self:runAction(act)
+        
+    end
+    local act = cc.Repeat:create(cc.Sequence:create(cc.CallFunc:create(move), cc.DelayTime:create(interval)), times)
+    self:runAction(act)
+end
+
 return M

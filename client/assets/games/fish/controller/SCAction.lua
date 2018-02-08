@@ -21,7 +21,7 @@ function M:createAnimation(strFormat, inteval)
     animation = cc.Animation:create()
     self.mAnimationList[strFormat] = animation
     local idx = 0
-    local frameNam, spriteFrame
+    local frameName, spriteFrame
     while true do
         frameName = string.format(strFormat, idx)
         spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName)

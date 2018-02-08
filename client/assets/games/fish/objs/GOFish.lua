@@ -214,7 +214,7 @@ function M:onHit()
     self.hp = self.hp - 1
     if self.hp < 1 then
         self:setAlive(false)
-        self:find("UIEffect"):playFishDead(self)
+        self:find("UIEffect"):playFishDeadEff(self)
     end
 end
 

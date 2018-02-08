@@ -4,18 +4,30 @@
 -- 描述：声音
 ----------------------------------------------------------------------
 
+local PATH = "games/fish/assets/sound/"
+
 local M = class("SCSound", u3a.GameObject)
 
 function M:onCreate()
 
 end
 
+function M:preload(filename)
+    filename = self:fullPath(filename)
+    cc.SimpleAudioEngine:getInstance():preloadEffect(filename)
+end
+
 function M:fullPath(str)
-    return "games/fish/assets/sound/" .. str .. ".mp3"
+    return PATH .. str .. ".mp3"
 end
 
 function M:playSound(filename)
     filename = self:fullPath(filename)
+    cc.SimpleAudioEngine:getInstance():playEffect(filename)
+end
+
+function M:playFishDead(filename)
+    filename = PATH .. filename
     cc.SimpleAudioEngine:getInstance():playEffect(filename)
 end
 

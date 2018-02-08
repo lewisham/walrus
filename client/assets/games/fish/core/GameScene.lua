@@ -35,6 +35,19 @@ function M:autoRequire(dir)
     self:set("lua_path", list)
 end
 
+function M:autoAddSound(dir)
+    if CreateSoundPath then
+        CreateSoundPath(dir)
+    end
+    local pre = string.gsub(dir, "\\", ".")
+    local tb = require(pre .. ".SoundPath")
+    local list = self:get("sound_path") or {}
+    for name, path in pairs(tb) do
+        list[name] = path
+    end
+    self:set("sound_path", list)
+end
+
 function M:getLuaPath(name)
     return self:get("lua_path")[name]
 end

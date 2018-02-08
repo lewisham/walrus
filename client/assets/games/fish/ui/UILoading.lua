@@ -49,6 +49,11 @@ function M:calcLoadRes()
     table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/friend_coin2.plist"})
     table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/game_coin1.plist"})
     table.insert(list, {type = 1, filename = "games/fish/assets/plist/coin/game_coin2.plist"})
+
+    -- 声音资源
+    for key, _ in pairs(self:require("SoundPath")) do
+        table.insert(list, {type = 2, filename = key})
+    end
     return list
 
 end
@@ -60,6 +65,8 @@ function M:play()
     for idx, val in ipairs(list) do
         if val.type == 1 then
             cc.SpriteFrameCache:getInstance():addSpriteFrames(val.filename)
+        elseif val.type == 2 then
+            self:find("SCSound"):preload(val.filename)
         end
         self:updatePercent(idx / total * 100)
         u3a.WaitForFrames(1)

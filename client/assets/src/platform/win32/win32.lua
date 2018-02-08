@@ -43,6 +43,32 @@ function CreateLuaPath(dir)
 	end
 end
 
+function CreateSoundPath(dir)
+    local length = string.len(dir )
+    local workDir = runDosCmd("cd")[1]
+    local tail = ".mp3"
+    local files = {}
+    local refs = {}
+    for _, val in pairs(runDosCmd("dir " .. dir .. " /b/s")) do
+        local path = string.sub(val, #workDir + length + 3)
+        if string.sub(path, -4) == tail then
+            path = string.gsub(path, tail, "")
+            refs[path] = 1
+        end
+    end
+    local str = "local tb = {\n"
+    for k, v in pairs(refs) do
+        local item = string.format("\t[\"%s\"] = \"%s\", \n", k, v)
+        str = str .. item
+    end
+    str = str .."} \n return tb"
+    local f = assert(io.open(dir .. "/SoundPath.lua", "wb"))
+	if f then
+		f:write(str)
+		io.close(f)
+	end
+end
+
 -- 加载本地配置脚本
 if cc.FileUtils:getInstance():isFileExist("src/platform/CustomScript.lua") then
     require("src.platform.CustomScript")
@@ -87,7 +113,7 @@ end
 cc.FileUtils:getInstance():setWritablePath("../../write/")
 
 --LuaDebug配置
-if cc.FileUtils:getInstance():isFileExist("src/platform/win32/LuaDebugjit.lua") then
+if cc.FileUtils:getInstance():isFileExist("src/platform/win32/LuaDebugjit1.lua") then
     local breakInfoFun, xpcallFun = require("src.platform.win32.LuaDebugjit")("localhost", 7003)
-    cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.01, false)
+    cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)
 end
