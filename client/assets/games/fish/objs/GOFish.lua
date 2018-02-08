@@ -18,6 +18,7 @@ function M:onCreate(id)
 end
 
 function M:removeFromScreen()
+    self:setOutOfScreen(true)
     self:setVisible(false)
     self:setAlive(false)
 end
@@ -37,13 +38,14 @@ end
 
 function M:reset()
     self:setRed(false)
-    self.hp = math.random(1, 30)
+    self.hp = math.random(1, 1)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
     self.mCurIdx = 3
     self.mState = u3a.FISH_STATE.normal
     self.mRedIdx = 0
     self.mStopRedCnt = 0
+    self:setScale(1.0)
 end
 
 function M:setPath(path)
@@ -96,6 +98,7 @@ function M:gotoFrame(frame)
         return 
     end
     local pos, angle = self:getPathInfo()
+    self:setOutOfScreen(false)
     self:setAlive(true)
     self:setVisible(true)
     self:setPosition(pos)
@@ -182,7 +185,7 @@ end
 
 -- 动作精灵
 function M:createActionSprite()
-    local sp = cc.Sprite:createWithSpriteFrameName(self.config.fish_res .. "_00.png")
+    local sp = cc.Sprite:create()
     self:addChild(sp)
     local strFormat = string.format("%s_%s.png", self.config.fish_res, "%02d")
     local animation = self:find("SCAction"):createAnimation(strFormat, 3 / 20.2)
@@ -210,8 +213,8 @@ function M:onHit()
     end
     self.hp = self.hp - 1
     if self.hp < 1 then
-        self:outOfFrame()
-        self:find("UICoinMgr"):play(cc.p(self:getPosition()), tonumber(self.config.coin_num), self:getScene():get("view_id"), math.random(10, 100))
+        self:setAlive(false)
+        self:find("UIEffect"):playFishDead(self)
     end
 end
 
@@ -229,15 +232,18 @@ end
 
 function M:onNormal()
     self.mCurIdx = 0
-    for _, action in ipairs(self.mFreezeActionList) do
-        action:setSpeed(1.0)
-    end
+    self:setActionSpeed(1)
 end
 
 function M:onStartFreeze()
     self:stopActionByTag(MOVE_TAG)
+    self:setActionSpeed(0)
+end
+
+-- 设置动作速度
+function M:setActionSpeed(speed)
     for _, action in ipairs(self.mFreezeActionList) do
-        action:setSpeed(0)
+        action:setSpeed(speed)
     end
 end
 

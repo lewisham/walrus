@@ -85,7 +85,7 @@ end
 function M:getFish(id)
     local go = nil
     for _, fish in ipairs(self.mFishList) do
-        if not fish:isAlive() and fish.id == id then
+        if fish:isOutOfScreen() and fish.id == id then
             --print("从池中中创建鱼")
             go = fish
             break

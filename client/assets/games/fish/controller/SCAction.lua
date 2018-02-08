@@ -21,9 +21,10 @@ function M:createAnimation(strFormat, inteval)
     animation = cc.Animation:create()
     self.mAnimationList[strFormat] = animation
     local idx = 0
+    local frameNam, spriteFrame
     while true do
-        local frameName = string.format(strFormat, idx)
-        local spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName)
+        frameName = string.format(strFormat, idx)
+        spriteFrame = cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName)
         if spriteFrame == nil then break end
         animation:addSpriteFrame(spriteFrame)
         idx = idx + 1

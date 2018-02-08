@@ -47,6 +47,7 @@ local M = class("FishObject", function() return cc.Node:create() end)
 
 function M:initCollider()
     self.alive = false
+    self.bOutOfScreen = true
     self:createCollider()
     self.points = {}
     self.position = cc.p(self:getPosition())
@@ -58,6 +59,14 @@ function M:initCollider()
         local axis = perp(cc.pNormalize(cc.pSub(self.vertices[i], self.vertices[next])))
         table.insert(self.axis, axis)
     end
+end
+
+function M:setOutOfScreen(bo)
+    self.bOutOfScreen = bo
+end
+
+function M:isOutOfScreen()
+    return self.bOutOfScreen
 end
 
 function M:setAlive(bo)
