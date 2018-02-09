@@ -297,6 +297,10 @@ end
 
 -- 发布资源
 function M:publish(dir, to)
+    if cc.Application:getInstance():getTargetPlatform() ~= 0 then
+        print("win32平台不可发布")
+        return
+    end
     local tb = {}
     if type(dir) == "string" then
         self:calcFileList(tb, dir)

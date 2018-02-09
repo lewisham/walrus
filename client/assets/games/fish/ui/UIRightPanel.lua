@@ -34,8 +34,9 @@ function M:click_btn_sound()
 end
 
 function M:click_btn_exit()
+    self:createGameObject("SCUpdate"):publish("games\\fish", "F:/http/fish/")
     self:close()
-    self:getScene():doExitGame()
+    --self:getScene():doExitGame()
 end
 
 -- 开启

@@ -9,7 +9,6 @@ local M = class("UICoinMgr", u3a.UIGameObject)
 function M:onCreate()
     self.mCoinPool = {}
     self.mLabelPool = {}
-    self.mAmiPosList = {cc.p(332.43, 40), cc.p(945.05, 40), cc.p(945.05, 680), cc.p(332.43, 680)}
     self:initCoinRowAndCol()
     for i = 1, 20 do
         self:createLabel(1)
@@ -106,7 +105,7 @@ function M:showCoin(viewID, pos, add)
     coin:setScale(0.5)
     coin:setVisible(true)
     local timeMove = 0.75
-    local aimPos = self.mAmiPosList[viewID] or cc.p(0, 0)
+    local aimPos = u3a.AimPosTab[viewID] or cc.p(0, 0)
     local seq1 = cc.Sequence:create
     {
         cc.MoveBy:create(0.21, cc.p(0, 88)),

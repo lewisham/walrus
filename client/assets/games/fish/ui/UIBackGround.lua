@@ -15,6 +15,7 @@ function M:onCreate()
     self:initWave()
     self:initBubble()
     self:initLayer()
+    self:initJoinTips()
 end
 
 -- 水波纹
@@ -85,6 +86,20 @@ function M:shake(interval, times)
     end
     local act = cc.Repeat:create(cc.Sequence:create(cc.CallFunc:create(move), cc.DelayTime:create(interval)), times)
     self:runAction(act)
+end
+
+function M:initJoinTips()
+    self.waiting = {}
+    for i = 1, 4 do
+		self.waiting[i] = cc.Sprite:create(self:fullPath("bg/bl_pic_ddjr.png"))
+    	self.waiting[i]:setPosition(u3a.AimPosTab[i])
+    	self:addChild(self.waiting[i], 100)
+    	self.waiting[i]:runAction(cc.RepeatForever:create(cc.Sequence:create(cc.FadeTo:create(0.8,0),cc.DelayTime:create(0.2),cc.FadeTo:create(0.8,255))))
+	end
+end
+
+function M:showWaiting(viewID, bVisible)
+    self.waiting[viewID]:setVisible(bVisible)
 end
 
 return M

@@ -4,14 +4,6 @@
 -- 描述：炮台
 ----------------------------------------------------------------------
 
-local pos_list = 
-{
-    cc.p(330, 0), 
-    cc.p(display.width - 330, 0), 
-    cc.p(display.width - 330, display.height),
-    cc.p(330, display.height),
-}
-
 local M = class("UICannon", u3a.UIGameObject)
 
 function M:onCreate(viewID)
@@ -41,7 +33,7 @@ function M:reset()
 end
 
 function M:initDir(viewID)
-    self:setPosition(pos_list[viewID])
+    self:setPosition(u3a.CannonPosList[viewID])
     if viewID == 2  then
         self.spr_coin_bg:setPositionX(-self.spr_coin_bg:getPositionX())
         self.fnt_curadd:setPositionX(-self.fnt_curadd:getPositionX())
@@ -136,8 +128,8 @@ function M:updateGun(id)
     id = 930000000 + id
     local config = self:require("cannonoutlook")[tostring(id)]
     self.config = config
-    self.spr_cannon_base:setTexture(self:fullPath("bg/".. config.base_img))
-    self.spr_cannon:setTexture(self:fullPath("bg/".. config.cannon_img))
+    --self.spr_cannon_base:setTexture(self:fullPath("bg/".. config.base_img))
+    self.spr_cannon:setTexture(self:fullPath("plist/bullet/".. config.cannon_img))
 end
 
 function M:updateCoin(coin)

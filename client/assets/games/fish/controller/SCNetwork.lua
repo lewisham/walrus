@@ -20,6 +20,7 @@ end
 
 -- 玩家加入
 function M:onMsgPlayerJoin(player)
+    self:find("UIBackGround"):showWaiting(player.view_id, false)
     self:find("UICannon" .. player.view_id):join(player)
     if player.is_self then
         self:find("UITouch"):setTouchEnabled(true)
