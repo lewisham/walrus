@@ -98,6 +98,7 @@ function M:gotoFrame(frame)
         return 
     end
     local pos, angle = self:getPathInfo()
+    self:setActionSpeed(1)
     self:setOutOfScreen(false)
     self:setAlive(true)
     self:setVisible(true)
@@ -197,7 +198,7 @@ function M:createActionSprite()
     -- 阴影
     local shadow = cc.Sprite:create()
     shadow:setColor(cc.c3b(0, 0, 0))
-    shadow:setOpacity(128)
+    shadow:setOpacity(96)
     shadow:setScale(0.8)
     local act2 = cc.Speed:create(cc.RepeatForever:create(cc.Animate:create(animation)), 1.0)
     table.insert(self.mFreezeActionList, act2)

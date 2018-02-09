@@ -9,6 +9,7 @@ local M = class("DAFish", u3a.GameObject)
 function M:onCreate()
     self:set("bullet_cnts", {0, 0, 0, 0})
     self:set("cannon_rates", {1, 2, 5, 10, 20, 30, 50, 100, 200, 500, 1000})
+    self:set("props", {})
 end
 
 function M:getBulletCnt(viewID)
@@ -37,6 +38,10 @@ function M:getLastRate(cur)
             return tb[key - 1]
         end
     end
+end
+
+function M:getPropCnt(id)
+    return 0
 end
 
 return M

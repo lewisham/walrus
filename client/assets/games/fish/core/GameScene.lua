@@ -182,7 +182,7 @@ function M:wrapGameObject(obj, path, ...)
     obj.mGameScene = self
     obj.__cname = cls.__cname
     self.mGameObjects[name] = obj
-    BindToUI(obj, ret)
+    u3a.BindToUI(obj, ret)
     obj:onCreate(...)
     return obj
 end

@@ -68,6 +68,7 @@ end
 -- 效果2
 function M:deathType2(fish)
     fish:stopAllActions()
+    fish:setActionSpeed(0)
     self:playBlastEff(0, fish.position)
     local function callback()
         fish:setScale(1)
@@ -85,6 +86,7 @@ end
 -- 效果3
 function M:deathType3(fish)
     fish:stopAllActions()
+    fish:setActionSpeed(0)
     self:playBlastEff(0, fish.position)
     self:playBlastCoinEff(0.2, fish.position)
     local function callback()
@@ -104,6 +106,7 @@ end
 function M:deathType4(fish)
     local delay = 1.2
     fish:stopAllActions()
+    fish:setActionSpeed(0)
     self:playBlastEff(0, fish.position)
     self:playBlastCoinEff(0.2, fish.position)
     self:playBlastCoinEff(0, fish.position)
