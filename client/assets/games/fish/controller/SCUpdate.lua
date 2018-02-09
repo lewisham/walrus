@@ -70,7 +70,7 @@ end
 
 -- 执行逻辑
 function M:play(url)
-    if cc.Application:getInstance():getTargetPlatform() ~= 0 then
+    if cc.Application:getInstance():getTargetPlatform() == 0 then
         print("win32平台不自动更新")
         return
     end
