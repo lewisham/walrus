@@ -52,7 +52,6 @@ end
 
 function M:play()
     self:createGameObject("SCUpdate"):play("http://192.168.67.132/fish/")
-    --self:createGameObject("SCUpdate"):publish("games\\fish", "F:/http/fish/")
     self:createGameObject("UILoading"):play()
     self:createGameObject("UIBackGround")
     self:createGameObject("UIEffect")

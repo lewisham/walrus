@@ -1,4 +1,5 @@
 1,b93b76dde24f43cb3ef9784108fc20de,games/fish/AutoPath.lua,2616
+1,3568e9729633374900b21b7c1b91b3f7,games/fish/CheckFileList.txt,47408
 1,98cc4c8e75e07a181de0a3fecdab4fde,games/fish/fish_client.lua,1099
 1,1e89e1e3bfd9461cc5bd66b9d4ace5b3,games/fish/ISever.lua,4635
 1,b02f7f307bac3727f919302ea0bac576,games/fish/SFish.lua,2465
@@ -506,7 +507,7 @@
 1,d81a6fdd13fe56b9b774c68764333482,games/fish/controller/SCNetwork.lua,1264
 1,4351c6cf573662cbc27a145235addae4,games/fish/controller/SCPool.lua,6220
 1,ee2163670a471d1b13299511098665d6,games/fish/controller/SCSound.lua,966
-1,9ddf8d8c82a2f2638603379dc18dd57f,games/fish/controller/SCUpdate.lua,9301
+1,b19d1431733d9c32b22dc17f1328b603,games/fish/controller/SCUpdate.lua,9303
 1,b529830461b72dddcd0deda2f51e0c6a,games/fish/core/Coroutine.lua,2141
 1,efa7f97397e5a013ea0a389e6cb39c24,games/fish/core/FishObject.lua,4111
 1,4e5ff41db7f08da547929fefe119c034,games/fish/core/GameObject.lua,2817

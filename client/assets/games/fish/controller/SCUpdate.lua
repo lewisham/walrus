@@ -70,6 +70,10 @@ end
 
 -- 执行逻辑
 function M:play(url)
+    if cc.Application:getInstance():getTargetPlatform() == 0 then
+        print("win32平台不自动更新")
+        return
+    end
     local downLoadDir = cc.FileUtils:getInstance():getWritablePath()
     if url == nil then return end
     print(url)
@@ -260,7 +264,7 @@ end
 
 -- 刷新提示
 function M:refreshTips(str)
-    Log(str)
+    --Log(str)
     do return end
     self:find("UIAutoUpdate"):refreshTips(str)
 end
