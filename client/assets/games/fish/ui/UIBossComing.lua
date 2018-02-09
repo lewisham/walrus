@@ -16,12 +16,17 @@ function M:onCreate()
     self:setVisible(false)
 end
 
-function M:play(name, rate)
+function M:play(id, rate)
+    id = id - 100000000
+    local filename = string.format("ui/images/bosscome/title_pic_%d.png", id)
+    self.spr_bosscome:setSpriteFrame(self:fullPath(filename))
+    self:find("SCSound"):playSound("bossalert_01")
+    self:find("SCSound"):playMusic("music_bosscome")
     self:setVisible(true)
     local function callback()
         u3a.SafeRemoveNode(self)
     end
-    --self.mTimelineAction:setLastFrameCallFunc(function() self:setVisible(false) end)
+    self.fnt_Rate:setString(rate)
     self.mTimelineAction:gotoFrameAndPlay(0)
     self:callAfter(150 / 60.0, callback)
 end

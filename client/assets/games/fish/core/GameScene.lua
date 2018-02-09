@@ -102,17 +102,18 @@ function M:createRoot()
     widget:setPosition(0, 0)
     widget:setAnchorPoint(0, 0)
     local function update(dt)
-        self:onUpdate(dt)
+        u3a.TimeDelta = dt
+        self:onUpdate()
     end
     widget:scheduleUpdateWithPriorityLua(update, 0)
     self.mRoot = widget
 end
 
-function M:onUpdate(dt)
+function M:onUpdate()
     -- 清除无用的对象
     for key, obj in pairs(self.mGameObjects) do
         if u3a.IsObjectAlive(obj) then
-            u3a.Invoke(obj, "onUpdate", dt)
+            u3a.Invoke(obj, "onUpdate")
         else
             self.mGameObjects[key] = nil
         end

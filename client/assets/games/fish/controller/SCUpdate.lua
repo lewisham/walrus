@@ -70,10 +70,11 @@ end
 
 -- 执行逻辑
 function M:play(url)
-    if cc.Application:getInstance():getTargetPlatform() == 0 then
+    if cc.Application:getInstance():getTargetPlatform() ~= 0 then
         print("win32平台不自动更新")
         return
     end
+    self:createGameObject("UILocalUpdate")
     local downLoadDir = cc.FileUtils:getInstance():getWritablePath()
     if url == nil then return end
     print(url)
@@ -264,18 +265,17 @@ end
 
 -- 刷新提示
 function M:refreshTips(str)
-    --Log(str)
-    do return end
-    self:find("UIAutoUpdate"):refreshTips(str)
+    local go = self:find("UILocalUpdate")
+    if not go then return end
+    go:updateString(str)
 end
 
 -- 刷新百分比
 function M:refreshPercent()
-    do return end
-    local go = self:find("UIAutoUpdate")
+    local go = self:find("UILocalUpdate")
     if not go then return end
     local percent = math.floor(self:get("update_cnt") / self:get("total_update_cnt") * 100)
-    go:refreshPercent(percent)
+    go:updatePercent(percent)
 end
 
 function M:calcFileList(tb, dir)

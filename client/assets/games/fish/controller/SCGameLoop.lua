@@ -10,6 +10,12 @@ function M:onCreate()
     self:set("freeze", false)
 end
 
+function M:onUpdate1()
+    if u3a.TimeDelta > 0.02 then
+        print(u3a.TimeDelta)
+    end
+end
+
 function M:startUpdate()
     self:startUpdateFrame()
     u3a.WaitForFrames(1)

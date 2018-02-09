@@ -45,7 +45,7 @@ function M:doBossWarnning(fish)
     local config = fish.config
     local trace_type = tonumber(fish.config.trace_type)
     if trace_type ~= 5 and trace_type ~= 10 then return end
-    self:createGameObject("UIBossComing"):play()
+    self:createGameObject("UIBossComing"):play(fish.config.id, tonumber(fish.config.score))
 end
 
 return M

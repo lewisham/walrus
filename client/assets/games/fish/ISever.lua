@@ -26,7 +26,7 @@ function M:test()
     local tb = {}
     local viewID = self:getScene():get("view_id")
     table.insert(tb, viewID)
-    for i = 1, 0 do
+    for i = 1, 3 do
         if viewID ~= i then
             table.insert(tb, i)
         end

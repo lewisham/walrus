@@ -1,5 +1,6 @@
 local tb = {
 	["UIGunChange"] = "games.fish.ui.UIGunChange", 
+	["UILocalUpdate"] = "games.fish.ui.UILocalUpdate", 
 	["GOFish"] = "games.fish.objs.GOFish", 
 	["FishObject"] = "games.fish.core.FishObject", 
 	["UISkillIcon"] = "games.fish.ui.UISkillIcon", 

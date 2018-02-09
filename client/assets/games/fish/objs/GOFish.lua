@@ -21,6 +21,9 @@ function M:removeFromScreen()
     self:setOutOfScreen(true)
     self:setVisible(false)
     self:setAlive(false)
+    local trace_type = tonumber(self.config.trace_type)
+    if trace_type ~= 5 and trace_type ~= 10 then return end
+    self:find("SCSound"):playMusic("music_00" .. self:getScene():get("room_idx"))
 end
 
 function M:initData(id)
@@ -43,8 +46,6 @@ function M:reset()
     self.frameIdx = 1
     self.mCurIdx = 3
     self.mState = u3a.FISH_STATE.normal
-    self.mRedIdx = 0
-    self.mStopRedCnt = 0
     self:setScale(1.0)
 end
 
@@ -61,20 +62,6 @@ function M:updateFrame()
         self:nextFrame()
     end
     self:updateShadowPos()
-    self:updateRed()
-end
-
-function M:updateRed()
-    if self.mStopRedCnt > 0 then
-        self.mStopRedCnt = self.mStopRedCnt - 1
-    end
-    if self.mRedIdx > 0 then
-        self.mRedIdx = self.mRedIdx - 1
-        self.mStopRedCnt = 12
-        self:setRed(true)
-    else
-        self:setRed(false)
-    end
 end
 
 function M:setRed(bo)
@@ -208,10 +195,6 @@ function M:createActionSprite()
 end
 
 function M:onHit()
-    if self.mStopRedCnt == 0 then
-        self.mStopRedCnt = 12
-        self.mRedIdx = 8
-    end
     self.hp = self.hp - 1
     if self.hp < 1 then
         self:setAlive(false)

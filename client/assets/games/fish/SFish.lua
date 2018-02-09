@@ -14,7 +14,6 @@ end
 function M:initConfig()
     rawset(_G, "u3a", self:require("u3a"))
     self:require("FishDef")
-    self:set("assets_path", "games/fish/assets/")
     -- 显示配置
     --rawset(_G, "TEST_COUNT", 0)
     --cc.Director:getInstance():setDisplayStats(true)
@@ -47,7 +46,9 @@ function M:initResolution()
 end
 
 function M:run()
+    math.randomseed(os.clock())
     self:initResolution()
+    self:set("assets_path", "games/fish/assets/")
     self:coroutine(self, "play")
 end
 

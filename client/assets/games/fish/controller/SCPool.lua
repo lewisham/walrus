@@ -93,6 +93,10 @@ function M:getFish(id)
     end
     if go == nil then
         local config = self:find("SCConfig"):get("fish")[id]
+        if config == nil then
+            printError(id)
+            return
+        end
         if tonumber(config.trace_type) == 4 or tonumber(config.trace_type) == 8 then
             go = self:createUnnameObject("GOFishChildren", id)
         else
@@ -107,6 +111,7 @@ end
 function M:createFish(id, pathID, frame, offset)
     offset = offset or cc.p(0, 0)
     local go = self:getFish(id)
+    if go == nil then return end
     go:reset()
     go:setOffsetPos(offset)
     local path = self:find("SCConfig"):get("path")[pathID]
