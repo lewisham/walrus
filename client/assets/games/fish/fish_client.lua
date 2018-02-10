@@ -5,7 +5,12 @@ u3a.GameObject = require("games.fish.core.GameObject")
 u3a.UIGameObject = require("games.fish.core.UIGameObject")
 u3a.FishObject = require("games.fish.core.FishObject")
 
-local scene = require("games.fish.SFish").new()
+local launcherFile = "games.fish.SFish"
+if OLD_FISH_TEST then
+    launcherFile = "games.fish.SFishTest"
+end
+
+local scene = require(launcherFile).new()
 scene:createRoot()
 scene:createAutoPath()
 scene:onCreate()

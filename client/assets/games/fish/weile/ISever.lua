@@ -11,8 +11,8 @@ function M:onCreate()
     self.mTimeLineIdx = 0
     self.mGroupIdx = 600
     self.mPlayerList = {}
-    --self:coroutine(self, "play")
-    --self:coroutine(self, "updatePlayer")
+    self:coroutine(self, "play")
+    self:coroutine(self, "updatePlayer")
     self:test()
 end
 

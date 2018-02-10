@@ -10,7 +10,7 @@ function M:onCreate()
     self:set("freeze", false)
 end
 
-function M:onUpdate()
+function M:onUpdate1()
     if u3a.TimeDelta > 0.018 then
         print(u3a.TimeDelta)
     end

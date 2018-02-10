@@ -147,7 +147,6 @@ function M:sat(go)
 end
 
 function M:moveTo(pos, duration)
-    do return end
     local mov = cc.MoveTo:create(duration, pos)
     mov:setTag(MOVE_TAG)
     self:runAction(mov)

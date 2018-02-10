@@ -9,7 +9,7 @@ local M = class("GameScene", require("games.fish.core.LuaObject"))
 -- 构造函数
 function M:ctor()
     M.super.ctor(self)
-    self.mRootZorder = 0
+    self.mRootZorder = 1000
     self.mGameObjects = {}
     self.mUniqueObjects = {}
     self.mLayers = {}
@@ -77,7 +77,6 @@ function M:destroy()
 		u3a.Invoke(obj, "releaseLuaObject")
 	end
     self:releaseLuaObject()
-    self:get("GameApp"):removeScene(self.__cname)
 end
 
 function M:getGameApp()

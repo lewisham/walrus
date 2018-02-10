@@ -4,7 +4,7 @@ function _M:init(protoString)
 
     -- 名称到类型映射
     self.nameToTypes = {}
-    print(protoString)
+    --print(protoString)
     -- id到类型映射，注意id为字符串
     self.idToTypes = {}
     for typeName, typeId, typeContent in string.gmatch(protoString, "(%a+[%a%d]*)%s*=%s*(%d+)%s*;?[^%c]*%c([^}]*)}") do
@@ -39,8 +39,6 @@ function _M:init(protoString)
         self.nameToTypes[typeName] = jmsgType
         self.idToTypes[typeId] = jmsgType
     end
-
-    dump(_M)
 end
 
 local function getIntPart(x)
