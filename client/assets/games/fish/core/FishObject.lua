@@ -43,6 +43,8 @@ local function project(tb, points, axis)
     tb[2] = max
 end
 
+local MOVE_TAG = 101
+
 local M = class("FishObject", function() return cc.Node:create() end)
 
 function M:initCollider()
@@ -142,6 +144,17 @@ function M:sat(go)
 		if not overlap() then return false end
     end
 	return true
+end
+
+function M:moveTo(pos, duration)
+    do return end
+    local mov = cc.MoveTo:create(duration, pos)
+    mov:setTag(MOVE_TAG)
+    self:runAction(mov)
+end
+
+function M:stopMove()
+    self:stopActionByTag(MOVE_TAG)
 end
 
 function M:onCollsion()

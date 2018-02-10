@@ -4,8 +4,6 @@
 -- 描述：鱼对象
 ----------------------------------------------------------------------
 
-local MOVE_TAG = 101
-
 local M = class("GOFish", u3a.FishObject)
 
 function M:onCreate(id)
@@ -44,6 +42,7 @@ function M:reset()
     self.hp = math.random(1, 10)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
+    self.totalFrame = 0
     self.mCurIdx = 3
     self.mState = u3a.FISH_STATE.normal
     self:setScale(1.0)
@@ -52,6 +51,7 @@ end
 function M:setPath(path)
     self.path = path
     self.frameIdx = 1
+    self.totalFrame = #path
     self.mCurIdx = 3
 end
 
@@ -97,15 +97,13 @@ end
 -- 下一帧
 function M:nextFrame()
     self.frameIdx = self.frameIdx + 1
-    if self.path[self.frameIdx] == nil then 
+    if self.frameIdx > self.totalFrame then 
         self:outOfFrame()
         return 
     end
     local pos, angle = self:getPathInfo()
-    local mov = cc.MoveTo:create(0.15, pos)
-    mov:setTag(MOVE_TAG)
     self:updateAngle(angle)
-    self:runAction(mov)
+    self:moveTo(pos, 0.15)
 end
 
 function M:getPathInfo()
@@ -221,7 +219,7 @@ function M:onNormal()
 end
 
 function M:onStartFreeze()
-    self:stopActionByTag(MOVE_TAG)
+    self:stopMove()
     self:setActionSpeed(0)
 end
 

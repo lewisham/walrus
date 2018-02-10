@@ -11,8 +11,8 @@ function M:onCreate()
     self.mTimeLineIdx = 0
     self.mGroupIdx = 600
     self.mPlayerList = {}
-    self:coroutine(self, "play")
-    self:coroutine(self, "updatePlayer")
+    --self:coroutine(self, "play")
+    --self:coroutine(self, "updatePlayer")
     self:test()
 end
 
@@ -26,7 +26,7 @@ function M:test()
     local tb = {}
     local viewID = self:getScene():get("view_id")
     table.insert(tb, viewID)
-    for i = 1, 3 do
+    for i = 1, 0 do
         if viewID ~= i then
             table.insert(tb, i)
         end

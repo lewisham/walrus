@@ -4,12 +4,26 @@
 -- 描述：Animation管理器
 ----------------------------------------------------------------------
 
+local function moveTo(go, dt)
+
+end
+
 local M = class("SCAction", u3a.GameObject)
 
 function M:onCreate()
     self.mAnimationList = {}
     self.mRetainActions = {}
     self:set("shader_list", {})
+end
+
+function M:onUpdate1()
+    local dt = u3a.TimeDelta
+     -- 更新鱼
+     for _, fish in ipairs(go.mFishList) do
+        if fish.alive then
+            moveTo(fish, dt)
+        end
+    end
 end
 
 function M:createAnimation(strFormat, inteval)
