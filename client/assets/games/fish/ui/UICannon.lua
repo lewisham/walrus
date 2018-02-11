@@ -104,17 +104,12 @@ function M:updateAngle(angle)
     self.node_gun:setRotation(-angle + 90)
 end
 
-function M:join(info)
+function M:join(is_self)
     self:reset()
     self:setVisible(true)
-    self:updateGun(info.gun_id)
-    self:find("SCPool"):createBulletPool(self.config.id)
-    self.fnt_multiple:setString(info.gun_rate)
-    self.fnt_coins:setString(info.coin)
-    self.fnt_diamonds:setString(info.diamonds)
     self.spr_coin_bg:setVisible(true)
-    self.is_self = info.is_self
-    if not info.is_self then return end
+    self.is_self = is_self
+    if not is_self then return end
     self.panel_1:setTouchEnabled(true)
     self.panel_1:onClicked(function() self:click_panel() end)
     self.btn_minus:setVisible(true)

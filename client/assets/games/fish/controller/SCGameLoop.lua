@@ -16,6 +16,16 @@ function M:onUpdate1()
     end
 end
 
+function M:releaseLuaObject()
+    M.super.releaseLuaObject(self)
+    if self.mSchedulerUpdateFrame then
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.mSchedulerUpdateFrame)
+    end
+    if self.mSchedulerCollsion then
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.mSchedulerCollsion)
+    end
+end
+
 function M:startUpdate()
     self:startUpdateFrame()
     u3a.WaitForFrames(1)
@@ -25,18 +35,18 @@ end
 function M:startUpdateFrame()
     local scheduler = cc.Director:getInstance():getScheduler()
     if TEST_COUNT then
-        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrameTest() end, 0.05, false)
+        self.mSchedulerUpdateFrame = scheduler:scheduleScriptFunc(function() self:updateFrameTest() end, 0.05, false)
     else
-        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateFrame() end, 0.05, false)
+        self.mSchedulerUpdateFrame = scheduler:scheduleScriptFunc(function() self:updateFrame() end, 0.05, false)
     end
 end
 
 function M:startCollsion()
     local scheduler = cc.Director:getInstance():getScheduler()
     if TEST_COUNT then
-        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsionTest() end, 0.09, false)
+        self.mSchedulerCollsion = scheduler:scheduleScriptFunc(function() self:updateCollsionTest() end, 0.09, false)
     else
-        self.mSchedulerId = scheduler:scheduleScriptFunc(function() self:updateCollsion() end, 0.09, false)
+        self.mSchedulerCollsion = scheduler:scheduleScriptFunc(function() self:updateCollsion() end, 0.09, false)
     end
 end
 

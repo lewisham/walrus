@@ -211,5 +211,12 @@ function M:rename(go, name)
     end
 end
 
+function M:doExitGame(reason)
+    self:coroutine(self, "doExitGameImpl", reason)
+end
+
+function M:doExitGameImpl(reason)
+end
+
 return M
 

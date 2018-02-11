@@ -116,7 +116,6 @@ function M:updateFrame()
 end
 
 function M:createTimeline()
-    local room_idx = self:getScene():get("room_idx")
     local idx = math.random(1, 6)
     local id = idx
     local req = {}

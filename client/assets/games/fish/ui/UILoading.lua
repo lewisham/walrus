@@ -72,7 +72,7 @@ function M:play()
         u3a.WaitForFrames(1)
     end
     u3a.WaitForSeconds(0.1)
-    self:find("SCSound"):playMusic("music_00" .. self:getScene():get("room_idx"))
+    self:find("SCSound"):playMusic("music_00" .. u3a.RoomIdx)
 end
 
 function M:updatePercent(per)

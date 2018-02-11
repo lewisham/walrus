@@ -21,7 +21,14 @@ end
 -- 玩家加入
 function M:onMsgPlayerJoin(player)
     self:find("UIBackGround"):showWaiting(player.view_id, false)
-    self:find("UICannon" .. player.view_id):join(player)
+    local cannon = self:find("UICannon" .. player.view_id)
+    cannon:join(player.is_self)
+    cannon:updateGun(player.gun_id)
+    self:find("SCPool"):createBulletPool(cannon.config.id)
+    cannon.fnt_multiple:setString(player.gun_rate)
+    cannon.fnt_coins:setString(player.coin)
+    cannon.fnt_diamonds:setString(player.diamonds)
+
     if player.is_self then
         self:find("UITouch"):setTouchEnabled(true)
     end

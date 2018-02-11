@@ -178,9 +178,8 @@ end
 
 -- 创建时间线
 function M:createTimeLine(idx, frame, bServer)
-    local room_idx = self:getScene():get("room_idx")
     local sever = bServer and 90000 or 0
-    local id = 320000000 + room_idx * 100000 + idx * 1000 + sever
+    local id = 320000000 + u3a.RoomIdx * 100000 + idx * 1000 + sever
     local go = self:createUnnameObject("GOFishTimeLine", id)
     go:gotoFrame(frame)
     table.insert(self.mTimeLineList, go)

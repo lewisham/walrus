@@ -7,8 +7,7 @@
 local M = class("UIBackGround", u3a.UIGameObject)
 
 function M:onCreate()
-    local idx = self:getScene():get("room_idx")
-    local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", idx)))
+    local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", u3a.RoomIdx)))
     self:addChild(sprite)
     sprite:setPosition(display.width / 2, display.height / 2)
     sprite:setScale(display.height / 720)

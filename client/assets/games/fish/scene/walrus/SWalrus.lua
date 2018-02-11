@@ -21,7 +21,6 @@ function M:initConfig()
     self:set("enable_fps", true) -- 显示帧速
     self:set("flip", false)
     -- 游戏数据
-    self:set("room_idx", 2)
     self:set("view_id", 1)
     self:set("auto_fire", false)
 end

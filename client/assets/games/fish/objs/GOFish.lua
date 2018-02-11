@@ -21,7 +21,7 @@ function M:removeFromScreen()
     self:setAlive(false)
     local trace_type = tonumber(self.config.trace_type)
     if trace_type ~= 5 and trace_type ~= 10 then return end
-    self:find("SCSound"):playMusic("music_00" .. self:getScene():get("room_idx"))
+    self:find("SCSound"):playMusic("music_00" .. u3a.RoomIdx)
 end
 
 function M:initData(id)
