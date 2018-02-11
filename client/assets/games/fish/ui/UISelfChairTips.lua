@@ -14,7 +14,7 @@ end
 function M:play()
     self.Node_1:setVisible(true)
     self:find("UIGunChange"):open()
-    local pos = cc.p(self:find("UICannon" .. self:getScene():get("view_id")):getPosition())
+    local pos = cc.p(self:find("UICannon" .. u3a.SelfViewID):getPosition())
     self.Node_1:setPosition(pos.x, pos.y + 180)
     local tb =
     {

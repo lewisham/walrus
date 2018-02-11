@@ -8,7 +8,7 @@ local M = class("UIGunChange", u3a.UIGameObject)
 
 function M:onCreate(viewID)
     self:loadCsb(self:fullPath("ui/uigunchange.csb"))
-    local cannon = self:find("UICannon" .. self:getScene():get("view_id"))
+    local cannon = self:find("UICannon" .. u3a.SelfViewID)
     self:setPosition(cannon:convertToWorldSpaceAR(cc.p(0, 62)))
     self:setVisible(false)
 end

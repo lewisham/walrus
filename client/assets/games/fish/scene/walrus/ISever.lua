@@ -24,7 +24,7 @@ function M:test()
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}
-    local viewID = self:getScene():get("view_id")
+    local viewID = u3a.SelfViewID
     table.insert(tb, viewID)
     for i = 1, 0 do
         if viewID ~= i then

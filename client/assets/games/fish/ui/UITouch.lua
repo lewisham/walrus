@@ -45,7 +45,7 @@ function M:onTouchEnded()
 end
 
 function M:updateAngle()
-    local viewID = self:getScene():get("view_id")
+    local viewID = u3a.SelfViewID
     local cannon = self:find("UICannon" .. viewID)
     local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
     local angle = math.atan2(vec.y, vec.x) * 180 / math.pi
@@ -53,7 +53,7 @@ function M:updateAngle()
 end
 
 function M:launcher()
-    local viewID = self:getScene():get("view_id")
+    local viewID = u3a.SelfViewID
     if self:find("DAFish"):getBulletCnt(viewID) >= u3a.MAX_BULLET_CNT then
         self:toast("屏幕上子弹太多")
         return

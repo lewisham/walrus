@@ -1,6 +1,8 @@
 u3a.MAX_BULLET_CNT = 25
 u3a.BULLET_LANCHER_INTERVAL = 0.2
 
+u3a.PlayerFlip = false
+
 -- 鱼的状态
 u3a.FISH_STATE =
 {

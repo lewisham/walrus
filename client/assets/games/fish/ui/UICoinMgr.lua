@@ -99,7 +99,7 @@ end
 
 -- 显示金币
 function M:showCoin(viewID, pos, add)
-    local idx = self:getScene():get("view_id") == viewID and 1 or 2
+    local idx = u3a.SelfViewID == viewID and 1 or 2
     local coin = self:getCoin(idx)
     coin:setPosition(pos)
     coin:setScale(0.5)
@@ -127,7 +127,7 @@ end
 
 -- 显示字体
 function M:showLabel(viewID, pos, score)
-    local idx = self:getScene():get("view_id") == viewID and 1 or 2
+    local idx = u3a.SelfViewID == viewID and 1 or 2
     local label = self:getLabel(idx)
     label:setPosition(pos)
     label:setVisible(false)
@@ -151,7 +151,7 @@ function M:getRowAndColByCount(cnt)
 end
 
 function M:updateCoin(viewID, add)
-    self:find("UICannon" .. viewID):modify(add)
+    self:find("UICannon" .. viewID):modifyCoin(add)
 end
 
 return M

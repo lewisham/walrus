@@ -96,6 +96,7 @@ function M:playFireAni()
     self.spr_cannon:stopAllActions()
     local act = cc.Sequence:create(cc.ScaleTo:create(0.05, 1, 0.8), cc.ScaleTo:create(0.05, 1, 1))
     self.spr_cannon:runAction(act)
+    self.spr_gunfire:stopAllActions()
     self.spr_gunfire:runAction(self.gunFireAction)
 end
 
@@ -123,7 +124,6 @@ function M:updateGun(id)
     id = 930000000 + id
     local config = self:require("cannonoutlook")[tostring(id)]
     self.config = config
-    --self.spr_cannon_base:setTexture(self:fullPath("bg/".. config.base_img))
     self.spr_cannon:setTexture(self:fullPath("plist/bullet/".. config.cannon_img))
 end
 
@@ -131,7 +131,7 @@ function M:updateCoin(coin)
     self.fnt_coins:setString(coin)
 end
 
-function M:modify(add)
+function M:modifyCoin(add)
     local cur = tonumber(self.fnt_coins:getString()) or 0
     cur = cur + add
     self.fnt_coins:setString(cur)

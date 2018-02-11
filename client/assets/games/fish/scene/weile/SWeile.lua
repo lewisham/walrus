@@ -19,9 +19,7 @@ function M:initConfig()
     --cc.Director:getInstance():setDisplayStats(true)
     --self:set("enble_collider", true) -- 显示碰撞区
     self:set("enable_fps", true) -- 显示帧速
-    self:set("flip", false)
     -- 游戏数据
-    self:set("view_id", 1)
     self:set("auto_fire", false)
 end
 
@@ -95,6 +93,7 @@ function M:play()
     self:find("UILoading"):removeFromScene()
     self:find("SCPool"):createFishPool()
     u3a.WaitForFrames(2)
+    self:find("SCGameClient"):set("start_process", true)
     self:find("SCGameLoop"):startUpdate()
     self:find("UISelfChairTips"):play()
 end

@@ -109,7 +109,7 @@ end
 function M:getPathInfo()
     local unit = self.path[self.frameIdx]
     local pos = cc.pAdd(self.mPathOffset, unit.pos)
-    if not self:getScene():get("flip") then 
+    if not u3a.PlayerFlip then 
         return pos, unit.angle
     end
     pos.x = display.width - pos.x

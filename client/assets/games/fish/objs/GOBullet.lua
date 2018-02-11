@@ -22,7 +22,7 @@ function M:onCreate(id)
 end
 
 function M:resetBullet(viewID)
-    self.mbSelf = self:getScene():get("view_id") == viewID  -- 是否是自己的子弹
+    self.mbSelf = u3a.SelfViewID == viewID  -- 是否是自己的子弹
     self.mViewID = viewID
     self.mbFollow = false
     self.mFollowFish = nil
