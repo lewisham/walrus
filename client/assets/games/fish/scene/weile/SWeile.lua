@@ -1,10 +1,10 @@
 ----------------------------------------------------------------------
 -- 作者：lewis
 -- 日期：2016-3-31
--- 描述：捕鱼旧版测试 
+-- 描述：微乐捕鱼
 ----------------------------------------------------------------------
 
-local M = class("SFishTest", u3a.GameScene)
+local M = class("SWeile", u3a.GameScene)
 
 function M:createAutoPath()
     self:autoAddSound("games\\fish\\assets\\sound")

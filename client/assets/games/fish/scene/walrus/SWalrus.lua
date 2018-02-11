@@ -4,7 +4,7 @@
 -- 描述：捕鱼
 ----------------------------------------------------------------------
 
-local M = class("SFish", u3a.GameScene)
+local M = class("SWalrus", u3a.GameScene)
 
 function M:createAutoPath()
     self:autoAddSound("games\\fish\\assets\\sound")
