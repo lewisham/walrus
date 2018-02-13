@@ -71,7 +71,7 @@ function M:onPlayerJoin(player, isSelf)
     local data = {}
     local wChairID = player.chairid + 1
     local viewID = wChairID
-    if isSelf and viewID >= 2 then
+    if isSelf and viewID > 2 then
         u3a.PlayerFlip = true
     end
     if u3a.PlayerFlip then
@@ -116,10 +116,6 @@ end
 -------------------------------------
 -- 网络消息处理
 -------------------------------------
-
--------------------------------------
--- 网络消息处理
--------------------------------------
 function M:doHandleMsg(id, resp)
     resp = clone(resp)
     if id == "MSGS2CGameStatus" then
@@ -127,13 +123,13 @@ function M:doHandleMsg(id, resp)
         return
     end
     if not self:get("start_process") then return end
-    print(id)
     u3a.Invoke(self, id, resp)
 end
 
 -- 进入游戏初始化
 function M:MSGS2CGameStatus(resp)
     --Log(resp)
+    Log(resp.killedFishes)
     for _, val in pairs(resp.playerInfos) do
         self:MSGS2CPlayerJion(val)
     end
@@ -141,7 +137,7 @@ function M:MSGS2CGameStatus(resp)
     self:find("SCPool"):createTimeLine(resp.timelineIndex, resp.frameId, true)
 end
 
--- 玩家加入
+-- 玩家加入 
 function M:MSGS2CPlayerJion(resp)
     local player = self.mPlayerList[resp.playerId]
     if player == nil then return end
@@ -164,12 +160,11 @@ end
 
 -- 心跳包
 function M:MSGS2CHeartBeat(resp)
-    --Log(resp)
+    self:find("SCGameLoop").mServerFrame = resp.frameCount
 end
 
 -- 玩家射击
 function M:MSGS2CPlayerShoot(resp)
-    --Log(resp)
     local player = self.mPlayerList[resp.playerId]
     if player == nil then return end
     local cannon = self:find("UICannon" .. player.view_id)
@@ -181,6 +176,12 @@ end
 -- 击中鱼
 function M:MSGS2CPlayerHit(resp)
     --Log(resp)
+    local player = self.mPlayerList[resp.playerId]
+    if player == nil then return end
+    local go = self:find("SCPool")
+    for _, val in ipairs(resp.killedFishes) do
+        go:killFish(player.view_id, val.timelineId, val.fishArrayId)
+    end
 end
 
 return M

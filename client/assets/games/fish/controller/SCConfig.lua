@@ -97,6 +97,7 @@ function M:getFishTimeline(id)
         local unit = tb[frame]
         if unit == nil then
             unit = {}
+            unit.id = tonumber(config.id)
             unit.frame = frame
             unit.fishes = {}
             tb[frame] = unit

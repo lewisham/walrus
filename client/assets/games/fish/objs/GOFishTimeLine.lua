@@ -15,10 +15,28 @@ end
 
 function M:gotoFrame(frame)
     self:setAlive(true)
-    self.mCurFrame = frame
+    self.mCurFrame = 0
     self.mMaxFrame = 0
     self.mFishData, self.mMaxFrame = self:find("SCConfig"):getFishTimeline(self.mStartID)
-    self:doFrame()
+    local args = {}
+    local unit
+    while self.mCurFrame < frame do
+        self.mCurFrame = self.mCurFrame + 1
+        unit = self.mFishData[self.mCurFrame]
+        if unit then
+            for _, val in ipairs(unit.fishes) do
+                if val[1] == "100" then
+                    --self:find("SCPool"):createFishArray(val[2], 1)
+                else
+                    args.id = val[1]
+                    args.path_id = tostring(val[2] +300000000)
+                    args.cur_frame = frame - self.mCurFrame
+                    args.timeline_id = unit.id
+                    self:find("SCPool"):createFish(args)
+                end
+            end
+        end
+    end
 end
 
 function M:updateFrame()
@@ -30,11 +48,15 @@ end
 function M:doFrame()
     local unit = self.mFishData[self.mCurFrame]
     if unit == nil then return end
+    local args = {}
     for _, val in ipairs(unit.fishes) do
         if val[1] == "100" then
             self:find("SCPool"):createFishArray(val[2], 1)
         else
-            local fish = self:find("SCPool"):createFish(val[1], tostring(val[2] +300000000), 1)
+            args.id = val[1]
+            args.path_id = tostring(val[2] +300000000)
+            args.cur_frame = 1
+            local fish = self:find("SCPool"):createFish(args)
             self:doBossWarnning(fish)
         end
     end

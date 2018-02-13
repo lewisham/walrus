@@ -108,15 +108,16 @@ function M:getFish(id)
 end
 
 -- 创建鱼
-function M:createFish(id, pathID, frame, offset)
-    offset = offset or cc.p(0, 0)
-    local go = self:getFish(id)
+function M:createFish(args)
+    local go = self:getFish(args.id)
     if go == nil then return end
     go:reset()
-    go:setOffsetPos(offset)
-    local path = self:find("SCConfig"):get("path")[pathID]
+    go.timelineID = args.timeline_id
+    go.fishArrayID = args.fishArrayID
+    go:setOffsetPos(args.offset)
+    local path = self:find("SCConfig"):get("path")[args.path_id]
     go:setPath(path)
-    go:gotoFrame(frame)
+    go:gotoFrame(args.cur_frame)
     return go
 end
 
@@ -230,6 +231,15 @@ function M:getFollowFish(viewID)
     for _, fish in ipairs(self.mFishList) do
         if fish:isAlive() then
             return fish
+        end
+    end
+end
+
+function M:killFish(viewID, timelineID, fishArrayID)
+    for _, fish in ipairs(self.mFishList) do
+        if fish:isAlive() and fish.timelineID == timelineID and fish.fishArrayID == fishArrayID then
+            fish:onHit(viewID)
+            break
         end
     end
 end

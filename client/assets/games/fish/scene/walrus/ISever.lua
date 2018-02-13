@@ -139,19 +139,6 @@ function M:randomTimeLine()
     self:find("SCGameLoop"):createTimeLine(id, 0)
 end
 
-function M:testFish(id)
-    local go = self:find("SCPool"):createFish(id, "300000663", 105)
-    --go:setState(1)
-end
-
-function M:testAllFish()
-    for _, val in pairs(self:require("fish")) do
-        print(val.id, val.name)
-        self:find("SCPool"):createFish(val.id, "300000805", 1)
-        u3a.WaitForSeconds(4.0)
-    end
-end
-
 function M:createGroup()
     local req = {}
     req.group_id = math.random(1, 7)

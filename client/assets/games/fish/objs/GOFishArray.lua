@@ -29,8 +29,13 @@ end
 function M:doFrame()
     local unit = self.mFishData[self.mCurFrame]
     if unit == nil then return end
+    local args = {}
     for _, val in ipairs(unit.fishes) do
-        self:find("SCPool"):createFish(val[1], tostring(val[2] +300000000), 1, val[3])
+        args.id = val[1]
+        args.path_id = tostring(val[2] +300000000)
+        args.cur_frame = 1
+        args.offset = val[3]
+        self:find("SCPool"):createFish(args)
     end
 end
 

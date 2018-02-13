@@ -8,6 +8,7 @@ local M = class("SCGameLoop", u3a.GameObject)
 
 function M:onCreate()
     self:set("freeze", false)
+    self.mCurrentFrame = 0
 end
 
 function M:onUpdate1()
@@ -32,6 +33,7 @@ function M:startUpdate()
     self:startCollsion()
 end
 
+-- 开始更新帧
 function M:startUpdateFrame()
     local scheduler = cc.Director:getInstance():getScheduler()
     if TEST_COUNT then
@@ -41,6 +43,7 @@ function M:startUpdateFrame()
     end
 end
 
+-- 开启碰撞检测倒计时
 function M:startCollsion()
     local scheduler = cc.Director:getInstance():getScheduler()
     if TEST_COUNT then
@@ -51,6 +54,11 @@ function M:startCollsion()
 end
 
 function M:updateFrame()
+    self.mCurrentFrame = self.mCurrentFrame + 1
+    self:updateOnceFrame()
+end
+
+function M:updateOnceFrame()
     local go = self:find("SCPool")
     -- 更新子弹
     for _, bullet in ipairs(go.mBulletList) do

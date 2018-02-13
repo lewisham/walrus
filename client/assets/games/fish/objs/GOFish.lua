@@ -34,12 +34,13 @@ function M:initData(id)
 end
 
 function M:setOffsetPos(pos)
-    self.mPathOffset = pos
+    if pos == nil then return end
+    self.mPathOffset.x = pos.x
+    self.mPathOffset.y = pos.y
 end
 
 function M:reset()
     self:setRed(false)
-    self.hp = math.random(1, 10)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
     self.totalFrame = 0
@@ -193,12 +194,9 @@ function M:createActionSprite()
 end
 
 function M:onHit()
-    self.hp = self.hp - 1
-    if self.hp < 1 then
-        self:setAlive(false)
-        self:setRed(false)
-        self:find("UIEffect"):playFishDeadEff(self)
-    end
+    self:setAlive(false)
+    self:setRed(false)
+    self:find("UIEffect"):playFishDeadEff(self)
 end
 
 function M:updateState(state)
