@@ -113,7 +113,7 @@ function M:createFish(args)
     if go == nil then return end
     go:reset()
     go.timelineID = args.timeline_id
-    go.fishArrayID = args.fishArrayID
+    go.fishArrayID = args.array_id or 0
     go:setOffsetPos(args.offset)
     local path = self:find("SCConfig"):get("path")[args.path_id]
     go:setPath(path)
@@ -188,9 +188,10 @@ function M:createTimeLine(idx, frame, bServer)
 end
 
 -- 创建鱼群
-function M:createFishArray(id, frame)
-    local go = self:createUnnameObject("GOFishArray", id)
-    go:gotoFrame(frame)
+function M:createFishArray(args)
+    local go = self:createUnnameObject("GOFishArray", args.id)
+    go.timelineID = args.timeline_id
+    go:gotoFrame(args.frame)
     table.insert(self.mFishArrayList, go)
     return go
 end
@@ -207,26 +208,6 @@ end
 -- 测试
 ----------------------------------
 
-function M:calcBulletCnt(viewID)
-    local cnt = 0
-    for _, bullet in ipairs(self.mBulletList) do
-        if bullet.mViewID == viewID then
-            cnt = cnt + 1
-        end
-    end
-    return cnt
-end
-
-function M:getCollsionBullet()
-    local tb = {}
-    for _, bullet in ipairs(self.mBulletList) do
-        if bullet:isAlive() and bullet:isNeedCollionCheck() then
-            table.insert(tb, bullet)
-        end
-    end
-    return tb
-end
-
 function M:getFollowFish(viewID)
     for _, fish in ipairs(self.mFishList) do
         if fish:isAlive() then
@@ -235,6 +216,7 @@ function M:getFollowFish(viewID)
     end
 end
 
+-- 捕到鱼
 function M:killFish(viewID, timelineID, fishArrayID)
     for _, fish in ipairs(self.mFishList) do
         if fish:isAlive() and fish.timelineID == timelineID and fish.fishArrayID == fishArrayID then

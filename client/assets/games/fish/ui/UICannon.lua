@@ -68,6 +68,7 @@ end
 
 -- 开火
 function M:fire(angle)
+    angle = 180 - angle
     self:updateAngle(angle)
     local extra = self.mViewID >= 3 and 180 or 0
     local pos = self.Node_launcher:convertToWorldSpaceAR(cc.p(0, 0))

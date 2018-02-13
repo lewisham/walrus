@@ -9,6 +9,7 @@ local M = class("SCGameLoop", u3a.GameObject)
 function M:onCreate()
     self:set("freeze", false)
     self.mCurrentFrame = 0
+    self.mServerFrame = 0
 end
 
 function M:onUpdate1()
@@ -54,7 +55,12 @@ function M:startCollsion()
 end
 
 function M:updateFrame()
-    self.mCurrentFrame = self.mCurrentFrame + 1
+    if self.mCurrentFrame < self.mServerFrame - 20 then
+        for i = 1, 20 do
+            self:updateOnceFrame()
+        end
+        return
+    end
     self:updateOnceFrame()
 end
 
@@ -67,6 +73,7 @@ function M:updateOnceFrame()
         end
     end
     if self:get("freeze") then return end
+    self.mCurrentFrame = self.mCurrentFrame + 1
     -- 更新鱼
     for _, fish in ipairs(go.mFishList) do
         if fish.alive then
@@ -158,7 +165,7 @@ function M:netCollsionCheck(fishes, net, grid)
     for idx, _ in pairs(list) do
         local fish = fishes[idx]
         if fish and net:sat(fish) then
-            fish:onHit()
+            --fish:onHit()
         end
     end 
 end

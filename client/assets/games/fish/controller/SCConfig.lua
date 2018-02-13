@@ -125,6 +125,7 @@ function M:getFishArray(id)
             unit = {}
             unit.frame = frame
             unit.fishes = {}
+            unit.id = id
             tb[frame] = unit
         end
         table.insert(unit.fishes, {config.fishid, config.trace, cc.p(tonumber(config.offsetx), tonumber(config.offsety))})

@@ -90,11 +90,12 @@ function M:play()
     self:find("UILoading"):play()
     u3a.WaitForFrames(1)
     self:createGameObject("UISelfChairTips")
-    self:find("UILoading"):removeFromScene()
     self:find("SCPool"):createFishPool()
     u3a.WaitForFrames(2)
     self:find("SCGameClient"):set("start_process", true)
     self:find("SCGameLoop"):startUpdate()
+    u3a.WaitForSeconds(1)
+    self:find("UILoading"):removeFromScene()
     self:find("UISelfChairTips"):play()
 end
 

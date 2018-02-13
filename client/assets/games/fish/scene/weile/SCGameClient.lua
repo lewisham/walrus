@@ -90,7 +90,12 @@ end
 
 -- 玩家离开桌子
 function M:onPlayerLeave(player)
+    local data = self.mPlayerList[player.id]
     self.mPlayerList[player.id] = nil
+    if data == nil then return end
+    self:find("UIBackGround"):showWaiting(data.view_id, true)
+    local cannon = self:find("UICannon" .. data.view_id)
+    cannon:setVisible(false)
 end
 
 -- 使用道具成功
@@ -123,16 +128,20 @@ function M:doHandleMsg(id, resp)
         return
     end
     if not self:get("start_process") then return end
+    if self[id] == nil then
+        print("++++++++++++++++++++++未处理的消息协议   " .. id)
+        return
+    end
     u3a.Invoke(self, id, resp)
 end
 
 -- 进入游戏初始化
 function M:MSGS2CGameStatus(resp)
     --Log(resp)
-    Log(resp.killedFishes)
     for _, val in pairs(resp.playerInfos) do
         self:MSGS2CPlayerJion(val)
     end
+    self:find("SCGameLoop").mCurrentFrame = resp.frameId
     self:find("SCPool"):createTimeLine(resp.timelineIndex, resp.frameId, false)
     self:find("SCPool"):createTimeLine(resp.timelineIndex, resp.frameId, true)
 end
@@ -175,13 +184,46 @@ end
 
 -- 击中鱼
 function M:MSGS2CPlayerHit(resp)
-    --Log(resp)
     local player = self.mPlayerList[resp.playerId]
     if player == nil then return end
+    if #resp.killedFishes == 0 then return end
+    --Log(resp)
     local go = self:find("SCPool")
     for _, val in ipairs(resp.killedFishes) do
         go:killFish(player.view_id, val.timelineId, val.fishArrayId)
     end
+end
+
+-- 请求冰冻技能结果
+function M:MSGS2CFreezeResult(resp)
+    if not resp.isSuccess then
+        return
+    end
+    self:find("SKFreeze"):activeSkill()
+end
+
+-- 开始冰冻技能
+function M:MSGS2CFreezeStart(resp)
+    self:find("SKFreeze"):activeSkill()
+end
+
+-- 结束冰冻技能
+function M:MSGS2CFreezeEnd(resp)
+end
+
+-- 改变炮的倍率
+function M:MSGS2CGunRateChange(resp)
+end
+
+-- 鱼潮来临
+function M:MSGS2CFishGroupNotify(resp)
+    Log(resp)
+end
+
+-- 鱼时间线
+function M:MSGS2CStartTimeline(resp)
+    self:find("SCPool"):createTimeLine(resp.index, 1, false)
+    self:find("SCPool"):createTimeLine(resp.index, 1, true)
 end
 
 return M

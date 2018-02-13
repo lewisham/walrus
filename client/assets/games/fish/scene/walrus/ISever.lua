@@ -20,7 +20,6 @@ function M:test()
     --self:testFish("100000401")
     --self:find("SCPool"):randomTimeLine()
     --self:find("SCPool"):createNet(1, cc.p(512, 360))
-    --self:find("SCPool"):createFishArray("312124001", 1)
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}

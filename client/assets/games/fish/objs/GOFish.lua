@@ -193,10 +193,10 @@ function M:createActionSprite()
     self.shadow = shadow
 end
 
-function M:onHit()
+function M:onHit(viewID)
     self:setAlive(false)
     self:setRed(false)
-    self:find("UIEffect"):playFishDeadEff(self)
+    self:find("UIEffect"):playFishDeadEff(self, viewID)
 end
 
 function M:updateState(state)
