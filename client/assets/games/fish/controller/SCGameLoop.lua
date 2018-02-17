@@ -8,8 +8,16 @@ local M = class("SCGameLoop", u3a.GameObject)
 
 function M:onCreate()
     self:set("freeze", false)
-    self.mCurrentFrame = 0
+    self.mClientFrame = 0
     self.mServerFrame = 0
+end
+
+function M:setServerFrame(frame)
+    self.mServerFrame = frame
+end
+
+function M:setClientFrame(frame)
+    self.mClientFrame = frame
 end
 
 function M:onUpdate1()
@@ -18,6 +26,7 @@ function M:onUpdate1()
     end
 end
 
+-- 释放对象，关闭定时器
 function M:releaseLuaObject()
     M.super.releaseLuaObject(self)
     if self.mSchedulerUpdateFrame then
@@ -28,6 +37,7 @@ function M:releaseLuaObject()
     end
 end
 
+-- 开启计时器
 function M:startUpdate()
     self:startUpdateFrame()
     u3a.WaitForFrames(1)
@@ -54,17 +64,19 @@ function M:startCollsion()
     end
 end
 
-function M:updateFrame()
-    if self.mCurrentFrame < self.mServerFrame - 20 then
-        for i = 1, 20 do
-            self:updateOnceFrame()
-        end
+-- 同步帧数
+function M:syncFrame()
+    if self.mServerFrame - self.mClientFrame < 20 then
         return
     end
-    self:updateOnceFrame()
+    u3a.Skip_Frame = true
+    for i = self.mClientFrame, self.mServerFrame do
+        self:updateFrame()
+    end
+    u3a.Skip_Frame = false
 end
 
-function M:updateOnceFrame()
+function M:updateFrame()
     local go = self:find("SCPool")
     -- 更新子弹
     for _, bullet in ipairs(go.mBulletList) do
@@ -73,7 +85,7 @@ function M:updateOnceFrame()
         end
     end
     if self:get("freeze") then return end
-    self.mCurrentFrame = self.mCurrentFrame + 1
+    self.mClientFrame = self.mClientFrame + 1
     -- 更新鱼
     for _, fish in ipairs(go.mFishList) do
         if fish.alive then
@@ -165,7 +177,7 @@ function M:netCollsionCheck(fishes, net, grid)
     for idx, _ in pairs(list) do
         local fish = fishes[idx]
         if fish and net:sat(fish) then
-            --fish:onHit()
+            fish:onRed()
         end
     end 
 end

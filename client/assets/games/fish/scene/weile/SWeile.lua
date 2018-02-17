@@ -49,9 +49,16 @@ function M:run()
     self:coroutine(self, "play")
 end
 
+-- 退出处理
 function M:doExitGameImpl()
-    if not WaitForDialog("提示", "是否退出游戏？") then return end
+    if not u3a.WaitForDialog("提示", "是否退出游戏？") then return end
 
+end
+
+-- 解析协议
+function M:parseMsg()
+    u3a.JMSG = self:require("LuaJmsg")
+    u3a.JMSG:init(self:require("MessageDefine"))
 end
 
 function M:initData()
@@ -63,6 +70,8 @@ function M:initData()
     self:createGameObject("SCGameLoop")
     self:createGameObject("SCAction")
     self:createGameObject("SCGameClient")
+    self:createGameObject("SCRecv")
+    self:createGameObject("SCSend")
 end
 
 function M:initSkill()
@@ -73,6 +82,7 @@ end
 
 function M:play()
     self:createGameObject("SCUpdate"):play("http://192.168.67.132/fish/")
+    self:parseMsg()
     self:initConfig()
     self:initData()
     self:createGameObject("UILoading")
@@ -84,7 +94,6 @@ function M:play()
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end
     self:createGameObject("UICoinMgr")
-    self:createGameObject("UIGunChange")
     self:createGameObject("UISkillPanel")
     self:createGameObject("UIRightPanel")
     self:find("UILoading"):play()
@@ -92,9 +101,10 @@ function M:play()
     self:createGameObject("UISelfChairTips")
     self:find("SCPool"):createFishPool()
     u3a.WaitForFrames(2)
-    self:find("SCGameClient"):set("start_process", true)
+    self:find("SCRecv"):set("start_process", true)
     self:find("SCGameLoop"):startUpdate()
-    u3a.WaitForSeconds(1)
+    u3a.WaitForFrames(1)
+    self:createGameObject("UIGunChange")
     self:find("UILoading"):removeFromScene()
     self:find("UISelfChairTips"):play()
 end

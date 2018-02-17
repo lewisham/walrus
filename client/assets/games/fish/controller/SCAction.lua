@@ -55,8 +55,6 @@ end
 
 -- 变红
 function M:setRed(sprite, bo)
-    if sprite.mbRed == bo then return end
-    sprite.mbRed = bo
     if bo then
         local shader = self:get("shader_list")["red"]
         if shader then

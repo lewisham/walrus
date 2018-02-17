@@ -46,6 +46,7 @@ function M:reset()
     self.totalFrame = 0
     self.mCurIdx = 3
     self.mState = u3a.FISH_STATE.normal
+    self.bRed = false
     self:setScale(1.0)
 end
 
@@ -104,6 +105,10 @@ function M:nextFrame()
     end
     local pos, angle = self:getPathInfo()
     self:updateAngle(angle)
+    if u3a.Skip_Frame then
+        self:setPosition(pos)
+        return
+    end
     self:moveTo(pos, 0.15)
 end
 
@@ -197,6 +202,21 @@ function M:onHit(viewID)
     self:setAlive(false)
     self:setRed(false)
     self:find("UIEffect"):playFishDeadEff(self, viewID)
+end
+
+function M:onRed()
+    if self.bRed then return end
+    self:setRed(true)
+    self.bRed = true
+    local tb =
+    {
+        cc.DelayTime:create(0.5),
+        cc.CallFunc:create(function() self:setRed(false) end),
+        cc.DelayTime:create(0.5),
+        cc.CallFunc:create(function() self.bRed = false end),
+    }
+    local act = cc.Sequence:create(tb)
+    self:runAction(act)
 end
 
 function M:updateState(state)

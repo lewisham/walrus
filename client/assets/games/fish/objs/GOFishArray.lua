@@ -34,7 +34,7 @@ function M:doFrame()
     for _, val in ipairs(unit.fishes) do
         args.id = val[1]
         args.path_id = tostring(val[2] +300000000)
-        args.cur_frame = self.mCurFrame
+        args.cur_frame = 1
         args.offset = val[3]
         args.timeline_id = self.timelineId
         args.array_id = unit.id

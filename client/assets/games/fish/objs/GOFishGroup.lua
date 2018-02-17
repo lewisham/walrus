@@ -20,10 +20,14 @@ end
 
 function M:updateFrame()
     local bAllUse = true
+    local arrayArgs = {}
     for _, unit in ipairs(self.mFishData) do
         if unit.frame == self.mCurFrame then
             unit.use = true
-            self:find("SCPool"):createFishArray(unit.fisharrid, 1)
+            arrayArgs.timeline_id = 0
+            arrayArgs.id = unit.fisharrid
+            arrayArgs.frame = 1
+            self:find("SCPool"):createFishArray(arrayArgs)
         end
         if bAllUse and not unit.use then
             bAllUse = false
