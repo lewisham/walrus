@@ -82,7 +82,7 @@ function M:allFishFadeOut()
     end
 end
 
-function M:getFish(id)
+function M:getPoolFish(id)
     local go = nil
     for _, fish in ipairs(self.mFishList) do
         if fish:isOutOfScreen() and fish.id == id then
@@ -110,7 +110,7 @@ end
 -- 创建鱼
 function M:createFish(id, pathID, frame, offset)
     offset = offset or cc.p(0, 0)
-    local go = self:getFish(id)
+    local go = self:getPoolFish(id)
     if go == nil then return end
     go:reset()
     go:setOffsetPos(offset)

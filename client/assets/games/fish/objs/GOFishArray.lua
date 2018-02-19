@@ -10,6 +10,7 @@ function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)
     self.mStartID = id
     self.mCurFrame = 0
+    self.timeline_id = 0
 end
 
 function M:gotoFrame(frame)

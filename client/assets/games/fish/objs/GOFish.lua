@@ -39,6 +39,8 @@ end
 
 function M:reset()
     self:setRed(false)
+    self.timeline_id = 0    -- 鱼的标识
+    self.fisharray_id = 0   -- 鱼的标识
     self.hp = math.random(1, 10)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
