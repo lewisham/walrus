@@ -10,7 +10,7 @@ function M:onCreate()
     local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", u3a.RoomIdx)))
     self:addChild(sprite)
     sprite:setPosition(display.width / 2, display.height / 2)
-    sprite:setScale(display.height / 720)
+    sprite:setScale(1.03)
     self:initWave()
     self:initBubble()
     self:initLayer()
@@ -65,7 +65,7 @@ function M:initLayer()
     self:getScene():set("net_layer", layer)
 end
 
-
+-- 震屏
 function M:shake(interval, times)
     local pos = cc.p(display.width / 2, display.height / 2)
     local function move()
@@ -87,6 +87,7 @@ function M:shake(interval, times)
     self:runAction(act)
 end
 
+-- 请等待提示
 function M:initJoinTips()
     self.waiting = {}
     for i = 1, 4 do

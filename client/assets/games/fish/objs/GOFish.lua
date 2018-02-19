@@ -34,19 +34,19 @@ function M:initData(id)
 end
 
 function M:setOffsetPos(pos)
-    self.mPathOffset = pos
+    if pos == nil then return end
+    self.mPathOffset.x = pos.x
+    self.mPathOffset.y = pos.y
 end
 
 function M:reset()
     self:setRed(false)
-    self.timeline_id = 0    -- 鱼的标识
-    self.fisharray_id = 0   -- 鱼的标识
-    self.hp = math.random(1, 10)
     self.mPathOffset = cc.p(0, 0)
     self.frameIdx = 1
     self.totalFrame = 0
     self.mCurIdx = 3
     self.mState = u3a.FISH_STATE.normal
+    self.bRed = false
     self:setScale(1.0)
 end
 
@@ -105,6 +105,10 @@ function M:nextFrame()
     end
     local pos, angle = self:getPathInfo()
     self:updateAngle(angle)
+    if u3a.Skip_Frame then
+        self:setPosition(pos)
+        return
+    end
     self:moveTo(pos, 0.15)
 end
 
@@ -194,13 +198,25 @@ function M:createActionSprite()
     self.shadow = shadow
 end
 
-function M:onHit()
-    self.hp = self.hp - 1
-    if self.hp < 1 then
-        self:setAlive(false)
-        self:setRed(false)
-        self:find("UIEffect"):playFishDeadEff(self)
-    end
+function M:onHit(viewID)
+    self:setAlive(false)
+    self:setRed(false)
+    self:find("UIEffect"):playFishDeadEff(self, viewID)
+end
+
+function M:onRed()
+    if self.bRed then return end
+    self:setRed(true)
+    self.bRed = true
+    local tb =
+    {
+        cc.DelayTime:create(0.5),
+        cc.CallFunc:create(function() self:setRed(false) end),
+        cc.DelayTime:create(0.5),
+        cc.CallFunc:create(function() self.bRed = false end),
+    }
+    local act = cc.Sequence:create(tb)
+    self:runAction(act)
 end
 
 function M:updateState(state)

@@ -97,6 +97,7 @@ function M:getFishTimeline(id)
         local unit = tb[frame]
         if unit == nil then
             unit = {}
+            unit.id = tonumber(config.id)
             unit.frame = frame
             unit.fishes = {}
             tb[frame] = unit
@@ -124,6 +125,7 @@ function M:getFishArray(id)
             unit = {}
             unit.frame = frame
             unit.fishes = {}
+            unit.id = id
             tb[frame] = unit
         end
         table.insert(unit.fishes, {config.fishid, config.trace, cc.p(tonumber(config.offsetx), tonumber(config.offsety))})

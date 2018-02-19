@@ -82,7 +82,7 @@ function M:allFishFadeOut()
     end
 end
 
-function M:getPoolFish(id)
+function M:getFish(id)
     local go = nil
     for _, fish in ipairs(self.mFishList) do
         if fish:isOutOfScreen() and fish.id == id then
@@ -108,15 +108,16 @@ function M:getPoolFish(id)
 end
 
 -- 创建鱼
-function M:createFish(id, pathID, frame, offset)
-    offset = offset or cc.p(0, 0)
-    local go = self:getPoolFish(id)
+function M:createFish(args)
+    local go = self:getFish(args.id)
     if go == nil then return end
     go:reset()
-    go:setOffsetPos(offset)
-    local path = self:find("SCConfig"):get("path")[pathID]
+    go.timelineID = args.timeline_id
+    go.fishArrayID = args.array_id or 0
+    go:setOffsetPos(args.offset)
+    local path = self:find("SCConfig"):get("path")[args.path_id]
     go:setPath(path)
-    go:gotoFrame(frame)
+    go:gotoFrame(args.cur_frame)
     return go
 end
 
@@ -187,9 +188,10 @@ function M:createTimeLine(idx, frame, bServer)
 end
 
 -- 创建鱼群
-function M:createFishArray(id, frame)
-    local go = self:createUnnameObject("GOFishArray", id)
-    go:gotoFrame(frame)
+function M:createFishArray(args)
+    local go = self:createUnnameObject("GOFishArray", args.id)
+    go.timelineID = args.timeline_id
+    go:gotoFrame(args.frame)
     table.insert(self.mFishArrayList, go)
     return go
 end
@@ -206,30 +208,20 @@ end
 -- 测试
 ----------------------------------
 
-function M:calcBulletCnt(viewID)
-    local cnt = 0
-    for _, bullet in ipairs(self.mBulletList) do
-        if bullet.mViewID == viewID then
-            cnt = cnt + 1
-        end
-    end
-    return cnt
-end
-
-function M:getCollsionBullet()
-    local tb = {}
-    for _, bullet in ipairs(self.mBulletList) do
-        if bullet:isAlive() and bullet:isNeedCollionCheck() then
-            table.insert(tb, bullet)
-        end
-    end
-    return tb
-end
-
 function M:getFollowFish(viewID)
     for _, fish in ipairs(self.mFishList) do
         if fish:isAlive() then
             return fish
+        end
+    end
+end
+
+-- 捕到鱼
+function M:killFish(viewID, timelineID, fishArrayID)
+    for _, fish in ipairs(self.mFishList) do
+        if fish:isAlive() and fish.timelineID == timelineID and fish.fishArrayID == fishArrayID then
+            fish:onHit(viewID)
+            break
         end
     end
 end

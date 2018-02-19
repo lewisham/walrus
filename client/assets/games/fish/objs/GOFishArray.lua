@@ -10,7 +10,7 @@ function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)
     self.mStartID = id
     self.mCurFrame = 0
-    self.timeline_id = 0
+    self.timelineId = 0
 end
 
 function M:gotoFrame(frame)
@@ -30,8 +30,15 @@ end
 function M:doFrame()
     local unit = self.mFishData[self.mCurFrame]
     if unit == nil then return end
+    local args = {}
     for _, val in ipairs(unit.fishes) do
-        self:find("SCPool"):createFish(val[1], tostring(val[2] +300000000), 1, val[3])
+        args.id = val[1]
+        args.path_id = tostring(val[2] +300000000)
+        args.cur_frame = 1
+        args.offset = val[3]
+        args.timeline_id = self.timelineId
+        args.array_id = unit.id
+        self:find("SCPool"):createFish(args)
     end
 end
 

@@ -15,16 +15,16 @@ u3a.FISH_STATE =
 --炮塔坐标
 u3a.CannonPosList = 
 {
-    cc.p(330, 0), 
-    cc.p(display.width - 330, 0), 
-    cc.p(display.width - 330, display.height),
-    cc.p(330, display.height),
+    cc.p(332.43, 0), 
+    cc.p(display.width - 332.43, 0), 
+    cc.p(display.width - 332.43, display.height),
+    cc.p(332.43, display.height),
 }
 --收取道具坐标
 u3a.AimPosTab = 
 {
-    cc.p(330, 40), 
-    cc.p(display.width - 330, 40), 
-    cc.p(display.width - 330, display.height - 40),
-    cc.p(330, display.height - 40),
+    cc.p(332.43, 40), 
+    cc.p(display.width - 332.43, 40), 
+    cc.p(display.width - 332.43, display.height - 40),
+    cc.p(332.43, display.height - 40),
 }

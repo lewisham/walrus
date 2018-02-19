@@ -14,6 +14,8 @@ u3a.FishObject = require("games.fish.core.FishObject")
 u3a.RoomIdx = 1 -- 房间id
 u3a.SelfViewID = 1 -- 自己视图id
 
+u3a.SendMsg = function() end -- 网络消息请求
+
 -- 启动场景
 local launcherFile = "games.fish.scene.walrus.SWalrus"
 if OLD_FISH_TEST then

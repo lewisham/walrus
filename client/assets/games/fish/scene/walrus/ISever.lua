@@ -20,7 +20,6 @@ function M:test()
     --self:testFish("100000401")
     --self:find("SCPool"):randomTimeLine()
     --self:find("SCPool"):createNet(1, cc.p(512, 360))
-    --self:find("SCPool"):createFishArray("312124001", 1)
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}
@@ -137,19 +136,6 @@ function M:randomTimeLine()
     local idx = math.random(1, 6)
     local id = 320000000 + roomID * 100000 + idx * 1000 + 1
     self:find("SCGameLoop"):createTimeLine(id, 0)
-end
-
-function M:testFish(id)
-    local go = self:find("SCPool"):createFish(id, "300000663", 105)
-    --go:setState(1)
-end
-
-function M:testAllFish()
-    for _, val in pairs(self:require("fish")) do
-        print(val.id, val.name)
-        self:find("SCPool"):createFish(val.id, "300000805", 1)
-        u3a.WaitForSeconds(4.0)
-    end
 end
 
 function M:createGroup()
