@@ -9,7 +9,8 @@ local PATH = "games/fish/assets/sound/"
 local M = class("SCSound", wls.GameObject)
 
 function M:onCreate()
-    self.bWindows = cc.Application:getInstance():getTargetPlatform() == 0
+    self.bEnableSound = cc.Application:getInstance():getTargetPlatform() == 0
+    self.bEnableSound = true
 end
 
 function M:preload(filename)
@@ -32,7 +33,7 @@ function M:playFishDead(filename)
 end
 
 function M:playSoundFile(filename)
-    if self.bWindows then
+    if self.bEnableSound then
         return
     end
     cc.SimpleAudioEngine:getInstance():playEffect(filename)
