@@ -4,7 +4,7 @@
 -- 描述：boss 
 ----------------------------------------------------------------------
 
-local M = class("UIBossRateChange", u3a.UIGameObject)
+local M = class("UIBossRateChange", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/bossratechange/uibossratechange.csb"))

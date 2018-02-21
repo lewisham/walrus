@@ -60,9 +60,9 @@ function M:coroutine(target, name, ...)
         return self:isObjectAlive()
     end
     local function callback(co)
-        u3a.Invoke(target, name, unpack(args))
+        wls.Invoke(target, name, unpack(args))
     end
-	local co = u3a.NewCoroutine(aliveCheckFunc, callback)
+	local co = wls.NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")
 end
 

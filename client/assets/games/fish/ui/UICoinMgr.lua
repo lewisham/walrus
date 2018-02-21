@@ -4,7 +4,7 @@
 -- 描述：金币效果
 ----------------------------------------------------------------------
 
-local M = class("UICoinMgr", u3a.UIGameObject)
+local M = class("UICoinMgr", wls.UIGameObject)
 
 function M:onCreate()
     self.mCoinPool = {}
@@ -74,7 +74,7 @@ function M:play(pos, cnt, viewID, score)
 end
 
 function M:playImpl(pos, cnt, viewID, score)
-    u3a.WaitForSeconds(1.0)
+    wls.WaitForSeconds(1.0)
     local coord = self:getRowAndColByCount(cnt)
     local gapWidth = 50
     local gapHeight = 60
@@ -89,7 +89,7 @@ function M:playImpl(pos, cnt, viewID, score)
             cur = cur + 1
             local add = cur == cnt and score or 0
             self:showCoin(viewID, cc.p(x, y), add)
-            u3a.WaitForSeconds(0.12)
+            wls.WaitForSeconds(0.12)
             x = x + gapWidth
         end
         y = y - gapHeight
@@ -99,13 +99,13 @@ end
 
 -- 显示金币
 function M:showCoin(viewID, pos, add)
-    local idx = u3a.SelfViewID == viewID and 1 or 2
+    local idx = wls.SelfViewID == viewID and 1 or 2
     local coin = self:getCoin(idx)
     coin:setPosition(pos)
     coin:setScale(0.5)
     coin:setVisible(true)
     local timeMove = 0.75
-    local aimPos = u3a.AimPosTab[viewID] or cc.p(0, 0)
+    local aimPos = wls.AimPosTab[viewID] or cc.p(0, 0)
     local seq1 = cc.Sequence:create
     {
         cc.MoveBy:create(0.21, cc.p(0, 88)),
@@ -127,7 +127,7 @@ end
 
 -- 显示字体
 function M:showLabel(viewID, pos, score)
-    local idx = u3a.SelfViewID == viewID and 1 or 2
+    local idx = wls.SelfViewID == viewID and 1 or 2
     local label = self:getLabel(idx)
     label:setPosition(pos)
     label:setVisible(false)

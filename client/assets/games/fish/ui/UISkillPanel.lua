@@ -14,7 +14,7 @@ local DOWN_LIST  =
     --{ ["varname"] = "btn_skill_14",["propId"] = 14,["index"] = 1,["allCount"] = 1},
 }
 
-local M = class("UISkillPanel", u3a.UIGameObject)
+local M = class("UISkillPanel", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/skill/uiskilldesk.csb"))

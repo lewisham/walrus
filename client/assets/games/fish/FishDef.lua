@@ -1,10 +1,10 @@
-u3a.MAX_BULLET_CNT = 25
-u3a.BULLET_LANCHER_INTERVAL = 0.2
+wls.MAX_BULLET_CNT = 25
+wls.BULLET_LANCHER_INTERVAL = 0.2
 
-u3a.PlayerFlip = false
+wls.PlayerFlip = false
 
 -- 鱼的状态
-u3a.FISH_STATE =
+wls.FISH_STATE =
 {
     normal = 1,
     start_freeze = 2,
@@ -13,7 +13,7 @@ u3a.FISH_STATE =
 }
 
 --炮塔坐标
-u3a.CannonPosList = 
+wls.CannonPosList = 
 {
     cc.p(332.43, 0), 
     cc.p(display.width - 332.43, 0), 
@@ -21,7 +21,7 @@ u3a.CannonPosList =
     cc.p(332.43, display.height),
 }
 --收取道具坐标
-u3a.AimPosTab = 
+wls.AimPosTab = 
 {
     cc.p(332.43, 40), 
     cc.p(display.width - 332.43, 40), 

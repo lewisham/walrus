@@ -4,7 +4,7 @@
 -- 描述：鱼对象
 ----------------------------------------------------------------------
 
-local M = class("GOFish", u3a.FishObject)
+local M = class("GOFish", wls.FishObject)
 
 function M:onCreate(id)
     self:initData(id)
@@ -21,7 +21,7 @@ function M:removeFromScreen()
     self:setAlive(false)
     local trace_type = tonumber(self.config.trace_type)
     if trace_type ~= 5 and trace_type ~= 10 then return end
-    self:find("SCSound"):playMusic("music_00" .. u3a.RoomIdx)
+    self:find("SCSound"):playMusic("music_00" .. wls.RoomIdx)
 end
 
 function M:initData(id)
@@ -45,7 +45,7 @@ function M:reset()
     self.frameIdx = 1
     self.totalFrame = 0
     self.mCurIdx = 3
-    self.mState = u3a.FISH_STATE.normal
+    self.mState = wls.FISH_STATE.normal
     self.bRed = false
     self:setScale(1.0)
 end
@@ -105,7 +105,7 @@ function M:nextFrame()
     end
     local pos, angle = self:getPathInfo()
     self:updateAngle(angle)
-    if u3a.Skip_Frame then
+    if wls.Skip_Frame then
         self:setPosition(pos)
         return
     end
@@ -115,7 +115,7 @@ end
 function M:getPathInfo()
     local unit = self.path[self.frameIdx]
     local pos = cc.pAdd(self.mPathOffset, unit.pos)
-    if not u3a.PlayerFlip then 
+    if not wls.PlayerFlip then 
         return pos, unit.angle
     end
     pos.x = display.width - pos.x
@@ -222,12 +222,12 @@ end
 function M:updateState(state)
     if self.mState == state then return end
     self.mState = state
-    if state == u3a.FISH_STATE.normal then
+    if state == wls.FISH_STATE.normal then
         self:onNormal()
-    elseif state == u3a.FISH_STATE.start_freeze then
+    elseif state == wls.FISH_STATE.start_freeze then
         self:onStartFreeze()
-    elseif state == u3a.FISH_STATE.freeze then
-    elseif state == u3a.FISH_STATE.end_freeze then
+    elseif state == wls.FISH_STATE.freeze then
+    elseif state == wls.FISH_STATE.end_freeze then
     end
 end
 

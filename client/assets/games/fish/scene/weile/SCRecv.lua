@@ -4,7 +4,7 @@
 -- 描述：网络接收处理
 ----------------------------------------------------------------------
 
-local M = class("SCRecv", u3a.GameObject)
+local M = class("SCRecv", wls.GameObject)
 
 function M:onCreate()
     self:set("start_process", false)
@@ -13,7 +13,7 @@ end
 function M:doHandleMsg(id, resp)
     resp = clone(resp)
     if id == "MSGS2CGameStatus" then
-        u3a.Invoke(self, id, resp)
+        wls.Invoke(self, id, resp)
         return
     end
     if not self:get("start_process") then return end
@@ -21,7 +21,7 @@ function M:doHandleMsg(id, resp)
         print("++++++++++++++++++++++未处理的消息协议   " .. id)
         return
     end
-    u3a.Invoke(self, id, resp)
+    wls.Invoke(self, id, resp)
 end
 
 function M:getPlayer(id)

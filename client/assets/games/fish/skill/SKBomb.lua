@@ -4,7 +4,7 @@
 -- 描述：核弹技能
 ----------------------------------------------------------------------
 
-local M = class("SKBomb", u3a.UIGameObject)
+local M = class("SKBomb", wls.UIGameObject)
 
 function M:onCreate()
     
@@ -18,26 +18,26 @@ function M:releaseSkill(pos)
 end
 
 function M:loop(pos)
-    u3a.WaitForFrames(1)
+    wls.WaitForFrames(1)
     local root = cc.Node:create()
     self:addChild(root)
     root:setPosition(pos)
     self:playCsbAni(root, self:fullPath("ui/bomb/uimbomb1.csb"), 120)
     self:playCsbAni(root, self:fullPath("ui/bomb/uimbombcom.csb"), 165)
     self:playCsbAni(root, self:fullPath("ui/bomb/uisbomb2.csb"), 49)
-    u3a.SafeRemoveNode(root)
+    wls.SafeRemoveNode(root)
 end
 
 function M:playCsbAni(root, filename, frames)
-    local node = u3a.LoadCsb(filename)
+    local node = wls.LoadCsb(filename)
     root:addChild(node)
-    u3a.BindToUI(node, node)
+    wls.BindToUI(node, node)
     node:setPosition(0, 0)
     local action = cc.CSLoader:createTimeline(filename)
     node:runAction(action)
     action:gotoFrameAndPlay(0)
-    u3a.WaitForSeconds(frames / 60.0)
-    u3a.SafeRemoveNode(node)
+    wls.WaitForSeconds(frames / 60.0)
+    wls.SafeRemoveNode(node)
 end
 
 return M

@@ -4,14 +4,14 @@
 -- 描述：设置界面
 ----------------------------------------------------------------------
 
-local M = class("UISetting", u3a.UIGameObject)
+local M = class("UISetting", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCenterNode(self:fullPath("ui/fishform/uifishform.csb"), true)
 end
 
 function M:click_btn_close()
-    u3a.SafeRemoveNode(self)
+    wls.SafeRemoveNode(self)
 end
 
 return M

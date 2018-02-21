@@ -4,7 +4,7 @@
 -- 描述：模拟服务器
 ----------------------------------------------------------------------
 
-local M = class("ISever", u3a.GameObject)
+local M = class("ISever", wls.GameObject)
 
 function M:onCreate()
     self.mFrameIdx = 0
@@ -23,7 +23,7 @@ function M:test()
     --self:find("SCPool"):createFishGroup(1, 1)
     local rates = {1, 2, 5, 10, 20, 30, 50}
     local tb = {}
-    local viewID = u3a.SelfViewID
+    local viewID = wls.SelfViewID
     table.insert(tb, viewID)
     for i = 1, 0 do
         if viewID ~= i then
@@ -55,7 +55,7 @@ function M:updatePlayer()
                 self:playerShoot(player)
             end
         end
-        u3a.WaitForSeconds(0.2)
+        wls.WaitForSeconds(0.2)
     end
 end
 
@@ -72,7 +72,7 @@ function M:playerShoot(player)
     else
         player.shoot_cnt = player.shoot_cnt - 1
     end
-    if self:find("DAFish"):getBulletCnt(player.view_id) >= u3a.MAX_BULLET_CNT then
+    if self:find("DAFish"):getBulletCnt(player.view_id) >= wls.MAX_BULLET_CNT then
         return
     end
     if player.shoot_angle == nil then
@@ -92,7 +92,7 @@ function M:play()
     while true do
         self.mFrameIdx = self.mFrameIdx + 1
         self:updateFrame()
-        u3a.WaitForSeconds(0.05)
+        wls.WaitForSeconds(0.05)
     end
 end
 

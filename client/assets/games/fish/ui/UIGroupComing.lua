@@ -4,7 +4,7 @@
 -- 描述：鱼潮来临
 ----------------------------------------------------------------------
 
-local M = class("UIGroupComing", u3a.UIGameObject)
+local M = class("UIGroupComing", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uifishgroupcome.csb"))
@@ -19,7 +19,7 @@ end
 function M:play()
     self:setVisible(true)
     local function callback()
-        u3a.SafeRemoveNode(self)
+        wls.SafeRemoveNode(self)
     end
     --self.mTimelineAction:setLastFrameCallFunc(function() self:setVisible(false) end)
     self.mTimelineAction:gotoFrameAndPlay(0)

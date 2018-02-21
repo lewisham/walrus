@@ -4,7 +4,7 @@
 -- 描述：技能icon
 ----------------------------------------------------------------------
 
-local M = class("UISkillIcon", u3a.UIGameObject)
+local M = class("UISkillIcon", wls.UIGameObject)
 
 function M:onCreate()
     local action = cc.CSLoader:createTimeline(self:fullPath("ui/skill/uiskilllight3.csb"))

@@ -72,9 +72,9 @@ function M:createAutoPath()
 end
 
 function M:destroy()
-    u3a.SafeRemoveNode(self.mRoot)
+    wls.SafeRemoveNode(self.mRoot)
 	for _, obj in pairs(self.mGameObjects) do
-		u3a.Invoke(obj, "releaseLuaObject")
+		wls.Invoke(obj, "releaseLuaObject")
 	end
     self:releaseLuaObject()
 end
@@ -101,7 +101,7 @@ function M:createRoot()
     widget:setPosition(0, 0)
     widget:setAnchorPoint(0, 0)
     local function update(dt)
-        u3a.TimeDelta = dt
+        wls.TimeDelta = dt
         self:onUpdate()
     end
     widget:scheduleUpdateWithPriorityLua(update, 0)
@@ -111,8 +111,8 @@ end
 function M:onUpdate()
     -- 清除无用的对象
     for key, obj in pairs(self.mGameObjects) do
-        if u3a.IsObjectAlive(obj) then
-            u3a.Invoke(obj, "onUpdate")
+        if wls.IsObjectAlive(obj) then
+            wls.Invoke(obj, "onUpdate")
         else
             self.mGameObjects[key] = nil
         end
@@ -125,10 +125,10 @@ end
 -- 事件派发
 function M:post(eventName, ...)
     -- 清除无用的对象
-    u3a.Invoke(self, eventName, ...)
+    wls.Invoke(self, eventName, ...)
     for _, obj in pairs(self.mGameObjects) do
-        if u3a.IsObjectAlive(obj) then
-            u3a.Invoke(obj, eventName, ...)
+        if wls.IsObjectAlive(obj) then
+            wls.Invoke(obj, eventName, ...)
         end
     end 
 end
@@ -141,15 +141,15 @@ end
 function M:createGameObject(filename, ...)
     local cls = self:require(filename)
 	local ret = cls.new(...)
-    if not u3a.IsKindOf(cls, "GameObject") then
-        u3a.ExtendClass(ret, u3a.GameObject)
+    if not wls.IsKindOf(cls, "GameObject") then
+        wls.ExtendClass(ret, wls.GameObject)
     end
     local name = ret.__cname
     ret.__path = self:getLuaPath(filename)
     ret.mRoot = self:getRoot()
     ret.mGameScene = self
     self.mGameObjects[name] = ret
-    u3a.Invoke(ret, "start")
+    wls.Invoke(ret, "start")
     ret:onCreate(...)
     return ret
 end
@@ -158,14 +158,14 @@ end
 function M:createUnnameObject(filename, ...)
     local cls = self:require(filename)
 	local ret = cls.new(...)
-	if not u3a.IsKindOf(cls, "GameObject") then
-        u3a.ExtendClass(ret, u3a.GameObject)
+	if not wls.IsKindOf(cls, "GameObject") then
+        wls.ExtendClass(ret, wls.GameObject)
     end
     local name = ret.__cname
     ret.__path = self:getLuaPath(filename)
     ret.mRoot = self:getRoot()
     ret.mGameScene = self
-    u3a.Invoke(ret, "start")
+    wls.Invoke(ret, "start")
     ret:onCreate(...)
     return ret
 end
@@ -173,8 +173,8 @@ end
 function M:wrapGameObject(obj, path, ...)
     local cls = self:require(path)
     local ret = cls.new(obj)
-    if not u3a.IsKindOf(cls, "GameObject") then
-        u3a.ExtendClass(ret, u3a.GameObject)
+    if not wls.IsKindOf(cls, "GameObject") then
+        wls.ExtendClass(ret, wls.GameObject)
     end
     local name = ret.__cname
     ret.__path = self:getLuaPath(filename)
@@ -182,7 +182,7 @@ function M:wrapGameObject(obj, path, ...)
     obj.mGameScene = self
     obj.__cname = cls.__cname
     self.mGameObjects[name] = obj
-    u3a.BindToUI(obj, ret)
+    wls.BindToUI(obj, ret)
     obj:onCreate(...)
     return obj
 end

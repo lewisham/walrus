@@ -4,7 +4,7 @@
 -- 描述：鱼潮
 ----------------------------------------------------------------------
 
-local M = class("GOFishGroup", u3a.FishObject)
+local M = class("GOFishGroup", wls.FishObject)
 
 function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)

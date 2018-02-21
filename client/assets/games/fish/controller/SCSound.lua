@@ -6,7 +6,7 @@
 
 local PATH = "games/fish/assets/sound/"
 
-local M = class("SCSound", u3a.GameObject)
+local M = class("SCSound", wls.GameObject)
 
 function M:onCreate()
     self.bWindows = cc.Application:getInstance():getTargetPlatform() == 0

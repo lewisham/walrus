@@ -54,7 +54,7 @@ local function Md5Crypto(str)
     end
 end
 
-local M = class("SCUpdate", u3a.GameObject)
+local M = class("SCUpdate", wls.GameObject)
 
 function M:onCreate()
     self:set("wait_cnt", 0)
@@ -83,7 +83,7 @@ function M:play(url)
 	cc.FileUtils:getInstance():purgeCachedEntries()
     self:set("down_load_dir", downLoadDir)
     self:logic()
-    u3a.SafeRemoveNode(self:get("root"))
+    wls.SafeRemoveNode(self:get("root"))
     if self:get("error_code") ~= "" then
         self:refreshTips(self:get("error_code"))
 		return false
@@ -97,7 +97,7 @@ function M:logic()
     -- 检查要更新文件
     local tb = self:checkUpdateFiles()
     if tb == nil then return end
-    u3a.WaitForSeconds(0.5)
+    wls.WaitForSeconds(0.5)
     self:refreshTips("更新中")
     -- 下载文件
     local maxThread = 3
@@ -107,13 +107,13 @@ function M:logic()
     for _, val in pairs(tb) do
         if self:get("error_code") ~= "" then return end
         self:updateFile(val)
-        u3a.WaitForFuncResult(function() return self:get("wait_cnt") < maxThread end)
+        wls.WaitForFuncResult(function() return self:get("wait_cnt") < maxThread end)
     end
-    u3a.WaitForFuncResult(function() return self:get("wait_cnt") == 0 end)
+    wls.WaitForFuncResult(function() return self:get("wait_cnt") == 0 end)
     self:saveClientFileList()
-    u3a.WaitForFrames(1)
+    wls.WaitForFrames(1)
     self:refreshTips("自动更新完成")
-    u3a.WaitForSeconds(1.0)
+    wls.WaitForSeconds(1.0)
 end
 
 -- 检查版本号
@@ -135,7 +135,7 @@ end
 
 -- 检查更新文件
 function M:checkUpdateFiles() 
-    u3a.WaitForSeconds(0.5)
+    wls.WaitForSeconds(0.5)
     self:refreshTips("检查要更新文件")
     local str1 = self:download("CheckFileList.txt")
     if str1 == nil then return end
@@ -215,7 +215,7 @@ function M:download(filename)
         bRet = true
     end
     self:httpGet(url, callback)
-    u3a.WaitForFuncResult(function() return bRet end)
+    wls.WaitForFuncResult(function() return bRet end)
     return ret
 end
 
@@ -247,7 +247,7 @@ function M:httpGet(url, fnCallback)
 		if tolua.isnull(ndProtected) then
 			return -- 节点已被删了, 可能是游戏被重新加载了
 		end
-		u3a.SafeRemoveNode(ndProtected)
+		wls.SafeRemoveNode(ndProtected)
 		if xhr.readyState == 4 and (xhr.status >= 200 and xhr.status < 207) then -- 成功
 			--print("成功 Code:"..xhr.statusText)
 			fnCallback(true, xhr.response)

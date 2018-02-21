@@ -4,7 +4,7 @@
 -- 描述：自已座提示
 ----------------------------------------------------------------------
 
-local M = class("UISelfChairTips", u3a.UIGameObject)
+local M = class("UISelfChairTips", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uiselftips.csb"), true)
@@ -14,7 +14,7 @@ end
 function M:play()
     self.Node_1:setVisible(true)
     self:find("UIGunChange"):open()
-    local pos = cc.p(self:find("UICannon" .. u3a.SelfViewID):getPosition())
+    local pos = cc.p(self:find("UICannon" .. wls.SelfViewID):getPosition())
     self.Node_1:setPosition(pos.x, pos.y + 180)
     local tb =
     {
@@ -24,9 +24,9 @@ function M:play()
         cc.MoveBy:create(0.5, cc.p(0,10)),
     }
     self.Node_1:runAction(cc.Sequence:create(tb))
-    u3a.WaitForSeconds(2.0)
+    wls.WaitForSeconds(2.0)
     self:find("UIGunChange"):close()
-    u3a.SafeRemoveNode(self)
+    wls.SafeRemoveNode(self)
 end
 
 return M

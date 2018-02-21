@@ -4,7 +4,7 @@
 -- 描述：鱼组
 ----------------------------------------------------------------------
 
-local M = class("GOFishArray", u3a.FishObject)
+local M = class("GOFishArray", wls.FishObject)
 
 function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)

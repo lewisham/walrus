@@ -4,7 +4,7 @@
 -- 描述：炮台
 ----------------------------------------------------------------------
 
-local M = class("UICannon", u3a.UIGameObject)
+local M = class("UICannon", wls.UIGameObject)
 
 function M:onCreate(viewID)
     self.mViewID = viewID
@@ -33,7 +33,7 @@ function M:reset()
 end
 
 function M:initDir(viewID)
-    self:setPosition(u3a.CannonPosList[viewID])
+    self:setPosition(wls.CannonPosList[viewID])
     if viewID == 2  then
         self.spr_coin_bg:setPositionX(-self.spr_coin_bg:getPositionX())
         self.fnt_curadd:setPositionX(-self.fnt_curadd:getPositionX())

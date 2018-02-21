@@ -4,7 +4,7 @@
 -- 描述：c++ GameClient
 ----------------------------------------------------------------------
 
-local M = class("SCGameClient", u3a.GameObject)
+local M = class("SCGameClient", wls.GameObject)
 
 function M:onCreate()
     self:set("start_process", false)
@@ -43,7 +43,7 @@ end
 function M:handleProcessEvent(name, ...)
     Log("+++++++++++handleProcessEvent", name)
     if self[name] then 
-        return u3a.Invoke(self, name, ...) 
+        return wls.Invoke(self, name, ...) 
     else
         Log("no hander for process", name)
     end
@@ -70,9 +70,9 @@ function M:onPlayerJoin(player, isSelf)
     local wChairID = player.chairid + 1
     local viewID = wChairID
     if isSelf and viewID > 2 then
-        u3a.PlayerFlip = true
+        wls.PlayerFlip = true
     end
-    if u3a.PlayerFlip then
+    if wls.PlayerFlip then
         viewID = FilpMap[viewID]
     end
     data.is_self = isSelf
@@ -82,7 +82,7 @@ function M:onPlayerJoin(player, isSelf)
     data.view_id = viewID
     self.mPlayers[player.id] = data
     if not isSelf then return end
-    u3a.SelfViewID = viewID
+    wls.SelfViewID = viewID
 end
 
 -- 玩家离开桌子

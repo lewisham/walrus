@@ -1,10 +1,10 @@
 ----------------------------------------------------------------------
 -- 作者：lewis
 -- 日期：2016-3-31
--- 描述：微乐捕鱼
+-- 描述：捕鱼(单机版)
 ----------------------------------------------------------------------
 
-local M = class("SWeile", u3a.GameScene)
+local M = class("GSWalrus", wls.GameScene)
 
 function M:createAutoPath()
     self:autoAddSound("games\\fish\\assets\\sound")
@@ -12,7 +12,7 @@ function M:createAutoPath()
 end
 
 function M:initConfig()
-    rawset(_G, "u3a", self:require("u3a"))
+    rawset(_G, "wls", self:require("wls"))
     self:require("FishDef")
     -- 显示配置
     --rawset(_G, "TEST_COUNT", 0)
@@ -38,7 +38,7 @@ function M:initResolution()
         end
     }
     display.setAutoScale(resolution) 
-    u3a.SCALE = 720 / display.width
+    wls.SCALE = 720 / display.width
     print(display.width, display.height)
 end
 
@@ -49,16 +49,9 @@ function M:run()
     self:coroutine(self, "play")
 end
 
--- 退出处理
 function M:doExitGameImpl()
-    if not u3a.WaitForDialog("提示", "是否退出游戏？") then return end
+    if not WaitForDialog("提示", "是否退出游戏？") then return end
 
-end
-
--- 解析协议
-function M:parseMsg()
-    u3a.JMSG = self:require("LuaJmsg")
-    u3a.JMSG:init(self:require("MessageDefine"))
 end
 
 function M:initData()
@@ -68,10 +61,8 @@ function M:initData()
     self:createGameObject("SCPool")
     self:createGameObject("SCGrid")
     self:createGameObject("SCGameLoop")
+    self:createGameObject("SCNetwork")
     self:createGameObject("SCAction")
-    self:createGameObject("SCGameClient")
-    self:createGameObject("SCRecv")
-    self:createGameObject("SCSend")
 end
 
 function M:initSkill()
@@ -82,10 +73,9 @@ end
 
 function M:play()
     self:createGameObject("SCUpdate"):play("http://192.168.67.132/fish/")
-    self:parseMsg()
     self:initConfig()
     self:initData()
-    self:createGameObject("UILoading")
+    self:createGameObject("UILoading"):play()
     self:createGameObject("UIBackGround")
     self:createGameObject("UIEffect")
     self:createGameObject("UITouch")
@@ -94,18 +84,16 @@ function M:play()
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end
     self:createGameObject("UICoinMgr")
+    self:createGameObject("UIGunChange")
+    self:createGameObject("ISever")
     self:createGameObject("UISkillPanel")
     self:createGameObject("UIRightPanel")
-    self:find("UILoading"):play()
-    u3a.WaitForFrames(1)
+    wls.WaitForFrames(1)
     self:createGameObject("UISelfChairTips")
-    self:find("SCPool"):createFishPool()
-    u3a.WaitForFrames(2)
-    self:find("SCRecv"):set("start_process", true)
-    self:find("SCGameLoop"):startUpdate()
-    u3a.WaitForFrames(1)
-    self:createGameObject("UIGunChange")
     self:find("UILoading"):removeFromScene()
+    self:find("SCPool"):createFishPool()
+    wls.WaitForFrames(2)
+    self:find("SCGameLoop"):startUpdate()
     self:find("UISelfChairTips"):play()
 end
 

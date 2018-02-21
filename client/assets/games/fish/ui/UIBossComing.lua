@@ -4,7 +4,7 @@
 -- 描述：boss 来临警告
 ----------------------------------------------------------------------
 
-local M = class("UIBossComing", u3a.UIGameObject)
+local M = class("UIBossComing", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uibosscome.csb"))
@@ -24,7 +24,7 @@ function M:play(id, rate)
     self:find("SCSound"):playMusic("music_bosscome")
     self:setVisible(true)
     local function callback()
-        u3a.SafeRemoveNode(self)
+        wls.SafeRemoveNode(self)
     end
     self.fnt_Rate:setString(rate)
     self.mTimelineAction:gotoFrameAndPlay(0)

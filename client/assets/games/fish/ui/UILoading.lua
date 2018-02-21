@@ -4,7 +4,7 @@
 -- 描述：加载界面
 ----------------------------------------------------------------------
 
-local M = class("UILoading", u3a.UIGameObject)
+local M = class("UILoading", wls.UIGameObject)
 
 function M:getZorder()
     return 100
@@ -69,10 +69,10 @@ function M:play()
             self:find("SCSound"):preload(val.filename)
         end
         self:updatePercent(idx / total * 100)
-        u3a.WaitForFrames(1)
+        wls.WaitForFrames(1)
     end
-    u3a.WaitForSeconds(0.1)
-    self:find("SCSound"):playMusic("music_00" .. u3a.RoomIdx)
+    wls.WaitForSeconds(0.1)
+    self:find("SCSound"):playMusic("music_00" .. wls.RoomIdx)
 end
 
 function M:updatePercent(per)

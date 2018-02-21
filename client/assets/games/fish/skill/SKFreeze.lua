@@ -4,7 +4,7 @@
 -- 描述：冰冻技能
 ----------------------------------------------------------------------
 
-local M = class("SKFreeze", u3a.UIGameObject)
+local M = class("SKFreeze", wls.UIGameObject)
 
 function M:onCreate()
     self:set("duration", 0)
@@ -39,23 +39,23 @@ function M:releaseSkillImpl()
     local go = self:find("SCPool")
     for _, fish in ipairs(go.mFishList) do
         if fish.alive then
-            fish:updateState(u3a.FISH_STATE.start_freeze)
+            fish:updateState(wls.FISH_STATE.start_freeze)
         end
     end
     local dt = 0.2
     while true do
         if self:modify("duration", -dt) < 0 then break end
-        u3a.WaitForSeconds(dt)
+        wls.WaitForSeconds(dt)
     end
     self:find("SCGameLoop"):set("freeze", false)
     local go = self:find("SCPool")
     for _, fish in ipairs(go.mFishList) do
         if fish.alive then
-            fish:updateState(u3a.FISH_STATE.normal)
+            fish:updateState(wls.FISH_STATE.normal)
         end
     end
     self.bg:runAction(cc.FadeOut:create(0.2))
-    u3a.WaitForSeconds(0.2)
+    wls.WaitForSeconds(0.2)
     self.bg:setVisible(false)
 end
 

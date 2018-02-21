@@ -4,10 +4,10 @@
 -- 描述：背景界面
 ----------------------------------------------------------------------
 
-local M = class("UIBackGround", u3a.UIGameObject)
+local M = class("UIBackGround", wls.UIGameObject)
 
 function M:onCreate()
-    local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", u3a.RoomIdx)))
+    local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", wls.RoomIdx)))
     self:addChild(sprite)
     sprite:setPosition(display.width / 2, display.height / 2)
     sprite:setScale(1.03)
@@ -92,7 +92,7 @@ function M:initJoinTips()
     self.waiting = {}
     for i = 1, 4 do
 		self.waiting[i] = cc.Sprite:create(self:fullPath("bg/bl_pic_ddjr.png"))
-    	self.waiting[i]:setPosition(u3a.AimPosTab[i])
+    	self.waiting[i]:setPosition(wls.AimPosTab[i])
     	self:addChild(self.waiting[i], 100)
     	self.waiting[i]:runAction(cc.RepeatForever:create(cc.Sequence:create(cc.FadeTo:create(0.8,0),cc.DelayTime:create(0.2),cc.FadeTo:create(0.8,255))))
 	end

@@ -51,12 +51,12 @@ function M:loadCsb(filename, bShield)
 	-- csb 绑定到的节点
 	local bindWidget = self
 	for k, v in ipairs(node:getChildren()) do
-		u3a.ChangeParentNode(v, bindWidget)
+		wls.ChangeParentNode(v, bindWidget)
 	end
 	if bLayer then
 		ccui.Helper:doLayout(self)
 	end
-	u3a.BindToUI(bindWidget, self)
+	wls.BindToUI(bindWidget, self)
 end
 
 -- 加载csb
@@ -76,7 +76,7 @@ function M:loadCenterNode(filename, bShield, aniType)
 		bindWidget = self:scaleToEnter()
 	end
 	node:addTo(bindWidget)
-	u3a.BindToUI(bindWidget, self)
+	wls.BindToUI(bindWidget, self)
 end
 
 function M:scaleToEnter()
@@ -122,7 +122,7 @@ end
 
 -- 从场景中移除
 function M:removeFromScene()
-	u3a.SafeRemoveNode(self)
+	wls.SafeRemoveNode(self)
 end
 
 -- 获得添加到的场景
@@ -155,9 +155,9 @@ function M:coroutine(target, name, ...)
         return not tolua.isnull(self)
     end
     local function callback(co)
-        u3a.Invoke(target, name, unpack(args))
+        wls.Invoke(target, name, unpack(args))
     end
-	local co = u3a.NewCoroutine(aliveCheckFunc, callback)
+	local co = wls.NewCoroutine(aliveCheckFunc, callback)
 	co:resume("start run")
 end
 

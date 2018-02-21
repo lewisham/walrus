@@ -40,7 +40,7 @@ function M:removeFromScene(frames)
             child:removeFromScene()
         end
     end
-    u3a.SafeRemoveNode(self.ui_root)
+    wls.SafeRemoveNode(self.ui_root)
 end
 
 -- 创建组件

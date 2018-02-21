@@ -4,7 +4,7 @@
 -- 描述：点击层
 ----------------------------------------------------------------------
 
-local M = class("UITouch", u3a.UIGameObject)
+local M = class("UITouch", wls.UIGameObject)
 
 function M:onCreate()
     self:setContentSize(cc.size(display.width, display.height))
@@ -45,7 +45,7 @@ function M:onTouchEnded()
 end
 
 function M:updateAngle()
-    local viewID = u3a.SelfViewID
+    local viewID = wls.SelfViewID
     local cannon = self:find("UICannon" .. viewID)
     local vec = cc.pSub(self.touchPos, cannon.cannonWorldPos)
     local angle = math.atan2(vec.y, vec.x) * 180 / math.pi
@@ -53,8 +53,8 @@ function M:updateAngle()
 end
 
 function M:launcher()
-    local viewID = u3a.SelfViewID
-    if self:find("DAFish"):getBulletCnt(viewID) >= u3a.MAX_BULLET_CNT then
+    local viewID = wls.SelfViewID
+    if self:find("DAFish"):getBulletCnt(viewID) >= wls.MAX_BULLET_CNT then
         self:toast("屏幕上子弹太多")
         return
     end
@@ -78,7 +78,7 @@ function M:startTimer()
     end
     local tb = 
     {
-        cc.DelayTime:create(u3a.BULLET_LANCHER_INTERVAL),
+        cc.DelayTime:create(wls.BULLET_LANCHER_INTERVAL),
         cc.CallFunc:create(callback),
     }
     self:runAction(cc.RepeatForever:create(cc.Sequence:create(tb)))

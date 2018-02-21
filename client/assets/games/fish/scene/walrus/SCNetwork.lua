@@ -4,7 +4,7 @@
 -- 描述：网络处理
 ----------------------------------------------------------------------
 
-local M = class("SCNetwork", u3a.GameObject)
+local M = class("SCNetwork", wls.GameObject)
 
 function M:onCreate()
 

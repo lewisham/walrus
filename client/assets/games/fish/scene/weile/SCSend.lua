@@ -4,7 +4,7 @@
 -- 描述：网络发送请求
 ----------------------------------------------------------------------
 
-local M = class("SCSend", u3a.GameObject)
+local M = class("SCSend", wls.GameObject)
 
 function M:onCreate()
     self:initSendFunc()
@@ -16,9 +16,9 @@ function M:initSendFunc()
             print("++++++++++++++++++++++未定义的发送命令   " .. id)
             return
         end
-        u3a.Invoke(self, id, ...)
+        wls.Invoke(self, id, ...)
     end
-    u3a.SendMsg = sendFunc
+    wls.SendMsg = sendFunc
 end
 
 function M:sendJMsg(name, data)

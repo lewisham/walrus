@@ -17,7 +17,7 @@ function M:init(aliveCheckFunc, func)
     self.mSchedulerId = scheduler:scheduleScriptFunc(function(dt) self:onUpdate(dt) end, 0, false)
     local co = coroutine.create(func)
     self.coroutine = co
-    u3a.mCoMap[co] = self
+    wls.mCoMap[co] = self
     return true
 end
 
@@ -25,7 +25,7 @@ end
 function M:cleanup()
     if not self.mAlive then return end
     self.mAlive = false
-    u3a.mCoMap[self.coroutine] = nil
+    wls.mCoMap[self.coroutine] = nil
     if self.mSchedulerId then
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.mSchedulerId)
         self.mSchedulerId = nil

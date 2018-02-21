@@ -4,7 +4,7 @@
 -- 描述：右边的菜单栏
 ----------------------------------------------------------------------
 
-local M = class("UIRightPanel", u3a.UIGameObject)
+local M = class("UIRightPanel", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uisetbutton.csb"))

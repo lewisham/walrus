@@ -4,7 +4,7 @@
 -- 描述：子弹
 ----------------------------------------------------------------------
 
-local M = class("GOBullet", u3a.FishObject)
+local M = class("GOBullet", wls.FishObject)
 
 function M:onCreate(id)
     self.mViewID = -1
@@ -22,7 +22,7 @@ function M:onCreate(id)
 end
 
 function M:resetBullet(viewID)
-    self.mbSelf = u3a.SelfViewID == viewID  -- 是否是自己的子弹
+    self.mbSelf = wls.SelfViewID == viewID  -- 是否是自己的子弹
     self.mViewID = viewID
     self.mbFollow = false
     self.mFollowFish = nil

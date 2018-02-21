@@ -4,7 +4,7 @@
 -- 描述：游戏主循环
 ----------------------------------------------------------------------
 
-local M = class("SCGameLoop", u3a.GameObject)
+local M = class("SCGameLoop", wls.GameObject)
 
 function M:onCreate()
     self:set("freeze", false)
@@ -21,8 +21,8 @@ function M:setClientFrame(frame)
 end
 
 function M:onUpdate1()
-    if u3a.TimeDelta > 0.018 then
-        print(u3a.TimeDelta)
+    if wls.TimeDelta > 0.018 then
+        print(wls.TimeDelta)
     end
 end
 
@@ -40,7 +40,7 @@ end
 -- 开启计时器
 function M:startUpdate()
     self:startUpdateFrame()
-    u3a.WaitForFrames(1)
+    wls.WaitForFrames(1)
     self:startCollsion()
 end
 
@@ -69,11 +69,11 @@ function M:syncFrame()
     if self.mServerFrame - self.mClientFrame < 20 then
         return
     end
-    u3a.Skip_Frame = true
+    wls.Skip_Frame = true
     for i = self.mClientFrame, self.mServerFrame do
         self:updateFrame()
     end
-    u3a.Skip_Frame = false
+    wls.Skip_Frame = false
 end
 
 function M:updateFrame()

@@ -4,7 +4,7 @@
 -- 描述：加载界面
 ----------------------------------------------------------------------
 
-local M = class("UILocalUpdate", u3a.UIGameObject)
+local M = class("UILocalUpdate", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uiLoadingLayer.csb"), true)

@@ -8,7 +8,7 @@ local function moveTo(go, dt)
 
 end
 
-local M = class("SCAction", u3a.GameObject)
+local M = class("SCAction", wls.GameObject)
 
 function M:onCreate()
     self.mAnimationList = {}
@@ -17,7 +17,7 @@ function M:onCreate()
 end
 
 function M:onUpdate1()
-    local dt = u3a.TimeDelta
+    local dt = wls.TimeDelta
      -- 更新鱼
      for _, fish in ipairs(go.mFishList) do
         if fish.alive then

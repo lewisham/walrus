@@ -4,7 +4,7 @@
 -- 描述：对象池管理器
 ----------------------------------------------------------------------
 
-local M = class("SCPool", u3a.GameObject)
+local M = class("SCPool", wls.GameObject)
 
 function M:onCreate()
     self.mNetPool = {}
@@ -35,7 +35,7 @@ end
 
 -- 预先创建子弹与鱼网
 function M:createBulletPool(id)
-    for i = 1, u3a.MAX_BULLET_CNT do
+    for i = 1, wls.MAX_BULLET_CNT do
         local bullet = self:createUnnameObject("GOBullet", id)
         table.insert(self.mBulletList, bullet)
         local net = self:createUnnameObject("GONet", id)
@@ -45,11 +45,11 @@ end
 
 function M:removeTimeline()
     for _, timeline in ipairs(self.mTimeLineList) do
-        u3a.SafeRemoveNode(timeline)
+        wls.SafeRemoveNode(timeline)
     end
     self.mTimeLineList = {}
     for _, array in ipairs(self.mFishArrayList) do
-        u3a.SafeRemoveNode(array)
+        wls.SafeRemoveNode(array)
     end
     self.mFishArrayList = {}
 end
@@ -180,7 +180,7 @@ end
 -- 创建时间线
 function M:createTimeLine(idx, frame, bServer)
     local sever = bServer and 90000 or 0
-    local id = 320000000 + u3a.RoomIdx * 100000 + idx * 1000 + sever
+    local id = 320000000 + wls.RoomIdx * 100000 + idx * 1000 + sever
     local go = self:createUnnameObject("GOFishTimeLine", id)
     go:gotoFrame(frame)
     table.insert(self.mTimeLineList, go)

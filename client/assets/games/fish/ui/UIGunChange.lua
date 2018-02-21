@@ -4,11 +4,11 @@
 -- 描述：炮台Panel
 ----------------------------------------------------------------------
 
-local M = class("UIGunChange", u3a.UIGameObject)
+local M = class("UIGunChange", wls.UIGameObject)
 
 function M:onCreate()
     self:loadCsb(self:fullPath("ui/uigunchange.csb"))
-    local cannon = self:find("UICannon" .. u3a.SelfViewID)
+    local cannon = self:find("UICannon" .. wls.SelfViewID)
     self:setPosition(cannon:convertToWorldSpaceAR(cc.p(0, 62)))
     self:setVisible(false)
 end

@@ -4,22 +4,21 @@ for _, path in pairs(require("games.fish.AutoPath")) do
 end
 
 -- 核心
-rawset(_G, "u3a", require("games.fish.core.u3a"))
-u3a.LuaObject = require("games.fish.core.LuaObject")
-u3a.GameScene = require("games.fish.core.GameScene")
-u3a.GameObject = require("games.fish.core.GameObject")
-u3a.UIGameObject = require("games.fish.core.UIGameObject")
-u3a.FishObject = require("games.fish.core.FishObject")
+rawset(_G, "wls", require("games.fish.core.wls"))
+wls.LuaObject = require("games.fish.core.LuaObject")
+wls.GameScene = require("games.fish.core.GameScene")
+wls.GameObject = require("games.fish.core.GameObject")
+wls.UIGameObject = require("games.fish.core.UIGameObject")
+wls.FishObject = require("games.fish.core.FishObject")
 
-u3a.RoomIdx = 1 -- 房间id
-u3a.SelfViewID = 1 -- 自己视图id
-
-u3a.SendMsg = function() end -- 网络消息请求
+wls.RoomIdx = 1 -- 房间id
+wls.SelfViewID = 1 -- 自己视图id
+wls.SendMsg = function() end -- 网络消息请求
 
 -- 启动场景
-local launcherFile = "games.fish.scene.walrus.SWalrus"
+local launcherFile = "games.fish.scene.walrus.GSWalrus"
 if OLD_FISH_TEST then
-    launcherFile = "games.fish.scene.weile.SWeile"
+    launcherFile = "games.fish.scene.weile.GSWeile"
 end
 
 local scene = require(launcherFile).new()

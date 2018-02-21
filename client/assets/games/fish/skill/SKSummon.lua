@@ -4,7 +4,7 @@
 -- 描述：召唤技能
 ----------------------------------------------------------------------
 
-local M = class("SKSummon", u3a.UIGameObject)
+local M = class("SKSummon", wls.UIGameObject)
 
 function M:onCreate()
     
