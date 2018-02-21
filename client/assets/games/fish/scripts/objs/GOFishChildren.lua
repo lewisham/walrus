@@ -4,7 +4,7 @@
 -- 描述：多条鱼对象
 ----------------------------------------------------------------------
 
-local M = class("GOFishChildren", require("games.fish.objs.GOFish"))
+local M = class("GOFishChildren", require("games.fish.scripts.objs.GOFish"))
 
 function M:onCreate(id)
     self:initData(id)
