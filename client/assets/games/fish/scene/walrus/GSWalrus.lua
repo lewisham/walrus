@@ -67,6 +67,7 @@ end
 
 function M:initSkill()
     self:createGameObject("SKFreeze")
+    self:createGameObject("SKTimeRevert")
     self:createGameObject("SKBomb")
     self:createGameObject("SKSummon")
 end
@@ -84,7 +85,8 @@ function M:play()
         self:createGameObject("UICannon", i):rename("UICannon" .. i)
     end
     self:createGameObject("UICoinMgr")
-    self:createGameObject("UIGunChange")
+    self:createGameObject("UIPropMgr")
+    self:createGameObject("UIGunPanel")
     self:createGameObject("ISever")
     self:createGameObject("UISkillPanel")
     self:createGameObject("UIRightPanel")

@@ -7,7 +7,7 @@
 			<key>games/fish/assets/ui/images/bosscome/bl_pic_word_award.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,335},{245,92}}</string>
+				<string>{{307,98},{245,92}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -15,21 +15,10 @@
 				<key>sourceSize</key>
 				<string>{245,92}</string>
 			</dict>
-			<key>games/fish/assets/ui/images/bosscome/levelup_bg.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{1,1},{640,239}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{640,240}</string>
-			</dict>
 			<key>games/fish/assets/ui/images/bosscome/pic_alert.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{985,1},{80,31}}</string>
+				<string>{{646,98},{80,31}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -40,7 +29,7 @@
 			<key>games/fish/assets/ui/images/bosscome/title_pic_152.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{643,1},{340,92}}</string>
+				<string>{{2,2},{340,92}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -51,7 +40,7 @@
 			<key>games/fish/assets/ui/images/bosscome/title_pic_153.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,242},{331,91}}</string>
+				<string>{{686,97},{331,91}}</string>
 				<key>offset</key>
 				<string>{-1,1}</string>
 				<key>rotated</key>
@@ -62,7 +51,7 @@
 			<key>games/fish/assets/ui/images/bosscome/title_pic_154.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{643,189},{335,91}}</string>
+				<string>{{686,2},{335,91}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -73,7 +62,7 @@
 			<key>games/fish/assets/ui/images/bosscome/title_pic_155.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{334,242},{301,92}}</string>
+				<string>{{2,98},{301,92}}</string>
 				<key>offset</key>
 				<string>{1,0}</string>
 				<key>rotated</key>
@@ -84,7 +73,7 @@
 			<key>games/fish/assets/ui/images/bosscome/title_pic_156.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{643,95},{336,92}}</string>
+				<string>{{346,2},{336,92}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -95,11 +84,11 @@
 			<key>games/fish/assets/ui/images/bosscome/title_pic_lx.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{637,282},{139,86}}</string>
+				<string>{{556,98},{139,86}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{140,86}</string>
 			</dict>
@@ -113,14 +102,14 @@
 			<key>realTextureFileName</key>
 			<string>bosscome.png</string>
 			<key>size</key>
-			<string>{1017,428}</string>
+			<string>{1024,256}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>1017</integer>
+			<integer>1024</integer>
 			<key>height</key>
-			<integer>428</integer>
+			<integer>256</integer>
 		</dict>
 	</dict>
 </plist>

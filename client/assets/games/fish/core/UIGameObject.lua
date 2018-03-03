@@ -114,6 +114,16 @@ end
 function M:onUpdate()
 end
 
+function M:createMask()
+	local mask = ccui.Layout:create()
+	self:addChild(mask, -100)
+	mask:setContentSize(display.width, display.height)
+	mask:setBackGroundColor(cc.c3b(0, 0, 0))
+	mask:setBackGroundColorOpacity(192)
+	mask:setBackGroundColorType(1)
+	return mask
+end
+
 ------------------------------------
 -- 继承GameObject接口
 ------------------------------------

@@ -21,12 +21,13 @@ function M:playDeadthSound(soundType)
     end
 end
 
-function M:playFishDeadEff(fish, viewID)
+function M:playFishDeadEff(fish, viewID, score)
+    if fish == nil then return end
     -- 鱼死亡音效
     if fish.config.music_res ~= "0" and  math.random(0, 100) < tonumber(fish.config.music_rate) then
         self:find("SCSound"):playFishDead(fish.config.music_res)
     end
-    self:find("UICoinMgr"):play(fish.position, tonumber(fish.config.coin_num), viewID, math.random(10, 100))
+    self:find("UICoinMgr"):play(fish.position, tonumber(fish.config.coin_num), viewID, score)
     -- 特效音效
     local soundType = tonumber(fish.config.trace_type)
     if soundType == 7 then

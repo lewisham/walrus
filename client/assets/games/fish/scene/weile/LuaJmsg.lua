@@ -303,8 +303,13 @@ function _M:fillTypeFieldsFromMsg(msg, typeInfo, ret)
         if fieldLen == 0 then
             break
         end
-
+        -- 缓存当前未知
+        local oldPos =  msg.position
         local fieldId = readEncodedInt(msg)
+
+        -- 计算字段头长度
+        local fieldIdLen = msg.position - oldPos
+
         local fieldIdString = tostring(fieldId)
             
         local fieldInfo = typeInfo.idToFields[fieldIdString]
@@ -312,7 +317,9 @@ function _M:fillTypeFieldsFromMsg(msg, typeInfo, ret)
         --print("read field id:"..fieldId)
         if fieldInfo == nil then
             --print("field not found")
-            readBytes(msg, fieldLen)
+
+            -- 跳过未知字段
+            readBytes(msg, fieldLen - fieldIdLen)
         elseif fieldInfo.isArray ~= true then
             --print("reading value field:"..fieldInfo.fieldName..",type:"..fieldInfo.fieldType)
             ret[fieldInfo.fieldName] = self:getFieldValueFromMsg(msg, fieldInfo)

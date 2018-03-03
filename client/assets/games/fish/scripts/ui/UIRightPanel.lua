@@ -11,6 +11,17 @@ function M:onCreate()
     self:setPosition(display.width, display.height / 2)
     self.originPos = cc.p(self:getPosition())
     self.isOpen = false
+
+    --添加安卓返回键监听
+    local function onKeyboardFunc(code, event)
+        if code == cc.KeyCode.KEY_BACK then
+            return self:doExitGame()
+        end
+    end
+    local listener = cc.EventListenerKeyboard:create()
+    listener:registerScriptHandler(onKeyboardFunc, cc.Handler.EVENT_KEYBOARD_RELEASED)
+    local eventDispatcher = self:getEventDispatcher()
+    eventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 end
 
 function M:click_btn_openlist()
@@ -19,8 +30,6 @@ function M:click_btn_openlist()
     else
         self:close()
     end
-    if not self:getScene():get("enable_fps") then return end
-    cc.Director:getInstance():setDisplayStats(self.isOpen)
 end
 
 function M:click_btn_pokedex()
@@ -30,13 +39,26 @@ end
 
 function M:click_btn_sound()
     self:close()
-    self:createGameObject("UISetting")
+    self:find("UISetting"):doShow()
 end
 
 function M:click_btn_exit()
-    self:createGameObject("SCUpdate"):publish("games\\fish", "F:/http/fish/")
     self:close()
-    --self:getScene():doExitGame()
+    self:doExitGame()
+end
+
+function M:doExitGame()
+    local function callback(ret)
+        if ret == 1 then self:getScene():doExitGame() end
+    end
+    if not self:find("SKTimeRevert"):exitCheck(callback) then
+        return 
+    end
+    if self:find("ExitDialog") then return end
+    local view = self:createGameObject("UIDialog", true)
+    view:rename("ExitDialog")
+    view:updateView(3, self:find("SCConfig"):getLanguageByID(800000004))
+    view:setCallback(callback)
 end
 
 -- 开启

@@ -13,7 +13,7 @@ end
 
 function M:play()
     self.Node_1:setVisible(true)
-    self:find("UIGunChange"):open()
+    self:find("UIGunPanel"):open()
     local pos = cc.p(self:find("UICannon" .. wls.SelfViewID):getPosition())
     self.Node_1:setPosition(pos.x, pos.y + 180)
     local tb =
@@ -25,7 +25,7 @@ function M:play()
     }
     self.Node_1:runAction(cc.Sequence:create(tb))
     wls.WaitForSeconds(2.0)
-    self:find("UIGunChange"):close()
+    self:find("UIGunPanel"):close()
     wls.SafeRemoveNode(self)
 end
 

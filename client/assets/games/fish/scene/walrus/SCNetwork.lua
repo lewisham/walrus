@@ -28,7 +28,6 @@ function M:onMsgPlayerJoin(player)
     cannon.fnt_multiple:setString(player.gun_rate)
     cannon.fnt_coins:setString(player.coin)
     cannon.fnt_diamonds:setString(player.diamonds)
-
     if player.is_self then
         self:find("UITouch"):setTouchEnabled(true)
     end
@@ -52,7 +51,7 @@ end
 function M:onMsgShoot(resp)
     local cannon = self:find("UICannon" .. resp.view_id)
     cannon:fire(resp.angle)
-    cannon:updateCoin(resp.coin)
+    cannon:setCoin(resp.coin)
 end
 
 return M

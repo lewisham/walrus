@@ -16,21 +16,12 @@ function M:onCreate()
     self.bg = bg
 end
 
-function M:activeSkill()
-    self:releaseSkill()
+function M:activeSkill(costType)
+    wls.SendMsg("sendFreezeStart", costType)
 end
 
 -- 释放技能
 function M:releaseSkill()
-    if self:get("duration") > 0 then
-        self:set("duration", 10.0)
-        return
-    end
-    self:set("duration", 10.0)
-    self:coroutine(self, "releaseSkillImpl")
-end
-
-function M:releaseSkillImpl()
     self:find("SCSound"):playSound("fishfreeze_01")
     self.bg:setOpacity(0)
     self.bg:setVisible(true)
@@ -42,11 +33,11 @@ function M:releaseSkillImpl()
             fish:updateState(wls.FISH_STATE.start_freeze)
         end
     end
-    local dt = 0.2
-    while true do
-        if self:modify("duration", -dt) < 0 then break end
-        wls.WaitForSeconds(dt)
-    end
+
+end
+
+function M:stopSkill()
+    print("----------stopSkill----------")
     self:find("SCGameLoop"):set("freeze", false)
     local go = self:find("SCPool")
     for _, fish in ipairs(go.mFishList) do
@@ -55,8 +46,6 @@ function M:releaseSkillImpl()
         end
     end
     self.bg:runAction(cc.FadeOut:create(0.2))
-    wls.WaitForSeconds(0.2)
-    self.bg:setVisible(false)
 end
 
 return M

@@ -10,143 +10,153 @@ function M:onCreate()
     self:initSendFunc()
 end 
 
+-- 定义SendMsg函数
 function M:initSendFunc()
-    local function sendFunc(id, ...)
+    -- 发送函数
+    function wls.SendMsg(id, ...)
         if self[id] == nil then
             print("++++++++++++++++++++++未定义的发送命令   " .. id)
             return
         end
         wls.Invoke(self, id, ...)
     end
-    wls.SendMsg = sendFunc
+
+    -- 创建子弹id
+    function wls.CreateBulletID(cnt)
+        return self:getSelfPlayer().id .. cnt
+    end
 end
 
+-- 发送协议
 function M:sendJMsg(name, data)
-    --设置发送消息的标识 判断断线的时候用
-    local encoded, len = jmsg.encodeBinary(proto, name, data)
+    if GameClient == nil then return end
+    --Log("请求网络消息:" .. name)
     local msg = CLuaMsgHeader.New()
-    msg.id = self.msg.HEAD.MSG_C2S_JMSG
---    print("encoded len="..len)
-    msg:WriteData(encoded, len)
-    
-    self:SendData(msg)
-    jmsg.freeBinary(encoded)
+    msg.id = 30
+    wls.JMSG:encode(name, msg, data)
+    GameClient:SendData(msg)
+end
+
+function M:getSelfPlayer()
+    return self:find("SCGameClient"):getSelfPlayer()
+end
+
+-- 开启心跳包定时器
+function M:startHeartBeatTimer()
+    local function callback()
+        self:sendHeartBeat()
+    end
+    self:startTimer(2.0, callback, nil, -1)
 end
 
 -------------------------------------
 -- 网络请求
 -------------------------------------
 
-function  M:sendClientReadyMessage()
+-- 发送准备
+function M:sendReady()
     self:sendJMsg("MSGC2SClientReady", {})
 end
 
 -- 发送子弹
-function M:sendBullet(bulletId, frameId, angle, gunRate,timelineId,fishArrayId,posx, posy, isViolent)
-    angle = FishGF.getStandardAngle(angle)
-    local scaleX_,scaleY_,scaleMin_  = FishGF.getCurScale()
-    posx = posx/scaleX_
-    posy = posy/scaleY_
-    if FishGI.isPlayerFlip then
-        local winSize = cc.Director:getInstance():getWinSize();
-        local cfg_ds= CC_DESIGN_RESOLUTION
-        posx = cfg_ds.width-posx;
-        posy = cfg_ds.height-posy;
-    end
-
-    local data = {}
-    data.bulletId = bulletId;
-    --data.frameId = frameId;
-    data.angle = angle;
-    data.gunRate = gunRate;
-    data.timelineId = timelineId;
-    data.fishArrayId = fishArrayId;
-    data.pointX = posx;
-    data.pointY = posy;
-    data.isViolent = isViolent
-    
+function M:sendBullet(id, angle, timelineId, fishArrayId)
+    local player = self:getSelfPlayer()
+    if player == nil then return end
+    self.MsgBullet = self.MsgBullet or {}
+    local data = self.MsgBullet
+    local cannon = self:find("UICannon" .. player.view_id)
+    data.bulletId = id
+    data.frameId = self:find("SCGameLoop").mClientFrame
+    data.angle = 180 - angle
+    data.gunRate = cannon:getGunRate()
+    data.timelineId = timelineId or 0
+    data.fishArrayId = fishArrayId or 0
+    data.pointX = 0
+    data.pointY = 0
+    data.isViolent = false 
     self:sendJMsg("MSGC2SPlayerShoot", data)
 end
 
---锁定变换目标
-function M:sendBulletTargetChange(data)
-    if data == nil then
-        return
+-- 发送碰撞消息
+function M:sendHit(bulletId, fishes, effectFishes)
+    self.MsgHit = self.MsgHit or {}
+    local data = self.MsgHit
+    data.bulletId = bulletId
+    data.frameId = self:find("SCGameLoop").mClientFrame
+    data.killedFishes = {}
+    data.effectedFishes = {}
+    for _, fish in ipairs(fishes) do
+        local unit = {}
+        unit.timelineId = fish:get("timeline_id")
+        unit.fishArrayId = fish:get("array_id")
+        table.insert(data.killedFishes, unit)
     end
+    if effectFishes then
+        for _, fish in ipairs(effectFishes) do
+            local unit = {}
+            unit.timelineId = fish:get("timeline_id")
+            unit.fishArrayId = fish:get("array_id")
+            table.insert(data.effectedFishes, unit)
+        end
+    end
+    --Log(#data.effectedFishes)
+    self:sendJMsg("MSGC2SPlayerHit", data)
+end
+
+--锁定变换目标
+function M:sendBulletTargetChange(fish)
+    self.MsgBulletTC = self.MsgBulletTC or {}
+    local data = self.MsgBulletTC
+    data.bullets = {}
+    data.timelineId = fish:get("timeline_id")
+    data.fishArrayId = fish:get("array_id")
     self:sendJMsg("MSGC2SBulletTargetChange", data)
 end
 
---申请冰冻
-function  M:sendFreezeStart(useType)
-    local data = {
+-- 申请冰冻
+function M:sendFreezeStart(useType)
+    local data = 
+    {
         useType = useType,
     }
     self:sendJMsg("MSGC2SFreezeStart", data)
 end
 
---申请锁定
-function  M:sendlockFish(timelineId,fishArrayId,useType)
-    local data = {
-        timelineId = timelineId,
-        fishArrayId = fishArrayId,
-        useType = useType,
-    }
-    self:sendJMsg("MSGC2SAim",data)
+-- 申请锁定
+function M:sendlockFish(timelineId, fishArrayId, useType)
+    Log("------------sendlockFish-----------------------")
+    self.MsgLockFish = self.MsgLockFish or {}
+    local data = self.MsgLockFish
+    data.timelineId = timelineId
+    data.fishArrayId = fishArrayId
+    data.useType = useType
+    self:sendJMsg("MSGC2SAim", data)
 end
 
---[[
-发送心跳消息
-frameCount:客户端帧号
-]]
-function M:sendHeartBeat(localFrameCount)
-    local data = {
-        frameCount = localFrameCount
-    }
-    self.isSend = true;
+-- 发送心跳消息
+function M:sendHeartBeat()
+    self.MsgHeartBeat = self.MsgHeartBeat or {}
+    local data = self.MsgHeartBeat
+    data.frameCount = self:find("SCGameLoop").mClientFrame
     self:sendJMsg("MSGC2SHeartBeat", data)
 end
 
---[[
-发送碰撞消息
-]]
-function M:sendHit(bulletId, frameId, fishes, effectedFishes)
-    local data = {
-        bulletId = bulletId,
-        frameId = frameId,
-        killedFishes = fishes,
-        effectedFishes = effectedFishes,
-    }
-  self:sendJMsg("MSGC2SPlayerHit", data)
-end
-
---召唤鱼
-function M:sendCallFish(fishId, useType)
-    local data = {
-        callFishId = fishId,
-        useType = useType,
-    }
+-- 召唤鱼
+function M:sendCallFish(useType, cnt)
+    self.MsgCallFish = self.MsgCallFish or {}
+    local data = self.MsgCallFish
+    data.callFishId = cnt
+    data.useType = useType
     self:sendJMsg("MSGC2SCallFish", data)
 end
 
 --核弹申请使用
-function M:sendNBomb(id, pos, useType)
-    local data = {
-        pointX = pos.x,
-        pointY = pos.y,
-        nBombId = FishGI.nbombCount,
-        useType = useType,
-        nPropID = id,
-    }
-    self:sendJMsg("MSGC2SNBomb", data)
-    FishGI.nbombCount = FishGI.nbombCount+1;
+function M:sendNBomb(resp)
+    self:sendJMsg("MSGC2SNBomb", resp)
 end
 
 --核弹爆炸
-function M:sendNBombBalst(id, killedFishes)
-    local data = {
-        killedFishes = killedFishes,
-        nBombId = id,
-    }
+function M:sendNBombBalst(data)
     self:sendJMsg("MSGC2SNBombBlast", data)
 end
 
@@ -187,7 +197,7 @@ function M:sendUpgradeCannon()
             end
         end
         local str = FishGF.getChByIndex(800000349)
-        FishGF.showMessageLayer(FishCD.MODE_MIDDLE_OK_CLOSE,str,callback);
+        FishGF.showMessageLayer(FishCD.MODE_MIDDLE_OK_CLOSE,str,callback)
         return
     end
 
@@ -254,23 +264,31 @@ function M:sendUpDataPlayerData(playerId)
     self:sendJMsg("MSGC2SGetPlayerInfo", data)
 end
 
---显示表示
+-- 显示表示
 function M:sendEmotionIcon(emoticonId)
-    local data = 
-    {
-        emoticonId = emoticonId,
-    }
+    self.MsgEmotion = self.MsgEmotion or {}
+    local data = self.MsgEmotion
+    data.emoticonId = emoticonId
     self:sendJMsg("MSGC2SEmoticon", data)
 end
 
 --魔法道具
 function M:sendMagicProp(magicpropId, toPlayerID)
+    self.MsgMagicProp = self.MsgMagicProp or {}
+    local data = self.MsgMagicProp
+    data.magicpropId = magicpropId
+    data.toPlayerID = toPlayerID
+    self:sendJMsg("MSGC2SMagicprop", data)
+end
+
+--房主踢人
+function M:sendFriendKickOut(playerId)
+    print("-------sendFriendKickOut-----------")
     local data = 
     {
-        magicpropId = magicpropId,
-        toPlayerID = toPlayerID,
+        playerId = magicpropId,
     }
-    self:sendJMsg("MSGC2SMagicprop", data)
+    self:sendJMsg("MSGC2SFriendKickOut", data)
 end
 
 --发送vip每日领取
@@ -280,25 +298,34 @@ end
 
 --开启时光沙漏
 function M:sendToStartTimeHourglass(tabVal)
+    print("-------sendToStartTimeHourglass-----------")
+    Log(tabVal)
     self:sendJMsg("MSGC2SUseTimeHourglass", tabVal)
 end
 
 --停止时光沙漏
 function M:sendToStopTimeHourglass(tabVal)
-    log("M:sendToStopTimeHourglass")
     self:sendJMsg("MSGC2SStopTimeHourglass", tabVal)
 end
 
 --继续时光沙漏
 function M:sendToContinueTimeHourglass(tabVal)
-    log("M:sendToContinueTimeHourglass")
     self:sendJMsg("MSGC2SContinueTimeHourglass", tabVal)
 end
 
 --获取新手任务信息
-function M:sendGetNewTaskInfo(tabVal)
-    log("M:sendGetNewTaskInfo")
-    self:sendJMsg("MSGC2SGetNewTaskInfo", tabVal)
+function M:sendGetNewTaskInfo()
+    Log("M:sendGetNewTaskInfo")
+    self:sendJMsg("MSGC2SGetNewTaskInfo", {})
+end
+
+--领取新手任务奖励
+function M:sendGetNewTaskReward(nTaskID)
+    Log("M:GetNewTaskReward")
+    local data = {
+        nTaskID = nTaskID
+    }
+    self:sendJMsg("MSGC2SGetNewTaskReward", data)
 end
 
 --使用限时炮台
@@ -310,12 +337,6 @@ function M:sendUsePropCannon(useType,propID)
         propID = propID,        
     }
     self:sendJMsg("MSGC2SUsePropCannon", data)
-end
-
---领取新手任务奖励
-function M:GetNewTaskReward(tabVal)
-    log("M:GetNewTaskReward")
-    self:sendJMsg("MSGC2SGetNewTaskReward", tabVal)
 end
 
 function M:sendSetViolentRate(rate)

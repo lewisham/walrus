@@ -105,6 +105,9 @@ function BindToUI(widget, obj)
         local name = child:getName()
         local func = obj["click_"..name]
         if func then 
+            if obj:find("SCSound") then
+                obj:find("SCSound"):playSound("com_btn01")
+            end
             func(obj, child)
         else
             print("no function", obj.__cname, "click_"..name)
@@ -156,6 +159,24 @@ end
 function SafeRemoveNode(node)
     if node == nil or tolua.isnull(node) then return end
     node:removeFromParent(true)
+end
+
+-- 重新加载lua文件
+function ReloadLuaModule(name)
+    package.loaded[name] = nil
+    return require(name)
+end
+
+function DebugGameObject(obj)
+    local name = obj.__path
+    if name == nil then return end
+    print(name)
+    local cls = ReloadLuaModule(name)
+    for key, val in pairs(cls) do
+        if type(val) == "function" then
+            obj[key] = val
+        end
+    end
 end
 
 

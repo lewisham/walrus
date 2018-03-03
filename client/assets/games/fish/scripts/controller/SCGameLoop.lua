@@ -8,8 +8,12 @@ local M = class("SCGameLoop", wls.GameObject)
 
 function M:onCreate()
     self:set("freeze", false)
+    self:set("timeline_idx", 0)
+    self.mbTestFrame = false
+    self.mbTestCollsion = false
     self.mClientFrame = 0
     self.mServerFrame = 0
+    self.mCallFishes = {}
 end
 
 function M:setServerFrame(frame)
@@ -20,10 +24,9 @@ function M:setClientFrame(frame)
     self.mClientFrame = frame
 end
 
-function M:onUpdate1()
-    if wls.TimeDelta > 0.018 then
-        print(wls.TimeDelta)
-    end
+-- 添加要召唤的鱼
+function M:addCallFish(args)
+    table.insert(self.mCallFishes, args)
 end
 
 -- 释放对象，关闭定时器
@@ -47,7 +50,7 @@ end
 -- 开始更新帧
 function M:startUpdateFrame()
     local scheduler = cc.Director:getInstance():getScheduler()
-    if TEST_COUNT then
+    if self.mbTestFrame then
         self.mSchedulerUpdateFrame = scheduler:scheduleScriptFunc(function() self:updateFrameTest() end, 0.05, false)
     else
         self.mSchedulerUpdateFrame = scheduler:scheduleScriptFunc(function() self:updateFrame() end, 0.05, false)
@@ -57,7 +60,7 @@ end
 -- 开启碰撞检测倒计时
 function M:startCollsion()
     local scheduler = cc.Director:getInstance():getScheduler()
-    if TEST_COUNT then
+    if self.mbTestCollsion then
         self.mSchedulerCollsion = scheduler:scheduleScriptFunc(function() self:updateCollsionTest() end, 0.09, false)
     else
         self.mSchedulerCollsion = scheduler:scheduleScriptFunc(function() self:updateCollsion() end, 0.09, false)
@@ -65,7 +68,8 @@ function M:startCollsion()
 end
 
 -- 同步帧数
-function M:syncFrame()
+function M:syncFrame(frame)
+    self.mServerFrame = frame
     if self.mServerFrame - self.mClientFrame < 20 then
         return
     end
@@ -76,63 +80,73 @@ function M:syncFrame()
     wls.Skip_Frame = false
 end
 
+-- 遍历列表，不存在的移除
+function M:updateList(list)
+    for i = #list, 1, -1 do
+        if list[i].alive then
+            list[i]:updateFrame()
+        else
+            table.remove(list, i)
+        end
+    end
+end
+
 function M:updateFrame()
     local go = self:find("SCPool")
     -- 更新子弹
-    for _, bullet in ipairs(go.mBulletList) do
-        if bullet.alive then
-            bullet:updateFrame()
-        end
-    end
+    self:updateList(go.mBulletList)
     if self:get("freeze") then return end
     self.mClientFrame = self.mClientFrame + 1
     -- 更新鱼
-    for _, fish in ipairs(go.mFishList) do
-        if fish.alive then
-            fish:updateFrame()
+    self:updateList(go.mFishList)
+    -- 更新鱼线
+    self:updateList(go.mTimeLineList)
+    -- 更新鱼组
+    self:updateList(go.mFishArrayList)
+    -- 更新鱼潮
+    self:updateList(go.mFishGroupList)
+    -- 更新召唤鱼
+    self:updateCallFish()
+end
+
+-- 更新创建召唤鱼
+function M:updateCallFish()
+    local args
+    for i = #self.mCallFishes, 1, -1 do
+        args = self.mCallFishes[i]
+        if args.cur_frame < self.mClientFrame then
+            args.cur_frame = self.mClientFrame - args.cur_frame
+            self:find("SCPool"):createSummonFish(args)
+            table.remove(self.mCallFishes, i)
+        elseif args.cur_frame == self.mClientFrame then
+            args.cur_frame = 1
+            self:find("SCPool"):createSummonFish(args)
+            table.remove(self.mCallFishes, i)
         end
     end
-    -- 更新鱼时间线
-    for _, timeline in ipairs(go.mTimeLineList) do
-        timeline:updateFrame()
-    end
-    go:removeDeadObject("mTimeLineList")
-    -- 更新鱼组
-    for _, array in ipairs(go.mFishArrayList) do
-        array:updateFrame()
-    end
-    go:removeDeadObject("mFishArrayList")
-    -- 更新鱼潮
-    for _, array in ipairs(go.mFishGroupList) do
-        array:updateFrame()
-    end
-    go:removeDeadObject("mFishGroupList")
 end
 
 function M:updateFrameTest()
+    local go = self:find("SCPool")
     local t1 = os.clock()
-    if TEST_COUNT then
-        TEST_COUNT = 0
-    end
     self:updateFrame()
-    if TEST_COUNT then
-        print("运算耗时", os.clock() - t1, #go.mBulletList, #go.mFishList)
-    end
+    print("更新帧运算耗时 " .. os.clock() - t1 .. "  " .. #go.mBulletList .. "  " .. #go.mFishList)
 end
+
+
+---------------------------------
+-- 碰撞检测
+---------------------------------
 
 function M:updateCollsion()
     self:collsionCheck()
 end
 
 function M:updateCollsionTest()
+    local go = self:find("SCPool")
     local t1 = os.clock()
-    if TEST_COUNT then
-        TEST_COUNT = 0
-    end
     self:updateCollsion()
-    if TEST_COUNT then
-        print("运算耗时", os.clock() - t1, #go.mBulletList, #go.mFishList)
-    end
+    print("碰撞检测运算耗时 " .. os.clock() - t1 .. "  " .. #go.mBulletList .. "  " .. #go.mFishList)
 end
 
 -- log2 4 * M算法
@@ -158,11 +172,11 @@ function M:collsionCheck()
                 for idx, _ in pairs(list) do
                     local fish = fishes[idx]
                     if bullet:sat(fish) then
-                        bullet:onCollsion()
                         local net = self:find("SCPool"):createNet(bullet.config.id, pos)
                         if bullet.mbSelf then
-                            self:netCollsionCheck(fishes, net, grid)
+                            self:netCollsionCheck(bullet.bullet_id, fishes, net, grid)
                         end
+                        bullet:onCollsion()
                         break
                     end
                 end
@@ -172,14 +186,28 @@ function M:collsionCheck()
 end
 
 -- 鱼网与鱼碰撞
-function M:netCollsionCheck(fishes, net, grid)
+function M:netCollsionCheck(id, fishes, net, grid)
+    self.catcheds = {}
+    self.effectFish = {}
     local list = grid:getFishesByPoints(net.points)
+    local specialFish = nil
     for idx, _ in pairs(list) do
         local fish = fishes[idx]
         if fish and net:sat(fish) then
             fish:onRed()
+            if fish:isSpecailFish() then
+                specialFish = fish
+                table.insert(self.catcheds, 1, fish)
+            else
+                table.insert(self.catcheds, fish)
+            end
         end
-    end 
+    end
+    -- 特殊鱼
+    if specialFish then
+        self:find("SCPool"):calcEffectFish(specialFish, self.effectFish)
+    end
+    wls.SendMsg("sendHit", id, self.catcheds, self.effectFish)
 end
 
 return M

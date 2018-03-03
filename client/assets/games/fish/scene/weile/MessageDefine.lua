@@ -30,7 +30,8 @@ MSGS2CPlayerShoot = 3 {
 	pointX : int = 7
 	pointY : int = 8
 	isViolent: bool = 9
-	nViolentRatio: int = 10
+	nViolentRatio: int = 10	
+	frameCount: int = 11
 }
 
 MSGC2SPlayerShoot = 4 {
@@ -42,6 +43,7 @@ MSGC2SPlayerShoot = 4 {
 	pointX : int = 6
 	pointY : int = 7
 	isViolent: bool = 8
+	frameCount: int = 9
 }
 
 MSGC2SHeartBeat = 5 {
@@ -178,6 +180,7 @@ MSGS2CUpgradeCannonResult = 27 {
 	costProps : []MSGProp = 5
 	dropSeniorProps : []MSGSeniorProp = 6
 	dropProps: []MSGProp = 7
+	newGunRate : int = 8
 }
 
 MSGC2SAlmInfo = 28 {	
@@ -370,6 +373,7 @@ MSGS2CAnnounce = 57 {
 MSGC2SGetHallInfo = 58 {
 	channelId : int = 1;渠道号
 	version : string = 2;版本
+	platform : int = 3;平台，1捕鱼，2棋牌
 }
 
 MSGS2CGetHallInfo = 59 {
@@ -537,6 +541,9 @@ MSGPlayerInfo = 83 {
 	nickNameChangeCount : int = 19
 	crystalPower : int = 20;结晶能量
 	seniorProps : []MSGSeniorProp = 21; 高级道具列表
+	hasNewerReward : bool = 22;是否有新手礼包
+	chairId : int = 23;椅子id
+	forgeCount : int = 24;锻造次数
 }
 
 MSGProp = 84 {
@@ -717,6 +724,7 @@ MSGFriendGameInfo = 110 {
 	startedMs : int = 12;已开始时间，毫秒
 	isFriendFree : bool = 13;朋友场是否免费
 	agent : bool = 14;是否代开
+	creatorPlayerNickName : string = 15;创建玩家昵称
 }
 
 MSGFriendPlayerInfo = 111 {
@@ -1105,5 +1113,28 @@ MSGS2CFriendDissolveRoom = 191 {;确认是否解散
 	friendGameId : string = 2;朋友场的场次id
 }
 
+MSGC2SFriendAgentKick = 192 {;代开踢人
+	playerId : int = 1;玩家id
+	friendRoomId : string = 2;朋友场id
+}
+
+MSGS2CFriendAgentKick = 193 {;代开踢人
+	playerId : int = 1;玩家id
+	friendRoomId : string = 2;朋友场id
+	errorCode : int = 3;0，成功，-1,玩家不存在，-2，朋友场不存在，-3，游戏已经开始
+}
+
+MSGC2SGetNewerReward = 194 {; 领取新手奖励
+}
+
+MSGS2CGetNewerReward = 195 {;
+	errorCode : int = 1;错误码，0成功，-1已领取过
+	props : []MSGProp = 2;道具列表
+	seniorProps : []MSGSeniorProp = 3;高级道具
+}
+
+MSGC2SGetDesk = 196 {
+	level : int = 1
+}
 ]]
 return a

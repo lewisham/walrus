@@ -106,7 +106,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_00.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{373,406},{98,100}}</string>
+				<string>{{372,406},{98,100}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -117,7 +117,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{122,491},{98,100}}</string>
+				<string>{{111,506},{98,100}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -128,7 +128,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,506},{98,100}}</string>
+				<string>{{0,518},{98,100}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -139,7 +139,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{220,497},{97,100}}</string>
+				<string>{{345,506},{97,100}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -150,7 +150,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_04.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{195,597},{94,100}}</string>
+				<string>{{442,507},{94,100}}</string>
 				<key>offset</key>
 				<string>{2,3}</string>
 				<key>rotated</key>
@@ -161,7 +161,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_05.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{98,591},{97,100}}</string>
+				<string>{{209,582},{97,100}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -172,7 +172,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_06.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,606},{97,100}}</string>
+				<string>{{98,606},{97,100}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -183,7 +183,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_07.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{317,506},{97,99}}</string>
+				<string>{{0,618},{97,99}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -194,7 +194,7 @@
 			<key>games/fish/assets/ui/images/effect/hgtips_08.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{414,506},{97,91}}</string>
+				<string>{{97,706},{97,91}}</string>
 				<key>offset</key>
 				<string>{0,2}</string>
 				<key>rotated</key>
@@ -205,7 +205,7 @@
 			<key>games/fish/assets/ui/images/effect/light_sd_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1576,768},{133,131}}</string>
+				<string>{{1576,901},{133,131}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -216,7 +216,7 @@
 			<key>games/fish/assets/ui/images/effect/light_sd_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2012,32},{30,31}}</string>
+				<string>{{2012,64},{30,31}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -227,7 +227,7 @@
 			<key>games/fish/assets/ui/images/effect/light_sd_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1706,945},{139,121}}</string>
+				<string>{{477,386},{139,121}}</string>
 				<key>offset</key>
 				<string>{-1,-9}</string>
 				<key>rotated</key>
@@ -260,7 +260,7 @@
 			<key>games/fish/assets/ui/images/effect/lightningball.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1910,1073},{131,127}}</string>
+				<string>{{616,386},{131,127}}</string>
 				<key>offset</key>
 				<string>{-3,2}</string>
 				<key>rotated</key>
@@ -293,7 +293,7 @@
 			<key>games/fish/assets/ui/images/effect/proptips_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{845,386},{79,79}}</string>
+				<string>{{1839,1030},{79,79}}</string>
 				<key>offset</key>
 				<string>{-6,8}</string>
 				<key>rotated</key>
@@ -304,7 +304,7 @@
 			<key>games/fish/assets/ui/images/effect/proptips_03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{604,506},{88,88}}</string>
+				<string>{{626,604},{88,88}}</string>
 				<key>offset</key>
 				<string>{-1,3}</string>
 				<key>rotated</key>
@@ -315,7 +315,7 @@
 			<key>games/fish/assets/ui/images/effect/proptips_04.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{414,597},{90,91}}</string>
+				<string>{{612,513},{90,91}}</string>
 				<key>offset</key>
 				<string>{0,2}</string>
 				<key>rotated</key>
@@ -326,7 +326,7 @@
 			<key>games/fish/assets/ui/images/effect/proptips_05.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{289,605},{90,91}}</string>
+				<string>{{536,604},{90,91}}</string>
 				<key>offset</key>
 				<string>{0,2}</string>
 				<key>rotated</key>
@@ -337,7 +337,7 @@
 			<key>games/fish/assets/ui/images/effect/proptips_06.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{604,594},{86,87}}</string>
+				<string>{{401,607},{86,87}}</string>
 				<key>offset</key>
 				<string>{2,0}</string>
 				<key>rotated</key>
@@ -348,7 +348,7 @@
 			<key>games/fish/assets/ui/images/effect/proptips_07.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1845,945},{76,77}}</string>
+				<string>{{536,507},{76,77}}</string>
 				<key>offset</key>
 				<string>{7,-5}</string>
 				<key>rotated</key>
@@ -381,7 +381,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{732,386},{113,114}}</string>
+				<string>{{747,506},{113,114}}</string>
 				<key>offset</key>
 				<string>{-1,-1}</string>
 				<key>rotated</key>
@@ -403,7 +403,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_04.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,706},{95,95}}</string>
+				<string>{{195,682},{95,95}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -414,7 +414,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_05.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{511,506},{93,94}}</string>
+				<string>{{0,717},{93,94}}</string>
 				<key>offset</key>
 				<string>{0,-1}</string>
 				<key>rotated</key>
@@ -425,7 +425,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_06_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{843,500},{82,85}}</string>
+				<string>{{1839,945},{82,85}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -436,7 +436,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_06_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{97,691},{95,97}}</string>
+				<string>{{306,606},{95,97}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -447,7 +447,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_06_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{732,500},{111,112}}</string>
+				<string>{{0,406},{111,112}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -458,7 +458,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_06_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{614,386},{118,120}}</string>
+				<string>{{1918,1073},{118,120}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -469,7 +469,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_06_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{261,406},{112,91}}</string>
+				<string>{{233,491},{112,91}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -480,7 +480,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_skll_06_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,406},{122,100}}</string>
+				<string>{{111,406},{122,100}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -502,7 +502,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_hourglass_0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{690,612},{201,25}}</string>
+				<string>{{714,620},{201,25}}</string>
 				<key>offset</key>
 				<string>{-1,1}</string>
 				<key>rotated</key>
@@ -513,7 +513,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_hourglass_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{690,657},{241,25}}</string>
+				<string>{{714,657},{241,25}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -546,7 +546,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_lamp.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{122,406},{139,85}}</string>
+				<string>{{233,406},{139,85}}</string>
 				<key>offset</key>
 				<string>{-1,1}</string>
 				<key>rotated</key>
@@ -568,7 +568,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_lock_0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1576,899},{130,130}}</string>
+				<string>{{1709,945},{130,130}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -579,7 +579,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_lock_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{477,386},{137,120}}</string>
+				<string>{{747,386},{137,120}}</string>
 				<key>offset</key>
 				<string>{-1,-10}</string>
 				<key>rotated</key>
@@ -601,7 +601,7 @@
 			<key>games/fish/assets/ui/images/effect/effect_lock_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1845,1022},{65,65}}</string>
+				<string>{{860,506},{65,65}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -623,13 +623,46 @@
 			<key>games/fish/assets/ui/images/effect/bl_multiple_bg_light_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2012,63},{14,26}}</string>
+				<string>{{2012,125},{14,26}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false />
 				<key>sourceSize</key>
 				<string>{14,26}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/effect/effet_violent_lock_0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1576,768},{133,133}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{133,133}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/effect/effet_violent_lock_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2012,32},{32,32}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{32,32}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/effect/effet_violent_lock_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2012,95},{30,30}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{30,30}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

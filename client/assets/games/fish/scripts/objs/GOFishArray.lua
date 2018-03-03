@@ -8,16 +8,32 @@ local M = class("GOFishArray", wls.FishObject)
 
 function M:onCreate(id)
     self:getScene():get("fish_layer"):addChild(self, 2)
+    self:set("timeline_id", 0)
     self.mStartID = id
     self.mCurFrame = 0
-    self.timelineId = 0
 end
 
 function M:gotoFrame(frame)
+    assert(frame >= 0, "error frame " .. frame)
     self:setAlive(true)
-    self.mCurFrame = frame
+    self.mCurFrame = 0
     self.mFishData, self.mMaxFrame = self:find("SCConfig"):getFishArray(self.mStartID)
-    self:doFrame()
+    local args = {}
+    while self.mCurFrame <= frame do
+        local unit = self.mFishData[self.mCurFrame]
+        if unit then
+            for _, val in ipairs(unit.fishes) do
+                args.id = val.fishid
+                args.path_id = tostring(val.trace +300000000)
+                args.cur_frame = frame - self.mCurFrame
+                args.offset = val.offset
+                args.timeline_id = self:get("timeline_id")
+                args.array_id = val.arrayid
+                self:find("SCPool"):createFish(args)
+            end
+        end
+        self.mCurFrame = self.mCurFrame + 1
+    end
 end
 
 
@@ -32,12 +48,12 @@ function M:doFrame()
     if unit == nil then return end
     local args = {}
     for _, val in ipairs(unit.fishes) do
-        args.id = val[1]
-        args.path_id = tostring(val[2] +300000000)
+        args.id = val.fishid
+        args.path_id = tostring(val.trace +300000000)
         args.cur_frame = 1
-        args.offset = val[3]
-        args.timeline_id = self.timelineId
-        args.array_id = unit.id
+        args.offset = val.offset
+        args.timeline_id = self:get("timeline_id")
+        args.array_id = val.arrayid
         self:find("SCPool"):createFish(args)
     end
 end

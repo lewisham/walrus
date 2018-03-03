@@ -10,7 +10,7 @@ function M:onCreate()
     local sprite = cc.Sprite:create(self:fullPath(string.format("bg/bl_roombg_%s.jpg", wls.RoomIdx)))
     self:addChild(sprite)
     sprite:setPosition(display.width / 2, display.height / 2)
-    sprite:setScale(1.03)
+    sprite:setScale(1.03 * display.height / 720)
     self:initWave()
     self:initBubble()
     self:initLayer()
@@ -67,7 +67,7 @@ end
 
 -- 震屏
 function M:shake(interval, times)
-    local pos = cc.p(display.width / 2, display.height / 2)
+    local pos = cc.p(0, 0)
     local function move()
         local function getDirect()
             return math.random(1, 2) == 2 and -1 or 1

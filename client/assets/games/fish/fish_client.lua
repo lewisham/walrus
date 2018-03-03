@@ -13,16 +13,18 @@ wls.FishObject = require("games.fish.core.FishObject")
 
 wls.RoomIdx = 1 -- 房间id
 wls.SelfViewID = 1 -- 自己视图id
+wls.RoomMinGunRate = 1 -- 当前房间最小炮率
 wls.SendMsg = function() end -- 网络消息请求
+wls.Toast = function() end
+wls.Dialog = function() end
 
 -- 启动场景
-local launcherFile = "games.fish.scene.walrus.GSWalrus"
-if OLD_FISH_TEST then
-    launcherFile = "games.fish.scene.weile.GSWeile"
+local launcherFile = "games.fish.scene.weile.GSWeile"
+if FISH_SINGLE_GAME then
+    launcherFile = "games.fish.scene.weile.GSWalrus"
 end
 
 local scene = require(launcherFile).new()
-scene:createRoot()
 scene:createAutoPath()
 scene:onCreate()
 scene:run()

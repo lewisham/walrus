@@ -74,6 +74,8 @@ function M:play(pos, cnt, viewID, score)
 end
 
 function M:playImpl(pos, cnt, viewID, score)
+    self:showLabel(viewID, pos, score)
+    --Log("-------playImpl",viewID, pos, score)
     wls.WaitForSeconds(1.0)
     local coord = self:getRowAndColByCount(cnt)
     local gapWidth = 50
@@ -87,14 +89,13 @@ function M:playImpl(pos, cnt, viewID, score)
         x = sx
         for j = 1, coord.row do
             cur = cur + 1
-            local add = cur == cnt and score or 0
+            local add = cur == 1 and score or 0
             self:showCoin(viewID, cc.p(x, y), add)
             wls.WaitForSeconds(0.12)
             x = x + gapWidth
         end
         y = y - gapHeight
     end
-    self:showLabel(viewID, pos, score)
 end
 
 -- 显示金币
@@ -119,7 +120,7 @@ function M:showCoin(viewID, pos, add)
         cc.Spawn:create(cc.ScaleTo:create(timeMove, 0.7), cc.EaseExponentialIn:create(cc.MoveTo:create(timeMove, aimPos))),
         cc.Hide:create(),
     }
-    if add > 0 then
+    if add ~= 0 then
         table.insert(tb, cc.CallFunc:create(function() self:updateCoin(viewID, add) end))
     end
     coin:runAction(cc.Sequence:create(tb))
@@ -127,18 +128,21 @@ end
 
 -- 显示字体
 function M:showLabel(viewID, pos, score)
+    if score <=0 then return end
     local idx = wls.SelfViewID == viewID and 1 or 2
     local label = self:getLabel(idx)
     label:setPosition(pos)
     label:setVisible(false)
     label:setOpacity(255)
     label:setString("+" .. score)
+    label:setScale(1.0)
     local tb =
     {
-        cc.DelayTime:create(0.4),
         cc.Show:create(),
-        cc.DelayTime:create(1.0),
-        cc.FadeOut:create(0.3),
+        cc.ScaleTo:create(0.08, 1.5),
+        cc.ScaleTo:create(0.08, 1.0),
+        cc.DelayTime:create(0.6),
+        cc.Spawn:create(cc.FadeOut:create(0.3), cc.MoveBy:create(0.3, cc.p(0, 30))),
         cc.Hide:create(),
     }
     label:runAction(cc.Sequence:create(tb))
@@ -151,7 +155,7 @@ function M:getRowAndColByCount(cnt)
 end
 
 function M:updateCoin(viewID, add)
-    self:find("UICannon" .. viewID):modifyCoin(add)
+    self:find("UICannon" .. viewID):opCoin(add)
 end
 
 return M

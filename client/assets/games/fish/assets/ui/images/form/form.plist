@@ -7,73 +7,73 @@
 			<key>games/fish/assets/ui/images/form/form_box_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{212,1},{126,84}}</string>
+				<string>{{72,2},{126,84}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/form_box_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,69},{126,84}}</string>
+				<string>{{72,132},{126,84}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/form_box_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,155},{126,84}}</string>
+				<string>{{72,262},{126,84}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/form_pic_tips.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{129,69},{311,29}}</string>
+				<string>{{72,392},{311,29}}</string>
 				<key>offset</key>
 				<string>{-1,1}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{312,30}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/form_pic_title_tj.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{185,917},{96,43}}</string>
+				<string>{{387,376},{96,43}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{96,44}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{230,896},{73,52}}</string>
+				<string>{{671,73},{73,52}}</string>
 				<key>offset</key>
 				<string>{-1,2}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_10.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{246,576},{65,66}}</string>
+				<string>{{602,77},{65,66}}</string>
 				<key>offset</key>
 				<string>{-2,2}</string>
 				<key>rotated</key>
@@ -84,7 +84,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_101.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{340,1},{107,67}}</string>
+				<string>{{160,308},{107,67}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -95,7 +95,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_102.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,554},{107,66}}</string>
+				<string>{{230,235},{107,66}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -106,7 +106,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_103.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{209,745},{60,67}}</string>
+				<string>{{670,2},{60,67}}</string>
 				<key>offset</key>
 				<string>{-3,0}</string>
 				<key>rotated</key>
@@ -117,18 +117,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_104.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{180,601},{80,64}}</string>
+				<string>{{630,351},{80,64}}</string>
 				<key>offset</key>
 				<string>{-2,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_105.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{160,283},{107,75}}</string>
+				<string>{{160,2},{107,75}}</string>
 				<key>offset</key>
 				<string>{-2,2}</string>
 				<key>rotated</key>
@@ -139,7 +139,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_11.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{68,853},{89,62}}</string>
+				<string>{{584,420},{89,62}}</string>
 				<key>offset</key>
 				<string>{0,4}</string>
 				<key>rotated</key>
@@ -150,7 +150,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_12.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{143,757},{64,71}}</string>
+				<string>{{535,2},{64,71}}</string>
 				<key>offset</key>
 				<string>{-1,-3}</string>
 				<key>rotated</key>
@@ -161,7 +161,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_13.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,947},{89,65}}</string>
+				<string>{{479,303},{89,65}}</string>
 				<key>offset</key>
 				<string>{0,3}</string>
 				<key>rotated</key>
@@ -172,29 +172,29 @@
 			<key>games/fish/assets/ui/images/form/fishid_14.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,479},{110,73}}</string>
+				<string>{{387,2},{110,73}}</string>
 				<key>offset</key>
 				<string>{-4,1}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_151.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{110,601},{102,68}}</string>
+				<string>{{341,232},{102,68}}</string>
 				<key>offset</key>
 				<string>{-1,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_152.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{195,87},{109,71}}</string>
+				<string>{{160,81},{109,71}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -205,7 +205,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_153.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,325},{117,78}}</string>
+				<string>{{128,425},{117,78}}</string>
 				<key>offset</key>
 				<string>{1,0}</string>
 				<key>rotated</key>
@@ -216,18 +216,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_154.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{120,382},{116,78}}</string>
+				<string>{{249,425},{116,78}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_155.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,405},{112,72}}</string>
+				<string>{{369,425},{112,72}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -238,18 +238,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_156.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{113,500},{99,72}}</string>
+				<string>{{271,305},{99,72}}</string>
 				<key>offset</key>
 				<string>{-5,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{266,814},{64,58}}</string>
+				<string>{{734,2},{64,58}}</string>
 				<key>offset</key>
 				<string>{-1,5}</string>
 				<key>rotated</key>
@@ -260,18 +260,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_201.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,1},{209,66}}</string>
+				<string>{{2,2},{209,66}}</string>
 				<key>offset</key>
 				<string>{3,1}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{260,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_203.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{201,830},{63,64}}</string>
+				<string>{{603,2},{63,64}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -282,7 +282,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_204.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{160,69},{212,33}}</string>
+				<string>{{345,2},{212,33}}</string>
 				<key>offset</key>
 				<string>{-2,0}</string>
 				<key>rotated</key>
@@ -293,7 +293,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_205.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{132,843},{72,67}}</string>
+				<string>{{531,80},{72,67}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -304,18 +304,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_3.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{268,155},{52,34}}</string>
+				<string>{{307,119},{52,34}}</string>
 				<key>offset</key>
 				<string>{-1,4}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_301.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,241},{122,82}}</string>
+				<string>{{2,428},{122,82}}</string>
 				<key>offset</key>
 				<string>{-1,-2}</string>
 				<key>rotated</key>
@@ -326,7 +326,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_302.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,764},{87,69}}</string>
+				<string>{{382,116},{87,69}}</string>
 				<key>offset</key>
 				<string>{-1,2}</string>
 				<key>rotated</key>
@@ -337,7 +337,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_303.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{187,500},{74,67}}</string>
+				<string>{{464,2},{74,67}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -348,7 +348,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_304.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{72,764},{77,69}}</string>
+				<string>{{650,419},{77,69}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -359,7 +359,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_4.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,853},{92,65}}</string>
+				<string>{{447,207},{92,65}}</string>
 				<key>offset</key>
 				<string>{-2,2}</string>
 				<key>rotated</key>
@@ -370,7 +370,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_5.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{260,644},{64,61}}</string>
+				<string>{{643,147},{64,61}}</string>
 				<key>offset</key>
 				<string>{-1,8}</string>
 				<key>rotated</key>
@@ -381,7 +381,7 @@
 			<key>games/fish/assets/ui/images/form/fishid_50.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,692},{95,70}}</string>
+				<string>{{485,423},{95,70}}</string>
 				<key>offset</key>
 				<string>{-1,1}</string>
 				<key>rotated</key>
@@ -392,18 +392,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_51.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{195,198},{112,68}}</string>
+				<string>{{235,119},{112,68}}</string>
 				<key>offset</key>
 				<string>{0,2}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_52.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,622},{101,68}}</string>
+				<string>{{374,304},{101,68}}</string>
 				<key>offset</key>
 				<string>{-1,2}</string>
 				<key>rotated</key>
@@ -414,18 +414,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_53.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{268,87},{110,66}}</string>
+				<string>{{160,194},{110,66}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_6.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{98,705},{83,50}}</string>
+				<string>{{579,235},{83,50}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -436,18 +436,18 @@
 			<key>games/fish/assets/ui/images/form/fishid_7.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{92,944},{91,59}}</string>
+				<string>{{516,195},{91,59}}</string>
 				<key>offset</key>
 				<string>{1,5}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/form/fishid_8.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{230,971},{47,72}}</string>
+				<string>{{487,372},{47,72}}</string>
 				<key>offset</key>
 				<string>{3,3}</string>
 				<key>rotated</key>
@@ -458,11 +458,77 @@
 			<key>games/fish/assets/ui/images/form/fishid_9.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{183,683},{75,60}}</string>
+				<string>{{579,156},{75,60}}</string>
 				<key>offset</key>
 				<string>{-4,2}</string>
 				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{126,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/form/fishid_501.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{572,290},{93,57}}</string>
+				<key>offset</key>
+				<string>{1,0}</string>
+				<key>rotated</key>
 				<false />
+				<key>sourceSize</key>
+				<string>{126,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/form/fishid_401.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,215},{209,66}}</string>
+				<key>offset</key>
+				<string>{3,2}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{260,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/form/fishid_157.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{455,116},{75,72}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{126,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/form/fishid_158.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{271,2},{113,70}}</string>
+				<key>offset</key>
+				<string>{-1,1}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{126,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/form/fishid_16.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{563,372},{63,44}}</string>
+				<key>offset</key>
+				<string>{0,2}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{126,86}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/form/fishid_15.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{307,175},{53,33}}</string>
+				<key>offset</key>
+				<string>{1,1}</string>
+				<key>rotated</key>
+				<true />
 				<key>sourceSize</key>
 				<string>{126,86}</string>
 			</dict>
@@ -476,14 +542,14 @@
 			<key>realTextureFileName</key>
 			<string>form.png</string>
 			<key>size</key>
-			<string>{448,1019}</string>
+			<string>{1024,512}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>448</integer>
+			<integer>1024</integer>
 			<key>height</key>
-			<integer>1019</integer>
+			<integer>512</integer>
 		</dict>
 	</dict>
 </plist>

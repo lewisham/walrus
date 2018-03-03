@@ -1,0 +1,5 @@
+return {
+    customEntrance="games/fish/FishEntrance.lua",
+    mainfile="games/fish/fish_client.lua",
+	version=1,
+}

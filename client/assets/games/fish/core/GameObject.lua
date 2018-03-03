@@ -12,6 +12,8 @@ function M:ctor()
     self.mGameScene = nil
     self.mComponents = {}
     self.mChildren = {}
+    self.mTimerList = {}
+    self.mTimerID = 0
     self:set("destroy_frames", -1)
 end
 
@@ -115,6 +117,60 @@ end
 
 function M:wrapGameObject(obj, path, name, ...)
     return self:getScene():wrapGameObject(obj, path, name, ...)
+end
+
+------------------------------------
+-- 定时器
+------------------------------------
+function M:doUpdateTimer(dt)
+    local timer
+    for i = #self.mTimerList, 1, -1 do
+        timer =  self.mTimerList[i]
+        if timer.alive then
+            self:updateOneTimer(timer, dt)
+        else
+            table.remove(self.mTimerList, i)
+        end
+    end
+end
+
+function M:updateOneTimer(timer, dt)
+    timer.curTimer = timer.curTimer + dt
+    if timer.curTimer < timer.maxTimer then return end
+    timer.curTimer = 0
+    timer.curCount = timer.curCount + 1
+    if timer.maxCount > 0 and timer.curCount >= timer.maxCount then
+        timer.alive = false
+    end
+    timer.func()
+end
+
+function M:stopTimer(id)
+    for _, timer in ipairs(self.mTimerList) do
+        if timer.id == id then
+            timer.alive = false
+            break
+        end
+    end
+end
+
+function M:startTimer(interval, func, id, cnt)
+    assert(type("interval") ~= "number", "设置间隔时间")
+    assert(func ~= nil, "设置回掉函数")
+    self.mTimerID = self.mTimerID + 1
+    local timer = {}
+    timer.id = id or self.mTimerID
+    timer.curTimer = 0
+    timer.maxTimer = interval
+    timer.curCount = 0
+    timer.maxCount = cnt or 1
+    timer.alive = true
+    timer.func = func
+    if type(func) == "string" then
+        timer.func = function() wls.Invoke(self, func) end
+    end
+    table.insert(self.mTimerList, timer)
+    return timer.id
 end
 
 return M

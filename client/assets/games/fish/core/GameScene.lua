@@ -55,7 +55,7 @@ end
 function M:require(name)
     local path = self:getLuaPath(name) or name
     if self:get("reload_lua_module") then
-        return ReloadLuaModule(path)
+        return wls.ReloadLuaModule(path)
     else
         return require(path)
     end
@@ -77,6 +77,7 @@ function M:destroy()
 		wls.Invoke(obj, "releaseLuaObject")
 	end
     self:releaseLuaObject()
+    display.setAutoScale(CC_DESIGN_RESOLUTION)
 end
 
 function M:getGameApp()
@@ -113,6 +114,7 @@ function M:onUpdate()
     for key, obj in pairs(self.mGameObjects) do
         if wls.IsObjectAlive(obj) then
             wls.Invoke(obj, "onUpdate")
+            obj:doUpdateTimer(wls.TimeDelta)
         else
             self.mGameObjects[key] = nil
         end
@@ -135,6 +137,15 @@ end
 
 function M:getRoot()
     return self.mRoot
+end
+
+-- 重新加载对象
+function M:reloadAllGameObject()
+    for key, obj in pairs(self.mGameObjects) do
+        if wls.IsObjectAlive(obj) then
+            wls.DebugGameObject(obj)
+        end
+    end
 end
 
 -- 创建游戏对象
@@ -212,10 +223,6 @@ function M:rename(go, name)
 end
 
 function M:doExitGame(reason)
-    self:coroutine(self, "doExitGameImpl", reason)
-end
-
-function M:doExitGameImpl(reason)
 end
 
 return M

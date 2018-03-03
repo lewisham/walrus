@@ -7,7 +7,7 @@
 			<key>games/fish/assets/ui/images/loading/hall_room_fish_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,1},{229,214}}</string>
+				<string>{{2,2},{229,214}}</string>
 				<key>offset</key>
 				<string>{-1,8}</string>
 				<key>rotated</key>
@@ -18,7 +18,7 @@
 			<key>games/fish/assets/ui/images/loading/hall_room_fish_1_eyes.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{189,217},{12,11}}</string>
+				<string>{{186,302},{12,11}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -26,21 +26,10 @@
 				<key>sourceSize</key>
 				<string>{14,14}</string>
 			</dict>
-			<key>games/fish/assets/ui/images/loading/loading_bar_blood.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{1,217},{800,38}}</string>
-				<key>offset</key>
-				<string>{-1,2}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{814,52}</string>
-			</dict>
 			<key>games/fish/assets/ui/images/loading/loading_pic_bar_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{232,1},{814,52}}</string>
+				<string>{{235,2},{814,52}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -51,7 +40,7 @@
 			<key>games/fish/assets/ui/images/loading/loading_pic_bubble_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{41,422},{151,167}}</string>
+				<string>{{2,374},{151,167}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -62,7 +51,7 @@
 			<key>games/fish/assets/ui/images/loading/loading_pic_bubble_2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{41,270},{150,172}}</string>
+				<string>{{2,220},{150,172}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -73,22 +62,22 @@
 			<key>games/fish/assets/ui/images/loading/loading_pic_light.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{41,217},{51,78}}</string>
+				<string>{{178,220},{51,78}}</string>
 				<key>offset</key>
 				<string>{-1,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{52,78}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/loading/loading_update_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,1019},{4,186}}</string>
+				<string>{{178,302},{4,186}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<true />
+				<false />
 				<key>sourceSize</key>
 				<string>{4,186}</string>
 			</dict>
@@ -102,14 +91,14 @@
 			<key>realTextureFileName</key>
 			<string>loading.png</string>
 			<key>size</key>
-			<string>{285,1024}</string>
+			<string>{289,818}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>285</integer>
+			<integer>289</integer>
 			<key>height</key>
-			<integer>1024</integer>
+			<integer>818</integer>
 		</dict>
 	</dict>
 </plist>

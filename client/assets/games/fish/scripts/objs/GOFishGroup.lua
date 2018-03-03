@@ -14,27 +14,40 @@ end
 
 function M:gotoFrame(frame)
     self:setAlive(true)
-    self.mCurFrame = frame
-    self.mFishData = self:find("SCConfig"):getFishGroup(self.mStartID)
+    self.mCurFrame = 0
+    self.mFishData, self.mMaxFrame = self:find("SCConfig"):getFishGroup(self.mStartID)
+    local unit = nil
+    local arrayArgs = {}
+    while self.mCurFrame <= frame do
+        unit = self.mFishData[self.mCurFrame]
+        if unit then
+            for _, val in ipairs(unit.fishes) do
+                arrayArgs.timeline_id = val.id
+                arrayArgs.id = val.fisharrid
+                arrayArgs.frame = frame - self.mCurFrame
+                self:find("SCPool"):createFishArray(arrayArgs)
+            end
+        end
+        self.mCurFrame = self.mCurFrame + 1
+    end
 end
 
 function M:updateFrame()
-    local bAllUse = true
-    local arrayArgs = {}
-    for _, unit in ipairs(self.mFishData) do
-        if unit.frame == self.mCurFrame then
-            unit.use = true
-            arrayArgs.timeline_id = 0
-            arrayArgs.id = unit.fisharrid
-            arrayArgs.frame = 1
-            self:find("SCPool"):createFishArray(arrayArgs)
-        end
-        if bAllUse and not unit.use then
-            bAllUse = false
-        end
-    end
-    self.alive = not bAllUse
     self.mCurFrame = self.mCurFrame + 1
+    self:doFrame()
+    self.alive = self.mCurFrame < self.mMaxFrame
+end
+
+function M:doFrame()
+    local unit = self.mFishData[self.mCurFrame]
+    if unit == nil then return end
+    local arrayArgs = {}
+    for _, val in ipairs(unit.fishes) do
+        arrayArgs.timeline_id = val.id
+        arrayArgs.id = val.fisharrid
+        arrayArgs.frame = 1
+        self:find("SCPool"):createFishArray(arrayArgs)
+    end
 end
 
 return M

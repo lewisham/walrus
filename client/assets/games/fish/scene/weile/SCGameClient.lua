@@ -7,13 +7,17 @@
 local M = class("SCGameClient", wls.GameObject)
 
 function M:onCreate()
-    self:set("start_process", false)
     self.mPlayers = {}
-    --self:registerProcessEvent()
+    self.mSelfPlayer = nil
+    self:registerProcessEvent()
 end
 
 function M:getPlayer(id)
     return self.mPlayers[id]
+end
+
+function M:getSelfPlayer()
+    return self.mSelfPlayer
 end
 
 -------------------------------------
@@ -31,17 +35,18 @@ function M:registerProcessEvent()
         ["PrintMessage"] = "onPrintMessage",
         ["OnUserProp"] = "onUserProp",
         ["OnUsePropFailed"] = "onUsePropFailed",
-        ["CreateM"] = "onCreateM",
+        ["CreateGameScene"] = "onCreateGameScene",
         ["OnGiftMoneyReplay"] = "onGiftMoneyReplay",
         [31] = "onRecvMsg",
     }
+    if GameClient.event["Initialize"] then return end
     for key, name in pairs(tb) do
         GameClient.event[key] = function(obj, ...) return self:handleProcessEvent(name, ...) end
     end
 end
 
 function M:handleProcessEvent(name, ...)
-    Log("+++++++++++handleProcessEvent", name)
+    print("+++++++++++handleProcessEvent  " .. name)
     if self[name] then 
         return wls.Invoke(self, name, ...) 
     else
@@ -51,6 +56,8 @@ end
 
 -- 收到网络消息
 function M:onRecvMsg(buffer)
+    local id, resp = wls.JMSG:decode(buffer)
+    self:find("SCRecv"):doHandleMsg(id, resp)
 end
 
 -- 游戏初始化
@@ -61,6 +68,7 @@ end
 -- 游戏关闭
 function M:onShutdown()
     self:getScene():destroy()
+    cc.Director:getInstance():popToRootScene()
 end
 
 -- 玩家进入
@@ -82,6 +90,7 @@ function M:onPlayerJoin(player, isSelf)
     data.view_id = viewID
     self.mPlayers[player.id] = data
     if not isSelf then return end
+    self.mSelfPlayer = data
     wls.SelfViewID = viewID
 end
 
@@ -89,7 +98,8 @@ end
 function M:onPlayerLeave(player)
     local data = self.mPlayers[player.id]
     self.mPlayers[player.id] = nil
-    if data == nil then return end
+    if data == nil or data.view_id == nil then return end
+    if self:find("UIBackGround") == nil then return end
     self:find("UIBackGround"):showWaiting(data.view_id, true)
     local cannon = self:find("UICannon" .. data.view_id)
     cannon:setVisible(false)
@@ -110,6 +120,16 @@ function M:onSocketError(state)
 end
 
 function M:onGameReset()
+end
+
+-- 创建游戏场景
+function M:onCreateGameScene()
+    local scene = cc.Scene:create()
+    cc.Director:getInstance():pushScene(scene)
+    scene.mSceneName = "fish"
+    rawset(_G, "g_rootNode", scene)
+    self:set("create_scene", true)
+    return scene
 end
 
 function M:onPrintMessage(msgType, strMsg)

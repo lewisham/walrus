@@ -14,10 +14,31 @@ function M:onCreate()
     self:loadCsb(self:fullPath("ui/uiLoadingLayer.csb"), true)
     self.sliderScale = self.slider_loading:getScale()
     self:updatePercent(0)
-    self.text_message:setString("海象号扬帆起航...")
     local action = cc.CSLoader:createTimeline(self:fullPath("ui/uiLoadingLayer.csb"))
     self:runAction(action)
     action:gotoFrameAndPlay(0)
+    local ids = {}
+    for i = 0, 9 do
+        table.insert(ids, {i, math.random(1, 100)})
+    end
+    table.sort(ids, function(a, b) return a[2] < b[2] end )
+    self.ids = ids
+    self.textIdx = 1
+    self:showText()
+    self:startTimer(2.0, "onTipsTimer", nil, -1)
+end
+
+function M:onTipsTimer()
+    self:showText()
+end
+
+function M:showText()
+    self.textIdx = self.textIdx + 1
+    if self.textIdx > #self.ids then
+        self.textIdx = 1
+    end
+    local idx = self.ids[self.textIdx][1]
+    self.text_message:setString(self:require("language")[tostring(800000059 + idx)].ch)
 end
 
 function M:calcLoadRes()
@@ -38,6 +59,7 @@ function M:calcLoadRes()
     end
     -- 子弹开火效果
     table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/guns_fire.plist"})
+    table.insert(list, {type = 1, filename = "games/fish/assets/plist/bullet/bullet.plist"})
 
     -- 特效图
     table.insert(list, {type = 1, filename = "games/fish/assets/ui/images/effect/blast.plist"})
@@ -71,7 +93,6 @@ function M:play()
         self:updatePercent(idx / total * 100)
         wls.WaitForFrames(1)
     end
-    wls.WaitForSeconds(0.1)
     self:find("SCSound"):playMusic("music_00" .. wls.RoomIdx)
 end
 

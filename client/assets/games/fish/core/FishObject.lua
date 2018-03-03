@@ -126,11 +126,11 @@ end
 
 -- 分离轴算法
 function M:sat(go)
-    local offsetx = self.position.x - go.position.x
-    local offsety = self.position.y - go.position.y
-    if offsetx * offsetx + offsety * offsety > self.raduis_2 + go.raduis_2 then
-        return false
-    end
+    -- local offsetx = self.position.x - go.position.x
+    -- local offsety = self.position.y - go.position.y
+    -- if offsetx * offsetx + offsety * offsety > self.raduis_2 + go.raduis_2 then
+    --     return false
+    -- end
     for k, v in ipairs(self.points) do
         local axis = self.axis[k]
         project(projectA, self.points, axis)
@@ -146,7 +146,18 @@ function M:sat(go)
 	return true
 end
 
+-- 是否在范围内
+function M:isInRange(orgin, raduis)
+    local s
+    for k, v in ipairs(self.points) do
+        s = dot(cc.pSub(v, orgin), self.axis[k])
+        if s > raduis then return false end  
+	end
+    return true
+end
+
 function M:moveTo(pos, duration)
+    self:stopActionByTag(MOVE_TAG)
     local mov = cc.MoveTo:create(duration, pos)
     mov:setTag(MOVE_TAG)
     self:runAction(mov)
@@ -157,6 +168,12 @@ function M:stopMove()
 end
 
 function M:onCollsion()
+end
+
+-- 是否在屏幕内
+function M:isInScreen()
+    local pos = cc.p(self:getPosition())
+    return cc.rectContainsPoint(wls.ScreenRect, pos)
 end
 
 return M

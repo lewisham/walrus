@@ -19,16 +19,16 @@ function M:gotoFrame(frame)
     self.mMaxFrame = 0
     self.mFishData, self.mMaxFrame = self:find("SCConfig"):getFishTimeline(self.mStartID)
     local args = {}
+    args.array_id = 0
     local arrayArgs = {}
     local unit
     self.pool = self:find("SCPool")
-    while self.mCurFrame < frame do
-        self.mCurFrame = self.mCurFrame + 1
+    while self.mCurFrame <= frame do
         unit = self.mFishData[self.mCurFrame]
         if unit then
             for _, val in ipairs(unit.fishes) do
                 if val[1] == "100" then
-                    arrayArgs.timeline_id = unit.id
+                    arrayArgs.timeline_id = val[3]
                     arrayArgs.id = val[2]
                     arrayArgs.frame = frame - self.mCurFrame
                     self.pool:createFishArray(arrayArgs)
@@ -36,11 +36,12 @@ function M:gotoFrame(frame)
                     args.id = val[1]
                     args.path_id = tostring(val[2] +300000000)
                     args.cur_frame = frame - self.mCurFrame
-                    args.timeline_id = unit.id
+                    args.timeline_id = val[3]
                     self.pool:createFish(args)
                 end
             end
         end
+        self.mCurFrame = self.mCurFrame + 1
     end
 end
 
@@ -54,11 +55,12 @@ function M:doFrame()
     local unit = self.mFishData[self.mCurFrame]
     if unit == nil then return end
     local args = {}
+    args.array_id = 0
     local arrayArgs = {}
     local fish = nil
     for _, val in ipairs(unit.fishes) do
         if val[1] == "100" then
-            arrayArgs.timeline_id = unit.id
+            arrayArgs.timeline_id = val[3]
             arrayArgs.id = val[2]
             arrayArgs.frame = 1
             self.pool:createFishArray(arrayArgs)
@@ -66,7 +68,7 @@ function M:doFrame()
             args.id = val[1]
             args.path_id = tostring(val[2] +300000000)
             args.cur_frame = 1
-            args.timeline_id = unit.id
+            args.timeline_id = val[3]
             fish = self.pool:createFish(args)
             self:doBossWarnning(fish)
         end

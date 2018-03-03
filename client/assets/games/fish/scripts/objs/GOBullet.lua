@@ -4,13 +4,16 @@
 -- 描述：子弹
 ----------------------------------------------------------------------
 
+local FOLLOW_INTERVAL = 5
+
 local M = class("GOBullet", wls.FishObject)
 
 function M:onCreate(id)
     self.mViewID = -1
     self.config = self:require("cannonoutlook")[id]
     self:getScene():get("bullet_layer"):addChild(self, tonumber(id))
-    local sprite = cc.Sprite:create(self:fullPath("plist/bullet/".. self.config.bullet_img))
+    -- 子弹图
+    local sprite = cc.Sprite:createWithSpriteFrameName(self.config.bullet_img)
     self:addChild(sprite)
     sprite:setAnchorPoint(cc.p(0.5, 0.75))
     self.vertices = {cc.p(-5, -10), cc.p(5, -10), cc.p(5, 15), cc.p(-5, 15)}
@@ -18,17 +21,27 @@ function M:onCreate(id)
     self:initCollider()
     self.bulletSpr = sprite
     self.vec = cc.p(0, 0)
+
+    -- 狂暴图
+    local bg = cc.Sprite:createWithSpriteFrameName("effect_bullet_superpos_01.png")
+    self:addChild(bg)
+    bg:setAnchorPoint(cc.p(0.5, 0.75))
+    bg:setVisible(false)
+    self.bgSpr = bg
     self:setVisible(false)
 end
 
-function M:resetBullet(viewID)
+function M:resetBullet(viewID, bViolent)
     self.mbSelf = wls.SelfViewID == viewID  -- 是否是自己的子弹
     self.mViewID = viewID
     self.mbFollow = false
     self.mFollowFish = nil
     self:setAlive(true)
     self:setVisible(true)
+    if bViolent == nil then bViolent = false end
+    self.bgSpr:setVisible(bViolent)
     self:find("DAFish"):modifyBulletCnt(viewID, 1)
+    self.mFollowIdx = FOLLOW_INTERVAL
 end
 
 function M:isNeedCollionCheck()
@@ -41,10 +54,10 @@ function M:getViewID(viewID)
 end
 
 -- 向某个角度发射
-function M:launch(id, srcPos, angle)
+function M:launch(id, srcPos, angle, duration)
     self:setVisible(true)
     self.config = self:require("cannonoutlook")[id]
-    self.bulletSpr:setTexture(self:fullPath("plist/bullet/".. self.config.bullet_img))
+    self.bulletSpr:setSpriteFrame(self.config.bullet_img)
     angle = angle - 90
     self:setPosition(srcPos)
     local radian = angle / 180 * 3.1415926
@@ -54,10 +67,15 @@ function M:launch(id, srcPos, angle)
 end
 
 -- 跟踪某个点
-function M:follow(id, srcPos, angle)
+function M:follow(id, srcPos, angle, duration)
     self.mbFollow = true
-    self:launch(id, srcPos, angle)
+    self:setVisible(true)
+    self.config = self:require("cannonoutlook")[id]
+    self.bulletSpr:setSpriteFrame(self.config.bullet_img)
+    self:setPosition(srcPos)
     self.mFollowFish = self:find("SCPool"):getFollowFish(self.mViewID)
+    if self.mFollowFish == nil then return end
+    self:flightTo()
 end
 
 function M:updateFrame()
@@ -113,6 +131,7 @@ function M:onCollsion()
 end
 
 function M:removeFromScreen()
+    self.bullet_id = -1
     self:setVisible(false)
     self:setAlive(false)
     self:find("DAFish"):modifyBulletCnt(self.mViewID, -1)
@@ -120,13 +139,56 @@ end
 
 -- 跟踪
 function M:updateFollow()
+    self.mFollowFish = self:find("SCPool"):getFollowFish(self.mViewID)
     if self.mFollowFish == nil then return end
     if not self.mFollowFish:isAlive() then
-        self.mFollowFish = self:find("SCPool"):getFollowFish(self.mViewID)
+        return
     end
-    local p2 = cc.p(self:getPosition())
-    self.vec = cc.pNormalize(cc.pSub(self.mFollowFish.position, p2))
-    self:moveToNextPoint()
+    if self.mFollowIdx > 0 then
+        self.mFollowIdx = self.mFollowIdx - 1
+        return
+    end
+    self.mFollowIdx = FOLLOW_INTERVAL
+    self:flightTo()
+end
+
+-- 飞行到
+function M:flightTo()
+    local dst = cc.p(self.mFollowFish:getPosition())
+    local pos = cc.p(self:getPosition())
+    local offset = cc.pSub(dst, pos)
+    local distance = cc.pGetLength(offset)
+    local duration = distance / 650 * 0.6
+    local rotation = math.atan2(offset.y, offset.x) * 180 / math.pi
+    self:runAction(cc.RotateTo:create(0.03, -rotation + 90))
+    self:stopActionByTag(101)
+    local function moveTo()
+        if self.mFollowFish == nil then 
+            return 
+        end
+        self:find("SCPool"):createNet(self.config.id, dst)
+        self:stopActionByTag(101)
+        if self.mbSelf then
+            self.mFollowFish:onRed()
+            wls.SendMsg("sendHit", self.bullet_id, {self.mFollowFish})
+        end
+        self:removeFromScreen()
+    end
+    local function moveOut()
+        wls.SendMsg("sendHit", self.bullet_id, {})
+        self:removeFromScreen()
+    end
+    local rate = display.width / distance
+    local act = cc.Sequence:create
+    {
+        cc.MoveBy:create(duration, offset), 
+        cc.CallFunc:create(moveTo),
+        cc.MoveBy:create(duration * rate, cc.p(offset.x * rate, offset.y * rate)),
+        cc.CallFunc:create(moveOut),
+    }
+    act:setTag(101)
+    self:runAction(act)
+
 end
 
 return M

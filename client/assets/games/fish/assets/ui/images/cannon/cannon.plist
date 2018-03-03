@@ -7,51 +7,51 @@
 			<key>games/fish/assets/ui/images/cannon/bl_btn_-_0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{201,141},{68,43}}</string>
+				<string>{{252,417},{68,43}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{68,44}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/cannon/bl_btn_-_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{92,847},{68,42}}</string>
+				<string>{{279,557},{68,42}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{68,44}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/cannon/bl_btn_add_0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{271,141},{68,43}}</string>
+				<string>{{279,487},{68,43}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{68,44}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/cannon/bl_btn_add_1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{312,78},{68,43}}</string>
+				<string>{{297,417},{68,43}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{68,44}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/cannon/bl_cannon_base_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{141,201},{188,80}}</string>
+				<string>{{1,921},{188,80}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -62,7 +62,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_coin_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{312,1},{184,75}}</string>
+				<string>{{191,917},{184,75}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,771},{89,135}}</string>
+				<string>{{141,631},{89,135}}</string>
 				<key>offset</key>
 				<string>{0,-1}</string>
 				<key>rotated</key>
@@ -84,7 +84,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,627},{95,142}}</string>
+				<string>{{140,487},{95,142}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -95,7 +95,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{128,341},{110,140}}</string>
+				<string>{{140,345},{110,140}}</string>
 				<key>offset</key>
 				<string>{0,-1}</string>
 				<key>rotated</key>
@@ -106,7 +106,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_04.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{201,1},{109,138}}</string>
+				<string>{{143,201},{109,138}}</string>
 				<key>offset</key>
 				<string>{0,-2}</string>
 				<key>rotated</key>
@@ -117,7 +117,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_05.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,486},{128,139}}</string>
+				<string>{{128,776},{128,139}}</string>
 				<key>offset</key>
 				<string>{0,-1}</string>
 				<key>rotated</key>
@@ -128,7 +128,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_06.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,341},{125,143}}</string>
+				<string>{{1,776},{125,143}}</string>
 				<key>offset</key>
 				<string>{0,1}</string>
 				<key>rotated</key>
@@ -139,7 +139,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_07.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,201},{138,138}}</string>
+				<string>{{1,636},{138,138}}</string>
 				<key>offset</key>
 				<string>{0,-1}</string>
 				<key>rotated</key>
@@ -150,7 +150,7 @@
 			<key>games/fish/assets/ui/images/cannon/bl_gun_lock.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{92,771},{74,74}}</string>
+				<string>{{252,341},{74,74}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -161,22 +161,22 @@
 			<key>games/fish/assets/ui/images/cannon/bl_multiple_bg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{141,283},{140,40}}</string>
+				<string>{{237,487},{140,40}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{140,40}</string>
 			</dict>
 			<key>games/fish/assets/ui/images/cannon/bl_pic_bankrupt.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1,908},{129,78}}</string>
+				<string>{{232,631},{129,78}}</string>
 				<key>offset</key>
 				<string>{-1,0}</string>
 				<key>rotated</key>
-				<false />
+				<true />
 				<key>sourceSize</key>
 				<string>{130,78}</string>
 			</dict>
@@ -191,6 +191,39 @@
 				<key>sourceSize</key>
 				<string>{198,198}</string>
 			</dict>
+			<key>games/fish/assets/ui/images/cannon/bl_gun_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,201},{140,142}}</string>
+				<key>offset</key>
+				<string>{0,1}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{140,144}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/cannon/bl_gun_09.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,491},{137,143}}</string>
+				<key>offset</key>
+				<string>{-1,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{140,144}</string>
+			</dict>
+			<key>games/fish/assets/ui/images/cannon/bl_gun_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,345},{137,144}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{140,144}</string>
+			</dict>
 		</dict>
 		<key>metadata</key>
 		<dict>
@@ -201,14 +234,14 @@
 			<key>realTextureFileName</key>
 			<string>cannon.png</string>
 			<key>size</key>
-			<string>{497,987}</string>
+			<string>{376,1002}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>497</integer>
+			<integer>376</integer>
 			<key>height</key>
-			<integer>987</integer>
+			<integer>1002</integer>
 		</dict>
 	</dict>
 </plist>
