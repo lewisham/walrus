@@ -104,6 +104,7 @@ local function testFish()
     else
 	    cc.Director:getInstance():runWithScene(scene)
     end
+    FISH_SINGLE_GAME = true
     g_RootNode = scene
     require("games.fish.fish_client")
 end

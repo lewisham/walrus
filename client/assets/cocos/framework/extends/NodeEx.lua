@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 local Node = cc.Node
 
--- ±éÀúËùÓÐ×Ó¿Ø¼þ
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Ø¼ï¿½
 function Node:visitAll(fn)
 	local function fnVisitAll(nd, fn)
 		for k, child in pairs(nd:getChildren()) do
@@ -44,19 +44,19 @@ function Node:visitAll(fn)
 	return fnVisitAll(self, fn)
 end
 
--- ¹¦ÄÜ£º¿ªÊ¼½Úµã¶¨Ê±Æ÷
--- ²ÎÊýfnTimer: Òª×öµÄÊÂÇé
--- ²ÎÊýbSkipFirst: ²»Á¢¼´Ö´ÐÐ
--- Àý×Ó£ºg_rootNode:startTimer(function() print(os.time()) end, 2)
-function Node:startTimer(fnTimer, seconds, bSkipFirst)
+-- ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½Ê¼ï¿½Úµã¶¨Ê±ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½fnTimer: Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½bSkipFirst: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
+-- ï¿½ï¿½ï¿½Ó£ï¿½g_rootNode:startTimer(function() print(os.time()) end, 2)
+function Node:startTimer1(fnTimer, seconds, bSkipFirst)
 	self:stopAllActions()
 
-	local function fnWrap() -- ³ö´íÊ±¹Ø±Õ¶¨Ê±Æ÷
+	local function fnWrap() -- ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ø±Õ¶ï¿½Ê±ï¿½ï¿½
 		return TryCatch(fnTimer, function() self:stopAllActions() end)
 	end
 
 	local acList = {}
-	if bSkipFirst then -- Ìø¹ýµÚÒ»´Î
+	if bSkipFirst then -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 		acList:insert(cc.DelayTime:create(seconds))
 		acList:insert(cc.CallFunc:create(fnWrap))
 	else
@@ -68,21 +68,21 @@ function Node:startTimer(fnTimer, seconds, bSkipFirst)
 	return self
 end
 
--- ¹¦ÄÜ: Í£Ö¹¶¨Ê±Æ÷
-function Node:stopTimer()
+-- ï¿½ï¿½ï¿½ï¿½: Í£Ö¹ï¿½ï¿½Ê±ï¿½ï¿½
+function Node:stopTimer1()
 	self:stopAllActions()
 	return self
 end
 
 ----------------------------------------------------------------------
--- ¹¦  ÄÜ£ºÌõ¼þ¶¨Ê±ÖØ¸´´¥·¢
+-- ï¿½ï¿½  ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
 ----------------------------------------------------------------------
 function Node:timerWhile(fnCond, seconds, fnOnError)
 	local nd = cc.Node:create()
 	self:addChild(nd)
 
 	local function fnCatch()
-		SafeRemoveNode(nd) -- ³ö´íÏÈÉ¾×Ô¼º, ·ÀÖ¹×ÊÔ´Ð¹Â¶
+		SafeRemoveNode(nd) -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½Ô¼ï¿½, ï¿½ï¿½Ö¹ï¿½ï¿½Ô´Ð¹Â¶
 		fnOnError()
 	end
 
@@ -90,7 +90,7 @@ function Node:timerWhile(fnCond, seconds, fnOnError)
 		return TryCatch(fnCond, fnCatch)
 	end
 
-	local hasFinish = false -- ¼ÓÕâ¸ö±äÁ¿·ÀÖ¹cocos2dx bug£¬×îºóÌõ¼þ¿ÉÄÜ±»Ö´ÐÐ¶à´Î
+	local hasFinish = false -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹cocos2dx bugï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü±ï¿½Ö´ï¿½Ð¶ï¿½ï¿½
 	local function fnTimer()
 		if hasFinish then
 			return
@@ -116,34 +116,34 @@ function Node:setMidPosition(node, difX, difY)
     node:setPosition(cc.p(pos.x+difX, pos.y+difY))
 end
 
--- Ìí¼Óµ½¿Ø¼þÖÐµã
+-- ï¿½ï¿½Óµï¿½ï¿½Ø¼ï¿½ï¿½Ðµï¿½
 function Node:addChildToMid(node, difX, difY)
     self:addChild(node)
     self:setMidPosition(node, difX, difY)
 end
 
--- ¹¦ÄÜ: °ó¶¨µ½ÆÁÄ»µÄÄ³¸öµã, ±ØÐëÈ·±£¸¸½ÚµãÒÑ¼ÓÈë³¡¾°Ê÷
--- Àý×Ó: nd:bindScreen(0.5, 0.5) -- °óµ½ÆÁÄ»ÖÐÐÄ
--- Àý×Ó: nd:bindScreen(0, 0) -- °óµ½ÆÁÄ»×óÏÂ½Ç
--- Àý×Ó: nd:bindScreen(1, 1) -- °óµ½ÆÁÄ»ÓÒÉÏ½Ç
+-- ï¿½ï¿½ï¿½ï¿½: ï¿½ó¶¨µï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ñ¼ï¿½ï¿½ë³¡ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½: nd:bindScreen(0.5, 0.5) -- ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½: nd:bindScreen(0, 0) -- ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Â½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½: nd:bindScreen(1, 1) -- ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Ï½ï¿½
 function Node:bindScreen(xAnchor, yAnchor)
-	assert(xAnchor and yAnchor, "Çë´«Èëx, y°ó¶¨µã, È¡Öµ·¶Î§0.0ÖÁ1.0!")
-	-- ¸¸½Úµã
+	assert(xAnchor and yAnchor, "ï¿½ë´«ï¿½ï¿½x, yï¿½ó¶¨µï¿½, È¡Öµï¿½ï¿½Î§0.0ï¿½ï¿½1.0!")
+	-- ï¿½ï¿½ï¿½Úµï¿½
 	local ndParent = self:getParent()
-	assert(ndParent, "Ã»¸¸½ÚµãÆÁÄ»×ø±êËã²»³öÀ´!")
+	assert(ndParent, "Ã»ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ã²»ï¿½ï¿½ï¿½ï¿½!")
 	local director = cc.Director:getInstance()
 	local view = director:getOpenGLView()
 	--Log(view:getVisibleRect())
 	local rc = view:getVisibleRect()
-	-- ÊÀ½ç×ø±ê
+	-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	local worldPos = cc.p(rc.x + rc.width * xAnchor, rc.y + rc.height * yAnchor)
-	-- ×ª³É×Ô¼ºµÄ×ø±ê
+	-- ×ªï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	local selfPos = ndParent:convertToNodeSpace(worldPos)
 	self:setPosition(selfPos)
 	return self
 end
 
--- ÏÔÊ¾¿Ø¼þ
+-- ï¿½ï¿½Ê¾ï¿½Ø¼ï¿½
 function Node:where()
 	local sz = self:getContentSize()
 	if sz.width < 50 then
@@ -260,7 +260,7 @@ function Node:scaleTo(args)
 end
 
 ----------------------------------------------------------------------
--- ¹¦  ÄÜ£º¹ýÒ»»á×öÄ³¼þÊÂÇé
+-- ï¿½ï¿½  ï¿½Ü£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ----------------------------------------------------------------------
 function Node:callAfter(seconds, fn)
 	local arr = {cc.DelayTime:create(seconds),
@@ -270,7 +270,7 @@ function Node:callAfter(seconds, fn)
 end
 
 ----------------------------------------------------------------------
--- ¹¦  ÄÜ£º¹ýÒ»»á×öÄ³¼þÊÂÇé(ÓÃ×Ó½Úµã×ö¶¨Ê±Æ÷, ·ÀÖ¹runAction³åÍ»)
+-- ï¿½ï¿½  ï¿½Ü£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½, ï¿½ï¿½Ö¹runActionï¿½ï¿½Í»)
 ----------------------------------------------------------------------
 function Node:callAfterEx(seconds, fn)
 	local nd = cc.Node:create()
@@ -282,11 +282,11 @@ function Node:callAfterEx(seconds, fn)
 	return self
 end
 
--- Ìø¹ýÒ»Ö¡£¬·ÀÖ¹³öÏÖÊÓ¾õbug
+-- ï¿½ï¿½ï¿½ï¿½Ò»Ö¡ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½bug
 function Node:runAtNextFrame(fn)
 	local oldVal = cc.Director:getInstance():getTotalFrames()
 	local function fnCond()
-		if cc.Director:getInstance():getTotalFrames() > oldVal + 1 then -- Ìø¹ý2Ö¡
+		if cc.Director:getInstance():getTotalFrames() > oldVal + 1 then -- ï¿½ï¿½ï¿½ï¿½2Ö¡
 			fn()
 			return false
 		else
@@ -298,11 +298,11 @@ function Node:runAtNextFrame(fn)
 end
 
 ----------------------------------------------------------------------
--- ¹¦  ÄÜ£º¸Ä±ä¸¸½Úµã
+-- ï¿½ï¿½  ï¿½Ü£ï¿½ï¿½Ä±ä¸¸ï¿½Úµï¿½
 ----------------------------------------------------------------------
 function Node:changeParentNode(newParent)
 	local nd = self
-	nd:retain() -- ·ÀÖ¹±»ÊÍ·Å
+	nd:retain() -- ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½Í·ï¿½
 	local parent = nd:getParent()
 	if parent then
 		parent:removeChild(nd, false)
@@ -311,7 +311,7 @@ function Node:changeParentNode(newParent)
 	nd:release()
 end
 ----------------------------------------------------------------------
--- ¹¦  ÄÜ£ºÈ¥µôsetParentº¯Êý£¬·ÀÖ¹ÎóÓÃ
+-- ï¿½ï¿½  ï¿½Ü£ï¿½È¥ï¿½ï¿½setParentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
 ----------------------------------------------------------------------
 Node.setParent = nil
 
@@ -322,7 +322,7 @@ function Node:onUpdate(callback)
     return self
 end
 
--- scheduleUpdateÄÚ²¿²»ÄÜÉ¾³ýÈÎºÎ½Úµã£¬·ñÔò¿ÉÄÜ»áÉÁÍË
+-- scheduleUpdateï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ÎºÎ½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½
 Node.scheduleUpdate = Node.onUpdate
 ]]--
 
@@ -426,7 +426,7 @@ function Node:onCleanup_()
     self:onCleanupCallback_()
 end
 
--- °ó¶¨Á£×Ó(¸úËæ½ÚµãÒÆ¶¯)
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Æ¶ï¿½)
 function Node:setParticleGrouped()
 	self:visitAll(function(v)
 				local disNode = v:getDisplayRenderNode()

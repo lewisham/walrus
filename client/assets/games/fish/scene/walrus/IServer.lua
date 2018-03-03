@@ -4,19 +4,16 @@
 -- 描述：模拟服务器
 ----------------------------------------------------------------------
 
-local M = class("ISever", wls.GameObject)
+local M = class("IServer", wls.GameObject)
 
 function M:onCreate()
     self.mFrameIdx = 0
     self.mTimeLineIdx = 0
     self.mGroupIdx = 600
     self.mPlayerList = {}
-    self:coroutine(self, "play")
-    self:coroutine(self, "updatePlayer")
-    self:test()
 end
 
-function M:test()
+function M:play()
     --self:testFish("100000401")
     --self:find("SCPool"):randomTimeLine()
     --self:find("SCPool"):createNet(1, cc.p(512, 360))
@@ -25,7 +22,7 @@ function M:test()
     local tb = {}
     local viewID = wls.SelfViewID
     table.insert(tb, viewID)
-    for i = 1, 0 do
+    for i = 1, 4 do
         if viewID ~= i then
             table.insert(tb, i)
         end
@@ -37,15 +34,17 @@ function M:test()
             gun_id = i == viewID and 1 or math.random(1, 7),
             gun_rate = rates[math.random(1, #rates)],
             is_self = i == viewID,
-            coin = math.random(1000, 9999),
+            coin = math.random(100000, 9999999),
             diamonds = math.random(0, 9999),
             shoot_cnt = 0,
         }
         table.insert(self.mPlayerList, info)
-        self:post("onMsgPlayerJoin", info)
+        self:onMsgPlayerJoin(info)
     end
-    --self:createTimeline()
+    self:createTimeline()
     --self:createGroup()
+    self:coroutine(self, "loop")
+    self:coroutine(self, "updatePlayer")
 end
 
 function M:updatePlayer()
@@ -85,10 +84,12 @@ function M:playerShoot(player)
     req.view_id = player.view_id
     req.angle = player.shoot_angle
     req.coin = player.coin
-    self:post("onMsgShoot", req)
+    local cannon = self:find("UICannon" .. req.view_id)
+    cannon:fire(1, req.angle)
+    cannon:setCoin(req.coin)
 end
 
-function M:play()
+function M:loop()
     while true do
         self.mFrameIdx = self.mFrameIdx + 1
         self:updateFrame()
@@ -120,10 +121,26 @@ function M:createTimeline()
     local req = {}
     req.id = id
     req.frame = 0
-    self:post("onMsgCreateTimeLine", req)
+    self:find("SCPool"):createTimeLine(req.id, req.frame, false)
+    self:find("SCPool"):createTimeLine(req.id, req.frame, true)
     self.mTimeLineIdx = 6000
     self.mGroupIdx = self.mTimeLineIdx
     self.mTimeLineIdx = self.mTimeLineIdx + 200
+end
+
+-- 玩家加入
+function M:onMsgPlayerJoin(player)
+    self:find("UIBackGround"):showWaiting(player.view_id, false)
+    local cannon = self:find("UICannon" .. player.view_id)
+    cannon:join(player.is_self)
+    cannon:updateGun(player.gun_id)
+    self:find("SCPool"):createBulletPool(cannon.config.id)
+    cannon:setCoin(player.coin)
+    cannon:setGem(player.diamonds)
+    cannon:setGunRate(player.gun_rate)
+    if player.is_self then
+        self:find("UITouch"):setTouchEnabled(true)
+    end
 end
 
 

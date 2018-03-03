@@ -113,7 +113,7 @@ end
 cc.FileUtils:getInstance():setWritablePath("../../write/")
 
 --LuaDebug配置
-if cc.FileUtils:getInstance():isFileExist("src/platform/win32/LuaDebugjit1.lua") then
+if cc.FileUtils:getInstance():isFileExist("src/platform/win32/LuaDebugjit.lua") then
     local breakInfoFun, xpcallFun = require("src.platform.win32.LuaDebugjit")("localhost", 7003)
     cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)
 end

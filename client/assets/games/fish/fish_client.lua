@@ -21,7 +21,7 @@ wls.Dialog = function() end
 -- 启动场景
 local launcherFile = "games.fish.scene.weile.GSWeile"
 if FISH_SINGLE_GAME then
-    launcherFile = "games.fish.scene.weile.GSWalrus"
+    launcherFile = "games.fish.scene.walrus.GSWalrus"
 end
 
 local scene = require(launcherFile).new()
