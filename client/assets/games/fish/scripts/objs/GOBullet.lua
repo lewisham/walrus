@@ -116,6 +116,7 @@ function M:updateNormal()
 end
 
 function M:moveToNextPoint()
+    Log(self:getNextPoint())
     local raduis = display.width + display.height
     local dstPos = cc.p(raduis * self.vec.x, raduis * self.vec.y)
     local act = cc.MoveBy:create(raduis / 650.0, dstPos)
@@ -188,7 +189,35 @@ function M:flightTo()
     }
     act:setTag(101)
     self:runAction(act)
+end
 
+local function dot(x1, y1, x2, y2)
+	return x1 * x2 + y1 * y2
+end
+
+function M:getNextPoint()
+    local cx, cy = self:getPosition()
+    local vx, vy = self.vec.x, self.vec.y
+    local a = vy / vx
+    local b = cy - a * cx
+    local x = 0
+    local y = b
+    if y >= 0 and y <= display.height and dot(x - cx, y - cy, vx, vy) > 0 then
+        return cc.p(x, y)
+    end
+    x = display.width
+    y = a * x + b
+    if y >= 0 and y <= display.height and dot(x - cx, y - cy, vx, vy) > 0 then
+        return cc.p(x, y)
+    end
+    y = 0
+    x = (y - b) / a
+    if x >= 0 and x <= display.width and dot(x - cx, y - cy, vx, vy) > 0 then
+        return cc.p(x, y)
+    end
+    y = display.height
+    x = (y - b) / a
+    return cc.p(x, y)
 end
 
 return M
